@@ -1,4 +1,4 @@
-import { KButton } from './KButton';
+import { KButton } from '../components/KButton';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {

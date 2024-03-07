@@ -1,4 +1,4 @@
-//import { GcpLabel, GcpTextField, TextFieldProps } from "./components/GCPlusTextField"
+//import { GcpLabel, GcpTextField, TextFieldProps } from "./stories/GCPlusTextField"
 
 export {
 //  GcpTextField,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { KButton } from './KButton';
-import './header.css';
+import '../styles/header.css';
 
 export const Header = ({ user, onLogin, onLogout, onCreateAccount }) => (
   <header>
