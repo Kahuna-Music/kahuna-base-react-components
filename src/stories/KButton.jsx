@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './button.css';
+import './kbutton.css';
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
+export const KButton = ({ primary, backgroundColor, size, label, ...props }) => {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
   return (
     <button
       type="button"
       className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={backgroundColor && { backgroundColor }}
+      style={{backgroundColor: "green"}}
       {...props}
     >
       <span>{label}</span>
@@ -19,7 +19,7 @@ export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
   );
 };
 
-Button.propTypes = {
+KButton.propTypes = {
   /**
    * Is this the principal call to action on the page?
    */
@@ -33,7 +33,7 @@ Button.propTypes = {
    */
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   /**
-   * Button contents
+   * KButton contents
    */
   label: PropTypes.string.isRequired,
   /**
@@ -42,7 +42,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
 };
 
-Button.defaultProps = {
+KButton.defaultProps = {
   backgroundColor: null,
   primary: false,
   size: 'medium',
