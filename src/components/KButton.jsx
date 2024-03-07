@@ -48,3 +48,5 @@ KButton.defaultProps = {
   size: 'medium',
   onClick: undefined,
 };
+
+export default KButton;
