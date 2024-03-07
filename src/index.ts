@@ -1,8 +1,7 @@
-//import { GcpLabel, GcpTextField, TextFieldProps } from "./stories/GCPlusTextField"
+import { KButton } from "./components/KButton"
 
 export {
-//  GcpTextField,
-//  GcpLabel
+  KButton
 }
 export type {
 //  TextFieldProps
