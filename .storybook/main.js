@@ -1,5 +1,6 @@
-/** @type { import('@storybook/react-webpack5').StorybookConfig } */
-const config = {
+const path = require('path');
+
+module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
@@ -20,5 +21,22 @@ const config = {
     autodocs: "tag",
   },
   staticDirs: ["../public"],
+  webpackFinal: async (config, { configType }) => {
+    // Find the rule for JavaScript/JSX files
+    const babelRule = config.module.rules.find(rule =>
+      rule && rule.test && (rule.test.toString().includes('.js') || rule.test.toString().includes('.jsx'))
+    );
+
+    // Add babel-loader to the rule if found
+    if (babelRule) {
+      babelRule.use.push({
+        loader: require.resolve('babel-loader'),
+        options: {
+          presets: ['@babel/preset-react']
+        }
+      });
+    }
+
+    return config;
+  }
 };
-export default config;
