@@ -1,4 +1,5 @@
 import React from "react";
+import "../../main.css"
 
 export interface KButtonProps {
   testIdPrefix: string;
@@ -12,11 +13,11 @@ const KButton: React.FC<KButtonProps> = (props) => {
     <button
       disabled={props.disabled}
       data-testid={`${props.testIdPrefix}`}
-      className={``}
+      className={`border-2`}
       onClick={() => {
       }}
     >
-      <span>{props.label}</span>
+      <span className={"p-4"}>{props.label}</span>
     </button>
   );
 };
