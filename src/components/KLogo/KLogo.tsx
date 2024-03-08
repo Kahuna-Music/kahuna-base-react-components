@@ -1,5 +1,6 @@
 import React from "react";
 import "../../main.css"
+// @ts-ignore
 import Logo from "../../assets/logo.svg"
 
 export interface KLogoProps {

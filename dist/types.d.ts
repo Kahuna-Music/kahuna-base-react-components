@@ -1,18 +1,34 @@
 import React from 'react';
 
 interface KButtonProps {
-    testIdPrefix: string;
-    label?: string;
-    theme: "primary" | "secondary";
-    disabled?: boolean;
+    onClick: () => void;
+    text?: string;
+    icon?: string;
+    rightIcon?: string;
+    leftIcon?: string;
+    background?: string;
+    borderRadius?: number;
+    width?: string;
+    height?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 
 interface KSpanProps {
-    testIdPrefix: string;
-    text?: string;
-    theme: "primary" | "secondary";
+    text: string;
+    fontSize?: number;
+    color?: string;
+    fontWeight?: number;
+    lineHeight?: string;
+    fontStyle?: string;
+    letterSpacing?: string;
 }
 declare const KSpan: React.FC<KSpanProps>;
 
-export { KButton, KSpan };
+interface KLogoProps {
+    width?: number;
+    height?: number;
+    borderRadius?: number;
+}
+declare const KLogo: React.FC<KLogoProps>;
+
+export { KButton, KLogo, KSpan };
