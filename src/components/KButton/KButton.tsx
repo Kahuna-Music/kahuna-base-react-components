@@ -14,6 +14,7 @@ const KButton: React.FC<KButtonProps> = (props) => {
       disabled={props.disabled}
       data-testid={`${props.testIdPrefix}`}
       style={{border: "1px solid black"}}
+      className={"p-40"}
       onClick={() => {
       }}
     >
