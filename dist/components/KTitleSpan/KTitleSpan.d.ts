@@ -1,6 +1,6 @@
 import React from "react";
 import "../../main.css";
-export interface KSpanProps {
+export interface KTitleSpanProps {
     text: string;
     fontSize?: number;
     color?: string;
@@ -9,5 +9,5 @@ export interface KSpanProps {
     fontStyle?: string;
     letterSpacing?: string;
 }
-declare const KSpan: React.FC<KSpanProps>;
-export default KSpan;
+declare const KTitleSpan: React.FC<KTitleSpanProps>;
+export default KTitleSpan;

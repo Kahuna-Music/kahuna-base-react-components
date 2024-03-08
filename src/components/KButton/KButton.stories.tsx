@@ -1,7 +1,10 @@
 import {Meta, StoryFn} from "@storybook/react";
 import KButton from "./KButton";
+// @ts-ignore
 import ChevronRightIcon from "../../assets/chevron-right.svg"
+// @ts-ignore
 import ChevronLeftIcon from "../../assets/chevron-left.svg"
+// @ts-ignore
 import TracksIcon from "../../assets/tracks.svg"
 
 export default {
