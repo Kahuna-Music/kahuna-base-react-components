@@ -1,6 +1,6 @@
 import React from "react";
 import "../../main.css"
-import Logo from "./logo.svg"
+import Logo from "../../assets/logo.svg"
 
 export interface KLogoProps {
   width?: number
