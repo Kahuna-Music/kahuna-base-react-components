@@ -1,5 +1,11 @@
-import React, {useState} from "react";
-import {KButtonProps} from "./KButton.types";
+import React from "react";
+
+export interface KButtonProps {
+  testIdPrefix: string;
+  label?: string;
+  theme: "primary" | "secondary";
+  disabled?: boolean;
+}
 
 const KButton: React.FC<KButtonProps> = (props) => {
   return (

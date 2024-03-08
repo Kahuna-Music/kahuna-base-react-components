@@ -6,7 +6,13 @@ interface KButtonProps {
     theme: "primary" | "secondary";
     disabled?: boolean;
 }
-
 declare const KButton: React.FC<KButtonProps>;
 
-export { KButton };
+interface KSpanProps {
+    testIdPrefix: string;
+    text?: string;
+    theme: "primary" | "secondary";
+}
+declare const KSpan: React.FC<KSpanProps>;
+
+export { KButton, KSpan };
