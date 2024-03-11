@@ -1,13 +1,14 @@
 {
   "name": "kahuna-base-react-components",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Kahuna Base React Components",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c --bundleConfigAsCjs",
+    "build": "rollup -c --bundleConfigAsCjs && npm run remove-stories",
+    "remove-stories": "find dist/ -name '*.stories.*' -type f -delete",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
