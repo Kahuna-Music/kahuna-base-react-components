@@ -15,7 +15,7 @@ const Template: StoryFn<typeof KInput> = (args) => <KInput {...args} />;
 
 export const KInputPrimary = Template.bind({});
 KInputPrimary.args = {
-  setValue: (value: string) => {
+  onChange: (value: string) => {
 
   },
   placeholder: "Placeholder..."
@@ -23,7 +23,7 @@ KInputPrimary.args = {
 
 export const KInputLeftIcon = Template.bind({});
 KInputLeftIcon.args = {
-  setValue: (value: string) => {
+  onChange: (value: string) => {
 
   },
   placeholder: "Placeholder...",
@@ -33,7 +33,7 @@ KInputLeftIcon.args = {
 
 export const KInputRightIcon = Template.bind({});
 KInputRightIcon.args = {
-  setValue: (value: string) => {
+  onChange: (value: string) => {
 
   },
   placeholder: "Placeholder...",
@@ -43,7 +43,7 @@ KInputRightIcon.args = {
 
 export const KInputLeftRightIcon = Template.bind({});
 KInputLeftRightIcon.args = {
-  setValue: (value: string) => {
+  onChange: (value: string) => {
 
   },
   placeholder: "Placeholder...",

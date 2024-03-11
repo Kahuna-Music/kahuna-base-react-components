@@ -48,7 +48,7 @@ declare const KLogo: React.FC<KLogoProps>;
 
 interface KInputProps {
     value: string;
-    setValue: (value: string) => void;
+    onChange: (value: string) => void;
     width?: number;
     height?: number;
     leftIcon?: string;

@@ -3,7 +3,7 @@ import "../../main.css"
 
 export interface KInputProps {
   value: string
-  setValue: (value: string) => void
+  onChange: (value: string) => void
   width?: number
   height?: number
   leftIcon?: string
@@ -50,7 +50,7 @@ const KInput: React.FC<KInputProps> = (props) => {
         value={props.value}
         placeholder={props.placeholder || ""}
         onChange={(event) => {
-          props.setValue(event.target.value)
+          props.onChange(event.target.value)
         }}/>
 
       {props.rightIcon && (
