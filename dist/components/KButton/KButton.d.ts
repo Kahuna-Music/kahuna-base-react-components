@@ -12,6 +12,7 @@ export interface KButtonProps {
     height?: string;
     disabled?: boolean;
     textColor?: string;
+    padding?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 export default KButton;

@@ -43,7 +43,6 @@
 
 .k-button {
     display: flex;
-    padding: 12px 16px;
     justify-content: center;
     align-items: center;
     gap: 4px;
