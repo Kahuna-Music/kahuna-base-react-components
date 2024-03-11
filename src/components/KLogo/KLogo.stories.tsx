@@ -17,3 +17,20 @@ KLogoPrimary.args = {
   height: 88,
   borderRadius: 10,
 };
+
+export const KLogoPrimaryText = Template.bind({});
+KLogoPrimaryText.args = {
+  width: 88,
+  height: 88,
+  borderRadius: 10,
+  primaryText: "Kahuna"
+};
+
+export const KLogoAllText = Template.bind({});
+KLogoAllText.args = {
+  width: 88,
+  height: 88,
+  borderRadius: 10,
+  primaryText: "Kahuna",
+  secondaryText: "for artists"
+};
