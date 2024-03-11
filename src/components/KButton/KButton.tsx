@@ -12,19 +12,24 @@ export interface KButtonProps {
   borderRadius?: number
   width?: string
   height?: string
+  disabled?: boolean
+  textColor?: string
 }
 
 const KButton: React.FC<KButtonProps> = (props) => {
-  const background = props.background || "#F2FE67"
+  const disabled = props.disabled || false
+  const background = disabled ? "#F0F0F0" : props.background || "#F2FE67"
   const borderRadius = props.borderRadius || 10
   const width = props.width || "100%"
   const height = props.height || "44px"
+  const textColor = disabled ? "#D6D6D6" : props.textColor || "#111"
 
   return (
-    <button className={"k-button"} style={{background, borderRadius, width, height}} onClick={props.onClick}>
+    <button className={"k-button"} disabled={disabled} onClick={props.onClick}
+            style={{background, borderRadius, width, height}}>
       <div className={"flex"}>
         {props.leftIcon && <img src={props.leftIcon} alt={"button-left-icon"}/>}
-        {props.text && <KSpan text={props.text} color={"#111"}/>}
+        {props.text && <KSpan text={props.text} color={textColor}/>}
         {props.icon && <img src={props.icon} alt={"button-icon"}/>}
         {props.rightIcon && <img src={props.rightIcon} alt={"button-right-icon"}/>}
       </div>

@@ -10,6 +10,8 @@ export interface KButtonProps {
     borderRadius?: number;
     width?: string;
     height?: string;
+    disabled?: boolean;
+    textColor?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 export default KButton;

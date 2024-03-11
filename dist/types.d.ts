@@ -10,6 +10,8 @@ interface KButtonProps {
     borderRadius?: number;
     width?: string;
     height?: string;
+    disabled?: boolean;
+    textColor?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 
@@ -44,4 +46,18 @@ interface KLogoProps {
 }
 declare const KLogo: React.FC<KLogoProps>;
 
-export { KButton, KLogo, KSpan, KTitleSpan };
+interface KInputProps {
+    value: string;
+    setValue: (value: string) => void;
+    width?: number;
+    height?: number;
+    leftIcon?: string;
+    background?: string;
+    activeBackground?: string;
+    borderRadius?: number;
+    placeholder?: string;
+    shadowDisabled?: boolean;
+}
+declare const KInput: React.FC<KInputProps>;
+
+export { KButton, KInput, KLogo, KSpan, KTitleSpan };
