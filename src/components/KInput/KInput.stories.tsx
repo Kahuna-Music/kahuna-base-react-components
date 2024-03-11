@@ -28,4 +28,27 @@ KInputLeftIcon.args = {
   },
   placeholder: "Placeholder...",
   leftIcon: TracksIcon,
+  leftIconClick: () => {alert("left icon clicked")}
+};
+
+export const KInputRightIcon = Template.bind({});
+KInputRightIcon.args = {
+  setValue: (value: string) => {
+
+  },
+  placeholder: "Placeholder...",
+  rightIcon: TracksIcon,
+  rightIconClick: () => {alert("right icon clicked")}
+};
+
+export const KInputLeftRightIcon = Template.bind({});
+KInputLeftRightIcon.args = {
+  setValue: (value: string) => {
+
+  },
+  placeholder: "Placeholder...",
+  leftIcon: TracksIcon,
+  rightIcon: TracksIcon,
+  leftIconClick: () => {alert("left icon clicked")},
+  rightIconClick: () => {alert("right icon clicked")}
 };
