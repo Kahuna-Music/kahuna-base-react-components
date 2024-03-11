@@ -24,6 +24,17 @@ interface KSpanProps {
 }
 declare const KSpan: React.FC<KSpanProps>;
 
+interface KTitleSpanProps {
+    text: string;
+    fontSize?: number;
+    color?: string;
+    fontWeight?: number;
+    lineHeight?: string;
+    fontStyle?: string;
+    letterSpacing?: string;
+}
+declare const KTitleSpan: React.FC<KTitleSpanProps>;
+
 interface KLogoProps {
     width?: number;
     height?: number;
@@ -33,4 +44,4 @@ interface KLogoProps {
 }
 declare const KLogo: React.FC<KLogoProps>;
 
-export { KButton, KLogo, KSpan };
+export { KButton, KLogo, KSpan, KTitleSpan };
