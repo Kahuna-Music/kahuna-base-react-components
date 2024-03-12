@@ -15,6 +15,7 @@ export interface KButtonProps {
   disabled?: boolean
   textColor?: string
   padding?: string
+  shadowDisabled?: boolean
 }
 
 const KButton: React.FC<KButtonProps> = (props) => {
@@ -25,10 +26,11 @@ const KButton: React.FC<KButtonProps> = (props) => {
   const height = props.height || "44px"
   const textColor = disabled ? "#D6D6D6" : props.textColor || "#111"
   const padding = props.padding || "12px 16px"
+  const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
 
   return (
     <button className={"k-button"} disabled={disabled} onClick={props.onClick}
-            style={{background, borderRadius, width, height, padding}}>
+            style={{background, borderRadius, width, height, padding, boxShadow}}>
       <div className={"flex"}>
         {props.leftIcon && <img src={props.leftIcon} alt={"button-left-icon"}/>}
         {props.text && <KSpan text={props.text} color={textColor}/>}

@@ -14,6 +14,7 @@ interface KButtonProps {
     disabled?: boolean;
     textColor?: string;
     padding?: string;
+    shadowDisabled?: boolean;
 }
 declare const KButton: React.FC<KButtonProps>;
 
