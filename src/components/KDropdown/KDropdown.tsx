@@ -78,7 +78,6 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           DropdownIndicator: () => null
         }}
         onChange={(event) => {
-          console.log(event)
           if (!event) {
             return
           }
