@@ -1,4 +1,5 @@
 import React from 'react';
+import { MultiValue } from 'react-select';
 
 interface KButtonProps {
     onClick: () => void;
@@ -65,4 +66,31 @@ interface KInputProps {
 }
 declare const KInput: React.FC<KInputProps>;
 
-export { KButton, KInput, KLogo, KSpan, KTitleSpan };
+interface KSelectOption {
+    label: string;
+    value: number;
+    type?: string;
+    label2?: string;
+    value2?: string;
+}
+interface KDropdownProps {
+    defaultValue?: KSelectOption | MultiValue<KSelectOption>;
+    selected?: KSelectOption | MultiValue<KSelectOption>;
+    onSelect: (selected: KSelectOption | MultiValue<KSelectOption>) => void;
+    options: KSelectOption[];
+    width?: number;
+    height?: number;
+    leftIcon?: string;
+    rightIcon?: string;
+    background?: string;
+    activeBackground?: string;
+    borderRadius?: number;
+    placeholder?: string;
+    isMulti?: boolean;
+    label?: string;
+    textColor?: string;
+    shadowDisabled?: boolean;
+}
+declare const KDropdown: React.FC<KDropdownProps>;
+
+export { KButton, KDropdown, KInput, KLogo, KSpan, KTitleSpan };

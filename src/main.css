@@ -48,3 +48,17 @@
     gap: 4px;
     align-self: stretch;
 }
+
+
+.k-dropdown-container {
+    display: flex;
+}
+
+.k-dropdown {
+    width: 100%;
+    font-family: Inter;
+}
+
+.k-dropdown:focus {
+    outline: none !important;
+}
