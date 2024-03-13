@@ -10,6 +10,7 @@ export interface KSliderProps {
     value?: number;
     disabled?: boolean;
     width?: string;
+    height?: string;
 }
 declare const KSlider: React.FC<KSliderProps>;
 export default KSlider;

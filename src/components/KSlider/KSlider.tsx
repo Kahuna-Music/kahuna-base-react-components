@@ -12,16 +12,18 @@ export interface KSliderProps {
   value?: number
   disabled?: boolean
   width?: string
+  height?: string
 }
 
 const KSlider: React.FC<KSliderProps> = (props) => {
   const disabled = props.disabled || false
   const width = props.width || "100%"
+  const height = props.height || "14px"
 
   return (
     <input
       disabled={disabled}
-      style={{width}}
+      style={{width, height}}
       className={"k-slider-input"}
       onChange={(e) => {
         const option = props.options.find((option) => option.value.toString() === e.target.value)
