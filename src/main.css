@@ -62,3 +62,34 @@
 .k-dropdown:focus {
     outline: none !important;
 }
+
+.k-slider-input {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+}
+
+.k-slider-input:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+.k-slider-input::-webkit-slider-runnable-track {
+    height: 14px;
+    background: #E7E7E7;
+    border-radius: 20px;
+}
+
+.k-slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    cursor: pointer;
+    margin-top: -2.5px; /* Align the thumb vertically with the track */
+    width: 20px; /* Width of the thumb */
+    height: 20px; /* Height of the thumb */
+    border-radius: 50px;
+    background: #fff !important; /* Background color of the thumb */
+    box-shadow: 0 0 0 1px rgba(228, 229, 231, 0.32), 0 0 0 1px #FFF, 0 0 0 1px #E4E5E7, 0 1px 2px 0 rgba(228, 229, 231, 0.40);
+}
+
+.k-slider-input::-webkit-slider-thumb::before {
+    content: url('data:image/svg+xml;utf8,<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"> <g id="dots, grid, slide"> <path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M4 5C4.55228 5 5 4.55228 5 4C5 3.44772 4.55228 3 4 3C3.44772 3 3 3.44772 3 4C3 4.55228 3.44772 5 4 5ZM4 9C4.55228 9 5 8.55229 5 8C5 7.44772 4.55228 7 4 7C3.44772 7 3 7.44772 3 8C3 8.55229 3.44772 9 4 9ZM9 8C9 8.55229 8.55229 9 8 9C7.44772 9 7 8.55229 7 8C7 7.44772 7.44772 7 8 7C8.55229 7 9 7.44772 9 8ZM8 5C8.55229 5 9 4.55228 9 4C9 3.44772 8.55229 3 8 3C7.44772 3 7 3.44772 7 4C7 4.55228 7.44772 5 8 5Z" fill="#111111"/> </g> </svg> ');
+}
