@@ -94,4 +94,17 @@ interface KDropdownProps {
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 
-export { KButton, KDropdown, KInput, KLogo, KSpan, KTitleSpan };
+interface SliderOption {
+    label: string;
+    value: number;
+}
+interface KSliderProps {
+    options: SliderOption[];
+    onChange: (option: SliderOption) => void;
+    value?: number;
+    disabled?: boolean;
+    width?: string;
+}
+declare const KSlider: React.FC<KSliderProps>;
+
+export { KButton, KDropdown, KInput, KLogo, KSlider, KSpan, KTitleSpan };
