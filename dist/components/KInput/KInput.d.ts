@@ -15,6 +15,7 @@ export interface KInputProps {
     type?: string;
     leftIconClick?: () => void;
     rightIconClick?: () => void;
+    accentColor?: string;
 }
 declare const KInput: React.FC<KInputProps>;
 export default KInput;

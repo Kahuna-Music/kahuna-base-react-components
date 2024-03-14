@@ -16,6 +16,7 @@ export interface KInputProps {
   type?: string
   leftIconClick?: () => void
   rightIconClick?: () => void
+  accentColor?: string
 }
 
 const KInput: React.FC<KInputProps> = (props) => {
@@ -34,6 +35,7 @@ const KInput: React.FC<KInputProps> = (props) => {
   const borderRadius = props.borderRadius || 10
   const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const type = props.type || "text"
+  const accentColor = props.accentColor || ""
 
   return (
     <div className={"k-input-container"} style={{background, borderRadius, boxShadow}}>
@@ -46,7 +48,7 @@ const KInput: React.FC<KInputProps> = (props) => {
       <input
         type={type}
         className={"k-input"}
-        style={{background, width, height}}
+        style={{background, width, height, accentColor}}
         value={props.value}
         placeholder={props.placeholder || ""}
         onChange={(event) => {
