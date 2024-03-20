@@ -3,6 +3,7 @@ import "../../main.css";
 export interface KInputProps {
     value: string;
     onChange: (value: string) => void;
+    onBlur?: (value: string) => void;
     width?: number;
     height?: number;
     leftIcon?: string;

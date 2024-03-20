@@ -4,6 +4,7 @@ import "../../main.css"
 export interface KInputProps {
   value: string
   onChange: (value: string) => void
+  onBlur?: (value: string) => void
   width?: number
   height?: number
   leftIcon?: string
@@ -51,6 +52,9 @@ const KInput: React.FC<KInputProps> = (props) => {
         style={{background, width, height, accentColor}}
         value={props.value}
         placeholder={props.placeholder || ""}
+        onBlur={(event) => {
+          if (props.onBlur) props.onBlur(event.target.value)
+        }}
         onChange={(event) => {
           props.onChange(event.target.value)
         }}/>
