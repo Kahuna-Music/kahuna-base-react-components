@@ -11,6 +11,7 @@ export interface KInputProps {
     background?: string;
     activeBackground?: string;
     borderRadius?: number;
+    disabled?: boolean;
     placeholder?: string;
     shadowDisabled?: boolean;
     type?: string;

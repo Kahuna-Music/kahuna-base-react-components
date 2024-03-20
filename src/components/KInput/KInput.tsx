@@ -12,6 +12,7 @@ export interface KInputProps {
   background?: string
   activeBackground?: string
   borderRadius?: number
+  disabled?: boolean
   placeholder?: string
   shadowDisabled?: boolean
   type?: string
@@ -37,6 +38,7 @@ const KInput: React.FC<KInputProps> = (props) => {
   const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const type = props.type || "text"
   const accentColor = props.accentColor || ""
+  const disabled = props.disabled || false
 
   return (
     <div className={"k-input-container"} style={{background, borderRadius, boxShadow}}>
@@ -52,6 +54,7 @@ const KInput: React.FC<KInputProps> = (props) => {
         style={{background, width, height, accentColor}}
         value={props.value}
         placeholder={props.placeholder || ""}
+        disabled={disabled}
         onBlur={(event) => {
           if (props.onBlur) props.onBlur(event.target.value)
         }}
