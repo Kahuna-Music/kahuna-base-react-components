@@ -13,6 +13,15 @@
     font-family: "Inter";
 }
 
+.k-span-hover {
+    display: none;
+}
+
+.k-span-hover-div:hover .k-span-hover {
+    display: inline;
+}
+
+
 .k-input-container {
     display: flex;
     padding: 8px;

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import "../../main.css"
 
 export interface KSpanProps {
@@ -14,6 +14,8 @@ export interface KSpanProps {
 }
 
 const KSpan: React.FC<KSpanProps> = (props) => {
+  const [onHover, setOnHover] = useState(false)
+
   const fontSize = props.fontSize || 14
   const color = props.color || "#737373"
   const fontWeight = props.fontWeight || 400
@@ -23,11 +25,21 @@ const KSpan: React.FC<KSpanProps> = (props) => {
   const hoverTextColor = props.hoverTextColor || "#737373"
 
   return props.hoverText ? (
-    <div className="grid justify-items-center">
+    <div className="grid justify-items-center k-span-hover-div">
       <span className={"k-span"} style={{ fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing }}>
         {props.text}
       </span>
-      <span className={"k-span"} style={{ fontSize, color: hoverTextColor, fontWeight, lineHeight, fontStyle, letterSpacing }}>
+      <span
+        className={"k-span-hover"}
+        style={{
+          fontSize: fontSize - 2,
+          color: hoverTextColor,
+          fontWeight,
+          lineHeight,
+          fontStyle,
+          letterSpacing
+        }}
+      >
         {props.hoverText}
       </span>
     </div>
