@@ -1,12 +1,13 @@
 import React from "react";
 import "../../main.css";
-import { MultiValue } from 'react-select';
+import { MultiValue } from "react-select";
 export interface KSelectOption {
     label: string;
     value: number;
     type?: string;
     label2?: string;
     value2?: string;
+    icon?: string;
 }
 export interface KDropdownProps {
     defaultValue?: KSelectOption | MultiValue<KSelectOption>;
@@ -25,6 +26,7 @@ export interface KDropdownProps {
     label?: string;
     textColor?: string;
     shadowDisabled?: boolean;
+    menuBackground?: string;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 export default KDropdown;

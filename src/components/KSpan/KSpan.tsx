@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import "../../main.css"
 
 export interface KSpanProps {
@@ -9,6 +9,8 @@ export interface KSpanProps {
   lineHeight?: string
   fontStyle?: string
   letterSpacing?: string
+  hoverText?: string
+  hoverTextColor?: string
 }
 
 const KSpan: React.FC<KSpanProps> = (props) => {
@@ -18,12 +20,22 @@ const KSpan: React.FC<KSpanProps> = (props) => {
   const lineHeight = props.lineHeight || "20px"
   const fontStyle = props.fontStyle || "normal"
   const letterSpacing = props.letterSpacing || "-0.084px"
+  const hoverTextColor = props.hoverTextColor || "#737373"
 
-  return (
-    <span className={"k-span"} style={{fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing}}>
+  return props.hoverText ? (
+    <div className="grid justify-items-center">
+      <span className={"k-span"} style={{ fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing }}>
+        {props.text}
+      </span>
+      <span className={"k-span"} style={{ fontSize, color: hoverTextColor, fontWeight, lineHeight, fontStyle, letterSpacing }}>
+        {props.hoverText}
+      </span>
+    </div>
+  ) : (
+    <span className={"k-span"} style={{ fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing }}>
       {props.text}
     </span>
-  );
-};
+  )
+}
 
-export default KSpan;
+export default KSpan

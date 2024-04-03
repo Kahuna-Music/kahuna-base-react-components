@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react"
 import "../../main.css"
-import Select, {MultiValue} from 'react-select'
-
+import Select, { MultiValue } from "react-select"
+// @ts-ignore
+import CheckIcon from "../../assets/check.svg"
 
 export interface KSelectOption {
   label: string
@@ -9,6 +10,7 @@ export interface KSelectOption {
   type?: string
   label2?: string
   value2?: string
+  icon?: string
 }
 
 export interface KDropdownProps {
@@ -28,9 +30,11 @@ export interface KDropdownProps {
   label?: string
   textColor?: string
   shadowDisabled?: boolean
+  menuBackground?: string
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
+  const [selectedOption, setSelectedOption] = useState<KSelectOption | MultiValue<KSelectOption>>()
   const [background, setBackground] = useState("#F5F5F5")
 
   useEffect(() => {
@@ -47,10 +51,26 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const isMulti = props.isMulti || false
   const textColor = props.textColor || "#111"
   const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
+  const menuBackground = props.menuBackground || "#dddddd"
+
+  const getOptionLabels = (option: KSelectOption) => {
+    return (
+      <div className="flex justify-between" style={{ width: "100%" }}>
+        <div className="flex">
+          {option.icon && <img src={option.icon} className="mr-2" width={20} alt={"option-icon"} />}
+          <span>{option.label}</span>
+        </div>
+        {
+          //@ts-ignore
+          !isMulti && selectedOption?.value === option.value && <img src={CheckIcon} width={24} alt={"check-icon"} />
+        }
+      </div>
+    )
+  }
 
   return (
-    <div className={"k-dropdown-container"} style={{background, borderRadius, width, height, boxShadow}}>
-      {props.leftIcon && <img src={props.leftIcon} width={24} className={"ml-2"} alt={"l-icon"}/>}
+    <div className={"k-dropdown-container"} style={{ background, borderRadius, width, height, boxShadow }}>
+      {props.leftIcon && <img src={props.leftIcon} width={24} className={"ml-2"} alt={"l-icon"} />}
 
       <Select
         defaultValue={props.defaultValue}
@@ -68,26 +88,47 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             fontSize: 16,
             cursor: "pointer"
           }),
-          singleValue: provided => ({
+          menu: (base) => ({
+            ...base,
+            borderRadius: 10,
+            background: menuBackground
+          }),
+          singleValue: (provided) => ({
             ...provided,
             color: textColor
+          }),
+          option: (provided, state) => ({
+            ...provided,
+            display: "flex",
+            alignItems: "center",
+            background: "transparent",
+            color: "#111"
           })
         }}
         components={{
           IndicatorSeparator: () => null,
-          DropdownIndicator: () => null
+          DropdownIndicator: () => null,
+          SingleValue: ({ data, ...props }) => (
+            <div className="flex ml-3" style={{ position: "absolute" }}>
+              {data.icon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
+              <span>{data.label}</span>
+            </div>
+          )
         }}
         onChange={(event) => {
           if (!event) {
             return
           }
+          setSelectedOption(event)
           props.onSelect(event)
         }}
+        //@ts-ignore
+        getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {props.rightIcon && <img src={props.rightIcon} width={24} className={"mr-2"} alt={"r-icon"}/>}
+      {props.rightIcon && <img src={props.rightIcon} width={24} className={"mr-2"} alt={"r-icon"} />}
     </div>
-  );
-};
+  )
+}
 
-export default KDropdown;
+export default KDropdown

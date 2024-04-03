@@ -26,6 +26,8 @@ interface KSpanProps {
     lineHeight?: string;
     fontStyle?: string;
     letterSpacing?: string;
+    hoverText?: string;
+    hoverTextColor?: string;
 }
 declare const KSpan: React.FC<KSpanProps>;
 
@@ -76,6 +78,7 @@ interface KSelectOption {
     type?: string;
     label2?: string;
     value2?: string;
+    icon?: string;
 }
 interface KDropdownProps {
     defaultValue?: KSelectOption | MultiValue<KSelectOption>;
@@ -94,6 +97,7 @@ interface KDropdownProps {
     label?: string;
     textColor?: string;
     shadowDisabled?: boolean;
+    menuBackground?: string;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 

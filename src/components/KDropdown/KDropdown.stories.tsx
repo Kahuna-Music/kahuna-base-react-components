@@ -19,8 +19,9 @@ KDropdownSingle.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {
 
   },
-  placeholder: "Placeholder...",
-  options: [{label: "Label 1", value: 1}, {label: "Label 2", value: 2}, {label: "Label 3", value: 3}]
+  width: 250,
+  placeholder: "Select single...",
+  options: [{label: "Label 1", value: 1, icon: TracksIcon}, {label: "Label 2", value: 2, icon: TracksIcon}, {label: "Label 3", value: 3}]
 };
 
 export const KDropdownMulti = Template.bind({});
@@ -28,8 +29,9 @@ KDropdownMulti.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {
 
   },
+  width: 250,
   placeholder: "Multi...",
-  options: [{label: "Label 1", value: 1}, {label: "Label 2", value: 2}, {label: "Label 3", value: 3}],
+  options: [{label: "Label 1", value: 1, icon: TracksIcon}, {label: "Label 2", value: 2, icon: TracksIcon}, {label: "Label 3", value: 3}],
   isMulti: true
 };
 
@@ -49,6 +51,8 @@ KDropdownRightIcon.args = {
   },
   placeholder: "Placeholder...",
   rightIcon: TracksIcon,
+  width: 250,
+  options: [{label: "Label 1", value: 1, icon: TracksIcon}, {label: "Label 2", value: 2, icon: TracksIcon}, {label: "Label 3", value: 3}],
 };
 
 export const KDropdownLeftRightIcon = Template.bind({});
