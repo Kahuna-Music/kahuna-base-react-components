@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react"
 import "../../main.css"
 
 export interface KInputProps {
@@ -19,10 +19,12 @@ export interface KInputProps {
   leftIconClick?: () => void
   rightIconClick?: () => void
   accentColor?: string
+  hoverBackground?: string
 }
 
 const KInput: React.FC<KInputProps> = (props) => {
   const [background, setBackground] = useState("#F5F5F5")
+  const [hover, setHover] = useState(false)
 
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
@@ -39,19 +41,30 @@ const KInput: React.FC<KInputProps> = (props) => {
   const type = props.type || "text"
   const accentColor = props.accentColor || ""
   const disabled = props.disabled || false
+  const hoverBackground = props.hoverBackground || background
 
   return (
-    <div className={"k-input-container"} style={{background, borderRadius, boxShadow}}>
+    <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className={"k-input-container"}
+      style={{ background: hover ? hoverBackground : background, borderRadius, boxShadow }}
+    >
       {props.leftIcon && (
-        <img src={props.leftIcon} alt={"l-icon"} className={props.leftIconClick && "cursor-pointer"} onClick={() => {
-          if (props.leftIconClick) props.leftIconClick()
-        }}/>
+        <img
+          src={props.leftIcon}
+          alt={"l-icon"}
+          className={props.leftIconClick && "cursor-pointer"}
+          onClick={() => {
+            if (props.leftIconClick) props.leftIconClick()
+          }}
+        />
       )}
 
       <input
         type={type}
         className={"k-input"}
-        style={{background, width, height, accentColor}}
+        style={{ background: hover ? hoverBackground : background, width, height, accentColor }}
         value={props.value}
         placeholder={props.placeholder || ""}
         disabled={disabled}
@@ -60,15 +73,21 @@ const KInput: React.FC<KInputProps> = (props) => {
         }}
         onChange={(event) => {
           props.onChange(event.target.value)
-        }}/>
+        }}
+      />
 
       {props.rightIcon && (
-        <img src={props.rightIcon} alt={"r-icon"} className={props.rightIconClick && "cursor-pointer"} onClick={() => {
-          if (props.rightIconClick) props.rightIconClick()
-        }}/>
+        <img
+          src={props.rightIcon}
+          alt={"r-icon"}
+          className={props.rightIconClick && "cursor-pointer"}
+          onClick={() => {
+            if (props.rightIconClick) props.rightIconClick()
+          }}
+        />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default KInput;
+export default KInput

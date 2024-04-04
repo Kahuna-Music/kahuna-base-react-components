@@ -15,6 +15,7 @@ interface KButtonProps {
     textColor?: string;
     padding?: string;
     shadowDisabled?: boolean;
+    hoverBackground?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 
@@ -69,6 +70,7 @@ interface KInputProps {
     leftIconClick?: () => void;
     rightIconClick?: () => void;
     accentColor?: string;
+    hoverBackground?: string;
 }
 declare const KInput: React.FC<KInputProps>;
 

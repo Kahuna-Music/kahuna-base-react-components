@@ -23,7 +23,8 @@ KButtonText.args = {
   background: "#F2FE67",
   borderRadius: 10,
   width: "160px",
-  height: "44px"
+  height: "44px",
+  hoverBackground: "#A2FE67"
 };
 
 export const KButtonIcon = Template.bind({});
