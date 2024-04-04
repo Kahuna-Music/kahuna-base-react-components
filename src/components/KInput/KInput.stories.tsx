@@ -18,7 +18,8 @@ KInputPrimary.args = {
   onChange: (value: string) => {
 
   },
-  placeholder: "Placeholder..."
+  placeholder: "Placeholder...",
+  hoverBackground: "white"
 };
 
 export const KInputLeftIcon = Template.bind({});
