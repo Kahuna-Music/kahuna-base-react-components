@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import "../../main.css";
 export interface KSpanProps {
     text: string;
@@ -10,6 +10,7 @@ export interface KSpanProps {
     letterSpacing?: string;
     hoverText?: string;
     hoverTextColor?: string;
+    hoverStyle?: CSSProperties;
 }
 declare const KSpan: React.FC<KSpanProps>;
 export default KSpan;

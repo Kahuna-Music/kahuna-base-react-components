@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { MultiValue } from 'react-select';
 
 interface KButtonProps {
@@ -29,6 +29,7 @@ interface KSpanProps {
     letterSpacing?: string;
     hoverText?: string;
     hoverTextColor?: string;
+    hoverStyle?: CSSProperties;
 }
 declare const KSpan: React.FC<KSpanProps>;
 

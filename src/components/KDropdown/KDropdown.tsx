@@ -3,6 +3,7 @@ import "../../main.css"
 import Select, { MultiValue } from "react-select"
 // @ts-ignore
 import CheckIcon from "../../assets/check.svg"
+import KSpan from "../KSpan"
 
 export interface KSelectOption {
   label: string
@@ -51,14 +52,14 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const isMulti = props.isMulti || false
   const textColor = props.textColor || "#111"
   const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
-  const menuBackground = props.menuBackground || "#dddddd"
+  const menuBackground = props.menuBackground || "rgb(249, 249, 249)";
 
   const getOptionLabels = (option: KSelectOption) => {
     return (
       <div className="flex justify-between" style={{ width: "100%" }}>
         <div className="flex">
           {option.icon && <img src={option.icon} className="mr-2" width={20} alt={"option-icon"} />}
-          <span>{option.label}</span>
+          <KSpan text={option.label} color="#111" />
         </div>
         {
           //@ts-ignore
@@ -91,7 +92,16 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           menu: (base) => ({
             ...base,
             borderRadius: 10,
-            background: menuBackground
+            background: menuBackground,
+            boxShadow: "0px 3px 3px 0px rgba(17, 17, 17, 0.03), 0px 1px 1px 0px rgba(17, 17, 17, 0.04), 0px 0px 0px 1px rgba(17, 17, 17, 0.04)",
+            backdropFilter: "blur(2px)",
+            paddingRight: 3,
+            paddingLeft: 3
+          }),
+          menuList: (base) => ({
+            ...base,
+            paddingTop: 0,
+            paddingBottom: 0
           }),
           singleValue: (provided) => ({
             ...provided,
@@ -101,7 +111,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             ...provided,
             display: "flex",
             alignItems: "center",
-            background: "transparent",
+            background: "white",
+            marginBottom: 4,
+            marginTop: 4,
+            borderRadius: 10,
             color: "#111"
           })
         }}
@@ -111,7 +124,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           SingleValue: ({ data, ...props }) => (
             <div className="flex ml-3" style={{ position: "absolute" }}>
               {data.icon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
-              <span>{data.label}</span>
+              <KSpan text={data.label} color="#111" />
             </div>
           )
         }}
