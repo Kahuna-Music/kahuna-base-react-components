@@ -1,6 +1,6 @@
 {
   "name": "kahuna-base-react-components",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Kahuna Base React Components",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -54,6 +54,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.35",
     "rollup": "^4.12.1",
+    "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
