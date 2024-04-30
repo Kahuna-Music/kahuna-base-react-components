@@ -11,7 +11,8 @@ export interface KSpanProps {
   letterSpacing?: string
   hoverText?: string
   hoverTextColor?: string
-  hoverStyle?: CSSProperties
+  hoverStyle?: CSSProperties,
+  textDecoration?: string
 }
 
 const KSpan: React.FC<KSpanProps> = (props) => {
