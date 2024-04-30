@@ -74,7 +74,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   }
 
   return (
-    <div className={"k-dropdown-container"} style={{ background, borderRadius, width, height, boxShadow, padding, gap }}>
+    <div
+      className={"k-dropdown-container"}
+      style={{ background, borderRadius, width, height, boxShadow, padding, gap }}
+    >
       {props.leftIcon && <img src={props.leftIcon} width={20} className={""} alt={"l-icon"} />}
 
       <Select
@@ -91,16 +94,17 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             padding: "0px !important",
             boxShadow: "none",
             fontSize: 14,
-            lineHeight:"20px",
+            lineHeight: "20px",
             cursor: "pointer",
             minHeight: "20px",
-            border: "none",
+            border: "none"
           }),
           menu: (base) => ({
             ...base,
             borderRadius: 10,
             background: menuBackground,
-            boxShadow: "0px 3px 3px 0px rgba(17, 17, 17, 0.03), 0px 1px 1px 0px rgba(17, 17, 17, 0.04), 0px 0px 0px 1px rgba(17, 17, 17, 0.04)",
+            boxShadow:
+              "0px 3px 3px 0px rgba(17, 17, 17, 0.03), 0px 1px 1px 0px rgba(17, 17, 17, 0.04), 0px 0px 0px 1px rgba(17, 17, 17, 0.04)",
             backdropFilter: "blur(2px)",
             paddingRight: 3,
             paddingLeft: 3
@@ -124,16 +128,16 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             borderRadius: 10,
             color: "#111"
           }),
-          valueContainer: (base) => ( {
+          valueContainer: (base) => ({
             ...base,
             padding: 0
           }),
-          
-          input: (base) => ( {
+
+          input: (base) => ({
             ...base,
             padding: 0,
             margin: 0,
-            height:"20px"
+            height: "20px"
           })
         }}
         components={{
