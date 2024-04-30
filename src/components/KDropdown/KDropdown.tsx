@@ -90,7 +90,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             lineHeight:"20px",
             cursor: "pointer",
             minHeight: "20px",
-            border: "none"
+            border: "none",
           }),
           menu: (base) => ({
             ...base,
