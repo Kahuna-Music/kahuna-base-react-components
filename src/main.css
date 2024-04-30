@@ -70,8 +70,6 @@
 
 .k-dropdown-container {
     display: flex;
-    gap: 8px;
-    padding: 12px 12px 12px 14px;
     align-items: center;
 }
 

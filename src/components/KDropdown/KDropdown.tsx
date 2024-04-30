@@ -32,6 +32,8 @@ export interface KDropdownProps {
   textColor?: string
   shadowDisabled?: boolean
   menuBackground?: string
+  padding?:string
+  gap?: string
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -53,6 +55,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const textColor = props.textColor || "#111"
   const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const menuBackground = props.menuBackground || "rgb(249, 249, 249)";
+  const padding = props.padding || "8px"
+  const gap = props.gap || "4px"
 
   const getOptionLabels = (option: KSelectOption) => {
     return (
@@ -70,7 +74,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   }
 
   return (
-    <div className={"k-dropdown-container"} style={{ background, borderRadius, width, height, boxShadow }}>
+    <div className={"k-dropdown-container"} style={{ background, borderRadius, width, height, boxShadow, padding, gap }}>
       {props.leftIcon && <img src={props.leftIcon} width={20} className={""} alt={"l-icon"} />}
 
       <Select
