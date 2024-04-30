@@ -71,7 +71,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
 
   return (
     <div className={"k-dropdown-container"} style={{ background, borderRadius, width, height, boxShadow }}>
-      {props.leftIcon && <img src={props.leftIcon} width={24} className={"ml-2"} alt={"l-icon"} />}
+      {props.leftIcon && <img src={props.leftIcon} width={20} className={""} alt={"l-icon"} />}
 
       <Select
         defaultValue={props.defaultValue}
@@ -84,10 +84,13 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           control: (baseStyles, state) => ({
             ...baseStyles,
             background: "transparent !important",
-            border: 0,
+            padding: "0px !important",
             boxShadow: "none",
-            fontSize: 16,
-            cursor: "pointer"
+            fontSize: 14,
+            lineHeight:"20px",
+            cursor: "pointer",
+            minHeight: "20px",
+            border: "none"
           }),
           menu: (base) => ({
             ...base,
@@ -116,6 +119,17 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             marginTop: 4,
             borderRadius: 10,
             color: "#111"
+          }),
+          valueContainer: (base) => ( {
+            ...base,
+            padding: 0
+          }),
+          
+          input: (base) => ( {
+            ...base,
+            padding: 0,
+            margin: 0,
+            height:"20px"
           })
         }}
         components={{
@@ -123,7 +137,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           DropdownIndicator: () => null,
           SingleValue: ({ data, ...props }) => (
             <div className="flex ml-3" style={{ position: "absolute" }}>
-              {data.icon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
+              {data.icon && <img src={data.icon} className="" width={20} alt={"data-icon"} />}
               <KSpan text={data.label} color="#111" />
             </div>
           )
@@ -139,7 +153,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {props.rightIcon && <img src={props.rightIcon} width={24} className={"mr-2"} alt={"r-icon"} />}
+      {props.rightIcon && <img src={props.rightIcon} width={20} className={""} alt={"r-icon"} />}
     </div>
   )
 }
