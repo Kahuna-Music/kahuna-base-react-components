@@ -34,6 +34,7 @@ export interface KDropdownProps {
   menuBackground?: string
   padding?:string
   gap?: string
+  showIcon?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -57,6 +58,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const menuBackground = props.menuBackground || "rgb(249, 249, 249)";
   const padding = props.padding || "8px"
   const gap = props.gap || "4px"
+  const showIcon = props.showIcon || false
 
   const getOptionLabels = (option: KSelectOption) => {
     return (
@@ -138,14 +140,18 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             padding: 0,
             margin: 0,
             height: "20px"
+          }),
+          placeholder: (base) => ({
+            ...base,
+            margin: 0
           })
         }}
         components={{
           IndicatorSeparator: () => null,
           DropdownIndicator: () => null,
           SingleValue: ({ data, ...props }) => (
-            <div className="flex ml-3" style={{ position: "absolute" }}>
-              {data.icon && <img src={data.icon} className="" width={20} alt={"data-icon"} />}
+            <div className="flex" style={{ position: "absolute" }}>
+              {data.icon && showIcon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
               <KSpan text={data.label} color="#111" />
             </div>
           )
