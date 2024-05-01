@@ -27,6 +27,8 @@ export interface KDropdownProps {
     textColor?: string;
     shadowDisabled?: boolean;
     menuBackground?: string;
+    padding?: string;
+    gap?: string;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 export default KDropdown;
