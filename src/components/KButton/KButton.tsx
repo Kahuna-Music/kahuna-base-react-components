@@ -17,6 +17,7 @@ export interface KButtonProps {
   padding?: string
   shadowDisabled?: boolean
   hoverBackground?: string
+  fontWeight?: number
 }
 
 const KButton: React.FC<KButtonProps> = (props) => {
@@ -31,7 +32,8 @@ const KButton: React.FC<KButtonProps> = (props) => {
   const padding = props.padding || "12px 16px"
   const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const hoverBackground = props.hoverBackground || background
-
+  const fontWeight = props.fontWeight || 500
+  
   return (
     <button
       onMouseEnter={() => setHover(true)}
@@ -43,7 +45,7 @@ const KButton: React.FC<KButtonProps> = (props) => {
     >
       <div className={"flex"}>
         {props.leftIcon && <img src={props.leftIcon} alt={"button-left-icon"} />}
-        {props.text && <KSpan text={props.text} color={textColor} />}
+        {props.text && <KSpan text={props.text} color={textColor} fontWeight={fontWeight} />}
         {props.icon && <img src={props.icon} alt={"button-icon"} />}
         {props.rightIcon && <img src={props.rightIcon} alt={"button-right-icon"} />}
       </div>

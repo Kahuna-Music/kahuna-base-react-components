@@ -32,6 +32,9 @@ export interface KDropdownProps {
   textColor?: string
   shadowDisabled?: boolean
   menuBackground?: string
+  padding?:string
+  gap?: string
+  showChosenOptionIcon?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -53,6 +56,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const textColor = props.textColor || "#111"
   const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const menuBackground = props.menuBackground || "rgb(249, 249, 249)";
+  const padding = props.padding || "8px"
+  const gap = props.gap || "4px"
+  const showIcon = props.showChosenOptionIcon || true
 
   const getOptionLabels = (option: KSelectOption) => {
     return (
@@ -70,8 +76,11 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   }
 
   return (
-    <div className={"k-dropdown-container"} style={{ background, borderRadius, width, height, boxShadow }}>
-      {props.leftIcon && <img src={props.leftIcon} width={24} className={"ml-2"} alt={"l-icon"} />}
+    <div
+      className={"k-dropdown-container"}
+      style={{ background, borderRadius, width, height, boxShadow, padding, gap }}
+    >
+      {props.leftIcon && <img src={props.leftIcon} width={20} alt={"l-icon"} />}
 
       <Select
         defaultValue={props.defaultValue}
@@ -84,16 +93,20 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           control: (baseStyles, state) => ({
             ...baseStyles,
             background: "transparent !important",
-            border: 0,
+            padding: "0px !important",
             boxShadow: "none",
-            fontSize: 16,
-            cursor: "pointer"
+            fontSize: 14,
+            lineHeight: "20px",
+            cursor: "pointer",
+            minHeight: "20px",
+            border: "none"
           }),
           menu: (base) => ({
             ...base,
             borderRadius: 10,
             background: menuBackground,
-            boxShadow: "0px 3px 3px 0px rgba(17, 17, 17, 0.03), 0px 1px 1px 0px rgba(17, 17, 17, 0.04), 0px 0px 0px 1px rgba(17, 17, 17, 0.04)",
+            boxShadow:
+              "0px 3px 3px 0px rgba(17, 17, 17, 0.03), 0px 1px 1px 0px rgba(17, 17, 17, 0.04), 0px 0px 0px 1px rgba(17, 17, 17, 0.04)",
             backdropFilter: "blur(2px)",
             paddingRight: 3,
             paddingLeft: 3
@@ -116,14 +129,29 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             marginTop: 4,
             borderRadius: 10,
             color: "#111"
+          }),
+          valueContainer: (base) => ({
+            ...base,
+            padding: 0
+          }),
+
+          input: (base) => ({
+            ...base,
+            padding: 0,
+            margin: 0,
+            height: "20px"
+          }),
+          placeholder: (base) => ({
+            ...base,
+            margin: 0
           })
         }}
         components={{
           IndicatorSeparator: () => null,
           DropdownIndicator: () => null,
           SingleValue: ({ data, ...props }) => (
-            <div className="flex ml-3" style={{ position: "absolute" }}>
-              {data.icon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
+            <div className="flex" style={{ position: "absolute" }}>
+              {data.icon && showIcon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
               <KSpan text={data.label} color="#111" />
             </div>
           )
@@ -139,7 +167,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {props.rightIcon && <img src={props.rightIcon} width={24} className={"mr-2"} alt={"r-icon"} />}
+      {props.rightIcon && <img src={props.rightIcon} width={20} alt={"r-icon"} />}
     </div>
   )
 }

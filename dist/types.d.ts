@@ -16,6 +16,7 @@ interface KButtonProps {
     padding?: string;
     shadowDisabled?: boolean;
     hoverBackground?: string;
+    fontWeight?: number;
 }
 declare const KButton: React.FC<KButtonProps>;
 
@@ -30,6 +31,7 @@ interface KSpanProps {
     hoverText?: string;
     hoverTextColor?: string;
     hoverStyle?: CSSProperties;
+    textDecoration?: string;
 }
 declare const KSpan: React.FC<KSpanProps>;
 
@@ -72,6 +74,10 @@ interface KInputProps {
     rightIconClick?: () => void;
     accentColor?: string;
     hoverBackground?: string;
+    padding?: string;
+    gap?: string;
+    border?: string;
+    boxShadow?: string;
 }
 declare const KInput: React.FC<KInputProps>;
 
@@ -101,6 +107,9 @@ interface KDropdownProps {
     textColor?: string;
     shadowDisabled?: boolean;
     menuBackground?: string;
+    padding?: string;
+    gap?: string;
+    showChosenOptionIcon?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 
@@ -114,7 +123,6 @@ interface KSliderProps {
     value?: number;
     disabled?: boolean;
     width?: string;
-    height?: string;
 }
 declare const KSlider: React.FC<KSliderProps>;
 
