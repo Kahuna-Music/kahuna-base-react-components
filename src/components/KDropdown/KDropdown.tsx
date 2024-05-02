@@ -80,7 +80,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
       className={"k-dropdown-container"}
       style={{ background, borderRadius, width, height, boxShadow, padding, gap }}
     >
-      {props.leftIcon && <img src={props.leftIcon} width={20} className={""} alt={"l-icon"} />}
+      {props.leftIcon && <img src={props.leftIcon} width={20} alt={"l-icon"} />}
 
       <Select
         defaultValue={props.defaultValue}
@@ -167,7 +167,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {props.rightIcon && <img src={props.rightIcon} width={20} className={""} alt={"r-icon"} />}
+      {props.rightIcon && <img src={props.rightIcon} width={20} alt={"r-icon"} />}
     </div>
   )
 }
