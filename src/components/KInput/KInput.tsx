@@ -46,8 +46,8 @@ const KInput: React.FC<KInputProps> = (props) => {
   const accentColor = props.accentColor || ""
   const disabled = props.disabled || false
   const hoverBackground = props.hoverBackground || background
-  const padding = props.padding || "12px 12px 12px 14px"
-  const gap = props.gap || "8px"
+  const padding = props.padding || "8px"
+  const gap = props.gap || "12px"
   const border = props.border || "none"
 
   return (
