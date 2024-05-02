@@ -109,7 +109,7 @@ interface KDropdownProps {
     menuBackground?: string;
     padding?: string;
     gap?: string;
-    showIcon?: boolean;
+    showChosenOptionIcon?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 

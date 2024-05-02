@@ -34,7 +34,7 @@ export interface KDropdownProps {
   menuBackground?: string
   padding?:string
   gap?: string
-  showIcon?: boolean
+  showChosenOptionIcon?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -58,7 +58,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const menuBackground = props.menuBackground || "rgb(249, 249, 249)";
   const padding = props.padding || "8px"
   const gap = props.gap || "4px"
-  const showIcon = props.showIcon || false
+  const showIcon = props.showChosenOptionIcon || true
 
   const getOptionLabels = (option: KSelectOption) => {
     return (
