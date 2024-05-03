@@ -52,7 +52,7 @@ const KInput: React.FC<KInputProps> = (props) => {
   const gap = props.gap || "12px"
   const border = props.border || "none"
   const fontSize = props.fontSize || "14px"
-  const iconSize = props.iconSize || "20px"
+  const iconSize = props.iconSize || "20px" 
 
   return (
     <div

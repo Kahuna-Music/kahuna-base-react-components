@@ -78,6 +78,8 @@ interface KInputProps {
     gap?: string;
     border?: string;
     boxShadow?: string;
+    fontSize?: string;
+    iconSize?: string;
 }
 declare const KInput: React.FC<KInputProps>;
 
@@ -109,7 +111,7 @@ interface KDropdownProps {
     menuBackground?: string;
     padding?: string;
     gap?: string;
-    showChosenOptionIcon?: boolean;
+    hideChosenOptionIcon?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 
