@@ -23,6 +23,8 @@ export interface KInputProps {
     gap?: string;
     border?: string;
     boxShadow?: string;
+    fontSize?: string;
+    iconSize?: string;
 }
 declare const KInput: React.FC<KInputProps>;
 export default KInput;

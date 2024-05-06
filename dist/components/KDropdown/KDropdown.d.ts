@@ -29,7 +29,7 @@ export interface KDropdownProps {
     menuBackground?: string;
     padding?: string;
     gap?: string;
-    showChosenOptionIcon?: boolean;
+    hideChosenOptionIcon?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 export default KDropdown;

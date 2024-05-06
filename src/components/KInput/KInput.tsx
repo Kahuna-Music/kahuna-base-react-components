@@ -24,6 +24,8 @@ export interface KInputProps {
   gap?: string
   border?: string
   boxShadow?: string
+  fontSize?: string
+  iconSize?: string
 }
 
 const KInput: React.FC<KInputProps> = (props) => {
@@ -39,7 +41,7 @@ const KInput: React.FC<KInputProps> = (props) => {
   }, [props.value])
 
   const width = props.width || "100%"
-  const height = props.height || 24
+  const height = props.height || 20
   const borderRadius = props.borderRadius || 10
   const boxShadow = props.shadowDisabled ? "" : props.boxShadow ? props.boxShadow : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const type = props.type || "text"
@@ -49,6 +51,8 @@ const KInput: React.FC<KInputProps> = (props) => {
   const padding = props.padding || "8px"
   const gap = props.gap || "12px"
   const border = props.border || "none"
+  const fontSize = props.fontSize || "14px"
+  const iconSize = props.iconSize || "20px" 
 
   return (
     <div
@@ -60,6 +64,10 @@ const KInput: React.FC<KInputProps> = (props) => {
       {props.leftIcon && (
         <img
           src={props.leftIcon}
+          style={{
+            width: iconSize,
+            height: iconSize
+          }}
           alt={"l-icon"}
           className={props.leftIconClick && "cursor-pointer"}
           onClick={() => {
@@ -71,7 +79,13 @@ const KInput: React.FC<KInputProps> = (props) => {
       <input
         type={type}
         className={"k-input"}
-        style={{ background: hover ? hoverBackground : background, width, height, accentColor }}
+        style={{
+          background: hover ? hoverBackground : background,
+          width,
+          height,
+          accentColor,
+          fontSize,
+        }}
         value={props.value}
         placeholder={props.placeholder || ""}
         disabled={disabled}
@@ -86,6 +100,10 @@ const KInput: React.FC<KInputProps> = (props) => {
       {props.rightIcon && (
         <img
           src={props.rightIcon}
+          style={{
+            width: iconSize,
+            height: iconSize
+          }}
           alt={"r-icon"}
           className={props.rightIconClick && "cursor-pointer"}
           onClick={() => {
