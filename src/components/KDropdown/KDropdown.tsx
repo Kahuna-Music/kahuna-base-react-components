@@ -32,14 +32,12 @@ export interface KDropdownProps {
   textColor?: string
   shadowDisabled?: boolean
   menuBackground?: string
-  onInput?: (input: string) => void
   padding?: string
   gap?: string
   hideChosenOptionIcon?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
-  const [options, setOptions] = useState(props.options)
   const [selectedOption, setSelectedOption] = useState<KSelectOption | MultiValue<KSelectOption>>()
   const [background, setBackground] = useState("#F5F5F5")
 
@@ -59,7 +57,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const menuBackground = props.menuBackground || "rgb(249, 249, 249)"
   const padding = props.padding || "8px"
-  const gap = props.gap || "12px"
+  const gap = props.gap || "4px"
   const hideIcon = props.hideChosenOptionIcon || false
 
   const getOptionLabels = (option: KSelectOption) => {
@@ -77,17 +75,6 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     )
   }
 
-  const onInputChange = (input: string) => {
-    if (props.onInput) {
-      props.onInput(input)
-      return
-    }
-
-    const filteredOptions =
-      props.options?.filter((option) => option.label.toLowerCase().includes(input.toLowerCase())) || []
-    setOptions([...filteredOptions])
-  }
-
   return (
     <div
       className={"k-dropdown-container"}
@@ -100,8 +87,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         isMulti={isMulti}
         name={props.label || ""}
         placeholder={props.placeholder || ""}
-        options={options}
-        onInputChange={(input) => onInputChange(input)}
+        options={props.options}
         className={"k-dropdown"}
         styles={{
           control: (baseStyles, state) => ({
