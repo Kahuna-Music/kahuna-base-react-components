@@ -109,6 +109,7 @@ interface KDropdownProps {
     textColor?: string;
     shadowDisabled?: boolean;
     menuBackground?: string;
+    onInput?: (input: string) => void;
     padding?: string;
     gap?: string;
     hideChosenOptionIcon?: boolean;
