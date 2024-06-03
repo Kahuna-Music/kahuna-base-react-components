@@ -21,7 +21,7 @@ KDropdownSingle.args = {
   },
   width: 250,
   placeholder: "Select single...",
-  options: [{label: "Label 1", value: 1, icon: TracksIcon}, {label: "Label 2", value: 2, icon: TracksIcon}, {label: "Label 3", value: 3}]
+  options: [{label: "Label 1", value: 1, icon: TracksIcon}, {label: "Label 2", value: 2, icon: TracksIcon}, {label: "Label 3", value: 3}, {label: "TANIK", value: 4}]
 };
 
 export const KDropdownMulti = Template.bind({});

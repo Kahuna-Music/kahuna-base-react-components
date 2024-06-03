@@ -4,6 +4,7 @@ import Select, { MultiValue } from "react-select"
 // @ts-ignore
 import CheckIcon from "../../assets/check.svg"
 import KSpan from "../KSpan"
+import { FilterOptionOption } from "react-select/dist/declarations/src/filters"
 
 export interface KSelectOption {
   label: string
@@ -60,6 +61,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const gap = props.gap || "4px"
   const hideIcon = props.hideChosenOptionIcon || false
 
+  const customFilterOption = (option: FilterOptionOption<KSelectOption>, inputValue: string) => {
+    return option.data.label.toLocaleLowerCase("en").includes(inputValue.toLocaleLowerCase("en"))
+  }
+
   const getOptionLabels = (option: KSelectOption) => {
     return (
       <div className="flex justify-between" style={{ width: "100%" }}>
@@ -74,7 +79,6 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
       </div>
     )
   }
-
   return (
     <div
       className={"k-dropdown-container"}
@@ -89,6 +93,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         placeholder={props.placeholder || ""}
         options={props.options}
         className={"k-dropdown"}
+        filterOption={customFilterOption}
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
