@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import "../../main.css"
 import Select, { MultiValue } from "react-select"
 // @ts-ignore
@@ -41,6 +41,11 @@ export interface KDropdownProps {
 const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
   const [selectedOption, setSelectedOption] = useState<KSelectOption | MultiValue<KSelectOption>>()
   const [background, setBackground] = useState("#F5F5F5")
+  const selectRef = useRef<any>(null)
+  
+  useEffect(() => {
+    console.log("selectedOption:", selectedOption)
+  }, []) 
 
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
@@ -87,6 +92,7 @@ const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
       {props.leftIcon && <img src={props.leftIcon} width={20} alt={"l-icon"} />}
 
       <Select
+        ref={selectRef}
         defaultValue={props.defaultValue}
         isMulti={isMulti}
         name={props.label || ""}
@@ -162,11 +168,18 @@ const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
           )
         }}
         onChange={(event) => {
+          console.log("event:", event)
           if (!event) {
             return
           }
-          setSelectedOption(event)
-          props.onSelect(event)
+          if (event === selectedOption) {
+            setSelectedOption(undefined)
+            selectRef.current.clearValue()
+          } else {
+            setSelectedOption(event)
+           
+          }
+           props.onSelect(event)
         }}
         //@ts-ignore
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
