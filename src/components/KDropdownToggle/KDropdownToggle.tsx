@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import "../../main.css"
 import Select, { MultiValue } from "react-select"
 // @ts-ignore
@@ -41,12 +41,7 @@ export interface KDropdownProps {
 const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
   const [selectedOption, setSelectedOption] = useState<KSelectOption | MultiValue<KSelectOption>>()
   const [background, setBackground] = useState("#F5F5F5")
-  const selectRef = useRef<any>(null)
   
-  useEffect(() => {
-    console.log("selectedOption:", selectedOption)
-  }, []) 
-
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
     const activeBackground = props.activeBackground || "#FFF"
@@ -92,7 +87,6 @@ const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
       {props.leftIcon && <img src={props.leftIcon} width={20} alt={"l-icon"} />}
 
       <Select
-        ref={selectRef}
         defaultValue={props.defaultValue}
         isMulti={isMulti}
         name={props.label || ""}
@@ -100,6 +94,7 @@ const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
         options={props.options}
         className={"k-dropdown"}
         filterOption={customFilterOption}
+        isClearable
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
@@ -145,7 +140,6 @@ const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
             ...base,
             padding: 0
           }),
-
           input: (base) => ({
             ...base,
             padding: 0,
@@ -155,7 +149,12 @@ const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
           placeholder: (base) => ({
             ...base,
             margin: 0
+          }),
+          clearIndicator:(base) => ({
+            ...base,
+            padding: 0
           })
+
         }}
         components={{
           IndicatorSeparator: () => null,
@@ -168,16 +167,11 @@ const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
           )
         }}
         onChange={(event) => {
-          console.log("event:", event)
           if (!event) {
-            return
-          }
-          if (event === selectedOption) {
             setSelectedOption(undefined)
-            selectRef.current.clearValue()
+            return
           } else {
             setSelectedOption(event)
-           
           }
            props.onSelect(event)
         }}

@@ -3,6 +3,7 @@ import KDropdownToggle, {KSelectOption} from "./KDropdownToggle";
 // @ts-ignore
 import TracksIcon from "../../assets/tracks.svg";
 import {MultiValue} from "react-select";
+import { useEffect, useState } from "react";
 
 export default {
   title: "ReactComponentLibrary/KDropdownToggle",
@@ -12,11 +13,13 @@ export default {
   },
 } as Meta<typeof KDropdownToggle>;
 
+
+
 const Template: StoryFn<typeof KDropdownToggle> = (args) => <KDropdownToggle {...args} />;
 
 export const KDropdownToggleSingle = Template.bind({});
 KDropdownToggleSingle.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption> | null) => {
 
   },
   width: 250,
