@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, KeyboardEvent } from "react"
 import "../../main.css"
 
 export interface KInputProps {
   value: string
   onChange: (value: string) => void
   onBlur?: (value: string) => void
+  onKeyDown?: (event: KeyboardEvent) => void
   width?: number
   height?: number
   leftIcon?: string
@@ -26,6 +27,7 @@ export interface KInputProps {
   boxShadow?: string
   fontSize?: string
   iconSize?: string
+  checked?:boolean
 }
 
 const KInput: React.FC<KInputProps> = (props) => {
@@ -86,6 +88,7 @@ const KInput: React.FC<KInputProps> = (props) => {
           accentColor,
           fontSize,
         }}
+        {...((props.checked && (type === "checkbox" || type === "radio")) && {checked: props.checked} )}
         value={props.value}
         placeholder={props.placeholder || ""}
         disabled={disabled}
@@ -94,6 +97,9 @@ const KInput: React.FC<KInputProps> = (props) => {
         }}
         onChange={(event) => {
           props.onChange(event.target.value)
+        }}
+        onKeyDown={(event) => {
+          if (props.onKeyDown) props.onKeyDown(event) 
         }}
       />
 
