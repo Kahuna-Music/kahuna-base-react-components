@@ -26,9 +26,10 @@ const KSpan: React.FC<KSpanProps> = (props) => {
   const letterSpacing = props.letterSpacing || "-0.084px"
   const hoverTextColor = props.hoverTextColor || "#737373"
   const hoverStyle = props.hoverStyle || {}
+  const textDecoration = props.textDecoration || "none"
 
   const renderBaseSpan = () => {
-    const baseSpanStyle = { fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing }
+    const baseSpanStyle = { fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing, textDecoration }
     return (
       <span
         className={"k-span"}
