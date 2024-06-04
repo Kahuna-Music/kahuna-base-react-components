@@ -41,7 +41,7 @@ export interface KDropdownProps {
 const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
   const [selectedOption, setSelectedOption] = useState<KSelectOption | MultiValue<KSelectOption>>()
   const [background, setBackground] = useState("#F5F5F5")
-  
+
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
     const activeBackground = props.activeBackground || "#FFF"
@@ -150,11 +150,10 @@ const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
             ...base,
             margin: 0
           }),
-          clearIndicator:(base) => ({
+          clearIndicator: (base) => ({
             ...base,
             padding: 0
           })
-
         }}
         components={{
           IndicatorSeparator: () => null,
@@ -173,7 +172,7 @@ const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
           } else {
             setSelectedOption(event)
           }
-           props.onSelect(event)
+          props.onSelect(event)
         }}
         //@ts-ignore
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}

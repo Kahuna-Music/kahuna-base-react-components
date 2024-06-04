@@ -1,5 +1,7 @@
 declare const _default: import("@storybook/types").ComponentAnnotations<import("@storybook/react").ReactRenderer, import("./KInput").KInputProps>;
 export default _default;
+export declare const KInputRange: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react").ReactRenderer, import("./KInput").KInputProps>;
+export declare const KInputCheckbox: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react").ReactRenderer, import("./KInput").KInputProps>;
 export declare const KInputPrimary: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react").ReactRenderer, import("./KInput").KInputProps>;
 export declare const KInputLeftIcon: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react").ReactRenderer, import("./KInput").KInputProps>;
 export declare const KInputRightIcon: import("@storybook/types").AnnotatedStoryFn<import("@storybook/react").ReactRenderer, import("./KInput").KInputProps>;

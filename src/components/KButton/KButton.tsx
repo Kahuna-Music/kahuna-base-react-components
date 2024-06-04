@@ -22,7 +22,7 @@ export interface KButtonProps {
 }
 
 const KButton: React.FC<KButtonProps> = (props) => {
-  const [hover, setHover] = useState(false);
+  const [hover, setHover] = useState(false)
 
   const disabled = props.disabled || false
   const background = disabled ? "#F0F0F0" : props.background || "#F2FE67"
@@ -35,7 +35,7 @@ const KButton: React.FC<KButtonProps> = (props) => {
   const hoverBackground = props.hoverBackground || background
   const fontWeight = props.fontWeight || 500
   const textDecoration = props.textDecoration || "none"
-  
+
   return (
     <button
       onMouseEnter={() => setHover(true)}
@@ -47,7 +47,9 @@ const KButton: React.FC<KButtonProps> = (props) => {
     >
       <div className={"flex"}>
         {props.leftIcon && <img src={props.leftIcon} alt={"button-left-icon"} />}
-        {props.text && <KSpan text={props.text} color={textColor} fontWeight={fontWeight} textDecoration={textDecoration} />}
+        {props.text && (
+          <KSpan text={props.text} color={textColor} fontWeight={fontWeight} textDecoration={textDecoration} />
+        )}
         {props.icon && <img src={props.icon} alt={"button-icon"} />}
         {props.rightIcon && <img src={props.rightIcon} alt={"button-right-icon"} />}
       </div>

@@ -9,8 +9,8 @@ import TracksIcon from "../../assets/tracks.svg"
 
 export default {
   title: "ReactComponentLibrary/KButton",
-  component: KButton,
-} as Meta<typeof KButton>;
+  component: KButton
+} as Meta<typeof KButton>
 
 const Template: StoryFn<typeof KButton> = (args) => <KButton {...args} />;
 
