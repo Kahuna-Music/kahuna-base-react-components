@@ -24,7 +24,8 @@ KButtonText.args = {
   borderRadius: 10,
   width: "160px",
   height: "44px",
-  hoverBackground: "#A2FE67"
+  hoverBackground: "#A2FE67",
+  textDecoration: "underline"
 };
 
 export const KButtonIcon = Template.bind({});
