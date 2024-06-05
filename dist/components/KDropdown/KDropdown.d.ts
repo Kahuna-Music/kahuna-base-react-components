@@ -11,6 +11,7 @@ export interface KSelectOption {
 }
 export interface KDropdownProps {
     defaultValue?: KSelectOption | MultiValue<KSelectOption>;
+    defaultValuePrimitive?: string | number;
     selected?: KSelectOption | MultiValue<KSelectOption>;
     onSelect: (selected: KSelectOption | MultiValue<KSelectOption>) => void;
     options: KSelectOption[];
@@ -30,6 +31,7 @@ export interface KDropdownProps {
     padding?: string;
     gap?: string;
     hideChosenOptionIcon?: boolean;
+    isClearable?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 export default KDropdown;

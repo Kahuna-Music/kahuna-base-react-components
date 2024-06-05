@@ -19,6 +19,8 @@ KDropdownSingle.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
   width: 250,
   placeholder: "Select single...",
+  // defaultValue: { label: "Label 1", value: 1, icon: TracksIcon },
+  // defaultValuePrimitive: 1,
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
     { label: "Label 4", value: 2, icon: TracksIcon },

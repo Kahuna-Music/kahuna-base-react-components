@@ -17,6 +17,7 @@ export interface KSelectOption {
 
 export interface KDropdownProps {
   defaultValue?: KSelectOption | MultiValue<KSelectOption>
+  defaultValuePrimitive?: string | number
   selected?: KSelectOption | MultiValue<KSelectOption>
   onSelect: (selected: KSelectOption | MultiValue<KSelectOption>) => void
   options: KSelectOption[]
@@ -63,6 +64,13 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const hideIcon = props.hideChosenOptionIcon || false
   const isClearable = props.isClearable || false
 
+  let defaultValue = props.defaultValue
+  if (!defaultValue && props.defaultValuePrimitive) {
+    defaultValue = props.options.find(
+      (option) => option.value === props.defaultValuePrimitive || option.value2 === props.defaultValuePrimitive
+    )
+  }
+
   const customFilterOption = (option: FilterOptionOption<KSelectOption>, inputValue: string) => {
     return option.data.label.toLocaleLowerCase("en").includes(inputValue.toLocaleLowerCase("en"))
   }
@@ -89,7 +97,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
       {props.leftIcon && <img src={props.leftIcon} width={20} alt={"l-icon"} />}
 
       <Select
-        defaultValue={props.defaultValue}
+        defaultValue={defaultValue}
         isMulti={isMulti}
         name={props.label || ""}
         placeholder={props.placeholder || ""}
