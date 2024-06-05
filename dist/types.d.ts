@@ -86,6 +86,51 @@ interface KInputProps {
 }
 declare const KInput: React.FC<KInputProps>;
 
+interface KSelectOption$1 {
+    label: string;
+    value: number;
+    type?: string;
+    label2?: string;
+    value2?: string;
+    icon?: string;
+}
+interface KDropdownProps$1 {
+    defaultValue?: KSelectOption$1 | MultiValue<KSelectOption$1>;
+    selected?: KSelectOption$1 | MultiValue<KSelectOption$1>;
+    onSelect: (selected: KSelectOption$1 | MultiValue<KSelectOption$1>) => void;
+    options: KSelectOption$1[];
+    width?: number;
+    height?: number;
+    leftIcon?: string;
+    rightIcon?: string;
+    background?: string;
+    activeBackground?: string;
+    borderRadius?: number;
+    placeholder?: string;
+    isMulti?: boolean;
+    label?: string;
+    textColor?: string;
+    shadowDisabled?: boolean;
+    menuBackground?: string;
+    padding?: string;
+    gap?: string;
+    hideChosenOptionIcon?: boolean;
+}
+declare const KDropdown: React.FC<KDropdownProps$1>;
+
+interface SliderOption {
+    label: string;
+    value: number;
+}
+interface KSliderProps {
+    options: SliderOption[];
+    onChange: (option: SliderOption) => void;
+    value?: number;
+    disabled?: boolean;
+    width?: string;
+}
+declare const KSlider: React.FC<KSliderProps>;
+
 interface KSelectOption {
     label: string;
     value: number;
@@ -116,19 +161,6 @@ interface KDropdownProps {
     gap?: string;
     hideChosenOptionIcon?: boolean;
 }
-declare const KDropdown: React.FC<KDropdownProps>;
+declare const KDropdownToggle: React.FC<KDropdownProps>;
 
-interface SliderOption {
-    label: string;
-    value: number;
-}
-interface KSliderProps {
-    options: SliderOption[];
-    onChange: (option: SliderOption) => void;
-    value?: number;
-    disabled?: boolean;
-    width?: string;
-}
-declare const KSlider: React.FC<KSliderProps>;
-
-export { KButton, KDropdown, KInput, KLogo, KSlider, KSpan, KTitleSpan };
+export { KButton, KDropdown, KDropdownToggle, KInput, KLogo, KSlider, KSpan, KTitleSpan };
