@@ -13,14 +13,7 @@ const Template: StoryFn<typeof KSelectDate> = (args) => <KSelectDate {...args} /
 
 export const KSelectDatePrimary = Template.bind({})
 KSelectDatePrimary.args = {
-  text: "Hello World",
-  fontSize: 14,
-  color: "#737373",
-  fontWeight: 400,
-  lineHeight: "20px",
-  fontStyle: "normal",
-  letterSpacing: "-0.084px",
-  textDecoration: "underline"
+
 }
 
 
