@@ -36,6 +36,7 @@ export interface KDropdownProps {
   padding?: string
   gap?: string
   hideChosenOptionIcon?: boolean
+  isClearable?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -60,6 +61,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const padding = props.padding || "8px"
   const gap = props.gap || "4px"
   const hideIcon = props.hideChosenOptionIcon || false
+  const isClearable = props.isClearable || false
 
   const customFilterOption = (option: FilterOptionOption<KSelectOption>, inputValue: string) => {
     return option.data.label.toLocaleLowerCase("en").includes(inputValue.toLocaleLowerCase("en"))
@@ -94,6 +96,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         options={props.options}
         className={"k-dropdown"}
         filterOption={customFilterOption}
+        isClearable={isClearable}
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
@@ -149,6 +152,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           placeholder: (base) => ({
             ...base,
             margin: 0
+          }),
+          clearIndicator: (base) => ({
+            ...base,
+            padding: 0
           })
         }}
         components={{
@@ -163,6 +170,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         }}
         onChange={(event) => {
           if (!event) {
+            if (props.isClearable) {
+              setSelectedOption(undefined)
+            }
             return
           }
           setSelectedOption(event)
