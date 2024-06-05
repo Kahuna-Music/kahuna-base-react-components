@@ -21,9 +21,13 @@ KDropdownSingle.args = {
   placeholder: "Select single...",
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
-    { label: "Label 2", value: 2, icon: TracksIcon },
+    { label: "Label 4", value: 2, icon: TracksIcon },
     { label: "Label 3", value: 3 },
-    { label: "TANIK", value: 4 }
+    { label: "Label 2", value: 4 },
+    { label: "R&B", value: 5 },
+    { label: "Çınar", value: 6 },
+    { label: "ELEKTRONIC ", value: 7 },
+    { label: "TANIK", value: 8 }
   ]
 }
 
@@ -55,8 +59,13 @@ KDropdownRightIcon.args = {
   width: 250,
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
-    { label: "Label 2", value: 2, icon: TracksIcon },
-    { label: "Label 3", value: 3 }
+    { label: "Label 4", value: 2, icon: TracksIcon },
+    { label: "Label 3", value: 3 },
+    { label: "Label 2", value: 4 },
+    { label: "Sevinç", value: 5 },
+    { label: "Çınar", value: 6 },
+    { label: "Ümit", value: 7 },
+    { label: "TANIK", value: 8 }
   ]
 }
 
