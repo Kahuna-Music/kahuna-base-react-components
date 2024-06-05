@@ -1,66 +1,78 @@
-import {Meta, StoryFn} from "@storybook/react";
-import KDropdown, {KSelectOption} from "./KDropdown";
+import { Meta, StoryFn } from "@storybook/react"
+import KDropdown, { KSelectOption } from "./KDropdown"
 // @ts-ignore
-import TracksIcon from "../../assets/tracks.svg";
-import {MultiValue} from "react-select";
+import TracksIcon from "../../assets/tracks.svg"
+import { MultiValue } from "react-select"
 
 export default {
   title: "ReactComponentLibrary/KDropdown",
   component: KDropdown,
   parameters: {
-    layout: 'centered',
-  },
-} as Meta<typeof KDropdown>;
+    layout: "centered"
+  }
+} as Meta<typeof KDropdown>
 
-const Template: StoryFn<typeof KDropdown> = (args) => <KDropdown {...args} />;
+const Template: StoryFn<typeof KDropdown> = (args) => <KDropdown {...args} />
 
-export const KDropdownSingle = Template.bind({});
+export const KDropdownSingle = Template.bind({})
 KDropdownSingle.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {
-
-  },
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
   width: 250,
   placeholder: "Select single...",
-  options: [{label: "Label 1", value: 1, icon: TracksIcon}, {label: "Label 2", value: 2, icon: TracksIcon}, {label: "Label 3", value: 3}]
-};
+  options: [
+    { label: "Label 1", value: 1, icon: TracksIcon },
+    { label: "Label 4", value: 2, icon: TracksIcon },
+    { label: "Label 3", value: 3 },
+    { label: "Label 2", value: 4 },
+    { label: "R&B", value: 5 },
+    { label: "Çınar", value: 6 },
+    { label: "ELEKTRONIC ", value: 7 },
+    { label: "TANIK", value: 8 }
+  ]
+}
 
-export const KDropdownMulti = Template.bind({});
+export const KDropdownMulti = Template.bind({})
 KDropdownMulti.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {
-
-  },
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
   width: 250,
   placeholder: "Multi...",
-  options: [{label: "Label 1", value: 1, icon: TracksIcon}, {label: "Label 2", value: 2, icon: TracksIcon}, {label: "Label 3", value: 3}],
+  options: [
+    { label: "Label 1", value: 1, icon: TracksIcon },
+    { label: "Label 2", value: 2, icon: TracksIcon },
+    { label: "Label 3", value: 3 }
+  ],
   isMulti: true
-};
+}
 
-export const KDropdownLeftIcon = Template.bind({});
+export const KDropdownLeftIcon = Template.bind({})
 KDropdownLeftIcon.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {
-
-  },
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
   placeholder: "Placeholder...",
-  leftIcon: TracksIcon,
-};
+  leftIcon: TracksIcon
+}
 
-export const KDropdownRightIcon = Template.bind({});
+export const KDropdownRightIcon = Template.bind({})
 KDropdownRightIcon.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {
-
-  },
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
   placeholder: "Placeholder...",
   rightIcon: TracksIcon,
   width: 250,
-  options: [{label: "Label 1", value: 1, icon: TracksIcon}, {label: "Label 2", value: 2, icon: TracksIcon}, {label: "Label 3", value: 3}],
-};
+  options: [
+    { label: "Label 1", value: 1, icon: TracksIcon },
+    { label: "Label 4", value: 2, icon: TracksIcon },
+    { label: "Label 3", value: 3 },
+    { label: "Label 2", value: 4 },
+    { label: "Sevinç", value: 5 },
+    { label: "Çınar", value: 6 },
+    { label: "Ümit", value: 7 },
+    { label: "TANIK", value: 8 }
+  ]
+}
 
-export const KDropdownLeftRightIcon = Template.bind({});
+export const KDropdownLeftRightIcon = Template.bind({})
 KDropdownLeftRightIcon.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {
-
-  },
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
   placeholder: "Placeholder...",
   leftIcon: TracksIcon,
-  rightIcon: TracksIcon,
-};
+  rightIcon: TracksIcon
+}

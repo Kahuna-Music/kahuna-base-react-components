@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, KeyboardEvent } from "react"
 import "../../main.css"
 
 export interface KInputProps {
   value: string
   onChange: (value: string) => void
   onBlur?: (value: string) => void
+  onKeyDown?: (event: KeyboardEvent) => void
   width?: number
   height?: number
   leftIcon?: string
@@ -20,12 +21,13 @@ export interface KInputProps {
   rightIconClick?: () => void
   accentColor?: string
   hoverBackground?: string
-  padding?: string 
+  padding?: string
   gap?: string
   border?: string
   boxShadow?: string
   fontSize?: string
   iconSize?: string
+  checked?: boolean
 }
 
 const KInput: React.FC<KInputProps> = (props) => {
@@ -43,7 +45,11 @@ const KInput: React.FC<KInputProps> = (props) => {
   const width = props.width || "100%"
   const height = props.height || 20
   const borderRadius = props.borderRadius || 10
-  const boxShadow = props.shadowDisabled ? "" : props.boxShadow ? props.boxShadow : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
+  const boxShadow = props.shadowDisabled
+    ? ""
+    : props.boxShadow
+    ? props.boxShadow
+    : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const type = props.type || "text"
   const accentColor = props.accentColor || ""
   const disabled = props.disabled || false
@@ -52,7 +58,7 @@ const KInput: React.FC<KInputProps> = (props) => {
   const gap = props.gap || "12px"
   const border = props.border || "none"
   const fontSize = props.fontSize || "14px"
-  const iconSize = props.iconSize || "20px" 
+  const iconSize = props.iconSize || "20px"
 
   return (
     <div
@@ -84,8 +90,9 @@ const KInput: React.FC<KInputProps> = (props) => {
           width,
           height,
           accentColor,
-          fontSize,
+          fontSize
         }}
+        {...(props.checked && (type === "checkbox" || type === "radio") && { checked: props.checked })}
         value={props.value}
         placeholder={props.placeholder || ""}
         disabled={disabled}
@@ -94,6 +101,9 @@ const KInput: React.FC<KInputProps> = (props) => {
         }}
         onChange={(event) => {
           props.onChange(event.target.value)
+        }}
+        onKeyDown={(event) => {
+          if (props.onKeyDown) props.onKeyDown(event)
         }}
       />
 

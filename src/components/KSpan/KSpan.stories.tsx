@@ -19,7 +19,8 @@ KSpanPrimary.args = {
   fontWeight: 400,
   lineHeight: "20px",
   fontStyle: "normal",
-  letterSpacing: "-0.084px"
+  letterSpacing: "-0.084px",
+  textDecoration: "underline"
 }
 
 

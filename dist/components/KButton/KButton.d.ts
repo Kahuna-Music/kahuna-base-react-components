@@ -16,6 +16,7 @@ export interface KButtonProps {
     shadowDisabled?: boolean;
     hoverBackground?: string;
     fontWeight?: number;
+    textDecoration?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 export default KButton;

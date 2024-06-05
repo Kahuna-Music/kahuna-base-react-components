@@ -9,8 +9,8 @@ import TracksIcon from "../../assets/tracks.svg"
 
 export default {
   title: "ReactComponentLibrary/KButton",
-  component: KButton,
-} as Meta<typeof KButton>;
+  component: KButton
+} as Meta<typeof KButton>
 
 const Template: StoryFn<typeof KButton> = (args) => <KButton {...args} />;
 
@@ -24,7 +24,8 @@ KButtonText.args = {
   borderRadius: 10,
   width: "160px",
   height: "44px",
-  hoverBackground: "#A2FE67"
+  hoverBackground: "#A2FE67",
+  textDecoration: "underline"
 };
 
 export const KButtonIcon = Template.bind({});

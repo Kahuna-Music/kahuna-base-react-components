@@ -1,9 +1,10 @@
-import React from "react";
+import React, { KeyboardEvent } from "react";
 import "../../main.css";
 export interface KInputProps {
     value: string;
     onChange: (value: string) => void;
     onBlur?: (value: string) => void;
+    onKeyDown?: (event: KeyboardEvent) => void;
     width?: number;
     height?: number;
     leftIcon?: string;
@@ -25,6 +26,7 @@ export interface KInputProps {
     boxShadow?: string;
     fontSize?: string;
     iconSize?: string;
+    checked?: boolean;
 }
 declare const KInput: React.FC<KInputProps>;
 export default KInput;

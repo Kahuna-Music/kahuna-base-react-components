@@ -38,7 +38,7 @@ export interface KDropdownProps {
   hideChosenOptionIcon?: boolean
 }
 
-const KDropdown: React.FC<KDropdownProps> = (props) => {
+const KDropdownToggle: React.FC<KDropdownProps> = (props) => {
   const [selectedOption, setSelectedOption] = useState<KSelectOption | MultiValue<KSelectOption>>()
   const [background, setBackground] = useState("#F5F5F5")
 
@@ -94,6 +94,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         options={props.options}
         className={"k-dropdown"}
         filterOption={customFilterOption}
+        isClearable
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
@@ -139,7 +140,6 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             ...base,
             padding: 0
           }),
-
           input: (base) => ({
             ...base,
             padding: 0,
@@ -149,6 +149,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           placeholder: (base) => ({
             ...base,
             margin: 0
+          }),
+          clearIndicator: (base) => ({
+            ...base,
+            padding: 0
           })
         }}
         components={{
@@ -163,9 +167,11 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         }}
         onChange={(event) => {
           if (!event) {
+            setSelectedOption(undefined)
             return
+          } else {
+            setSelectedOption(event)
           }
-          setSelectedOption(event)
           props.onSelect(event)
         }}
         //@ts-ignore
@@ -177,4 +183,4 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   )
 }
 
-export default KDropdown
+export default KDropdownToggle

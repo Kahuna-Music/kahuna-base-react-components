@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, KeyboardEvent } from 'react';
 import { MultiValue } from 'react-select';
 
 interface KButtonProps {
@@ -17,6 +17,7 @@ interface KButtonProps {
     shadowDisabled?: boolean;
     hoverBackground?: string;
     fontWeight?: number;
+    textDecoration?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 
@@ -59,6 +60,7 @@ interface KInputProps {
     value: string;
     onChange: (value: string) => void;
     onBlur?: (value: string) => void;
+    onKeyDown?: (event: KeyboardEvent) => void;
     width?: number;
     height?: number;
     leftIcon?: string;
@@ -80,6 +82,7 @@ interface KInputProps {
     boxShadow?: string;
     fontSize?: string;
     iconSize?: string;
+    checked?: boolean;
 }
 declare const KInput: React.FC<KInputProps>;
 
