@@ -19,8 +19,9 @@ KDropdownSingle.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
   width: 250,
   placeholder: "Select single...",
+  isClearable: true,
   // defaultValue: { label: "Label 1", value: 1, icon: TracksIcon },
-  // defaultValuePrimitive: 1,
+   defaultValuePrimitive: 7,
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
     { label: "Label 4", value: 2, icon: TracksIcon },
@@ -30,7 +31,8 @@ KDropdownSingle.args = {
     { label: "Çınar", value: 6 },
     { label: "ELEKTRONIC ", value: 7 },
     { label: "TANIK", value: 8 }
-  ]
+  ],
+  
 }
 
 export const KDropdownMulti = Template.bind({})
