@@ -20,6 +20,12 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const formatShortWeekday = (locale: string | undefined, date: Date): string => {
     return date.toLocaleDateString(locale, { weekday: "short" }).charAt(0) // Return only the first letter of the weekday
   }
+  const formatMonthYear = (locale: string | undefined, date: Date): string => {
+    const formattedDate = date.toLocaleDateString(locale, { month: "short", year: "numeric" })
+    const [month, year] = formattedDate.split(" ")
+    const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1).toLowerCase()
+    return `${capitalizedMonth}, ${year}`
+  }
 
   return (
     <div className="flex flex-col gap-0">
@@ -30,8 +36,10 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
         next2Label={null}
         prev2Label={null}
         prevLabel={<img src={LeftIcon} />}
+        
         nextLabel={<img src={RightIcon} />}
         formatShortWeekday={formatShortWeekday}
+        formatMonthYear={formatMonthYear}
       />
       <div className="h-19 bg-[#FFF] flex flex-row gap-4 py-4 justify-center border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]">
         <KButton text="Cancel" height="44px" width="160px" background="#FFF" textColor="#111" onClick={() => {}}/>
