@@ -16,7 +16,14 @@ const Template: StoryFn<typeof KDropdown> = (args) => <KDropdown {...args} />
 
 export const KDropdownSingle = Template.bind({})
 KDropdownSingle.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {
+    if ( value === undefined) {
+      console.log("our value is undefined, deleting process can be performed")
+    } else {
+      console.log("update process can be performed")
+    }
+
+  },
   width: 250,
   placeholder: "Select single...",
   isClearable: true,
@@ -37,7 +44,7 @@ KDropdownSingle.args = {
 
 export const KDropdownMulti = Template.bind({})
 KDropdownMulti.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
   width: 250,
   placeholder: "Multi...",
   options: [
@@ -50,14 +57,14 @@ KDropdownMulti.args = {
 
 export const KDropdownLeftIcon = Template.bind({})
 KDropdownLeftIcon.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
   placeholder: "Placeholder...",
   leftIcon: TracksIcon
 }
 
 export const KDropdownRightIcon = Template.bind({})
 KDropdownRightIcon.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
   placeholder: "Placeholder...",
   rightIcon: TracksIcon,
   width: 250,
@@ -75,7 +82,7 @@ KDropdownRightIcon.args = {
 
 export const KDropdownLeftRightIcon = Template.bind({})
 KDropdownLeftRightIcon.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption>) => {},
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption> |undefined) => {},
   placeholder: "Placeholder...",
   leftIcon: TracksIcon,
   rightIcon: TracksIcon

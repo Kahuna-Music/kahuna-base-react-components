@@ -19,7 +19,7 @@ export interface KDropdownProps {
   defaultValue?: KSelectOption | MultiValue<KSelectOption>
   defaultValuePrimitive?: string | number
   selected?: KSelectOption | MultiValue<KSelectOption>
-  onSelect: (selected: KSelectOption | MultiValue<KSelectOption>) => void
+  onSelect: (selected: KSelectOption | MultiValue<KSelectOption> | undefined) => void
   options: KSelectOption[]
   width?: number
   height?: number
@@ -180,6 +180,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           if (!event) {
             if (props.isClearable) {
               setSelectedOption(undefined)
+              props.onSelect(undefined)
             }
             return
           }
