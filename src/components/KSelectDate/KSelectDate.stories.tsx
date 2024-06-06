@@ -15,7 +15,12 @@ export const KSelectDatePrimary = Template.bind({})
 KSelectDatePrimary.args = {
   value:undefined,
   onChange: (value) => {
-    console.log("value:", value)
+    if (value) {
+      console.log("value is updated using this value:", value)
+    } else {
+      console.log("value is deleted, because it is: ", value)
+    }
+    
   }
 }
 

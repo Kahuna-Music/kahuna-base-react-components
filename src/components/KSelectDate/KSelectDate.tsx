@@ -14,7 +14,7 @@ import KButton from "../KButton"
 import KSpan from "../KSpan"
 
 export interface KSelectDateProps {
-  value: Date | undefined,
+  value: Date | undefined
   onChange: (date: Date | undefined) => void
 }
 interface MonthSelectorType {
@@ -29,14 +29,15 @@ interface DaySelectorType {
 }
 
 const KSelectDate: React.FC<KSelectDateProps> = (props) => {
-
   const [value, setValue] = useState<Date | undefined>(props.value)
   const [nextMonths, setNextMonths] = useState<MonthSelectorType[]>([])
   const [weekDays, setWeekDays] = useState<DaySelectorType[]>([])
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
+
   const formatShortWeekday = (locale: string | undefined, date: Date): string => {
     return date.toLocaleDateString(locale, { weekday: "short" }).charAt(0) // Return only the first letter of the weekday
   }
+
   const formatMonthYear = (locale: string | undefined, date: Date): string => {
     const formattedDate = date.toLocaleDateString(locale, { month: "short", year: "numeric" })
     const [month, year] = formattedDate.split(" ")
@@ -79,11 +80,6 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
       }
     })
   }
-
-  useEffect(() => {
-    setNextMonths(getNextMonths(value || new Date()))
-    setWeekDays(getWeekDays(value || new Date()))
-  }, [value])
 
   const renderPopUpCalendar = () => {
     return (
@@ -130,6 +126,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const monthSelector = (text: string, date: Date) => {
     return (
       <div
+        key={`${text}-${date}`}
         className={`w-[135px] h-9 box-sizing`}
         style={{
           borderRadius: 999,
@@ -148,6 +145,25 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           padding="8px 16px"
           height="34px"
         />
+      </div>
+    )
+  }
+
+  const daySelector = (text: string, date: Date) => {
+    return (
+      <div
+        key={`${text}-${date}`}
+        className={`w-[85px] h-[104px] flex flex-col justify-between py-3 px-2.5 rounded-[10px] ${
+          date.getTime() === value?.getTime() ? "bg-[#F8FEA3]" : "bg-[#F5F5F5]"
+        } cursor-pointer`}
+        onClick={() => {
+          setValue(date)
+        }}
+      >
+        <div>
+          <img src={CalendarIcon} alt="calendar" />
+        </div>
+        <KSpan text={text} fontWeight={500} color="#111" />
       </div>
     )
   }
@@ -172,37 +188,21 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
     }
   }
 
-  const daySelector = (text: string, date: Date) => {
-    return (
-      <div
-        className={`w-[85px] h-[104px] flex flex-col justify-between py-3 px-2.5 rounded-[10px] ${
-          date.getTime() === value?.getTime() ? "bg-[#F8FEA3]" : "bg-[#F5F5F5]"
-        } cursor-pointer`}
-        onClick={() => {
-          setValue(date)
-        }}
-      >
-        <div>
-          <img src={CalendarIcon} alt="calendar" />
-        </div>
-        <KSpan text={text} fontWeight={500} color="#111" />
-      </div>
-    )
-  }
-
   useEffect(() => {
+    setNextMonths(getNextMonths(value || new Date()))
+    setWeekDays(getWeekDays(value || new Date()))
     props.onChange(value)
   }, [value])
 
   return (
     <React.Fragment>
       {openCalendar && (
-        <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center">
-          {renderPopUpCalendar()}
+        <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50">
+          <div>{renderPopUpCalendar()}</div>
         </div>
       )}
       <div>
-        <div className="flex flex-col gap-4">
+        <div className={`flex flex-col gap-4 ${openCalendar && "blur-2xl"}`}>
           <div className="flex flex-row justify-between gap-2 items-center">
             <div className="flex flex-row gap-2">
               {nextMonths.map((month, i) => {
