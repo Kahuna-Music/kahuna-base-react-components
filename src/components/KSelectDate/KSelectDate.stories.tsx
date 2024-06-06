@@ -13,19 +13,15 @@ const Template: StoryFn<typeof KSelectDate> = (args) => <KSelectDate {...args} /
 
 export const KSelectDatePrimary = Template.bind({})
 KSelectDatePrimary.args = {
-  value:undefined,
+  value: undefined,
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)
     } else {
       console.log("value is deleted, because it is: ", value)
     }
-    
   }
 }
 
-
 export const KSelectDateHoverText = Template.bind({})
-KSelectDateHoverText.args = {
-
-}
+KSelectDateHoverText.args = {}

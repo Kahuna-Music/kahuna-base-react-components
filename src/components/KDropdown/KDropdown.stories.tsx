@@ -17,18 +17,17 @@ const Template: StoryFn<typeof KDropdown> = (args) => <KDropdown {...args} />
 export const KDropdownSingle = Template.bind({})
 KDropdownSingle.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {
-    if ( value === undefined) {
+    if (value === undefined) {
       console.log("our value is undefined, deleting process can be performed")
     } else {
       console.log("update process can be performed")
     }
-
   },
   width: 250,
   placeholder: "Select single...",
   isClearable: true,
   // defaultValue: { label: "Label 1", value: 1, icon: TracksIcon },
-   defaultValuePrimitive: 7,
+  defaultValuePrimitive: 7,
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
     { label: "Label 4", value: 2, icon: TracksIcon },
@@ -38,8 +37,7 @@ KDropdownSingle.args = {
     { label: "Çınar", value: 6 },
     { label: "ELEKTRONIC ", value: 7 },
     { label: "TANIK", value: 8 }
-  ],
-  
+  ]
 }
 
 export const KDropdownMulti = Template.bind({})
@@ -82,7 +80,7 @@ KDropdownRightIcon.args = {
 
 export const KDropdownLeftRightIcon = Template.bind({})
 KDropdownLeftRightIcon.args = {
-  onSelect: (value: KSelectOption | MultiValue<KSelectOption> |undefined) => {},
+  onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
   placeholder: "Placeholder...",
   leftIcon: TracksIcon,
   rightIcon: TracksIcon
