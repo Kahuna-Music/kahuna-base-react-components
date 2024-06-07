@@ -61,7 +61,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const getNextMonths = (date: Date | undefined) => {
     if (date) {
       const updatedMonths = Array.from({ length: 4 }, (_, i) => {
-        const newDate = new Date(date.getFullYear(), date.getMonth() + i, 1)
+        const newDate = new Date(date.getFullYear(), date.getMonth() + (i - 1), 1)
         return {
           monthName: newDate.toLocaleString("en-US", { month: "long" }),
           year: newDate.getFullYear().toString(),
