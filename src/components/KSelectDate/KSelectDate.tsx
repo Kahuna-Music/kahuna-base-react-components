@@ -153,13 +153,15 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
 
     const text = `${monthText[month]}, ${year}`
 
+    const inMonth = dummyDate ? dummyDate?.getMonth() === date.getMonth() : new Date().getMonth() === date.getMonth()
+
     return (
       <div
         key={`${text}-${date}`}
         className={`w-[135px] h-9 box-sizing`}
         style={{
           borderRadius: 999,
-          border: dummyDate?.getMonth() === date.getMonth() ? "1px solid #111" : "1px solid #E7E7E7"
+          border: inMonth ? "1px solid #111" : "1px solid #E7E7E7"
         }}
       >
         <KButton
@@ -170,8 +172,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
               setDummyDate(date)
             }
           }}
-          background={dummyDate?.getMonth() === date.getMonth() ? "#111" : "#FFF"}
-          textColor={dummyDate?.getMonth() === date.getMonth() ? "#FFF" : "#111"}
+          background={inMonth ? "#111" : "#FFF"}
+          textColor={inMonth? "#FFF" : "#111"}
           borderRadius={999}
           padding="8px 16px"
           height="34px"
