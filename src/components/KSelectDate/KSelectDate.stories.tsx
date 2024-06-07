@@ -12,7 +12,7 @@ export default {
 
 const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
 
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   useEffect(() => {
     console.log("selectedDate: ", selectedDate)
   }, [selectedDate])
@@ -26,6 +26,7 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
         if (date) {
           setSelectedDate(date)
           console.log("updating is completed: ", date)
+          console.log("updating is completed date.toISOString(): ", date?.toISOString())
         } else {
           setSelectedDate(undefined)
           console.log("Deleting is completed")
