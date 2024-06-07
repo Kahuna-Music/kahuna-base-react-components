@@ -104,7 +104,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             width="160px"
             background="#FFF"
             textColor="#111"
-            onClick={() => {   
+            onClick={() => {
               setOpenCalendar(false)
             }}
           />
@@ -141,9 +141,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             if (date.getTime() === value?.getTime()) {
               setValue(undefined)
             } else {
-               setValue(date)
+              setValue(date)
             }
-           
           }}
           background={value?.getMonth() === date.getMonth() ? "#111" : "#FFF"}
           textColor={value?.getMonth() === date.getMonth() ? "#FFF" : "#111"}
@@ -166,7 +165,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           if (date.getTime() === value?.getTime()) {
             setValue(undefined)
           } else {
-             setValue(date)
+            setValue(date)
           }
         }}
       >

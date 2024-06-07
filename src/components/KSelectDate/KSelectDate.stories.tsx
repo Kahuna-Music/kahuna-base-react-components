@@ -20,7 +20,6 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
   return (
     <KSelectDate
       {...args}
-      
       value={selectedDate}
       onChange={(date) => {
         console.log("date: ", date)
@@ -32,7 +31,6 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
           console.log("Deleting is completed")
         }
       }}
-
     />
   )
 }

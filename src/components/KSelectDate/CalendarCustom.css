@@ -102,10 +102,12 @@
     font-size: 0.75em;
     font-weight: bold;
 }
+
 .react-calendar__month-view__days {
-  justify-content: space-between;
-    
+    justify-content: space-between;
+
 }
+
 .react-calendar__month-view__days__day {
     flex-basis: auto !important;
     border-radius: 20px;
@@ -130,15 +132,18 @@
 .react-calendar__year-view .react-calendar__tile,
 .react-calendar__decade-view .react-calendar__tile,
 .react-calendar__century-view .react-calendar__tile {
-    padding: 0; /*old value : 2em 0.5em*/
+    padding: 0;
+    /*old value : 2em 0.5em*/
 }
+
 .react-calendar__navigation__arrow {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 24px !important;
     height: 24px;
-    border-radius: 12px;;
+    border-radius: 12px;
+    ;
 }
 
 .react-calendar__tile {
@@ -175,13 +180,15 @@
 }
 
 .react-calendar__tile--hasActive {
-    background: #111111; /*76baff*/
+    background: #111111;
+    /*76baff*/
     color: #FFFFFF;
 }
 
 .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
-    background: #111111; /*old value: #a9d4ff*/
+    background: #111111;
+    /*old value: #a9d4ff*/
 }
 
 .react-calendar__tile--active {
@@ -194,22 +201,27 @@
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-    background: #111111; /*old value: 1087ff*/
+    background: #111111;
+    /*old value: 1087ff*/
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #F0F0F0;
 }
-.react-calendar__month-view__weekdays__weekday  {
+
+.react-calendar__month-view__weekdays__weekday {
     text-decoration: none !important;
 }
+
 .react-calendar__month-view__weekdays__weekday--weekend {
     text-decoration: none;
 }
+
 abbr:where([title]) {
     text-decoration: none !important;
-    color:#3D3D3D;
+    color: #3D3D3D;
 }
+
 .react-calendar__navigation__label__labelText {
     color: #111;
     font-size: 16px;
@@ -217,6 +229,7 @@ abbr:where([title]) {
     line-height: 24px;
     letter-spacing: -0.176px;
 }
+
 .react-calendar__year-view__months__month {
     padding: 0 !important;
 }
