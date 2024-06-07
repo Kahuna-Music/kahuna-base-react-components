@@ -34,6 +34,7 @@ interface MonthTextType {
 const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const [value, setValue] = useState<Date | undefined>(props.value)
   const [calendarDate, setCalendarDate] = useState<Date | undefined>(props.value)
+  const [dummyDate, setDummyDate] = useState<Date | undefined>(props.value)
   const [nextMonths, setNextMonths] = useState<MonthSelectorType[]>([])
   const [weekDays, setWeekDays] = useState<DaySelectorType[]>([])
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
@@ -57,32 +58,39 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
     }
   }
 
-  const getNextMonths = (date: Date): MonthSelectorType[] => {
-    return Array.from({ length: 4 }, (_, i) => {
-      const newDate = new Date(date.getFullYear(), date.getMonth() + i, 1)
-      return {
-        monthName: newDate.toLocaleString("en-US", { month: "long" }),
-        year: newDate.getFullYear().toString(),
-        date: newDate
-      }
-    })
+  const getNextMonths = (date: Date | undefined) => {
+    if (date) {
+      const updatedMonths = Array.from({ length: 4 }, (_, i) => {
+        const newDate = new Date(date.getFullYear(), date.getMonth() + i, 1)
+        return {
+          monthName: newDate.toLocaleString("en-US", { month: "long" }),
+          year: newDate.getFullYear().toString(),
+          date: newDate
+        }
+      })
+      setNextMonths(updatedMonths)
+    }
   }
 
-  const getWeekDays = (date: Date): DaySelectorType[] => {
-    const startOfWeek = new Date(date)
-    const dayOfWeek = startOfWeek.getDay()
-    const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek // If Sunday (0), move back 6 days; otherwise move back (1 - dayOfWeek) days
-    startOfWeek.setDate(startOfWeek.getDate() + diffToMonday)
+  const getWeekDays = (date: Date | undefined) => {
+    if (date) {
+      const startOfWeek = new Date(date)
+      const dayOfWeek = startOfWeek.getDay()
+      const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek // If Sunday (0), move back 6 days; otherwise move back (1 - dayOfWeek) days
+      startOfWeek.setDate(startOfWeek.getDate() + diffToMonday)
 
-    return Array.from({ length: 7 }, (_, i) => {
-      const day = new Date(startOfWeek)
-      day.setDate(startOfWeek.getDate() + i)
-      return {
-        dayName: day.toLocaleDateString("en-US", { weekday: "short" }),
-        dayOrderInMonth: day.getDate(),
-        date: day
-      }
-    })
+      const updatedDays = Array.from({ length: 7 }, (_, i) => {
+        const day = new Date(startOfWeek)
+        day.setDate(startOfWeek.getDate() + i)
+        return {
+          dayName: day.toLocaleDateString("en-US", { weekday: "short" }),
+          dayOrderInMonth: day.getDate(),
+          date: day
+        }
+      })
+
+      setWeekDays(updatedDays)
+    }
   }
 
   const renderPopUpCalendar = () => {
@@ -127,9 +135,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
     )
   }
 
-  const monthSelector = (month:string, year:string, date: Date) => {
-    
-    const monthText: MonthTextType  = {
+  const monthSelector = (month: string, year: string, date: Date) => {
+    const monthText: MonthTextType = {
       January: "Jan",
       February: "Feb",
       March: "March",
@@ -145,27 +152,26 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
     }
 
     const text = `${monthText[month]}, ${year}`
+
     return (
       <div
         key={`${text}-${date}`}
         className={`w-[135px] h-9 box-sizing`}
         style={{
           borderRadius: 999,
-          border: value?.getMonth() === date.getMonth() ? "1px solid #111" : "1px solid #E7E7E7"
+          border: dummyDate?.getMonth() === date.getMonth() ? "1px solid #111" : "1px solid #E7E7E7"
         }}
       >
         <KButton
           text={text}
           shadowDisabled={true}
           onClick={() => {
-            if (date.getTime() === value?.getTime()) {
-              setValue(undefined)
-            } else {
-              setValue(date)
+            if (date.getTime()) {
+              setDummyDate(date)
             }
           }}
-          background={value?.getMonth() === date.getMonth() ? "#111" : "#FFF"}
-          textColor={value?.getMonth() === date.getMonth() ? "#FFF" : "#111"}
+          background={dummyDate?.getMonth() === date.getMonth() ? "#111" : "#FFF"}
+          textColor={dummyDate?.getMonth() === date.getMonth() ? "#FFF" : "#111"}
           borderRadius={999}
           padding="8px 16px"
           height="34px"
@@ -205,7 +211,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
       } else {
         newDate.setDate(newDate.getDate() - 7)
       }
-      setValue(newDate)
+      setDummyDate(newDate)
     } else {
       const newDate = new Date()
       if (isNextWeek) {
@@ -213,16 +219,29 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
       } else {
         newDate.setDate(newDate.getDate() - 7)
       }
-      setValue(newDate)
+      setDummyDate(newDate)
     }
   }
 
   useEffect(() => {
-    setNextMonths(getNextMonths(value || new Date()))
-    setWeekDays(getWeekDays(value || new Date()))
-    setCalendarDate(value)
+    if (value) {
+      setDummyDate(value)
+    }
     props.onChange(value)
   }, [value])
+
+  useEffect(() => {
+    const today = new Date()
+    if (!props.value) {
+      getNextMonths(today)
+      getWeekDays(today)
+    }
+  }, [])
+  
+  useEffect(() => {
+    getNextMonths(dummyDate)
+    getWeekDays(dummyDate)
+  }, [dummyDate])
 
   return (
     <React.Fragment>
@@ -266,7 +285,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
               padding="6px"
               leftIcon={LeftIcon}
               onClick={() => {
-                changeWeeks(value, false)
+                changeWeeks(dummyDate, false)
               }}
               width="130px"
               height="32px"
@@ -277,7 +296,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
               padding="6px"
               rightIcon={RightIcon}
               onClick={() => {
-                changeWeeks(value, true)
+                changeWeeks(dummyDate, true)
               }}
               width="130px"
               height="32px"
