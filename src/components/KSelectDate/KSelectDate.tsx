@@ -27,6 +27,9 @@ interface DaySelectorType {
   dayOrderInMonth: number
   date: Date
 }
+interface MonthTextType {
+  [key: string]: string
+}
 
 const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const [value, setValue] = useState<Date | undefined>(props.value)
@@ -124,7 +127,24 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
     )
   }
 
-  const monthSelector = (text: string, date: Date) => {
+  const monthSelector = (month:string, year:string, date: Date) => {
+    
+    const monthText: MonthTextType  = {
+      January: "Jan",
+      February: "Feb",
+      March: "March",
+      April: "April",
+      May: "May",
+      June: "June",
+      July: "July",
+      August: "August",
+      September: "Sept",
+      October: "Oct",
+      November: "Nov",
+      December: "Dec"
+    }
+
+    const text = `${monthText[month]}, ${year}`
     return (
       <div
         key={`${text}-${date}`}
@@ -216,7 +236,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           <div className="flex flex-row justify-between gap-2 items-center">
             <div className="flex flex-row gap-2">
               {nextMonths.map((month, i) => {
-                return monthSelector(`${month.monthName} ${month.year}`, month.date)
+                return monthSelector(month.monthName, month.year, month.date)
               })}
             </div>
             <div>
