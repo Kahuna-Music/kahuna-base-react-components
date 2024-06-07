@@ -37,6 +37,8 @@ export default [
         extensions: [".css"]
       })
     ],
+    context: 'window',
+    moduleContext: id => 'window',
     external: ["react", "react-dom"],
   },
   {

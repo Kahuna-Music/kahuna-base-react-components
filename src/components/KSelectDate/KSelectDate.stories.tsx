@@ -12,7 +12,7 @@ export default {
 
 const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
 
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
   useEffect(() => {
     console.log("selectedDate: ", selectedDate)
   }, [selectedDate])
