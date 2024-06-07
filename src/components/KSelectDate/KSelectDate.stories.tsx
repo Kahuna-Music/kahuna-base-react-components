@@ -1,5 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react"
-import KSelectDate from "./KSelectDate"
+import KSelectDate, { KSelectDateProps } from "./KSelectDate"
+import { useState } from "react"
 
 export default {
   title: "ReactComponentLibrary/KSelectDate",
@@ -9,7 +10,31 @@ export default {
   }
 } as Meta<typeof KSelectDate>
 
-const Template: StoryFn<typeof KSelectDate> = (args) => <KSelectDate {...args} />
+const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
+
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(args.value)
+
+  return (
+    <KSelectDate
+      {...args}
+      
+      value={selectedDate}
+      onChange={(date) => {
+        console.log("date: ", date)
+        if (date) {
+          setSelectedDate(date)
+          console.log("updating is completed: ", date)
+        } else {
+          setSelectedDate(undefined)
+          console.log("Deleting is completed")
+        }
+      }}
+
+    />
+  )
+}
+
+const Template: StoryFn<typeof KSelectDateWrapper> = (args) => <KSelectDateWrapper {...args} />
 
 export const KSelectDatePrimary = Template.bind({})
 KSelectDatePrimary.args = {
