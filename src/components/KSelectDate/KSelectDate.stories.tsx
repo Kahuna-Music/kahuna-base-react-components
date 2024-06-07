@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react"
 import KSelectDate, { KSelectDateProps } from "./KSelectDate"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default {
   title: "ReactComponentLibrary/KSelectDate",
@@ -13,6 +13,9 @@ export default {
 const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(args.value)
+  useEffect(() => {
+    console.log("selectedDate: ", selectedDate)
+  }, [selectedDate])
 
   return (
     <KSelectDate
