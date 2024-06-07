@@ -98,7 +98,7 @@ interface KDropdownProps {
     defaultValue?: KSelectOption | MultiValue<KSelectOption>;
     defaultValuePrimitive?: string | number;
     selected?: KSelectOption | MultiValue<KSelectOption>;
-    onSelect: (selected: KSelectOption | MultiValue<KSelectOption>) => void;
+    onSelect: (selected: KSelectOption | MultiValue<KSelectOption> | undefined) => void;
     options: KSelectOption[];
     width?: number;
     height?: number;
@@ -133,4 +133,10 @@ interface KSliderProps {
 }
 declare const KSlider: React.FC<KSliderProps>;
 
-export { KButton, KDropdown, KInput, KLogo, KSlider, KSpan, KTitleSpan };
+interface KSelectDateProps {
+    value: Date | undefined;
+    onChange: (date: Date | undefined) => void;
+}
+declare const KSelectDate: React.FC<KSelectDateProps>;
+
+export { KButton, KDropdown, KInput, KLogo, KSelectDate, KSlider, KSpan, KTitleSpan };
