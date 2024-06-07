@@ -148,7 +148,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           }),
           valueContainer: (base) => ({
             ...base,
-            padding: 0
+            padding: 0,
+            whiteSpace: "nowrap"
+
           }),
 
           input: (base) => ({

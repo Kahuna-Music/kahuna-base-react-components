@@ -36,7 +36,9 @@ KDropdownSingle.args = {
     { label: "R&B", value: 5 },
     { label: "Çınar", value: 6 },
     { label: "ELEKTRONIC ", value: 7 },
-    { label: "TANIK", value: 8 }
+    { label: "TANIK", value: 8 },
+    { label: "Very very very very very long content.", value: 9 },
+    { label: "TANIK", value: 10 }
   ]
 }
 
