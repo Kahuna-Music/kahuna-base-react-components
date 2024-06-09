@@ -25,7 +25,7 @@ KDropdownSingle.args = {
   },
   width: 250,
   placeholder: "Select single...",
-  isClearable: true,
+  isClearable: false,
   // defaultValue: { label: "Label 1", value: 1, icon: TracksIcon },
   defaultValuePrimitive: 7,
   options: [
