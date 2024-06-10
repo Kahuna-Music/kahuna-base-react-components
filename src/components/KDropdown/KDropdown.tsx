@@ -172,7 +172,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           IndicatorSeparator: () => null,
           DropdownIndicator: () => null,
           SingleValue: ({ data, ...props }) => (
-            <div className="flex w-full" style={{ position: "absolute" }}>
+            <div className={`flex ${isEllipsis ? "w-full" : ""}`} style={{ position: "absolute" }}>
               {data.icon && !hideIcon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
               <KSpan text={data.label} color="#111" ellipsis={isEllipsis} />
             </div>
