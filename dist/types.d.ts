@@ -33,6 +33,7 @@ interface KSpanProps {
     hoverTextColor?: string;
     hoverStyle?: CSSProperties;
     textDecoration?: string;
+    ellipsis?: boolean;
 }
 declare const KSpan: React.FC<KSpanProps>;
 
@@ -117,6 +118,7 @@ interface KDropdownProps {
     gap?: string;
     hideChosenOptionIcon?: boolean;
     isClearable?: boolean;
+    isEllipsis?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 

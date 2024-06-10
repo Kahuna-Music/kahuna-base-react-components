@@ -38,6 +38,7 @@ export interface KDropdownProps {
   gap?: string
   hideChosenOptionIcon?: boolean
   isClearable?: boolean
+  isEllipsis?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -63,6 +64,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const gap = props.gap || "4px"
   const hideIcon = props.hideChosenOptionIcon || false
   const isClearable = props.isClearable || false
+  const isEllipsis = props.isEllipsis || false
 
   let defaultValue = props.defaultValue
   if (!defaultValue && props.defaultValuePrimitive) {
@@ -148,8 +150,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           }),
           valueContainer: (base) => ({
             ...base,
-            padding: 0,
-            whiteSpace: "nowrap"
+            padding: 0
           }),
 
           input: (base) => ({
@@ -171,9 +172,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           IndicatorSeparator: () => null,
           DropdownIndicator: () => null,
           SingleValue: ({ data, ...props }) => (
-            <div className="flex" style={{ position: "absolute" }}>
+            <div className="flex w-full" style={{ position: "absolute" }}>
               {data.icon && !hideIcon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
-              <KSpan text={data.label} color="#111" />
+              <KSpan text={data.label} color="#111" ellipsis={isEllipsis} />
             </div>
           )
         }}

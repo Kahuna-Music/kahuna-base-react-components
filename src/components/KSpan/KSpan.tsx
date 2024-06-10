@@ -12,7 +12,8 @@ export interface KSpanProps {
   hoverText?: string
   hoverTextColor?: string
   hoverStyle?: CSSProperties,
-  textDecoration?: string
+  textDecoration?: string,
+  ellipsis?: boolean
 }
 
 const KSpan: React.FC<KSpanProps> = (props) => {
@@ -27,9 +28,12 @@ const KSpan: React.FC<KSpanProps> = (props) => {
   const hoverTextColor = props.hoverTextColor || "#737373"
   const hoverStyle = props.hoverStyle || {}
   const textDecoration = props.textDecoration || "none"
+  const ellipsis = props.ellipsis || false
+
+  const ellipsisStyle = {overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap"}
 
   const renderBaseSpan = () => {
-    const baseSpanStyle = { fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing, textDecoration }
+    const baseSpanStyle = { fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing, textDecoration, ...(ellipsis && ellipsisStyle) }
     return (
       <span
         className={"k-span"}
