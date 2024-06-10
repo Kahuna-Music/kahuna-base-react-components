@@ -5,4 +5,5 @@ import KLogo from "./components/KLogo";
 import KInput from "./components/KInput";
 import KDropdown from "./components/KDropdown";
 import KSlider from "./components/KSlider";
-export { KButton, KSpan, KLogo, KTitleSpan, KInput, KDropdown, KSlider };
+import KSelectDate from "./components/KSelectDate";
+export { KButton, KSpan, KLogo, KTitleSpan, KInput, KDropdown, KSlider, KSelectDate };

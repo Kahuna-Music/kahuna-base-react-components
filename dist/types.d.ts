@@ -33,6 +33,7 @@ interface KSpanProps {
     hoverTextColor?: string;
     hoverStyle?: CSSProperties;
     textDecoration?: string;
+    ellipsis?: boolean;
 }
 declare const KSpan: React.FC<KSpanProps>;
 
@@ -98,7 +99,7 @@ interface KDropdownProps {
     defaultValue?: KSelectOption | MultiValue<KSelectOption>;
     defaultValuePrimitive?: string | number;
     selected?: KSelectOption | MultiValue<KSelectOption>;
-    onSelect: (selected: KSelectOption | MultiValue<KSelectOption>) => void;
+    onSelect: (selected: KSelectOption | MultiValue<KSelectOption> | undefined) => void;
     options: KSelectOption[];
     width?: number;
     height?: number;
@@ -117,6 +118,7 @@ interface KDropdownProps {
     gap?: string;
     hideChosenOptionIcon?: boolean;
     isClearable?: boolean;
+    isEllipsis?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 
@@ -133,4 +135,10 @@ interface KSliderProps {
 }
 declare const KSlider: React.FC<KSliderProps>;
 
-export { KButton, KDropdown, KInput, KLogo, KSlider, KSpan, KTitleSpan };
+interface KSelectDateProps {
+    value: Date | undefined;
+    onChange: (date: Date | undefined) => void;
+}
+declare const KSelectDate: React.FC<KSelectDateProps>;
+
+export { KButton, KDropdown, KInput, KLogo, KSelectDate, KSlider, KSpan, KTitleSpan };
