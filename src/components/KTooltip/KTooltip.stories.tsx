@@ -17,12 +17,13 @@ const Template: StoryFn<KTooltipProps> = (args) => (
 
 export const KTooltipPrimary = Template.bind({});
 KTooltipPrimary.args = {
-  content: <div className="bg-red-100 flex justify-center w-[300px] h-[300px] items-center">
+  content: <div className="bg-red-100 flex justify-center w-[150px] h-[100px] items-center">
     <div className="bg-green-300 font-extrabold ">BURADA</div>
   </div>,
-  position: "right",
+  position: "top",
   zIndex: 1000,
-  arrowColor:"green"
+  arrowColor:"green",
+  showArrow: true,
   //boxShadow: "3px 3px 10px #000",
   //borderRadius: "100px",
 };

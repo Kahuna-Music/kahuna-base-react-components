@@ -5,6 +5,7 @@ export interface KTooltipProps {
   children: React.ReactNode
   content: React.ReactNode
   position?: string
+  open?: boolean
   backgroundColor?: string
   width?: string
   height?: string
@@ -14,6 +15,7 @@ export interface KTooltipProps {
   boxShadow?: string
   showArrow?: boolean
   arrowColor?: string
+  padding?:string
 }
 
 const KTooltip: React.FC<KTooltipProps> = (props) => {
@@ -23,6 +25,7 @@ const KTooltip: React.FC<KTooltipProps> = (props) => {
   const hideTooltip = () => setIsVisible(false)
 
   const position = props.position || "top"
+  const open = props.open || false
   const width = props.width || "auto"
   const height = props.height || "auto"
   const background = props.backgroundColor || "#F7F7F7"
@@ -32,8 +35,10 @@ const KTooltip: React.FC<KTooltipProps> = (props) => {
   const borderRadius = props.borderRadius || "4px"
   const arrowColor = props.arrowColor ? props.arrowColor : props.backgroundColor ? props.backgroundColor : "#F7F7F7"
   const showArrow = props.showArrow || false
+  const padding = props.padding || "10px"
+  const showTheTooltip = props.open !== undefined ? props.open : isVisible
 
-  const baseStyles = { width, height, background, zIndex, border, borderRadius, boxShadow }
+  const baseStyles = { width, height, background, zIndex, border, borderRadius, boxShadow}
   return (
     <div
       className="relative"
@@ -43,10 +48,11 @@ const KTooltip: React.FC<KTooltipProps> = (props) => {
       onBlur={hideTooltip}
     >
       {props.children}
-      {isVisible && (
+      {showTheTooltip && (
         <div className={`k-tooltip-${position} absolute`} style={baseStyles}>
-          {props.content}
-          {showArrow && <div className={`arrow-${position}`} style={{backgroundColor:arrowColor}}></div>}
+          <div style={{
+            padding:padding, background          }}>{props.content}</div>
+          {showArrow && <div className={`arrow-${position}`} style={{backgroundColor:arrowColor, zIndex:-200}}></div>}
         </div>
       )}
     </div>
