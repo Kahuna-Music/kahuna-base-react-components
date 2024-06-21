@@ -145,12 +145,11 @@ interface KTooltipProps {
     children: React.ReactNode;
     content: React.ReactNode;
     position?: string;
-    open?: boolean;
     backgroundColor?: string;
     width?: string;
     height?: string;
     zIndex?: number;
-    border: string;
+    border?: string;
     borderRadius?: string;
     boxShadow?: string;
     showArrow?: boolean;
