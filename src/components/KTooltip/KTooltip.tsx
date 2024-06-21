@@ -15,7 +15,7 @@ export interface KTooltipProps {
   boxShadow?: string
   showArrow?: boolean
   arrowColor?: string
-  padding?:string
+  padding?: string
 }
 
 const KTooltip: React.FC<KTooltipProps> = (props) => {
@@ -28,20 +28,25 @@ const KTooltip: React.FC<KTooltipProps> = (props) => {
   const open = props.open || false
   const width = props.width || "auto"
   const height = props.height || "auto"
-  const background = props.backgroundColor || "#F7F7F7"
+  const background = props.backgroundColor || "#FFF"
   const zIndex = props.zIndex || 999999
   const boxShadow = props.boxShadow || "none"
-  const border = props.border || "none"
-  const borderRadius = props.borderRadius || "4px"
-  const arrowColor = props.arrowColor ? props.arrowColor : props.backgroundColor ? props.backgroundColor : "#F7F7F7"
+  const border = props.border || "1px solid #E5E7EB"
+  const borderRadius = props.borderRadius || "5px"
+  const arrowColor =
+    props.arrowColor !== undefined
+      ? props.arrowColor
+      : props.backgroundColor !== undefined
+      ? props.backgroundColor
+      : "#F7F7F7"
   const showArrow = props.showArrow || false
-  const padding = props.padding || "10px"
+  const padding = props.padding || "5px"
   const showTheTooltip = props.open !== undefined ? props.open : isVisible
 
-  const baseStyles = { width, height, background, zIndex, border, borderRadius, boxShadow}
+  const baseStyles = { width, height, background, zIndex, border, borderRadius, boxShadow }
   return (
     <div
-      className="relative"
+      className="relative box-border"
       onMouseEnter={showTooltip}
       onMouseLeave={hideTooltip}
       onFocus={showTooltip}
@@ -50,9 +55,18 @@ const KTooltip: React.FC<KTooltipProps> = (props) => {
       {props.children}
       {showTheTooltip && (
         <div className={`k-tooltip-${position} absolute`} style={baseStyles}>
-          <div style={{
-            padding:padding, background          }}>{props.content}</div>
-          {showArrow && <div className={`arrow-${position}`} style={{backgroundColor:arrowColor, zIndex:-200}}></div>}
+          <div
+            style={{
+              padding: padding,
+              borderRadius,
+              background
+            }}
+          >
+            {props.content}
+          </div>
+          {showArrow && (
+            <div className={`arrow-${position}`} style={{ backgroundColor: arrowColor, zIndex: -200 }}></div>
+          )}
         </div>
       )}
     </div>
