@@ -141,4 +141,21 @@ interface KSelectDateProps {
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 
-export { KButton, KDropdown, KInput, KLogo, KSelectDate, KSlider, KSpan, KTitleSpan };
+interface KTooltipProps {
+    children: React.ReactNode;
+    content: React.ReactNode;
+    position?: string;
+    backgroundColor?: string;
+    width?: string;
+    height?: string;
+    zIndex?: number;
+    border?: string;
+    borderRadius?: string;
+    boxShadow?: string;
+    showArrow?: boolean;
+    arrowColor?: string;
+    padding?: string;
+}
+declare const KTooltip: React.FC<KTooltipProps>;
+
+export { KButton, KDropdown, KInput, KLogo, KSelectDate, KSlider, KSpan, KTitleSpan, KTooltip };

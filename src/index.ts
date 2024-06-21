@@ -6,7 +6,8 @@ import KInput from "./components/KInput"
 import KDropdown from "./components/KDropdown"
 import KSlider from "./components/KSlider"
 import KSelectDate from "./components/KSelectDate"
+import KTooltip from "./components/KTooltip"
 
 export {
-  KButton, KSpan, KLogo, KTitleSpan, KInput, KDropdown, KSlider, KSelectDate
+  KButton, KSpan, KLogo, KTitleSpan, KInput, KDropdown, KSlider, KSelectDate, KTooltip
 }
