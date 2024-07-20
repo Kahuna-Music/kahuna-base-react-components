@@ -21,7 +21,7 @@ const KSliderLabelWrapper: React.FC<SliderLabelProps> = (args) => {
   ]
 
   return (
-    <div className="w-[616px]">
+    <div className="w-[616px]" onClick={() => {console.log("FRRFRFRF")}}>
       <KSliderLabel
         {...args}
         options={lengthOfContractOptions}
