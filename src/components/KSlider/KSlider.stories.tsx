@@ -14,5 +14,6 @@ KSliderPrimary.args = {
   onChange: (option: SliderOption) => {
     // Do Nothing
   },
-  width: "200px"
+  width: "200px",
+  value: 2
 };
