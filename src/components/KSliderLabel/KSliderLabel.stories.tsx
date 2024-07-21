@@ -52,5 +52,6 @@ KSliderLabelPrimary.args = {
   onChange: (option: SliderLabelOption) => {
     // Do 
     console.log("0")
-  }
+  },
+  fontSize: 10
 }

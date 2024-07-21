@@ -16,13 +16,17 @@ export interface SliderLabelProps {
   disabled?: boolean
   width?: string
   titleText?: string
-  valueText?: string
+  valueText?: string,
+  fontSize?: number,
+  color?: string
 }
 
 const KSliderLabel: React.FC<SliderLabelProps> = (props) => {
   const disabled = props.disabled || false
   const width = props.width || "100%"
   const height = "48px"
+  const fontSize = props.fontSize || 14
+  const color = props.color || "#000"
 
   const [titleFits, setTitleFits] = useState<boolean>(false)
   const [valueFits, setValueFits] = useState<boolean>(false)
@@ -48,14 +52,12 @@ const KSliderLabel: React.FC<SliderLabelProps> = (props) => {
 
   }, [props.value])
 
-  const calculateSpanWidth = (): number => {
+  const calculateSpanWidth = (): string => {
+    if (!props.value!) return "32px"
     const min = props.options[0].value
     const max = props.options[props.options.length - 1].value
-    const spanWidth = ((props.value! - min) / (max - min)) * 100 * 0.95
-    if (spanWidth >= 95) {
-      return 100
-    }
-    return spanWidth + 5
+    const spanWidth = `calc((((${props.value! - min}) / (${max - min})) * (100% - 32px)) + 32px)`
+    return spanWidth
   }
 
   return (
@@ -70,8 +72,8 @@ const KSliderLabel: React.FC<SliderLabelProps> = (props) => {
         >
           <KSpan
             text={props.titleText || ""}
-            color={"#000"}
-            fontSize={14}
+            color={color}
+            fontSize={fontSize}
             lineHeight="20px"
             letterSpacing="-0.084px"
             fontWeight={500}
@@ -86,8 +88,8 @@ const KSliderLabel: React.FC<SliderLabelProps> = (props) => {
         >
           <KSpan
             text={props.valueText || ""}
-            color={"#000"}
-            fontSize={14}
+            color={color}
+            fontSize={fontSize}
             lineHeight="20px"
             letterSpacing="-0.084px"
             fontWeight={500}
@@ -102,7 +104,7 @@ const KSliderLabel: React.FC<SliderLabelProps> = (props) => {
           className="block items-center z-50 top-0 relative"
           style={{
             height,
-            width: `calc(${calculateSpanWidth()}%)`,
+            width: calculateSpanWidth(),
             borderRadius: "8px",
             backgroundColor: "rgba(102, 102, 102, 0.05)"
           }}

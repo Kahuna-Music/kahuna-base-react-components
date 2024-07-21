@@ -12,6 +12,8 @@ export interface SliderLabelProps {
     width?: string;
     titleText?: string;
     valueText?: string;
+    fontSize?: number;
+    color?: string;
 }
 declare const KSliderLabel: React.FC<SliderLabelProps>;
 export default KSliderLabel;
