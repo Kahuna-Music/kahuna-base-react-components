@@ -31,3 +31,8 @@ KLogoWhite.args = {
   logoType: "light"
 
 };
+export const KLogoWhiteText = Template.bind({});
+KLogoWhiteText.args = {
+  logoType: "light-text"
+
+};

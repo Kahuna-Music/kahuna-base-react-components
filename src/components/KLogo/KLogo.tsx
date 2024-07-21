@@ -109,12 +109,39 @@ const KLogo: React.FC<KLogoProps> = (props) => {
     )
   }
 
+  const renderWhiteTextLogo = () => {
+    return (
+      <div className="flex flex-row gap-1.5">
+        <div
+        style={{
+          width: !props.width ? "48px" : props.width,
+          height: !props.height ? "48px" : props.height,
+          borderRadius: !props.borderRadius ? "" : props.borderRadius
+        }}
+      >
+        <img
+          style={{
+            width: !props.width ? "48px" : props.width,
+            height: !props.height ? "48px" : props.height,
+            borderRadius: !props.borderRadius ? "" : props.borderRadius
+          }}
+          src={LogoWhite}
+          alt="logo-icon"
+        />
+      </div>
+      <img src={KahunaIcon} alt="kahuna-icon" />  
+      </div>
+    )
+  }
+
+
   return (
     <div className={"flex items-center"}>
       {logoType === "primary" && renderLogo()}
       {logoType === "light" && renderWhiteLogo()}
       {logoType === "hover" && renderHoveredLogo()}
       {logoType === "text" && renderLogoText()}
+      {logoType === "light-text" && renderWhiteTextLogo()}
     </div>
   )
 }
