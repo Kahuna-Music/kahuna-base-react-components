@@ -14,7 +14,6 @@ const Template: StoryFn<typeof KLogo> = (args) => <KLogo {...args} />;
 export const KLogoText = Template.bind({});
 KLogoText.args = {
   logoType: "text"
-
 };
 
 export const KLogoHover = Template.bind({});
@@ -25,5 +24,10 @@ KLogoHover.args = {
 export const KLogoPrimary = Template.bind({});
 KLogoPrimary.args = {
   logoType: "primary"
+
+};
+export const KLogoWhite = Template.bind({});
+KLogoWhite.args = {
+  logoType: "light"
 
 };

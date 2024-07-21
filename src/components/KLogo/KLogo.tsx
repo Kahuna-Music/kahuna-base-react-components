@@ -7,9 +7,9 @@ import KahunaIcon from "../../assets/kahuna-text.svg"
 //@ts-ignore
 import VectorIcon from "../../assets/vector.svg"
 //@ts-ignore
-import LogoNoHover from "../../assets/logo-small.svg"
+import LogoWhite from "../../assets/logo-small.svg"
 //@ts-ignore
-import LogoHovered from "../../assets/logo-small-hovered.svg"
+import LogoWhiteHovered from "../../assets/logo-small-hovered.svg"
 import KTitleSpan from "../KTitleSpan"
 import KSpan from "../KSpan"
 
@@ -80,7 +80,29 @@ const KLogo: React.FC<KLogoProps> = (props) => {
             height: !props.height ? "48px" : props.height,
             borderRadius: !props.borderRadius ? "" : props.borderRadius
           }}
-          src={!onHover ? LogoNoHover : LogoHovered}
+          src={!onHover ? LogoWhite : LogoWhiteHovered}
+          alt="logo-icon"
+        />
+      </div>
+    )
+  }
+
+  const renderWhiteLogo = () => {
+    return (
+      <div
+        style={{
+          width: !props.width ? "48px" : props.width,
+          height: !props.height ? "48px" : props.height,
+          borderRadius: !props.borderRadius ? "" : props.borderRadius
+        }}
+      >
+        <img
+          style={{
+            width: !props.width ? "48px" : props.width,
+            height: !props.height ? "48px" : props.height,
+            borderRadius: !props.borderRadius ? "" : props.borderRadius
+          }}
+          src={LogoWhite}
           alt="logo-icon"
         />
       </div>
@@ -89,9 +111,10 @@ const KLogo: React.FC<KLogoProps> = (props) => {
 
   return (
     <div className={"flex items-center"}>
-      {logoType === "text" && renderLogoText()}
       {logoType === "primary" && renderLogo()}
+      {logoType === "light" && renderWhiteLogo()}
       {logoType === "hover" && renderHoveredLogo()}
+      {logoType === "text" && renderLogoText()}
     </div>
   )
 }
