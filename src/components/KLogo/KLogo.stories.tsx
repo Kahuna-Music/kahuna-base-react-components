@@ -11,26 +11,19 @@ export default {
 
 const Template: StoryFn<typeof KLogo> = (args) => <KLogo {...args} />;
 
+export const KLogoText = Template.bind({});
+KLogoText.args = {
+  logoType: "text"
+
+};
+
+export const KLogoHover = Template.bind({});
+KLogoHover.args = {
+  logoType: "hover"
+};
+
 export const KLogoPrimary = Template.bind({});
 KLogoPrimary.args = {
-  width: 88,
-  height: 88,
-  borderRadius: 10,
-};
+  logoType: "primary"
 
-export const KLogoPrimaryText = Template.bind({});
-KLogoPrimaryText.args = {
-  width: 88,
-  height: 88,
-  borderRadius: 10,
-  primaryText: "Kahuna"
-};
-
-export const KLogoAllText = Template.bind({});
-KLogoAllText.args = {
-  width: 88,
-  height: 88,
-  borderRadius: 10,
-  primaryText: "Kahuna",
-  secondaryText: "for artists"
 };
