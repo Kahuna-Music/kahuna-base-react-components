@@ -25,6 +25,9 @@ export interface KLogoProps {
 const KLogo: React.FC<KLogoProps> = (props) => {
   const [onHover, setOnHover] = useState(false)
   const logoType = props.logoType || "black"
+  const width = props.width || "48px"
+  const height = props.height || "48px"
+  const borderRadius = props.borderRadius || 0
 
   const renderText = () => {
     return (
@@ -47,18 +50,18 @@ const KLogo: React.FC<KLogoProps> = (props) => {
     return (
       <div
         style={{
-          width: !props.width ? "72px" : props.width,
-          height: !props.height ? "72px" : props.height,
-          borderRadius: !props.borderRadius ? "" : props.borderRadius
+          width,
+          height,
+          borderRadius
         }}
       >
         <img
           src={logoType === "black" ? Logo : logoType === "gray" ? LogoGray : LogoWhite}
           alt="Logo"
           style={{
-            width: !props.width ? "72px" : props.width,
-            height: !props.height ? "72px" : props.height,
-            borderRadius: !props.borderRadius ? "" : props.borderRadius
+            width,
+            height,
+            borderRadius
           }}
         />
       </div>
@@ -69,18 +72,18 @@ const KLogo: React.FC<KLogoProps> = (props) => {
     return (
       <div
         style={{
-          width: !props.width ? "48px" : props.width,
-          height: !props.height ? "48px" : props.height,
-          borderRadius: !props.borderRadius ? "" : props.borderRadius
+          width,
+          height,
+          borderRadius
         }}
         onMouseEnter={() => setOnHover(true)}
         onMouseLeave={() => setOnHover(false)}
       >
         <img
           style={{
-            width: !props.width ? "48px" : props.width,
-            height: !props.height ? "48px" : props.height,
-            borderRadius: !props.borderRadius ? "" : props.borderRadius
+            width,
+            height,
+            borderRadius
           }}
           src={!onHover ? LogoWhite : LogoWhiteHovered}
           alt="logo-icon"
@@ -94,16 +97,16 @@ const KLogo: React.FC<KLogoProps> = (props) => {
       <div className="flex flex-row gap-1.5">
         <div
           style={{
-            width: !props.width ? "48px" : props.width,
-            height: !props.height ? "48px" : props.height,
-            borderRadius: !props.borderRadius ? "" : props.borderRadius
+            width,
+            height,
+            borderRadius
           }}
         >
           <img
             style={{
-              width: !props.width ? "48px" : props.width,
-              height: !props.height ? "48px" : props.height,
-              borderRadius: !props.borderRadius ? "" : props.borderRadius
+              width,
+              height,
+              borderRadius
             }}
             src={logoType === "black-text" ? Logo : logoType === "gray-text" ? LogoGray : LogoWhite}
             alt="logo-icon"
