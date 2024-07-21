@@ -10,6 +10,8 @@ import VectorIcon from "../../assets/vector.svg"
 import LogoWhite from "../../assets/logo-small.svg"
 //@ts-ignore
 import LogoWhiteHovered from "../../assets/logo-small-hovered.svg"
+//@ts-ignore
+import LogoGray from "../../assets/logo-gray.svg"
 import KTitleSpan from "../KTitleSpan"
 import KSpan from "../KSpan"
 
@@ -22,9 +24,9 @@ export interface KLogoProps {
 
 const KLogo: React.FC<KLogoProps> = (props) => {
   const [onHover, setOnHover] = useState(false)
-  const logoType = props.logoType || "primary"
+  const logoType = props.logoType || "black"
 
-  const renderLogoText = () => {
+  const renderText = () => {
     return (
       <div
         className="flex flex-row items-center gap-2.5"
@@ -51,7 +53,7 @@ const KLogo: React.FC<KLogoProps> = (props) => {
         }}
       >
         <img
-          src={Logo}
+          src={logoType === "black" ? Logo : logoType === "gray" ? LogoGray : LogoWhite}
           alt="Logo"
           style={{
             width: !props.width ? "72px" : props.width,
@@ -87,61 +89,37 @@ const KLogo: React.FC<KLogoProps> = (props) => {
     )
   }
 
-  const renderWhiteLogo = () => {
-    return (
-      <div
-        style={{
-          width: !props.width ? "48px" : props.width,
-          height: !props.height ? "48px" : props.height,
-          borderRadius: !props.borderRadius ? "" : props.borderRadius
-        }}
-      >
-        <img
-          style={{
-            width: !props.width ? "48px" : props.width,
-            height: !props.height ? "48px" : props.height,
-            borderRadius: !props.borderRadius ? "" : props.borderRadius
-          }}
-          src={LogoWhite}
-          alt="logo-icon"
-        />
-      </div>
-    )
-  }
-
-  const renderWhiteTextLogo = () => {
+  const renderLogoAndText = () => {
     return (
       <div className="flex flex-row gap-1.5">
         <div
-        style={{
-          width: !props.width ? "48px" : props.width,
-          height: !props.height ? "48px" : props.height,
-          borderRadius: !props.borderRadius ? "" : props.borderRadius
-        }}
-      >
-        <img
           style={{
             width: !props.width ? "48px" : props.width,
             height: !props.height ? "48px" : props.height,
             borderRadius: !props.borderRadius ? "" : props.borderRadius
           }}
-          src={LogoWhite}
-          alt="logo-icon"
-        />
-      </div>
-      <img src={KahunaIcon} alt="kahuna-icon" />  
+        >
+          <img
+            style={{
+              width: !props.width ? "48px" : props.width,
+              height: !props.height ? "48px" : props.height,
+              borderRadius: !props.borderRadius ? "" : props.borderRadius
+            }}
+            src={logoType === "black-text" ? Logo : logoType === "gray-text" ? LogoGray : LogoWhite}
+            alt="logo-icon"
+          />
+        </div>
+        <img src={KahunaIcon} alt="kahuna-icon" />
       </div>
     )
   }
 
-
   return (
     <div className={"flex items-center"}>
-      {logoType === "primary" && renderLogo()}
-      {logoType === "light" && renderWhiteLogo()}
+      {(logoType === "black" || logoType === "gray" || logoType === "white") && renderLogo()}
       {logoType === "hover" && renderHoveredLogo()}
-      {logoType === "text" && renderLogoText()}
-      {logoType === "light-text" && renderWhiteTextLogo()}
+      {(logoType === "black-text" || logoType === "gray-text" || logoType === "white-text") && renderLogoAndText()}
+      {logoType === "text" && renderText()}
     </div>
   )
 }

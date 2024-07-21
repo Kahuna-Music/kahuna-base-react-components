@@ -23,16 +23,31 @@ KLogoHover.args = {
 
 export const KLogoPrimary = Template.bind({});
 KLogoPrimary.args = {
-  logoType: "primary"
+  logoType: "black"
 
 };
 export const KLogoWhite = Template.bind({});
 KLogoWhite.args = {
-  logoType: "light"
+  logoType: "white"
 
 };
 export const KLogoWhiteText = Template.bind({});
 KLogoWhiteText.args = {
-  logoType: "light-text"
+  logoType: "white-text"
+
+};
+export const KLogoGray = Template.bind({});
+KLogoGray.args = {
+  logoType: "gray"
+
+};
+export const KLogoGrayText = Template.bind({});
+KLogoGrayText.args = {
+  logoType: "gray-text"
+
+};
+export const KLogoBlackText = Template.bind({});
+KLogoBlackText.args = {
+  logoType: "black-text"
 
 };
