@@ -158,4 +158,19 @@ interface KTooltipProps {
 }
 declare const KTooltip: React.FC<KTooltipProps>;
 
-export { KButton, KDropdown, KInput, KLogo, KSelectDate, KSlider, KSpan, KTitleSpan, KTooltip };
+interface SliderLabelOption {
+    label: string;
+    value: number;
+}
+interface SliderLabelProps {
+    options: SliderLabelOption[];
+    onChange: (option: SliderLabelOption) => void;
+    value?: number;
+    disabled?: boolean;
+    width?: string;
+    titleText?: string;
+    valueText?: string;
+}
+declare const KSliderLabel: React.FC<SliderLabelProps>;
+
+export { KButton, KDropdown, KInput, KLogo, KSelectDate, KSlider, KSliderLabel, KSpan, KTitleSpan, KTooltip };
