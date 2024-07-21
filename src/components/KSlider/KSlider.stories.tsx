@@ -15,5 +15,5 @@ KSliderPrimary.args = {
     // Do Nothing
   },
   width: "200px",
-  value: 2
+  value: 3
 };

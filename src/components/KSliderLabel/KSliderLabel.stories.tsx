@@ -1,26 +1,18 @@
-import React, { useState } from "react"
 import { Meta, StoryFn } from "@storybook/react"
 import KSliderLabel, { SliderLabelOption, SliderLabelProps } from "./KSliderLabel"
+import { useState } from "react"
 
 export default {
-  title: "Components/KSliderLabel",
+  title: "ReactComponentLibrary/KSliderLabel",
   component: KSliderLabel,
   parameters: {
     layout: "centered"
   }
 } as Meta<typeof KSliderLabel>
 
-const Template: StoryFn<SliderLabelProps> = (args) => {
-  const [currentValue, setCurrentValue] = useState<number>(args.value || 0)
-
-  const handleChange = (option: SliderLabelOption) => {
-    setCurrentValue(option.value)
-    if (args.onChange) {
-      args.onChange(option)
-    }
-  }
-
-  const options: SliderLabelOption[] = [
+const KSliderLabelWrapper: React.FC<SliderLabelProps> = (args) => {
+  const [lengthOfContract, setLengthOfContract] = useState<number>(args.value || 1)
+  const lengthOfContractOptions: SliderLabelOption[] = [
     { value: 1, label: "6 months" },
     { value: 2, label: "1 year" },
     { value: 3, label: "2 years" },
@@ -31,19 +23,34 @@ const Template: StoryFn<SliderLabelProps> = (args) => {
   return (
     <div className="w-[616px]">
       <KSliderLabel
-        {...args}
-        options={options}
-        value={currentValue}
-        onChange={handleChange}
-        titleText={args.titleText || "Contract Duration"}
-        valueText={options.find(option => option.value === currentValue)?.label || ""}
+        options={lengthOfContractOptions}
+        value={lengthOfContract}
+        onChange={(sliderOption: SliderLabelOption) => {
+          console.log("DENEME")
+          setLengthOfContract(sliderOption.value)
+        }}
+        titleText={"Contract Duration"}
+        valueText={lengthOfContractOptions.find((option) => option.value === lengthOfContract)?.label || ""}
       />
     </div>
   )
 }
 
-export const Default = Template.bind({})
-Default.args = {
+const Template: StoryFn<typeof KSliderLabelWrapper> = (args) => <KSliderLabelWrapper {...args} />
+
+export const KSliderLabelPrimary = Template.bind({})
+KSliderLabelPrimary.args = {
   value: 1,
-  titleText: "Contract Duration"
+  options: [
+    { value: 1, label: "6 months" },
+    { value: 2, label: "1 year" },
+    { value: 3, label: "2 years" },
+    { value: 4, label: "3 years" },
+    { value: 5, label: "5 years" }
+  ],
+  titleText: "Contract Duration",
+  onChange: (option: SliderLabelOption) => {
+    // Do 
+    console.log("0")
+  }
 }
