@@ -53,7 +53,7 @@ const KSliderLabel: React.FC<SliderLabelProps> = (props) => {
   }, [props.value])
 
   const calculateSpanWidth = (): string => {
-    if (!props.value!) return "32px"
+    if (!props.value) return "32px"
     const min = props.options[0].value
     const max = props.options[props.options.length - 1].value
     const spanWidth = `calc((((${props.value! - min}) / (${max - min})) * (100% - 32px)) + 32px)`
