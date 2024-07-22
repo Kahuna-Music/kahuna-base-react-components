@@ -15,14 +15,16 @@ export interface KTitleSpanProps {
 const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
   const fontSize = props.fontSize || 48
   const color = props.color || "#111111"
-  const fontWeight = props.fontWeight || 700
   const lineHeight = props.lineHeight || "56px"
   const fontStyle = props.fontStyle || "normal"
   const letterSpacing = props.letterSpacing || "-0.48px"
   const bold = props.bold || false
-  const titleSpanClass = bold ? "k-title-span-bold" : "k-title-span"
+  const titleClassName = bold ? "k-title-span-bold" : "k-title-span"
+  const fontWeight = bold ? (props.fontWeight || 700) : (props.fontWeight || 500)
+
+  
   return (
-    <span className={titleSpanClass} style={{fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing}}>
+    <span className={`${titleClassName} flex items-center`} style={{fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing}}>
       {props.text}
     </span>
   );

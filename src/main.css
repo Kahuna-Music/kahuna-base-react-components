@@ -14,9 +14,8 @@
 }
 @font-face {
     font-family: "Aeonik Pro Bold";
-    src: local("Aeonik Pro"), url("./assets/fonts/AeonikPro/AeonikPro-Bold.otf") format("truetype");
+    src: local("Aeonik Pro Bold"), url("./assets/fonts/AeonikPro/AeonikPro-Bold.otf") format("truetype");
 }
-
 
 .k-title-span {
     font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
