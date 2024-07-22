@@ -53,15 +53,15 @@ interface KLogoProps {
     width?: number;
     height?: number;
     borderRadius?: number;
-    primaryText?: string;
+    primaryTextVisible?: boolean;
     secondaryText?: string;
     logoColor?: string;
     hoverEnabled?: boolean;
-    primaryTextColor?: string;
     secondaryTextColor?: string;
-    primaryTextFontSize?: number;
     secondaryTextFontSize?: number;
     hideIcon?: boolean;
+    primaryTextWidth?: number;
+    primaryTextHeight?: number;
 }
 declare const KLogo: React.FC<KLogoProps>;
 
