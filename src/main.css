@@ -10,13 +10,21 @@
 
 @font-face {
     font-family: "Aeonik Pro";
-    src: local("Aeonik Pro"), url("./assets/fonts/AeonikPro-Bold/AeonikPro-Bold.otf") format("truetype");
+    src: local("Aeonik Pro"), url("./assets/fonts/AeonikPro/AeonikPro-Medium.otf") format("truetype");
+}
+@font-face {
+    font-family: "Aeonik Pro Bold";
+    src: local("Aeonik Pro"), url("./assets/fonts/AeonikPro/AeonikPro-Bold.otf") format("truetype");
 }
 
 
 .k-title-span {
     font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
     font-family: "Aeonik Pro";
+}
+.k-title-span-bold {
+    font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
+    font-family: "Aeonik Pro Bold";
 }
 
 .k-span {

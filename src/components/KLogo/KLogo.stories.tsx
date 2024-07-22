@@ -13,7 +13,9 @@ const Template: StoryFn<typeof KLogo> = (args) => <KLogo {...args} />;
 
 export const KLogoText = Template.bind({});
 KLogoText.args = {
-  logoType: "text"
+  logoType: "hover-text",
+  width: 77,
+  height: 77
 };
 
 export const KLogoHover = Template.bind({});

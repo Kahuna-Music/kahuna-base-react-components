@@ -70,10 +70,8 @@ const KLogo: React.FC<KLogoProps> = (props) => {
 
   const renderHoveredLogo = () => {
     return (
-      <div
+      <div className="flex flex-row gap-1.5"
         style={{
-          width,
-          height,
           borderRadius
         }}
         onMouseEnter={() => setOnHover(true)}
@@ -88,6 +86,7 @@ const KLogo: React.FC<KLogoProps> = (props) => {
           src={!onHover ? LogoWhite : LogoWhiteHovered}
           alt="logo-icon"
         />
+        {logoType === "hover-text" && <div className="flex items-center"><img src={KahunaIcon} alt="kahuna-icon"/></div>}
       </div>
     )
   }
@@ -120,7 +119,7 @@ const KLogo: React.FC<KLogoProps> = (props) => {
   return (
     <div className={"flex items-center"}>
       {(logoType === "black" || logoType === "gray" || logoType === "white") && renderLogo()}
-      {logoType === "hover" && renderHoveredLogo()}
+      {(logoType === "hover" || logoType === "hover-text") && renderHoveredLogo()}
       {(logoType === "black-text" || logoType === "gray-text" || logoType === "white-text") && renderLogoAndText()}
       {logoType === "text" && renderText()}
     </div>

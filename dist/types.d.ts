@@ -45,6 +45,7 @@ interface KTitleSpanProps {
     lineHeight?: string;
     fontStyle?: string;
     letterSpacing?: string;
+    bold?: boolean;
 }
 declare const KTitleSpan: React.FC<KTitleSpanProps>;
 

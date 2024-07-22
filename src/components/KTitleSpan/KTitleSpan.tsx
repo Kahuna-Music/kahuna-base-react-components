@@ -8,7 +8,8 @@ export interface KTitleSpanProps {
   fontWeight?: number
   lineHeight?: string
   fontStyle?: string
-  letterSpacing?: string
+  letterSpacing?: string,
+  bold?: boolean
 }
 
 const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
@@ -18,9 +19,10 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
   const lineHeight = props.lineHeight || "56px"
   const fontStyle = props.fontStyle || "normal"
   const letterSpacing = props.letterSpacing || "-0.48px"
-
+  const bold = props.bold || false
+  const titleSpanClass = bold ? "k-title-span-bold" : "k-title-span"
   return (
-    <span className={"k-title-span"} style={{fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing}}>
+    <span className={titleSpanClass} style={{fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing}}>
       {props.text}
     </span>
   );
