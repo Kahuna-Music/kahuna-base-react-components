@@ -51,20 +51,27 @@ const KLogo: React.FC<KLogoProps> = (props) => {
     <div className={"flex items-center"}>
       {!hideIcon && (
         <img
-          src={(onHover && hoverEnabled) ? LogoWhiteHovered : logoIcon}
+          src={onHover && hoverEnabled ? LogoWhiteHovered : logoIcon}
           alt={"kahuna-logo"}
           style={{ borderRadius, width, height }}
-          onMouseEnter={() => setOnHover(true)} 
+          onMouseEnter={() => setOnHover(true)}
           onMouseLeave={() => setOnHover(false)}
         />
       )}
       {props.primaryText && (
         <div className={"ml-2 mr-2 flex items-center"}>
-          <KTitleSpan fontSize={primaryTextFontSize} lineHeight={`${primaryTextFontSize}px`} text={props.primaryText} color={primaryTextColor} bold={true} />
+          <KTitleSpan
+            fontSize={primaryTextFontSize}
+            lineHeight={`${primaryTextFontSize}px`}
+            text={props.primaryText}
+            color={primaryTextColor}
+            bold={true}
+          />
         </div>
       )}
+      {(props.primaryText && props.secondaryText) && <img src={VectorIcon} alt="vector" />}
       {props.secondaryText && (
-        <div className={"pl-2 flex items-center"} style={{ borderLeft: "1px solid #E7E7E7" }}>
+        <div className={"pl-2 flex items-center"}>
           <KSpan fontSize={secondaryTextFontSize} text={props.secondaryText} color={secondaryTextColor} />
         </div>
       )}
