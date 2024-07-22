@@ -240,21 +240,3 @@
 .k-slider-label-input::-webkit-slider-thumb:active {
     cursor: grabbing;
 }
-.k-logo-icon {
-   transform: scale(1);
-}
-.k-logo-icon:hover {
-   transform: scale(1.2);
-   transition-duration: 1s;
-}
-
-@keyframes scaleUp {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.4);
-    }
-}
-

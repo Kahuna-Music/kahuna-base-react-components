@@ -20,5 +20,5 @@ KLogoText.args = {
 
 export const KLogoHover = Template.bind({});
 KLogoHover.args = {
-  hoverEnabled: true
+  hoverEnabled: true,logoColor:"gray"
 };
