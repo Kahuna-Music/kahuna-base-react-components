@@ -20,7 +20,7 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
   const letterSpacing = props.letterSpacing || "-0.48px"
   const bold = props.bold || false
   const titleClassName = bold ? "k-title-span-bold" : "k-title-span"
-  const fontWeight = bold ? (props.fontWeight || 700) : (props.fontWeight || 500)
+  const fontWeight = props.fontWeight ? props.fontWeight : (bold ? 700 : 500)
 
   
   return (
