@@ -10,13 +10,20 @@
 
 @font-face {
     font-family: "Aeonik Pro";
-    src: local("Aeonik Pro"), url("./assets/fonts/AeonikPro-Bold/AeonikPro-Bold.otf") format("truetype");
+    src: local("Aeonik Pro"), url("./assets/fonts/AeonikPro/AeonikPro-Medium.otf") format("truetype");
 }
-
+@font-face {
+    font-family: "Aeonik Pro Bold";
+    src: local("Aeonik Pro Bold"), url("./assets/fonts/AeonikPro/AeonikPro-Bold.otf") format("truetype");
+}
 
 .k-title-span {
     font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
     font-family: "Aeonik Pro";
+}
+.k-title-span-bold {
+    font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
+    font-family: "Aeonik Pro Bold";
 }
 
 .k-span {
@@ -197,4 +204,39 @@
     transform-origin: center;
     transform: translateX(-50%) rotateZ(45deg);
     z-index: -100;
+}
+.k-slider-label-input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    outline: none;
+    border-radius: 16px;
+    background: transparent;
+    overflow: visible;  
+}
+.k-slider-label-input:active {
+   cursor: default !important;   
+}
+.k-slider-label-input::-webkit-slider-runnable-track {
+    border-radius: 20px;
+    height: 48px;
+    z-index: 0;
+}
+
+.k-slider-label-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    margin-top: -4px;
+    /* Align the thumb vertically with the track */
+    /* Width of the thumb */
+    background: url('data:image/svg+xml,%3Csvg%20width%3D%222%22%20height%3D%2216%22%20viewBox%3D%220%200%202%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%222%22%20height%3D%2216%22%20rx%3D%221%22%20fill%3D%22%23666666%22%2F%3E%3C%2Fsvg%3E') no-repeat;
+    /* Height of the thumb */
+    background-size: contain;
+    margin-top: 16px ;
+    background-position: center;
+    position: relative;
+    opacity: 0;
+    cursor: grab;
+}
+.k-slider-label-input::-webkit-slider-thumb:active {
+    cursor: grabbing;
 }

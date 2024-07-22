@@ -11,26 +11,45 @@ export default {
 
 const Template: StoryFn<typeof KLogo> = (args) => <KLogo {...args} />;
 
+export const KLogoText = Template.bind({});
+KLogoText.args = {
+  logoType: "hover-text",
+  width: 77,
+  height: 77
+};
+
+export const KLogoHover = Template.bind({});
+KLogoHover.args = {
+  logoType: "hover"
+};
+
 export const KLogoPrimary = Template.bind({});
 KLogoPrimary.args = {
-  width: 88,
-  height: 88,
-  borderRadius: 10,
-};
+  logoType: "black"
 
-export const KLogoPrimaryText = Template.bind({});
-KLogoPrimaryText.args = {
-  width: 88,
-  height: 88,
-  borderRadius: 10,
-  primaryText: "Kahuna"
 };
+export const KLogoWhite = Template.bind({});
+KLogoWhite.args = {
+  logoType: "white"
 
-export const KLogoAllText = Template.bind({});
-KLogoAllText.args = {
-  width: 88,
-  height: 88,
-  borderRadius: 10,
-  primaryText: "Kahuna",
-  secondaryText: "for artists"
+};
+export const KLogoWhiteText = Template.bind({});
+KLogoWhiteText.args = {
+  logoType: "white-text"
+
+};
+export const KLogoGray = Template.bind({});
+KLogoGray.args = {
+  logoType: "gray"
+
+};
+export const KLogoGrayText = Template.bind({});
+KLogoGrayText.args = {
+  logoType: "gray-text"
+
+};
+export const KLogoBlackText = Template.bind({});
+KLogoBlackText.args = {
+  logoType: "black-text"
+
 };

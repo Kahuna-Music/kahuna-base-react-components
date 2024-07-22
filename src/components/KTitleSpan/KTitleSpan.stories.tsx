@@ -16,8 +16,8 @@ KTitleSpanPrimary.args = {
   text: "Hello World",
   fontSize: 48,
   color: "#111",
-  fontWeight: 700,
   lineHeight: "56px",
   fontStyle: "normal",
-  letterSpacing: "-0.48px"
+  letterSpacing: "-0.48px",
+  bold: false
 };
