@@ -62,7 +62,7 @@ const KLogo: React.FC<KLogoProps> = (props) => {
         />
       )}
       {primaryTextVisible && (
-        <div className={"mr-2 flex items-center"} style={{marginLeft: -8}}>
+        <div className={"mr-2 flex items-center"}>
           <img src={UnionSvg} alt={"kahuna-union"} style={{ width: primaryTextWidth, height: primaryTextHeight }} />
         </div>
       )}
