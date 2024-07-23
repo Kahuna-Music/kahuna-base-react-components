@@ -67,7 +67,8 @@ const KSliderLabel: React.FC<SliderLabelProps> = (props) => {
           ref={titleTextRef}
           className="relative pl-4"
           style={{
-            top: titleFits ? "40px" : "0px"
+            top: titleFits ? "40px" : "0px",
+            transitionDuration: "0.3s"
           }}
         >
           <KSpan
@@ -83,7 +84,9 @@ const KSliderLabel: React.FC<SliderLabelProps> = (props) => {
           ref={valueTextRef}
           className="relative pr-4"
           style={{
-            top: valueFits ? "40px" : "0px"
+            top: valueFits ? "40px" : "0px",
+            transitionDuration: "0.3s"
+
           }}
         >
           <KSpan

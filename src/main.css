@@ -224,7 +224,6 @@
 }
 
 .k-slider-label-input::-webkit-slider-thumb {
-    -webkit-appearance: none;
     margin-top: -4px;
     /* Align the thumb vertically with the track */
     /* Width of the thumb */
