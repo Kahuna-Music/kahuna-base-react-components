@@ -44,7 +44,7 @@ export const KSliderLabelPrimary = Template.bind({});
 KSliderLabelPrimary.args = {
   options,
   disabled: false,
-  width: "400px",
+  width: "440px",
   titleText: "Slider Title",
   valueText: "50",
   fontSize: 14,
