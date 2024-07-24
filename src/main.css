@@ -239,3 +239,21 @@
 .k-slider-label-input::-webkit-slider-thumb:active {
     cursor: grabbing;
 }
+.k-code-input-character-container {
+    outline: none !important;
+    text-align: center;
+    font-size: 24px;
+    color: #000;
+    font-weight: 500;
+    font-family: "Inter";
+    line-height: 32px;
+}
+.k-code-input-character-container:hover {
+    border:1px solid #F3F3F3;
+}
+.k-code-input-character-container:focus {
+    box-shadow: 0px 1px 2px 0px rgba(228, 229, 231, 0.24);
+    border:1px solid #F3F3F3;
+    background: #FFF !important;
+
+}
