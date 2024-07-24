@@ -224,7 +224,6 @@
 }
 
 .k-slider-label-input::-webkit-slider-thumb {
-    -webkit-appearance: none;
     margin-top: -4px;
     /* Align the thumb vertically with the track */
     /* Width of the thumb */
@@ -234,8 +233,8 @@
     margin-top: 16px ;
     background-position: center;
     position: relative;
-    opacity: 0;
     cursor: grab;
+    opacity: 0;
 }
 .k-slider-label-input::-webkit-slider-thumb:active {
     cursor: grabbing;

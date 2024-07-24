@@ -19,6 +19,7 @@ export interface KButtonProps {
   hoverBackground?: string
   fontWeight?: number
   textDecoration?: string
+  gap?: string
 }
 
 const KButton: React.FC<KButtonProps> = (props) => {
@@ -35,7 +36,7 @@ const KButton: React.FC<KButtonProps> = (props) => {
   const hoverBackground = props.hoverBackground || background
   const fontWeight = props.fontWeight || 500
   const textDecoration = props.textDecoration || "none"
-
+  const gap = props.gap || "0px"
   return (
     <button
       onMouseEnter={() => setHover(true)}
@@ -45,7 +46,7 @@ const KButton: React.FC<KButtonProps> = (props) => {
       onClick={props.onClick}
       style={{ background: hover ? hoverBackground : background, borderRadius, width, height, padding, boxShadow }}
     >
-      <div className={"flex"}>
+      <div className={"flex items-center"} style={{gap}}>
         {props.leftIcon && <img src={props.leftIcon} alt={"button-left-icon"} />}
         {props.text && (
           <KSpan text={props.text} color={textColor} fontWeight={fontWeight} textDecoration={textDecoration} />

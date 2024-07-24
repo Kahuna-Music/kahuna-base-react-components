@@ -18,6 +18,7 @@ interface KButtonProps {
     hoverBackground?: string;
     fontWeight?: number;
     textDecoration?: string;
+    gap?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 
