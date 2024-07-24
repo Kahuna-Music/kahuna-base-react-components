@@ -233,8 +233,8 @@
     margin-top: 16px ;
     background-position: center;
     position: relative;
-    opacity: 0;
     cursor: grab;
+    opacity: 0;
 }
 .k-slider-label-input::-webkit-slider-thumb:active {
     cursor: grabbing;

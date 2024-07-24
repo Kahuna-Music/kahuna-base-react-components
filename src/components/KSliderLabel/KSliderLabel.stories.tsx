@@ -11,7 +11,7 @@ export default {
 } as Meta<typeof KSliderLabel>;
 
 const KSliderLabelWrapper: React.FC<SliderLabelProps> = (args) => {
-  const [selectedValue, setSelectedValue] = useState<number | undefined>(args.value);
+  const [selectedValue, setSelectedValue] = useState<number | undefined>(0);
 
   useEffect(() => {
     console.log("selectedValue: ", selectedValue);
@@ -44,7 +44,7 @@ export const KSliderLabelPrimary = Template.bind({});
 KSliderLabelPrimary.args = {
   options,
   disabled: false,
-  width: "100%",
+  width: "400px",
   titleText: "Slider Title",
   valueText: "50",
   fontSize: 14,

@@ -35,7 +35,7 @@ export interface KLogoProps {
 const KLogo: React.FC<KLogoProps> = (props) => {
   const width = props.width || 88
   const height = props.height || 88
-  const borderRadius = props.borderRadius || 10
+  const borderRadius = props.borderRadius !== undefined ? props.borderRadius : 10
   const logoColor = props.logoColor || "black"
 
   const logoIcon = logoColor === "black" ? Logo : logoColor === "white" ? LogoWhite : LogoGray
