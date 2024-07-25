@@ -1,8 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react"
 import KCodeInput, { KCodeInputProps } from "./KCodeInput"
 // @ts-ignore
-import TracksIcon from "../../assets/tracks.svg"
-import { KeyboardEvent, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 export default {
   title: "ReactComponentLibrary/KCodeInput",
@@ -50,12 +49,15 @@ KCodeInputPrimary.args = {
   hoverBackground: "green",
   focusedBackground: "blue",
   filledBackground: "black",
-  border: "4px solid black",
-  hoverBorder: "2px solid yellow",
-  focusedBorder: "3px solid purple",
-  filledBorder: "5px solid gray",
+  border: "1px solid black",
+  hoverBorder: "1px solid yellow",
+  focusedBorder: "1px solid purple",
+  filledBorder: "1px solid gray",
   fontSize: "15px",
   padding: "10px",
-  color: "white",
-  
+  color: "white", 
+}
+
+export const KCodeInputSecondary = Template.bind({})
+KCodeInputSecondary.args = {
 }
