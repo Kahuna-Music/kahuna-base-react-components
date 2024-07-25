@@ -2,26 +2,35 @@ import React, { useEffect, useState, KeyboardEvent, useRef } from "react"
 import "../../main.css"
 
 export interface KCodeInputProps {
-  value: string
-  length: number
   onChange: (value: string) => void
-  width?: number
-  height?: number
-  background?: string
-  activeBackground?: string
+  length?: number
   borderRadius?: number
   disabled?: boolean
-  hoverBackground?: string
   padding?: string
-  gap?: string
+  gap?: number
   fontSize?: string
-  border?: string
+  fontWeight?: string
+  color?: string
+  lineHeight?: string
   sendImmediately?: boolean
   allowedCharacters?: "numeric" | "alphaNumeric" | "alpha"
-  inputWidth?: number
-  inputHeight?: number
+  width?: number
+  height?: number
   autoFocus?: boolean
-  password?: boolean
+  isPassword?: boolean
+  background?: string
+  hoverBackground?: string
+  focusedBackground?: string
+  filledBackground?: string
+  border?: string
+  hoverBorder?: string
+  focusedBorder?: string
+  filledBorder?: string
+  boxShadow?: string
+  hoverBoxShadow?: string
+  focusedBoxShadow?: string
+  filledBoxShadow?: string
+  fitInContainer?: boolean
 }
 
 const KInput: React.FC<KCodeInputProps> = (props) => {
@@ -30,33 +39,60 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   const [focusedIndex, setFocusedIndex] = useState<number>(autoFocus ? 0 : -1)
   const inputRefs = useRef<HTMLInputElement[]>([])
 
-  const width = props.width || "100%"
-  const height = props.height || 20
   const borderRadius = props.borderRadius || 10
   const disabled = props.disabled || false
-  const gap = props.gap || "12px"
-  const fontSize = props.fontSize || "30px"
   const length = props.length || 6
-  const border = props.border || "1px solid #000"
+  const padding = props.padding || "6px"
+  const gap = props.gap || 6
   const sendImmediately = props.sendImmediately || false
   const allowedCharacters = props.allowedCharacters || "numeric" // only numeric for default case
-  const inputWidth = props.inputWidth || "60px"
-  const inputHeight = props.inputHeight || "60px"
-  const background = props.background || "#F5F5F5"
-  const password = props.password || false
+  const password = props.isPassword || false
+  const fitInContainer = props.fitInContainer || false
+  const width = props.width || "60px"
+  const height = props.height || "60px"
+  const fontSize = props.fontSize || "24px"
+  const fontWeight = props.fontWeight || 500
+  const lineHeight = props.lineHeight || "32px"
+  const defaultBorder = props.border || ""
+  const hoverBorder = props.hoverBorder || "1px solid #F3F3F3"
+  const focusedBorder = props.focusedBorder || "1px solid #F3F3F3"
+  const filledBorder = props.filledBorder || "1px solid  #B7B7B7"
+  const defaultBoxShadow = props.boxShadow || ""
+  const hoverBoxShadow = props.hoverBoxShadow || ""
+  const focusedBoxShadow = props.focusedBoxShadow || " 0px 1px 2px 0px rgba(228, 229, 231, 0.24)"
+  const filledBoxShadow = props.filledBoxShadow || " 0px 1px 2px 0px rgba(228, 229, 231, 0.24)"
+  const defaultBackground = props.background || "#F5F5F5"
+  const hoverBackground = props.hoverBackground || defaultBackground
+  const focusedBackground = props.focusedBackground || "#FFF"
+  const filledBackground = props.filledBackground || "#FFF"
+  const color = props.color || "#000"
 
   const [values, setValues] = useState<string[]>(Array(length).fill(""))
+  const [hoveredIndexes, setHoveredIndexes] = useState<boolean[]>(Array(length).fill(false))
+  const [focusedIndexes, setFocusedIndexes] = useState<boolean[]>(Array(length).fill(false))
+
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndexes((prev) => prev.map((hovered, i) => (i === index ? true : hovered)))
+  }
+
+  const handleMouseLeave = (index: number) => {
+    setHoveredIndexes((prev) => prev.map((hovered, i) => (i === index ? false : hovered)))
+  }
+
+  const handleFocus = (index: number) => {
+    setFocusedIndexes((prev) => prev.map((focused, i) => (i === index ? true : focused)))
+  }
+  const handleBlur = (index: number) => {
+    setFocusedIndexes((prev) => prev.map((focused, i) => (i === index ? false : focused)))
+  }
 
   useEffect(() => {
-    // Focus the input at focusedIndex whenever it changes
-    console.log("Focused index:", focusedIndex)
     if (inputRefs.current[focusedIndex]) {
       inputRefs.current[focusedIndex].focus()
     }
   }, [focusedIndex])
 
   const handleClick = (index: number) => {
-    event.preventDefault()
     if (values[index]) {
       const updatedArray = values.map((value, i) => (i >= index ? "" : value))
       setValues(updatedArray)
@@ -107,15 +143,45 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   }, [values])
 
   const renderCharacterComponent = (index: number) => {
+    const isHovered = hoveredIndexes[index]
+    const isFocused = focusedIndexes[index]
+    const isFilled = values[index]
+
+    const background = isFilled
+      ? filledBackground
+      : isFocused
+      ? focusedBackground
+      : isHovered
+      ? hoverBackground
+      : defaultBackground
+
+    const boxShadow = isFilled
+      ? filledBoxShadow
+      : isFocused
+      ? focusedBoxShadow
+      : isHovered
+      ? hoverBoxShadow
+      : defaultBoxShadow
+      
+    const border = isFilled ? filledBorder : isFocused ? focusedBorder : isHovered ? hoverBorder : defaultBorder
+
     return (
       <input
         key={`k-code-input-${index}`}
-        className="k-code-input-character-container hover:border-['1px solid red']"
+        className={`k-code-input-character-container`}
         style={{
+          padding,
           background,
           borderRadius,
-          width: inputWidth,
-          height: inputHeight
+          height,
+          border,
+          boxShadow,
+          fontSize,
+          fontWeight,
+          lineHeight,
+          color,
+          width: !fitInContainer ? width : `calc((100% - ${(length - 1) * gap}px) / ${length})`
+          
         }}
         required
         type={password ? "password" : "text"}
@@ -132,12 +198,16 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
         }}
         ref={(el: HTMLInputElement) => (inputRefs.current[index] = el)}
         disabled={disabled}
+        onMouseEnter={() => handleMouseEnter(index)}
+        onMouseLeave={() => handleMouseLeave(index)}
+        onFocus={() => handleFocus(index)}
+        onBlur={() => handleBlur(index)}
       />
     )
   }
 
   return (
-    <div className="flex flex-row justify-between items-center" style={{ gap, width: "100%" }}>
+    <div className="flex flex-row items-center" style={{ width: "100%", gap }}>
       {Array.from({ length }, (_, index) => renderCharacterComponent(index))}
     </div>
   )
