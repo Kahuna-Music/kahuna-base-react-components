@@ -1,8 +1,8 @@
 import { Meta, StoryFn } from "@storybook/react"
-import KCodeInput from "./KCodeInput"
+import KCodeInput, { KCodeInputProps } from "./KCodeInput"
 // @ts-ignore
 import TracksIcon from "../../assets/tracks.svg"
-import { KeyboardEvent } from "react"
+import { KeyboardEvent, useEffect, useState } from "react"
 
 export default {
   title: "ReactComponentLibrary/KCodeInput",
@@ -12,13 +12,35 @@ export default {
   }
 } as Meta<typeof KCodeInput>
 
-const Template: StoryFn<typeof KCodeInput> = (args) => <KCodeInput {...args} />
+const KCodeInputWrapper: React.FC<KCodeInputProps> = (args) => {
+  const [code, setCode] = useState<string>("");
 
-export const KInputRange = Template.bind({})
-KInputRange.args = {
-  onChange: (value: string) => {},
+  useEffect(() => {
+    console.log("code: ", code);
+  }, [code]);
+
+  return (
+    <KCodeInput
+      {...args}
+      onChange={(value:string) => {
+        //console.log("value: ", value);
+        setCode(value);
+        //console.log("Value updated to: ", option.value);
+      }}
+    />
+  );
+};
+
+
+const Template: StoryFn<typeof KCodeInput> = (args) => <KCodeInputWrapper {...args} />
+
+export const KCodeInputPrimary = Template.bind({})
+KCodeInputPrimary.args = {
   hoverBackground: "white",
-  length: 4,
-  isAlphaNumeric: true,
-  sendImmediately: true
+  length: 6,
+  allowedCharacters: 'alphaNumeric',
+  sendImmediately: true,
+  password: false,
+  disabled: false,
+  autoFocus:true
 }
