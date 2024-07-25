@@ -247,4 +247,5 @@
 }
 .k-code-input-character-container:disabled {
     background: #F7F7F7 !important;
+    border: none !important;
 }

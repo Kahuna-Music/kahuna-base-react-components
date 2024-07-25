@@ -19,7 +19,7 @@ const KCodeInputWrapper: React.FC<KCodeInputProps> = (args) => {
   }, [code]);
 
   return (
-    <div className="w-[300px]">
+    <div className="w-[300px] p-4">
     <KCodeInput
       {...args}
       onChange={(value:string) => {
@@ -38,20 +38,21 @@ const Template: StoryFn<typeof KCodeInput> = (args) => <KCodeInputWrapper {...ar
 export const KCodeInputPrimary = Template.bind({})
 KCodeInputPrimary.args = {
   length: 6,
-  allowedCharacters: 'alphaNumeric',
-  sendImmediately: true,
+  allowedCharacters: 'alpha',
+  autoSend: true,
   isPassword: false,
   disabled: false,
   autoFocus:true,
-  fitInContainer: true,
   gap:2,
+  width: 150,
   background: "red",
   hoverBackground: "green",
   focusedBackground: "blue",
   filledBackground: "black",
+  fitInContainer: true,
   border: "1px solid black",
   hoverBorder: "1px solid yellow",
-  focusedBorder: "1px solid purple",
+  focusedBorder: "1px solid white",
   filledBorder: "1px solid gray",
   fontSize: "15px",
   padding: "10px",
@@ -60,4 +61,18 @@ KCodeInputPrimary.args = {
 
 export const KCodeInputSecondary = Template.bind({})
 KCodeInputSecondary.args = {
+  isCodeCorrect: true,
+  boxShadow: "1px 2px 10px black",
+  hoverBoxShadow: "1px 2px 10px red",
+  focusedBoxShadow: "1px 2px 10px yellow",
+  filledBoxShadow: "1px 2px 10px purple",
+  fontSize: "30px",
+  padding: "10px",
+  color: "orange", 
+  autoBlur: true,
+  autoFocus: true,
+  width: 50,
+  height: 90,
+  fitInContainer: true,
+  gap: 12
 }

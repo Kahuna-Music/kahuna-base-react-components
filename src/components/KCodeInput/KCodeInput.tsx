@@ -12,7 +12,7 @@ export interface KCodeInputProps {
   fontWeight?: string
   color?: string
   lineHeight?: string
-  sendImmediately?: boolean
+  autoSend?: boolean
   allowedCharacters?: "numeric" | "alphaNumeric" | "alpha"
   width?: number
   height?: number
@@ -31,21 +31,21 @@ export interface KCodeInputProps {
   focusedBoxShadow?: string
   filledBoxShadow?: string
   fitInContainer?: boolean
+  isCodeCorrect?: boolean
+  autoBlur?: boolean
 }
 
 const KInput: React.FC<KCodeInputProps> = (props) => {
+
   const autoFocus = props.autoFocus || false
-
-  const [focusedIndex, setFocusedIndex] = useState<number>(autoFocus ? 0 : -1)
-  const inputRefs = useRef<HTMLInputElement[]>([])
-
+  const autoBlur = props.autoBlur || false
   const borderRadius = props.borderRadius || 10
   const disabled = props.disabled || false
   const length = props.length || 6
   const padding = props.padding || "6px"
   const gap = props.gap || 6
-  const sendImmediately = props.sendImmediately || false
-  const allowedCharacters = props.allowedCharacters || "numeric" // only numeric for default case
+  const autoSend = props.autoSend || false
+  const allowedCharacters = props.allowedCharacters || "numeric"
   const password = props.isPassword || false
   const fitInContainer = props.fitInContainer || false
   const width = props.width || "60px"
@@ -66,6 +66,12 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   const focusedBackground = props.focusedBackground || "#FFF"
   const filledBackground = props.filledBackground || "#FFF"
   const color = props.color || "#000"
+  const isCodeCorrect = props.isCodeCorrect !== undefined ? props.isCodeCorrect : true
+
+  const [focusedIndex, setFocusedIndex] = useState<number>(autoFocus ? 0 : -1)
+  const inputRefs = useRef<HTMLInputElement[]>([])
+
+  const [allCharactersWritten, setAllCharactersWritten] = useState<boolean>(false)
 
   const [values, setValues] = useState<string[]>(Array(length).fill(""))
   const [hoveredIndexes, setHoveredIndexes] = useState<boolean[]>(Array(length).fill(false))
@@ -136,9 +142,12 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
 
   useEffect(() => {
     const allDone = values.every((value) => value.length > 0)
-    if (sendImmediately && allDone) {
-      console.log(values.join(""))
+    setAllCharactersWritten(allDone)
+
+    if (allDone && autoBlur) {
+      inputRefs.current[focusedIndex].blur()
     }
+
     props.onChange(values.join(""))
   }, [values])
 
@@ -174,7 +183,7 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
           background,
           borderRadius,
           height,
-          border,
+          border: (allCharactersWritten && !isCodeCorrect) ? "1px solid #FF5865" : border,
           boxShadow,
           fontSize,
           fontWeight,
