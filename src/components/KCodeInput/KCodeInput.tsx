@@ -99,10 +99,11 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   }, [focusedIndex])
 
   const handleClick = (index: number) => {
-    if (values[index]) {
+    /*if (values[index]) {
       const updatedArray = values.map((value, i) => (i >= index ? "" : value))
       setValues(updatedArray)
-    } else if (!values[index]) {
+    }*/
+    if (!values[index]) {
       const firstEmptyInputIndex = values.findIndex((value) => value === "")
       setFocusedIndex(firstEmptyInputIndex)
       if (inputRefs.current[focusedIndex]) {
@@ -119,8 +120,13 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
     }
 
     if (patterns[allowedCharacters]?.test(text)) {
+      
       const newValues = [...values]
-      newValues[index] = text
+      if (text.length === 1) {
+        newValues[index] = text
+      } else if (text.length === 2) {
+        newValues[index] = (newValues[index] === text[0]) ? text[1] : text[0]
+      }
       setValues(newValues)
       if (text && index < length - 1) {
         setFocusedIndex(index + 1)
@@ -177,6 +183,7 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
     return (
       <input
         key={`k-code-input-${index}`}
+        value={values[index]}
         className={`k-code-input-character-container`}
         style={{
           padding,
@@ -194,8 +201,6 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
         }}
         required
         type={password ? "password" : "text"}
-        value={values[index]}
-        maxLength={1}
         onChange={(event) => {
           handleChange(event.target.value, index)
         }}

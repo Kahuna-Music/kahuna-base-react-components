@@ -76,3 +76,8 @@ KCodeInputSecondary.args = {
   fitInContainer: true,
   gap: 12
 }
+
+export const KCodeInputDefault = Template.bind({})
+KCodeInputDefault.args = {
+  isCodeCorrect: false
+}
