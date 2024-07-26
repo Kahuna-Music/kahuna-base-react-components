@@ -68,6 +68,8 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   const color = props.color || "#000"
   const isCodeCorrect = props.isCodeCorrect !== undefined ? props.isCodeCorrect : true
 
+  const [pastedText, setPastedText] = useState<string>("")
+
   const [focusedIndex, setFocusedIndex] = useState<number>(autoFocus ? 0 : -1)
   const inputRefs = useRef<HTMLInputElement[]>([])
 
@@ -99,11 +101,9 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   }, [focusedIndex])
 
   const handleClick = (index: number) => {
-    /*if (values[index]) {
-      const updatedArray = values.map((value, i) => (i >= index ? "" : value))
-      setValues(updatedArray)
-    }*/
-    if (!values[index]) {
+    if (values[index]) {
+      setFocusedIndex(index)
+    } else if (!values[index]) {
       const firstEmptyInputIndex = values.findIndex((value) => value === "")
       setFocusedIndex(firstEmptyInputIndex)
       if (inputRefs.current[focusedIndex]) {
@@ -139,10 +139,32 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
       const newValues = [...values]
       newValues[index] = ""
       if (index > 0) {
-        newValues[index - 1] = ""
         setFocusedIndex(index - 1)
       }
       setValues(newValues)
+    }
+  }
+
+  const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    const pastedText = event.clipboardData.getData("text").replace(/\s+/g, '')
+    const patterns: Record<string, RegExp> = {
+      numeric: /^\d*$/,
+      alpha: /^[a-zA-Z]*$/,
+      alphaNumeric: /^[a-zA-Z0-9]*$/
+    }
+    if (patterns[allowedCharacters]?.test(pastedText) && pastedText.length > 0) {
+      const newValues = [...values]
+      const currentIndex = focusedIndex
+      const pastedCharacters = pastedText.includes(" ") ? pastedText.split(" ") : pastedText.split("")
+      pastedCharacters.forEach((character, index) => {
+        const i = currentIndex + index
+        if (i < length) {
+          newValues[i] = character
+        }
+      })
+      setValues(newValues)
+      setFocusedIndex((pastedCharacters.length + currentIndex) >= length ? length - 1 : (pastedCharacters.length + currentIndex))
     }
   }
 
@@ -209,6 +231,9 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
         }}
         onKeyDown={(event) => {
           handleDelete(event, index)
+        }}
+        onPaste={(event) => {
+          handlePaste(event)
         }}
         ref={(el: HTMLInputElement) => (inputRefs.current[index] = el)}
         disabled={disabled}
