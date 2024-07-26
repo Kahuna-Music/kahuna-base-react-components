@@ -1,0 +1,37 @@
+import React from "react";
+import "../../main.css";
+export interface KCodeInputProps {
+    onChange: (value: string) => void;
+    length?: number;
+    borderRadius?: number;
+    disabled?: boolean;
+    padding?: string;
+    gap?: number;
+    fontSize?: string;
+    fontWeight?: string;
+    color?: string;
+    lineHeight?: string;
+    autoSend?: boolean;
+    allowedCharacters?: "numeric" | "alphaNumeric" | "alpha";
+    width?: number;
+    height?: number;
+    autoFocus?: boolean;
+    isPassword?: boolean;
+    background?: string;
+    hoverBackground?: string;
+    focusedBackground?: string;
+    filledBackground?: string;
+    border?: string;
+    hoverBorder?: string;
+    focusedBorder?: string;
+    filledBorder?: string;
+    boxShadow?: string;
+    hoverBoxShadow?: string;
+    focusedBoxShadow?: string;
+    filledBoxShadow?: string;
+    fitInContainer?: boolean;
+    isCodeCorrect?: boolean;
+    autoBlur?: boolean;
+}
+declare const KInput: React.FC<KCodeInputProps>;
+export default KInput;
