@@ -176,13 +176,14 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   useEffect(() => {
     const allDone = values.every((value) => value.length > 0)
     setAllCharactersWritten(allDone)
-
-    if (allDone && autoBlur) {
-      inputRefs.current[focusedIndex].blur()
-    }
-
     props.onChange(values.join(""))
   }, [values])
+
+  useEffect(() => {
+    if (allCharactersWritten && autoBlur) {
+      inputRefs.current[focusedIndex].blur()
+    }
+  }, [allCharactersWritten])
 
   const renderCharacterComponent = (index: number) => {
     const isHovered = hoveredIndexes[index]
