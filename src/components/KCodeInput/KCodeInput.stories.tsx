@@ -39,7 +39,6 @@ export const KCodeInputPrimary = Template.bind({})
 KCodeInputPrimary.args = {
   length: 6,
   allowedCharacters: 'alpha',
-  autoSend: true,
   isPassword: false,
   disabled: false,
   autoFocus:true,

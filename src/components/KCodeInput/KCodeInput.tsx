@@ -12,7 +12,6 @@ export interface KCodeInputProps {
   fontWeight?: string
   color?: string
   lineHeight?: string
-  autoSend?: boolean
   allowedCharacters?: "numeric" | "alphaNumeric" | "alpha"
   width?: number
   height?: number
@@ -36,7 +35,6 @@ export interface KCodeInputProps {
 }
 
 const KInput: React.FC<KCodeInputProps> = (props) => {
-
   const autoFocus = props.autoFocus || false
   const autoBlur = props.autoBlur || false
   const borderRadius = props.borderRadius || 10
@@ -44,7 +42,6 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   const length = props.length || 6
   const padding = props.padding || "6px"
   const gap = props.gap || 6
-  const autoSend = props.autoSend || false
   const allowedCharacters = props.allowedCharacters || "numeric"
   const password = props.isPassword || false
   const fitInContainer = props.fitInContainer || false
@@ -120,12 +117,11 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
     }
 
     if (patterns[allowedCharacters]?.test(text)) {
-      
       const newValues = [...values]
       if (text.length === 1) {
         newValues[index] = text
       } else if (text.length === 2) {
-        newValues[index] = (newValues[index] === text[0]) ? text[1] : text[0]
+        newValues[index] = newValues[index] === text[0] ? text[1] : text[0]
       }
       setValues(newValues)
       if (text && index < length - 1) {
@@ -147,7 +143,7 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
 
   const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault()
-    const pastedText = event.clipboardData.getData("text").replace(/\s+/g, '')
+    const pastedText = event.clipboardData.getData("text").replace(/\s+/g, "")
     const patterns: Record<string, RegExp> = {
       numeric: /^\d*$/,
       alpha: /^[a-zA-Z]*$/,
@@ -164,7 +160,9 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
         }
       })
       setValues(newValues)
-      setFocusedIndex((pastedCharacters.length + currentIndex) >= length ? length - 1 : (pastedCharacters.length + currentIndex))
+      setFocusedIndex(
+        pastedCharacters.length + currentIndex >= length ? length - 1 : pastedCharacters.length + currentIndex
+      )
     }
   }
 
@@ -199,7 +197,7 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
       : isHovered
       ? hoverBoxShadow
       : defaultBoxShadow
-      
+
     const border = isFilled ? filledBorder : isFocused ? focusedBorder : isHovered ? hoverBorder : defaultBorder
 
     return (
@@ -212,14 +210,13 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
           background,
           borderRadius,
           height,
-          border: (allCharactersWritten && !isCodeCorrect) ? "1px solid #FF5865" : border,
+          border: allCharactersWritten && !isCodeCorrect ? "1px solid #FF5865" : border,
           boxShadow,
           fontSize,
           fontWeight,
           lineHeight,
           color,
           width: !fitInContainer ? width : `calc((100% - ${(length - 1) * gap}px) / ${length})`
-          
         }}
         required
         type={password ? "password" : "text"}
@@ -246,7 +243,7 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   }
 
   return (
-    <div className="flex flex-row items-center" style={{ width: "100%", gap }}>
+    <div className="flex flex-row items-center justify-between" style={{ width: "100%", gap }}>
       {Array.from({ length }, (_, index) => renderCharacterComponent(index))}
     </div>
   )

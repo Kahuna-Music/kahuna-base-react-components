@@ -195,7 +195,6 @@ interface KCodeInputProps {
     fontWeight?: string;
     color?: string;
     lineHeight?: string;
-    autoSend?: boolean;
     allowedCharacters?: "numeric" | "alphaNumeric" | "alpha";
     width?: number;
     height?: number;
