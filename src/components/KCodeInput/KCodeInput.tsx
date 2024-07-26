@@ -65,8 +65,6 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   const color = props.color || "#000"
   const isCodeCorrect = props.isCodeCorrect !== undefined ? props.isCodeCorrect : true
 
-  const [pastedText, setPastedText] = useState<string>("")
-
   const [focusedIndex, setFocusedIndex] = useState<number>(autoFocus ? 0 : -1)
   const inputRefs = useRef<HTMLInputElement[]>([])
 
@@ -96,6 +94,15 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
       inputRefs.current[focusedIndex].focus()
     }
   }, [focusedIndex])
+
+  useEffect(() => {
+    if (disabled) {
+      setFocusedIndexes((prev) => prev.map((focused, i) => false))
+      setHoveredIndexes((prev) => prev.map((hovered, i) => false))
+      setValues(Array(length).fill(""))
+      setAllCharactersWritten(false)
+    }
+  }, [disabled])
 
   const handleClick = (index: number) => {
     if (values[index]) {

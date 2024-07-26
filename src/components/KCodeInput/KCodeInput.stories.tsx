@@ -79,5 +79,6 @@ KCodeInputSecondary.args = {
 export const KCodeInputDefault = Template.bind({})
 KCodeInputDefault.args = {
   isCodeCorrect: false,
-  allowedCharacters:"numeric"
+  allowedCharacters:"numeric",
+  autoBlur:true
 }
