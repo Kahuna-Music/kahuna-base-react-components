@@ -94,7 +94,7 @@ interface KInputProps {
     iconSize?: string;
     checked?: boolean;
 }
-declare const KInput: React.FC<KInputProps>;
+declare const KInput$1: React.FC<KInputProps>;
 
 interface KSelectOption {
     label: string;
@@ -184,4 +184,38 @@ interface SliderLabelProps {
 }
 declare const KSliderLabel: React.FC<SliderLabelProps>;
 
-export { KButton, KDropdown, KInput, KLogo, KSelectDate, KSlider, KSliderLabel, KSpan, KTitleSpan, KTooltip };
+interface KCodeInputProps {
+    onChange: (value: string) => void;
+    length?: number;
+    borderRadius?: number;
+    disabled?: boolean;
+    padding?: string;
+    gap?: number;
+    fontSize?: string;
+    fontWeight?: string;
+    color?: string;
+    lineHeight?: string;
+    allowedCharacters?: "numeric" | "alphaNumeric" | "alpha";
+    width?: number;
+    height?: number;
+    autoFocus?: boolean;
+    isPassword?: boolean;
+    background?: string;
+    hoverBackground?: string;
+    focusedBackground?: string;
+    filledBackground?: string;
+    border?: string;
+    hoverBorder?: string;
+    focusedBorder?: string;
+    filledBorder?: string;
+    boxShadow?: string;
+    hoverBoxShadow?: string;
+    focusedBoxShadow?: string;
+    filledBoxShadow?: string;
+    fitInContainer?: boolean;
+    isCodeCorrect?: boolean;
+    autoBlur?: boolean;
+}
+declare const KInput: React.FC<KCodeInputProps>;
+
+export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSelectDate, KSlider, KSliderLabel, KSpan, KTitleSpan, KTooltip };

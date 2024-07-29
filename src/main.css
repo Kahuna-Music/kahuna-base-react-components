@@ -239,3 +239,13 @@
 .k-slider-label-input::-webkit-slider-thumb:active {
     cursor: grabbing;
 }
+.k-code-input-character-container {
+    outline: none !important;
+    text-align: center;
+    font-family: "Inter";
+    caret-color: #B7B7B7;  
+}
+.k-code-input-character-container:disabled {
+    background: #F7F7F7 !important;
+    border: none !important;
+}
