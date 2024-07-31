@@ -1,0 +1,32 @@
+import React, { KeyboardEvent } from "react";
+import "../../main.css";
+export interface KTextAreaProps {
+    value: string;
+    onChange: (value: string) => void;
+    rows?: number;
+    onBlur?: (value: string) => void;
+    onKeyDown?: (event: KeyboardEvent) => void;
+    width?: number;
+    height?: number;
+    leftIcon?: string;
+    rightIcon?: string;
+    background?: string;
+    activeBackground?: string;
+    borderRadius?: number;
+    disabled?: boolean;
+    placeholder?: string;
+    shadowDisabled?: boolean;
+    leftIconClick?: () => void;
+    rightIconClick?: () => void;
+    accentColor?: string;
+    hoverBackground?: string;
+    padding?: string;
+    gap?: string;
+    border?: string;
+    boxShadow?: string;
+    fontSize?: string;
+    iconSize?: string;
+    checked?: boolean;
+}
+declare const KTextArea: React.FC<KTextAreaProps>;
+export default KTextArea;
