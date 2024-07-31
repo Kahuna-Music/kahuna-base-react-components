@@ -96,6 +96,36 @@ interface KInputProps {
 }
 declare const KInput$1: React.FC<KInputProps>;
 
+interface KTextAreaProps {
+    value: string;
+    onChange: (value: string) => void;
+    rows?: number;
+    onBlur?: (value: string) => void;
+    onKeyDown?: (event: KeyboardEvent) => void;
+    width?: number;
+    height?: number;
+    leftIcon?: string;
+    rightIcon?: string;
+    background?: string;
+    activeBackground?: string;
+    borderRadius?: number;
+    disabled?: boolean;
+    placeholder?: string;
+    shadowDisabled?: boolean;
+    leftIconClick?: () => void;
+    rightIconClick?: () => void;
+    accentColor?: string;
+    hoverBackground?: string;
+    padding?: string;
+    gap?: string;
+    border?: string;
+    boxShadow?: string;
+    fontSize?: string;
+    iconSize?: string;
+    checked?: boolean;
+}
+declare const KTextArea: React.FC<KTextAreaProps>;
+
 interface KSelectOption {
     label: string;
     value: number;
@@ -218,4 +248,4 @@ interface KCodeInputProps {
 }
 declare const KInput: React.FC<KCodeInputProps>;
 
-export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSelectDate, KSlider, KSliderLabel, KSpan, KTitleSpan, KTooltip };
+export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSelectDate, KSlider, KSliderLabel, KSpan, KTextArea, KTitleSpan, KTooltip };

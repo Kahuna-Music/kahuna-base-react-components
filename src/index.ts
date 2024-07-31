@@ -3,6 +3,7 @@ import KSpan from "./components/KSpan"
 import KTitleSpan from "./components/KTitleSpan"
 import KLogo from "./components/KLogo"
 import KInput from "./components/KInput"
+import KTextArea from "./components/KTextArea"
 import KDropdown from "./components/KDropdown"
 import KSlider from "./components/KSlider"
 import KSelectDate from "./components/KSelectDate"
@@ -12,5 +13,5 @@ import KCodeInput from "./components/KCodeInput"
 
 
 export {
-  KButton, KSpan, KLogo, KTitleSpan, KInput, KDropdown, KSlider, KSelectDate, KTooltip, KSliderLabel, KCodeInput
+  KButton, KSpan, KLogo, KTitleSpan, KInput, KTextArea, KDropdown, KSlider, KSelectDate, KTooltip, KSliderLabel, KCodeInput
 }
