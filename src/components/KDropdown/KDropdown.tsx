@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react"
 import "../../main.css"
-// @ts-ignore
 import Select, { MultiValue } from "react-select"
 // @ts-ignore
 import CheckIcon from "../../assets/check.svg"
 import KSpan from "../KSpan"
-// @ts-ignore
 import { FilterOptionOption } from "react-select/dist/declarations/src/filters"
 
 export interface KSelectOption {
@@ -110,7 +108,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         filterOption={customFilterOption}
         isClearable={isClearable}
         styles={{
-          control: (baseStyles: any, state: any) => ({
+          control: (baseStyles, state) => ({
             ...baseStyles,
             background: "transparent !important",
             padding: "0px !important",
@@ -121,7 +119,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             minHeight: "20px",
             border: "none"
           }),
-          menu: (base: any) => ({
+          menu: (base) => ({
             ...base,
             borderRadius: 10,
             background: menuBackground,
@@ -131,16 +129,16 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             paddingRight: 3,
             paddingLeft: 3
           }),
-          menuList: (base: any) => ({
+          menuList: (base) => ({
             ...base,
             paddingTop: 0,
             paddingBottom: 0
           }),
-          singleValue: (provided: any) => ({
+          singleValue: (provided) => ({
             ...provided,
             color: textColor
           }),
-          option: (provided: any, state: any) => ({
+          option: (provided, state) => ({
             ...provided,
             display: "flex",
             alignItems: "center",
@@ -150,22 +148,22 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             borderRadius: 10,
             color: "#111"
           }),
-          valueContainer: (base: any) => ({
+          valueContainer: (base) => ({
             ...base,
             padding: 0
           }),
 
-          input: (base: any) => ({
+          input: (base) => ({
             ...base,
             padding: 0,
             margin: 0,
             height: "20px"
           }),
-          placeholder: (base: any) => ({
+          placeholder: (base) => ({
             ...base,
             margin: 0
           }),
-          clearIndicator: (base: any) => ({
+          clearIndicator: (base) => ({
             ...base,
             padding: 0
           })
@@ -173,7 +171,6 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         components={{
           IndicatorSeparator: () => null,
           DropdownIndicator: () => null,
-          //@ts-ignore
           SingleValue: ({ data, ...props }) => (
             <div className={`flex ${isEllipsis ? "w-full" : ""}`} style={{ position: "absolute" }}>
               {data.icon && !hideIcon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
@@ -181,7 +178,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             </div>
           )
         }}
-        onChange={(event: any) => {
+        onChange={(event) => {
           if (!event) {
             if (props.isClearable) {
               setSelectedOption(undefined)
