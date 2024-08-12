@@ -25,9 +25,14 @@ KTextAreaPrimary.args = {
       console.log("Enter is clicked and our value is:", event.currentTarget)
     }
   },
-  rows: 4,
   placeholder: "Placeholder...",
-  hoverBackground: "white"
+  hoverBackground: "white",
+  width: 200,
+  autoResize: true,
+  height: 20,
+  leftIcon: TracksIcon,
+  activeBackground: "#FFF"
+
 }
 
 export const KTextAreaLeftIcon = Template.bind({})

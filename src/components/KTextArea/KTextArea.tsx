@@ -28,6 +28,8 @@ export interface KTextAreaProps {
   fontSize?: string
   iconSize?: string
   checked?: boolean
+  autoResize?: boolean
+  maxHeight?: number
 }
 
 const KTextArea: React.FC<KTextAreaProps> = (props) => {
@@ -58,7 +60,19 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
   const border = props.border || "none"
   const fontSize = props.fontSize || "14px"
   const iconSize = props.iconSize || "20px"
-  const rows = props.rows || 2
+  const rows = props.rows || 1
+
+  const autoResize = props.autoResize || false
+  const maxHeight = props.maxHeight || 200
+
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const textarea = e.target
+    textarea.style.height = 'auto'
+    console.log("textarea.scrollHeight:", textarea.scrollHeight)
+    console.log("textarea.scrollHeight:", textarea.scrollHeight)
+    textarea.style.height = `${textarea.scrollHeight}px` // Set the height to scrollHeight
+    console.log("textarea.rows:", textarea.rows)
+  }
 
   return (
     <div
@@ -89,24 +103,32 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
           width,
           height,
           accentColor,
-          fontSize
+          fontSize,
+          overflow: autoResize ? "hidden" : "auto",
+          minHeight: height,
+          resize: autoResize ? "none" : "horizontal",
+          ...(autoResize && {maxHeight})
+         
         }}
-        rows={rows}
         value={props.value}
+        rows={rows}
         placeholder={props.placeholder || ""}
         disabled={disabled}
         onBlur={(event) => {
-          console.log("onBulur", event.target.value)
           if (props.onBlur) props.onBlur(event.target.value)
         }}
         onChange={(event) => {
-          console.log("OnChange", event.target.value)
+          
+          if (autoResize) {
+            handleInput(event)
+          }
+          
           props.onChange(event.target.value)
         }}
         onKeyDown={(event) => {
-          console.log("OnKeyDown", event)
           if (props.onKeyDown) props.onKeyDown(event)
         }}
+      
       />
 
       {props.rightIcon && (
