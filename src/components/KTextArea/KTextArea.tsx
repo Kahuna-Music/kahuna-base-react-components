@@ -131,7 +131,9 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
             } else if (textAreaRef.current) {
               event.preventDefault()
               const textAreaComponent = textAreaRef.current
+              textAreaComponent.style.height = "auto"
               textAreaComponent.style.height = `${height}px`
+              textAreaComponent.value = ""
             } else {
               event.preventDefault()
             }
