@@ -103,7 +103,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
           fontSize,
           overflow: autoResize ? "hidden" : "auto",
           minHeight: height,
-          resize: autoResize ? "none" : "horizontal",
+          resize: autoResize ? "none" : "vertical",
           ...(autoResize && {maxHeight})
          
         }}
