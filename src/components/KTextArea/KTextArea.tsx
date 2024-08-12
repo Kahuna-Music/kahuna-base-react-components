@@ -125,6 +125,9 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
           props.onChange(event.target.value)
         }}
         onKeyDown={(event) => {
+
+          if (props.onKeyDown) props.onKeyDown(event)
+
           if (event.key === "Enter") {
             if (event.shiftKey) {
               return
@@ -138,7 +141,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
               event.preventDefault()
             }
           }
-          if (props.onKeyDown) props.onKeyDown(event)
+          
         }}
       />
 
