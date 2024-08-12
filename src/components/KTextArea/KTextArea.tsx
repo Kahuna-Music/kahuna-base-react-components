@@ -68,10 +68,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const textarea = e.target
     textarea.style.height = 'auto'
-    console.log("textarea.scrollHeight:", textarea.scrollHeight)
-    console.log("textarea.scrollHeight:", textarea.scrollHeight)
     textarea.style.height = `${textarea.scrollHeight}px` // Set the height to scrollHeight
-    console.log("textarea.rows:", textarea.rows)
   }
 
   return (
