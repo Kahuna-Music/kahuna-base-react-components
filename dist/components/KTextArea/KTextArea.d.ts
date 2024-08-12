@@ -27,6 +27,7 @@ export interface KTextAreaProps {
     fontSize?: string;
     iconSize?: string;
     checked?: boolean;
+    maxHeight?: number;
 }
 declare const KTextArea: React.FC<KTextAreaProps>;
 export default KTextArea;
