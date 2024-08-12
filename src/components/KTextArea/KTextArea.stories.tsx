@@ -30,8 +30,8 @@ KTextAreaPrimary.args = {
   width: 200,
   height: 20,
   leftIcon: TracksIcon,
-  activeBackground: "#FFF"
-
+  activeBackground: "#FFF",
+  maxHeight: 200
 }
 
 export const KTextAreaLeftIcon = Template.bind({})

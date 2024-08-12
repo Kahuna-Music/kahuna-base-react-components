@@ -1,4 +1,4 @@
-import React, { useEffect, useState, KeyboardEvent } from "react"
+import React, { useEffect, useState, KeyboardEvent, useRef } from "react"
 import "../../main.css"
 
 export interface KTextAreaProps {
@@ -35,6 +35,8 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
   const [background, setBackground] = useState("#F5F5F5")
   const [hover, setHover] = useState(false)
 
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
+
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
     const activeBackground = props.activeBackground || "#FFF"
@@ -65,9 +67,11 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
   const maxHeight = props.maxHeight || 200
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const textarea = e.target
-    textarea.style.height = "auto"
-    textarea.style.height = `${textarea.scrollHeight}px` // Set the height to scrollHeight
+    if (textAreaRef.current) {
+      const textarea = textAreaRef.current
+      textarea.style.height = "auto"
+      textarea.style.height = `${textarea.scrollHeight}px` // Set the height to scrollHeight
+    }
   }
 
   return (
@@ -93,6 +97,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
       )}
 
       <textarea
+        ref={textAreaRef}
         className={"k-input"}
         style={{
           background: hover ? hoverBackground : background,
@@ -120,6 +125,17 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
           props.onChange(event.target.value)
         }}
         onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            if (event.shiftKey) {
+              return
+            } else if (textAreaRef.current) {
+              event.preventDefault()
+              const textAreaComponent = textAreaRef.current
+              textAreaComponent.style.height = `${height}px`
+            } else {
+              event.preventDefault()
+            }
+          }
           if (props.onKeyDown) props.onKeyDown(event)
         }}
       />
