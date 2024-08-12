@@ -28,7 +28,6 @@ export interface KTextAreaProps {
   fontSize?: string
   iconSize?: string
   checked?: boolean
-  autoResize?: boolean
   maxHeight?: number
 }
 
@@ -62,12 +61,12 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
   const iconSize = props.iconSize || "20px"
   const rows = props.rows || 1
 
-  const autoResize = props.autoResize || false
+  const autoResize = props.maxHeight && props.maxHeight !== props.height
   const maxHeight = props.maxHeight || 200
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const textarea = e.target
-    textarea.style.height = 'auto'
+    textarea.style.height = "auto"
     textarea.style.height = `${textarea.scrollHeight}px` // Set the height to scrollHeight
   }
 
@@ -104,8 +103,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
           overflow: autoResize ? "hidden" : "auto",
           minHeight: height,
           resize: autoResize ? "none" : "vertical",
-          ...(autoResize && {maxHeight})
-         
+          ...(autoResize && { maxHeight })
         }}
         value={props.value}
         rows={rows}
@@ -115,17 +113,15 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
           if (props.onBlur) props.onBlur(event.target.value)
         }}
         onChange={(event) => {
-          
           if (autoResize) {
             handleInput(event)
           }
-          
+
           props.onChange(event.target.value)
         }}
         onKeyDown={(event) => {
           if (props.onKeyDown) props.onKeyDown(event)
         }}
-      
       />
 
       {props.rightIcon && (

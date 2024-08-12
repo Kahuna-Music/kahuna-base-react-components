@@ -28,7 +28,6 @@ KTextAreaPrimary.args = {
   placeholder: "Placeholder...",
   hoverBackground: "white",
   width: 200,
-  autoResize: true,
   height: 20,
   leftIcon: TracksIcon,
   activeBackground: "#FFF"
