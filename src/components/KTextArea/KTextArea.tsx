@@ -1,4 +1,4 @@
-import React, { useEffect, useState, KeyboardEvent } from "react"
+import React, { useEffect, useState, KeyboardEvent, useRef } from "react"
 import "../../main.css"
 
 export interface KTextAreaProps {
@@ -29,11 +29,14 @@ export interface KTextAreaProps {
   iconSize?: string
   checked?: boolean
   maxHeight?: number
+  clearTextOnPressedEnter?: boolean
 }
 
 const KTextArea: React.FC<KTextAreaProps> = (props) => {
   const [background, setBackground] = useState("#F5F5F5")
   const [hover, setHover] = useState(false)
+
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
@@ -63,11 +66,14 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
 
   const autoResize = props.maxHeight && props.maxHeight !== props.height
   const maxHeight = props.maxHeight || 200
+  const clearTextOnPressedEnter = props.clearTextOnPressedEnter || false
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const textarea = e.target
-    textarea.style.height = "auto"
-    textarea.style.height = `${textarea.scrollHeight}px` // Set the height to scrollHeight
+    if (textAreaRef.current) {
+      const textarea = textAreaRef.current
+      textarea.style.height = "auto"
+      textarea.style.height = `${textarea.scrollHeight}px` // Set the height to scrollHeight
+    }
   }
 
   return (
@@ -93,6 +99,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
       )}
 
       <textarea
+        ref={textAreaRef}
         className={"k-input"}
         style={{
           background: hover ? hoverBackground : background,
@@ -121,6 +128,20 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
         }}
         onKeyDown={(event) => {
           if (props.onKeyDown) props.onKeyDown(event)
+
+          if (event.key === "Enter") {
+            if (event.shiftKey) {
+              return
+            } else if (textAreaRef.current && clearTextOnPressedEnter) {
+              event.preventDefault()
+              const textAreaComponent = textAreaRef.current
+              textAreaComponent.style.height = "auto"
+              textAreaComponent.style.height = `${height}px`
+              textAreaComponent.value = ""
+            } else {
+              event.preventDefault()
+            }
+          }
         }}
       />
 
