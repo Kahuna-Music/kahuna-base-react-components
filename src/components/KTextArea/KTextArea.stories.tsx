@@ -24,6 +24,9 @@ KTextAreaPrimary.args = {
     if (event.key === "Enter") {
       console.log("Enter is clicked and our value is:", event.currentTarget)
     }
+    if (event.key === "Enter" && event.shiftKey) {
+      console.log("Enter and shift is clicked ")
+    }
   },
   placeholder: "Placeholder...",
   hoverBackground: "white",
@@ -31,7 +34,8 @@ KTextAreaPrimary.args = {
   height: 20,
   leftIcon: TracksIcon,
   activeBackground: "#FFF",
-  maxHeight: 200
+  maxHeight: 200,
+  clearTextOnPressedEnter: true
 }
 
 export const KTextAreaLeftIcon = Template.bind({})

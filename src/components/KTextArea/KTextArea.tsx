@@ -29,6 +29,7 @@ export interface KTextAreaProps {
   iconSize?: string
   checked?: boolean
   maxHeight?: number
+  clearTextOnPressedEnter?: boolean
 }
 
 const KTextArea: React.FC<KTextAreaProps> = (props) => {
@@ -65,6 +66,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
 
   const autoResize = props.maxHeight && props.maxHeight !== props.height
   const maxHeight = props.maxHeight || 200
+  const clearTextOnPressedEnter = props.clearTextOnPressedEnter || false
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (textAreaRef.current) {
@@ -130,7 +132,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
           if (event.key === "Enter") {
             if (event.shiftKey) {
               return
-            } else if (textAreaRef.current) {
+            } else if (textAreaRef.current && clearTextOnPressedEnter) {
               event.preventDefault()
               const textAreaComponent = textAreaRef.current
               textAreaComponent.style.height = "auto"

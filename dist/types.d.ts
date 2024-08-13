@@ -124,6 +124,7 @@ interface KTextAreaProps {
     iconSize?: string;
     checked?: boolean;
     maxHeight?: number;
+    clearTextOnPressedEnter?: boolean;
 }
 declare const KTextArea: React.FC<KTextAreaProps>;
 
