@@ -16,6 +16,7 @@ import KSpan from "../KSpan"
 export interface KSelectDateProps {
   value: Date | undefined
   onChange: (date: Date | undefined) => void
+  minimumDate?: Date
 }
 interface MonthSelectorType {
   monthName: string
@@ -107,6 +108,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           nextLabel={<img src={RightIcon} />}
           formatShortWeekday={formatShortWeekday}
           formatMonthYear={formatMonthYear}
+          minDate={props.minimumDate || undefined}
         />
         <div className="h-19 w-[350px] bg-[#FFF] flex flex-row gap-4 py-4 justify-center border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]">
           <KButton
@@ -173,7 +175,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             }
           }}
           background={inMonth ? "#111" : "#FFF"}
-          textColor={inMonth? "#FFF" : "#111"}
+          textColor={inMonth ? "#FFF" : "#111"}
           borderRadius={999}
           padding="8px 16px"
           height="34px"
@@ -183,13 +185,23 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   }
 
   const daySelector = (text: string, date: Date) => {
+    const dateNotAllowed = props.minimumDate && date < props.minimumDate
     return (
       <div
         key={`${text}-${date}`}
-        className={`w-[85px] h-[104px] flex flex-col justify-between py-3 px-2.5 rounded-[10px] ${
-          date.getTime() === value?.getTime() ? "bg-[#F8FEA3]" : "bg-[#F5F5F5]"
-        } cursor-pointer`}
+        className={`w-[85px] h-[104px] flex flex-col justify-between py-3 px-2.5 rounded-[10px] cursor-pointer`}
+        style={{
+          background: dateNotAllowed
+            ? "rgb(170, 170, 170, 0.7)"
+            : date.getTime() === value?.getTime()
+            ? "#F8FEA3"
+            : "#F5F5F5"
+        }}
         onClick={() => {
+          if (dateNotAllowed) {
+            return
+          }
+
           if (date.getTime() === value?.getTime()) {
             setValue(undefined)
           } else {
@@ -228,6 +240,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   useEffect(() => {
     if (value) {
       setDummyDate(value)
+    } else if (props.minimumDate) {
+      setDummyDate(props.minimumDate)
     }
     props.onChange(value)
   }, [value])
@@ -235,14 +249,19 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   useEffect(() => {
     const today = new Date()
     if (!props.value) {
-      getNextMonths(today)
-      getWeekDays(today)
+      getNextMonths(props.minimumDate || today)
+      getWeekDays(props.minimumDate || today)
     }
   }, [])
-  
+
   useEffect(() => {
-    getNextMonths(dummyDate)
-    getWeekDays(dummyDate)
+    if (dummyDate && props.minimumDate && dummyDate < props.minimumDate) {
+      getNextMonths(props.minimumDate)
+      getWeekDays(props.minimumDate)
+    } else {
+      getNextMonths(dummyDate)
+      getWeekDays(dummyDate)
+    }
   }, [dummyDate])
 
   return (

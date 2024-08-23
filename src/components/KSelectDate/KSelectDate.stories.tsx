@@ -14,7 +14,7 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
   useEffect(() => {
-    console.log("selectedDate: ", selectedDate)
+    // console.log("selectedDate: ", selectedDate)
   }, [selectedDate])
 
   return (
@@ -22,14 +22,14 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
       {...args}
       value={selectedDate}
       onChange={(date) => {
-        console.log("date: ", date)
+        // console.log("date: ", date)
         if (date) {
           setSelectedDate(date)
-          console.log("updating is completed: ", date)
-          console.log("updating is completed date.toISOString(): ", date?.toISOString())
+          // console.log("updating is completed: ", date)
+          // console.log("updating is completed date.toISOString(): ", date?.toISOString())
         } else {
           setSelectedDate(undefined)
-          console.log("Deleting is completed")
+          // console.log("Deleting is completed")
         }
       }}
     />
@@ -41,6 +41,7 @@ const Template: StoryFn<typeof KSelectDateWrapper> = (args) => <KSelectDateWrapp
 export const KSelectDatePrimary = Template.bind({})
 KSelectDatePrimary.args = {
   value: undefined,
+  minimumDate: new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000),
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)
