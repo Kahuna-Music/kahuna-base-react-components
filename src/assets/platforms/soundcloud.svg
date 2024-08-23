@@ -1,0 +1,13 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="soundcloud">
+<circle id="Vector" cx="8" cy="8" r="7" fill="#FF5502"/>
+<g id="Vector_2">
+<path d="M11.9651 10.5H7.87209V5.55523C8.25132 5.20893 8.74249 5 9.27906 5C10.4665 5 11.4316 6.02312 11.4531 7.29403C11.6132 7.23314 11.7856 7.2 11.9651 7.2C12.8128 7.2 13.5 7.93873 13.5 8.85C13.5 9.76127 12.8128 10.5 11.9651 10.5Z" fill="white"/>
+<path d="M7.5 6H7V10.5H7.5V6Z" fill="white"/>
+<path d="M6 6.5H6.5V10.5H6V6.5Z" fill="white"/>
+<path d="M5.5 7.5H5V10.5H5.5V7.5Z" fill="white"/>
+<path d="M4 7H4.5V10.5H4V7Z" fill="white"/>
+<path d="M3.5 8H3V10.5H3.5V8Z" fill="white"/>
+</g>
+</g>
+</svg>
