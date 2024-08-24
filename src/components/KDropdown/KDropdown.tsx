@@ -40,7 +40,6 @@ export interface KDropdownProps {
   isClearable?: boolean
   isEllipsis?: boolean,
   showOnlyIconsInMulti?: boolean,
-  showedIconsSize?: number,
   menuWidth?: string | number,
   menuLeftMargin?: number
 }
@@ -70,7 +69,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const isClearable = props.isClearable || false
   const isEllipsis = props.isEllipsis || false
   const showOnlyIconsInMulti = props.showOnlyIconsInMulti || false
-  const showedIconsSize = props.showedIconsSize || 20
+  const showedIconsSize = 20
   const menuWidth = props.menuWidth || "100%"
   const menuLeftMargin = props.menuLeftMargin || 0
   
@@ -182,7 +181,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           valueContainer: (base) => ({
             ...base,
             padding: 0,
-            position: "relative"
+            position: "relative",
+            ...(!props.width && isMulti && showOnlyIconsInMulti && selectedOption && {width: `${(selectedOption as KSelectOption[]).length * 15 + 5}px`, minWidth: "50px"})
           }),
           input: (base) => ({
             ...base,
@@ -192,7 +192,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           }),
           placeholder: (base) => ({
             ...base,
-            margin: 0
+            margin: 0,
+            maxWidth: "none"
           }),
           clearIndicator: (base) => ({
             ...base,

@@ -70,16 +70,13 @@ const options = [
 ]
 KDropdownMulti.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
-  width: 130,
   placeholder: "Multi...",
   options: options,
   isMulti: true,
-  showOnlyIconsInMulti: true,
   selected: options[0],
   rightIcon: CaretDownIcon,
   menuWidth: 200,
-  menuLeftMargin: -100
-
+  width: 150
 }
 
 export const KDropdownLeftIcon = Template.bind({})
@@ -87,7 +84,6 @@ KDropdownLeftIcon.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
   placeholder: "Placeholder...",
   leftIcon: TracksIcon,
-  menuLeftMargin: -30,
   menuWidth: 400
 }
 
