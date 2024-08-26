@@ -192,8 +192,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           }),
           placeholder: (base) => ({
             ...base,
-            margin: 0,
-            maxWidth: "none"
+            margin: 0
           }),
           clearIndicator: (base) => ({
             ...base,
