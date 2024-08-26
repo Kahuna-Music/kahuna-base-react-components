@@ -160,6 +160,9 @@ interface KDropdownProps {
     hideChosenOptionIcon?: boolean;
     isClearable?: boolean;
     isEllipsis?: boolean;
+    showOnlyIconsInMulti?: boolean;
+    menuWidth?: string | number;
+    menuLeftMargin?: number;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 
@@ -180,6 +183,7 @@ interface KSelectDateProps {
     value: Date | undefined;
     onChange: (date: Date | undefined) => void;
     minimumDate?: Date;
+    onlyMonthSelection?: boolean;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 
@@ -251,4 +255,11 @@ interface KCodeInputProps {
 }
 declare const KInput: React.FC<KCodeInputProps>;
 
-export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSelectDate, KSlider, KSliderLabel, KSpan, KTextArea, KTitleSpan, KTooltip };
+interface KSelectRangeProps {
+    value: DateRangeType;
+    onChange: (date: DateRangeType) => void;
+}
+type DateRangeType = Date | null | [Date | null, Date | null];
+declare const KSelectRange: React.FC<KSelectRangeProps>;
+
+export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSelectDate, KSelectRange, KSlider, KSliderLabel, KSpan, KTextArea, KTitleSpan, KTooltip };

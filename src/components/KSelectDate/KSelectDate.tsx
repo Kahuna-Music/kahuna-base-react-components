@@ -17,6 +17,7 @@ export interface KSelectDateProps {
   value: Date | undefined
   onChange: (date: Date | undefined) => void
   minimumDate?: Date
+  onlyMonthSelection?: boolean
 }
 interface MonthSelectorType {
   monthName: string
@@ -40,6 +41,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const [weekDays, setWeekDays] = useState<DaySelectorType[]>([])
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
 
+  const onlyMonthSelection = props.onlyMonthSelection || false
+
   const formatShortWeekday = (locale: string | undefined, date: Date): string => {
     return date.toLocaleDateString(locale, { weekday: "short" }).charAt(0) // Return only the first letter of the weekday
   }
@@ -52,6 +55,13 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   }
 
   const onClickDay = (date: Date) => {
+    if (date.getTime() === calendarDate?.getTime()) {
+      setCalendarDate(undefined)
+    } else {
+      setCalendarDate(date)
+    }
+  }
+  const onClickMonth = (date: Date) => {
     if (date.getTime() === calendarDate?.getTime()) {
       setCalendarDate(undefined)
     } else {
@@ -99,6 +109,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
       <div className="flex flex-col gap-0">
         <Calendar
           onClickDay={onClickDay}
+          {...(onlyMonthSelection && { onClickMonth: onClickMonth })}
+          {...(onlyMonthSelection && { maxDetail: "year" })}
           locale="en-US"
           value={calendarDate || null}
           defaultValue={null}
@@ -109,6 +121,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           formatShortWeekday={formatShortWeekday}
           formatMonthYear={formatMonthYear}
           minDate={props.minimumDate || undefined}
+          
         />
         <div className="h-19 w-[350px] bg-[#FFF] flex flex-row gap-4 py-4 justify-center border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]">
           <KButton

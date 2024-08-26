@@ -33,6 +33,9 @@ export interface KDropdownProps {
     hideChosenOptionIcon?: boolean;
     isClearable?: boolean;
     isEllipsis?: boolean;
+    showOnlyIconsInMulti?: boolean;
+    menuWidth?: string | number;
+    menuLeftMargin?: number;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 export default KDropdown;

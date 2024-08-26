@@ -25,7 +25,7 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
         // console.log("date: ", date)
         if (date) {
           setSelectedDate(date)
-          // console.log("updating is completed: ", date)
+           console.log("updating is completed: ", date)
           // console.log("updating is completed date.toISOString(): ", date?.toISOString())
         } else {
           setSelectedDate(undefined)
@@ -42,6 +42,7 @@ export const KSelectDatePrimary = Template.bind({})
 KSelectDatePrimary.args = {
   value: undefined,
   minimumDate: new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000),
+  onlyMonthSelection: true,
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)
