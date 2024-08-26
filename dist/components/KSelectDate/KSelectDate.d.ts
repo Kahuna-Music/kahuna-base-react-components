@@ -5,6 +5,8 @@ export interface KSelectDateProps {
     value: Date | undefined;
     onChange: (date: Date | undefined) => void;
     minimumDate?: Date;
+    onlyMonthSelection?: boolean;
+    hideBody?: boolean;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 export default KSelectDate;

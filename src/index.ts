@@ -10,8 +10,9 @@ import KSelectDate from "./components/KSelectDate"
 import KTooltip from "./components/KTooltip"
 import KSliderLabel from "./components/KSliderLabel"
 import KCodeInput from "./components/KCodeInput"
+import KSelectRange from "./components/KSelectRange"
 
 
 export {
-  KButton, KSpan, KLogo, KTitleSpan, KInput, KTextArea, KDropdown, KSlider, KSelectDate, KTooltip, KSliderLabel, KCodeInput
+  KButton, KSpan, KLogo, KTitleSpan, KInput, KTextArea, KDropdown, KSlider, KSelectDate, KTooltip, KSliderLabel, KCodeInput, KSelectRange
 }
