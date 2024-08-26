@@ -12,7 +12,7 @@ export default {
 
 const KSelectRangeWrapper: React.FC<KSelectRangeProps> = (args) => {
   const [selectedDate, setSelectedDate] = useState<DateRangeType>([
-    new Date(new Date().setMonth(new Date().getMonth() - 1)), // Start date: 3 months ago
+    new Date(new Date().setMonth(new Date().getMonth() - 10)), // Start date: 3 months ago
     new Date() // End date: today
   ])
   useEffect(() => {
@@ -20,7 +20,7 @@ const KSelectRangeWrapper: React.FC<KSelectRangeProps> = (args) => {
   }, [selectedDate])
 
   return (
-    <KSelectRange
+    <div><KSelectRange
       {...args}
       value={selectedDate}
       onChange={(date: DateRangeType) => {
@@ -34,7 +34,7 @@ const KSelectRangeWrapper: React.FC<KSelectRangeProps> = (args) => {
           // console.log("Deleting is completed")
         }
       }}
-    />
+    /></div>
   )
 }
 

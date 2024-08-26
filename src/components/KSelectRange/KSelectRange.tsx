@@ -4,14 +4,11 @@ import "./KSelectRangeCustom.css"
 //@ts-ignore
 import LeftIcon from "../../assets/chevron-left.svg"
 //@ts-ignore
-import SeparatorIcon from "../../assets/separator.svg"
-//@ts-ignore
 import CalendarIcon from "../../assets/calendar-new.svg"
 //@ts-ignore
 import RightIcon from "../../assets/chevron-right.svg"
 import "../../main.css"
 import KButton from "../KButton"
-import KSpan from "../KSpan"
 
 export interface KSelectRangeProps {
   value: DateRangeType
@@ -63,9 +60,6 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   }
 
   useEffect(() => {
-    if (value) {
-      setRange(value)
-    }
     props.onChange(value)
   }, [value])
 
