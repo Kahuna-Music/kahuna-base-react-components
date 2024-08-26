@@ -184,6 +184,7 @@ interface KSelectDateProps {
     onChange: (date: Date | undefined) => void;
     minimumDate?: Date;
     onlyMonthSelection?: boolean;
+    hideBody?: boolean;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 

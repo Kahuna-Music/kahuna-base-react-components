@@ -43,6 +43,7 @@ KSelectDatePrimary.args = {
   value: undefined,
   minimumDate: new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000),
   onlyMonthSelection: true,
+  hideBody: true,
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)

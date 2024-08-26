@@ -8,6 +8,8 @@ import SeparatorIcon from "../../assets/separator.svg"
 //@ts-ignore
 import CalendarIcon from "../../assets/calendar.svg"
 //@ts-ignore
+import CalendarNewIcon from "../../assets/calendar-new.svg"
+//@ts-ignore
 import RightIcon from "../../assets/chevron-right.svg"
 import "../../main.css"
 import KButton from "../KButton"
@@ -18,6 +20,7 @@ export interface KSelectDateProps {
   onChange: (date: Date | undefined) => void
   minimumDate?: Date
   onlyMonthSelection?: boolean
+  hideBody?: boolean
 }
 interface MonthSelectorType {
   monthName: string
@@ -42,6 +45,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
 
   const onlyMonthSelection = props.onlyMonthSelection || false
+  const hideBody = props.hideBody || false
 
   const formatShortWeekday = (locale: string | undefined, date: Date): string => {
     return date.toLocaleDateString(locale, { weekday: "short" }).charAt(0) // Return only the first letter of the weekday
@@ -121,7 +125,6 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           formatShortWeekday={formatShortWeekday}
           formatMonthYear={formatMonthYear}
           minDate={props.minimumDate || undefined}
-          
         />
         <div className="h-19 w-[350px] bg-[#FFF] flex flex-row gap-4 py-4 justify-center border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]">
           <KButton
@@ -284,61 +287,77 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           <div>{renderPopUpCalendar()}</div>
         </div>
       )}
-      <div>
-        <div className={`flex flex-col gap-4 ${openCalendar && "blur-2xl"}`}>
-          <div className="flex flex-row justify-between gap-2 items-center">
-            <div className="flex flex-row gap-2">
-              {nextMonths.map((month, i) => {
-                return monthSelector(month.monthName, month.year, month.date)
+      {!hideBody ? (
+        <div>
+          <div className={`flex flex-col gap-4 ${openCalendar && "blur-2xl"}`}>
+            <div className="flex flex-row justify-between gap-2 items-center">
+              <div className="flex flex-row gap-2">
+                {nextMonths.map((month, i) => {
+                  return monthSelector(month.monthName, month.year, month.date)
+                })}
+              </div>
+              <div>
+                <img src={SeparatorIcon} />
+              </div>
+              <div>
+                <KButton
+                  icon={CalendarIcon}
+                  onClick={() => {
+                    setOpenCalendar(true)
+                    setCalendarDate(value)
+                  }}
+                  padding="8px"
+                  height="36px"
+                  background="#FFF"
+                />
+              </div>
+            </div>
+            <div className="flex flex-row justify-between gap-1 items-center">
+              {weekDays.map((day, i) => {
+                return daySelector(`${day.dayOrderInMonth}, ${day.dayName}`, day.date)
               })}
             </div>
-            <div>
-              <img src={SeparatorIcon} />
-            </div>
-            <div>
+            <div className="flex flex-row justify-between items-center">
               <KButton
-                icon={CalendarIcon}
+                text="Previous Week"
+                padding="6px"
+                leftIcon={LeftIcon}
                 onClick={() => {
-                  setOpenCalendar(true)
-                  setCalendarDate(value)
+                  changeWeeks(dummyDate, false)
                 }}
-                padding="8px"
-                height="36px"
+                width="130px"
+                height="32px"
+                background="#FFF"
+              />
+              <KButton
+                text="Next Week"
+                padding="6px"
+                rightIcon={RightIcon}
+                onClick={() => {
+                  changeWeeks(dummyDate, true)
+                }}
+                width="130px"
+                height="32px"
                 background="#FFF"
               />
             </div>
           </div>
-          <div className="flex flex-row justify-between gap-1 items-center">
-            {weekDays.map((day, i) => {
-              return daySelector(`${day.dayOrderInMonth}, ${day.dayName}`, day.date)
-            })}
-          </div>
-          <div className="flex flex-row justify-between items-center">
-            <KButton
-              text="Previous Week"
-              padding="6px"
-              leftIcon={LeftIcon}
-              onClick={() => {
-                changeWeeks(dummyDate, false)
-              }}
-              width="130px"
-              height="32px"
-              background="#FFF"
-            />
-            <KButton
-              text="Next Week"
-              padding="6px"
-              rightIcon={RightIcon}
-              onClick={() => {
-                changeWeeks(dummyDate, true)
-              }}
-              width="130px"
-              height="32px"
-              background="#FFF"
-            />
-          </div>
         </div>
+      ) : (
+        <div>
+        <KButton
+          icon={CalendarNewIcon}
+          onClick={() => {
+            setOpenCalendar(true)
+          }}
+          padding="14px"
+          width="48px"
+          height="48px"
+          background="#F7F7F7"
+          hoverBackground="#F3F3F3"
+        />
       </div>
+      )}
     </React.Fragment>
   )
 }

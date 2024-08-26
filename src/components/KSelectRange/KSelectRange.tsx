@@ -4,7 +4,7 @@ import "./KSelectRangeCustom.css"
 //@ts-ignore
 import LeftIcon from "../../assets/chevron-left.svg"
 //@ts-ignore
-import CalendarIcon from "../../assets/calendar-new.svg"
+import CalendarNewIcon from "../../assets/calendar-new.svg"
 //@ts-ignore
 import RightIcon from "../../assets/chevron-right.svg"
 import "../../main.css"
@@ -214,7 +214,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
         <div className="flex flex-row justify-between gap-2 items-center">
           <div>
             <KButton
-              icon={CalendarIcon}
+              icon={CalendarNewIcon}
               onClick={() => {
                 setOpenCalendar(true)
               }}
