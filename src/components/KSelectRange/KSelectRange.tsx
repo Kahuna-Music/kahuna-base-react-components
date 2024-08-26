@@ -20,6 +20,7 @@ export type DateRangeType = Date | null | [Date | null, Date | null]
 const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   const [value, setValue] = useState<DateRangeType>(props.value)
   const [range, setRange] = useState<DateRangeType>(props.value)
+  const [loading, setLoading] = useState(false)
 
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
   const [shorthandIndex, setShorthandIndex] = useState<{ current: number; approved: number }>({
@@ -71,8 +72,14 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             className="kselect-range"
             locale="en-US"
             value={range}
-            onChange={setRange}
+            onChange={(dates) => {
+              setRange(dates)
+              setTimeout(() => {
+                setLoading(false)
+              }, 200)
+            }}
             onClickMonth={() => {
+              setLoading(true)
               setShorthandIndex({ ...shorthandIndex, current: -1 })
             }}
             defaultValue={null}
@@ -110,6 +117,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               width="160px"
               background="#F2FE67"
               textColor="#111"
+              disabled={loading}
               onClick={() => {
                 setValue(range)
                 setOpenCalendar(false)
