@@ -1,6 +1,21 @@
 import { Meta, StoryFn } from "@storybook/react"
 import KSelectRange, { KSelectRangeProps, DateRangeType } from "./KSelectRange"
 import { useEffect, useState } from "react"
+// @ts-ignore
+import AppleIcon from "../../assets/platforms/apple-music.svg"
+// @ts-ignore
+import MetaIcon from "../../assets/platforms/Meta.svg"
+// @ts-ignore
+import TiktokIcon from "../../assets/platforms/tiktok.svg"
+// @ts-ignore
+import SpotifyIcon from "../../assets/platforms/Spotify.svg"
+// @ts-ignore
+import YoutubeIcon from "../../assets/platforms/youtube.svg"
+// @ts-ignore
+import NcmIcon from "../../assets/platforms/ncm.svg"
+// @ts-ignore
+import CaretDownIcon from "../../assets/platforms/caret-down.svg"
+
 
 export default {
   title: "ReactComponentLibrary/KSelectRange",
@@ -42,6 +57,10 @@ const Template: StoryFn<typeof KSelectRangeWrapper> = (args) => <KSelectRangeWra
 
 export const KSelectRangePrimary = Template.bind({})
 KSelectRangePrimary.args = {
+  width: "48px",
+  height: "48px",
+  backgroundColor: "#F7F7F7",
+  hoverBackgroundColor: "#F3F3F3",
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)

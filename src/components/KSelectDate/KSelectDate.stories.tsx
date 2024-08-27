@@ -1,6 +1,8 @@
 import { Meta, StoryFn } from "@storybook/react"
 import KSelectDate, { KSelectDateProps } from "./KSelectDate"
 import { useEffect, useState } from "react"
+//@ts-ignore
+import CalendarNewIcon from "../../assets/calendar-new.svg"
 
 export default {
   title: "ReactComponentLibrary/KSelectDate",
@@ -44,6 +46,7 @@ KSelectDatePrimary.args = {
   minimumDate: new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000),
   onlyMonthSelection: true,
   hideBody: true,
+  icon: CalendarNewIcon,
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)
@@ -54,4 +57,6 @@ KSelectDatePrimary.args = {
 }
 
 export const KSelectDateHoverText = Template.bind({})
-KSelectDateHoverText.args = {}
+KSelectDateHoverText.args = {
+  icon: CalendarNewIcon
+}
