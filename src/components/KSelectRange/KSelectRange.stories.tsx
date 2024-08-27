@@ -42,7 +42,7 @@ const KSelectRangeWrapper: React.FC<KSelectRangeProps> = (args) => {
         // console.log("date: ", date)
         if (date) {
           setSelectedDate(date)
-          console.log("updating is completed: ", date)
+          //console.log("updating is completed: ", date)
           // console.log("updating is completed date.toISOString(): ", date?.toISOString())
         } else {
           setSelectedDate(null)

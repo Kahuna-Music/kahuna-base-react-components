@@ -22,18 +22,16 @@ export interface KSelectRangeProps {
   padding?: string
   hoverBackgroundColor?: string
   borderRadius?: number
-
 }
 
 export type DateRangeType = Date | null | [Date | null, Date | null]
 
 const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
-
-  const width = props.width ||  "36px"
+  const width = props.width || "36px"
   const height = props.height || "36px"
   const padding = props.padding || "8px"
   const icon = props.icon || CalendarNewIcon
-  const boxShadow = props.boxShadow || "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)" 
+  const boxShadow = props.boxShadow || "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const backgroundColor = props.backgroundColor || "#FFF"
   const hoverBackgroundColor = props.hoverBackgroundColor || backgroundColor
   const borderRadius = props.borderRadius || 10
@@ -73,7 +71,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
       const startDate = new Date(year + range, 0)
       setRange([startDate, endDate])
     }
-
+    setLoading(false)
     setOpenCalendar(false)
     setTimeout(() => {
       setOpenCalendar(true)
@@ -94,9 +92,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             value={range}
             onChange={(dates) => {
               setRange(dates)
-              setTimeout(() => {
-                setLoading(false)
-              }, 200)
+              setLoading(false)
             }}
             onClickMonth={() => {
               setLoading(true)
@@ -129,6 +125,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                 setOpenCalendar(false)
                 const approvedIndex = shorthandIndex.approved
                 setShorthandIndex({ ...shorthandIndex, current: approvedIndex })
+                setLoading(false)
               }}
             />
             <KButton
@@ -240,10 +237,12 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
       )}
       <div>
         <div className="flex flex-row justify-between gap-2 items-center">
-          <div style={{
-            borderRadius: borderRadius,
-            boxShadow: boxShadow
-          }}>
+          <div
+            style={{
+              borderRadius: borderRadius,
+              boxShadow: boxShadow
+            }}
+          >
             <KButton
               icon={icon}
               onClick={() => {
@@ -256,7 +255,6 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               hoverBackground={hoverBackgroundColor}
               borderRadius={borderRadius}
               shadowDisabled
-              
             />
           </div>
         </div>

@@ -46,7 +46,6 @@ KSelectDatePrimary.args = {
   minimumDate: new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000),
   onlyMonthSelection: true,
   hideBody: true,
-  icon: CalendarNewIcon,
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)
@@ -58,5 +57,4 @@ KSelectDatePrimary.args = {
 
 export const KSelectDateHoverText = Template.bind({})
 KSelectDateHoverText.args = {
-  icon: CalendarNewIcon
 }
