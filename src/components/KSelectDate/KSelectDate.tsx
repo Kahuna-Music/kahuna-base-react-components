@@ -55,6 +55,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const backgroundColor = props.backgroundColor || "#FFF"
   const hoverBackgroundColor = props.hoverBackgroundColor || backgroundColor
   const borderRadius = props.borderRadius || 10
+  const border = props.border || "none"
 
   const [value, setValue] = useState<Date | undefined>(props.value)
   const [calendarDate, setCalendarDate] = useState<Date | undefined>(props.value)
@@ -365,7 +366,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
       ) : (
           <div style={{
             borderRadius: borderRadius,
-            boxShadow: boxShadow
+            boxShadow: boxShadow,
+            border: border
           }}>
             <KButton
               icon={icon}
@@ -380,6 +382,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
               hoverBackground={hoverBackgroundColor}
               borderRadius={borderRadius}
               shadowDisabled
+              
               
             />
           </div>
