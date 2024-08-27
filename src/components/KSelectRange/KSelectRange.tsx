@@ -35,6 +35,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   const backgroundColor = props.backgroundColor || "#FFF"
   const hoverBackgroundColor = props.hoverBackgroundColor || backgroundColor
   const borderRadius = props.borderRadius || 10
+  const border = props.border || "none"
 
   const [value, setValue] = useState<DateRangeType>(props.value)
   const [range, setRange] = useState<DateRangeType>(props.value)
@@ -240,7 +241,8 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
           <div
             style={{
               borderRadius: borderRadius,
-              boxShadow: boxShadow
+              boxShadow: boxShadow,
+              border: border
             }}
           >
             <KButton

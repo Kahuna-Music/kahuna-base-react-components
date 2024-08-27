@@ -61,6 +61,9 @@ KSelectRangePrimary.args = {
   height: "48px",
   backgroundColor: "#F7F7F7",
   hoverBackgroundColor: "#F3F3F3",
+  boxShadow: "1px 1px 2px red",
+  borderRadius: 24,
+  border: "3px dashed blue",
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)
