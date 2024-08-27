@@ -371,6 +371,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
               icon={icon}
               onClick={() => {
                 setOpenCalendar(true)
+                setCalendarDate(value)
               }}
               padding={padding}
               width={width}
