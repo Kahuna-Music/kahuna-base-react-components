@@ -21,6 +21,15 @@ export interface KSelectDateProps {
   minimumDate?: Date
   onlyMonthSelection?: boolean
   hideBody?: boolean
+  width?: string
+  height?: string
+  border?: string
+  backgroundColor?: string
+  boxShadow?: string
+  icon?: string
+  padding?: string
+  hoverBackgroundColor?: string
+  borderRadius?: number
 }
 interface MonthSelectorType {
   monthName: string
@@ -37,6 +46,17 @@ interface MonthTextType {
 }
 
 const KSelectDate: React.FC<KSelectDateProps> = (props) => {
+
+  const width = props.width ||  "36px"
+  const height = props.height || "36px"
+  const padding = props.padding || "8px"
+  const icon = props.icon || CalendarIcon
+  const boxShadow = props.boxShadow || "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)" 
+  const backgroundColor = props.backgroundColor || "#FFF"
+  const hoverBackgroundColor = props.hoverBackgroundColor || backgroundColor
+  const borderRadius = props.borderRadius || 10
+  const border = props.border || "none"
+
   const [value, setValue] = useState<Date | undefined>(props.value)
   const [calendarDate, setCalendarDate] = useState<Date | undefined>(props.value)
   const [dummyDate, setDummyDate] = useState<Date | undefined>(props.value)
@@ -226,7 +246,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
         }}
       >
         <div>
-          <img src={CalendarIcon} alt="calendar" />
+          <img src={icon} alt="calendar" />
         </div>
         <KSpan text={text} fontWeight={500} color="#111" />
       </div>
@@ -301,7 +321,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
               </div>
               <div>
                 <KButton
-                  icon={CalendarIcon}
+                  icon={icon}
                   onClick={() => {
                     setOpenCalendar(true)
                     setCalendarDate(value)
@@ -344,20 +364,28 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           </div>
         </div>
       ) : (
-        <div>
-        <KButton
-          icon={CalendarNewIcon}
-          onClick={() => {
-            setOpenCalendar(true)
-            setCalendarDate(value)
-          }}
-          padding="14px"
-          width="48px"
-          height="48px"
-          background="#F7F7F7"
-          hoverBackground="#F3F3F3"
-        />
-      </div>
+          <div style={{
+            borderRadius: borderRadius,
+            boxShadow: boxShadow,
+            border: border
+          }}>
+            <KButton
+              icon={icon}
+              onClick={() => {
+                setOpenCalendar(true)
+                setCalendarDate(value)
+              }}
+              padding={padding}
+              width={width}
+              height={height}
+              background={backgroundColor}
+              hoverBackground={hoverBackgroundColor}
+              borderRadius={borderRadius}
+              shadowDisabled
+              
+              
+            />
+          </div>
       )}
     </React.Fragment>
   )
