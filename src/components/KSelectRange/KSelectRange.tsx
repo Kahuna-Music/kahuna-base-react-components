@@ -93,7 +93,9 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             value={range}
             onChange={(dates) => {
               setRange(dates)
-              setLoading(false)
+              setTimeout(() => {
+                setLoading(false)
+              }, 100)
             }}
             onClickMonth={() => {
               setLoading(true)

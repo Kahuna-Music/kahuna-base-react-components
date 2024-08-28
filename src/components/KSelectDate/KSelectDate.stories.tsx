@@ -61,5 +61,6 @@ KSelectDateHoverText.args = {
   hoverBackgroundColor: "#F7F7F7",
   boxShadow: "none",
   borderRadius: 22,
-  icon: CalendarNewIcon
+  icon: CalendarNewIcon,
+  hideBody: true
 }

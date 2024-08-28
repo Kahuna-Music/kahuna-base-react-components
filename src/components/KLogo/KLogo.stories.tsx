@@ -14,8 +14,10 @@ const Template: StoryFn<typeof KLogo> = (args) => <KLogo {...args} />;
 export const KLogoText = Template.bind({});
 KLogoText.args = {
   logoColor: "white",
-  width: 77,
-  height: 77
+  width: 48,
+  height: 48,
+  secondaryText: "for analytics",
+  hoverEnabled: true
 };
 
 export const KLogoHover = Template.bind({});

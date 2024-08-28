@@ -7,6 +7,15 @@ export interface KSelectDateProps {
     minimumDate?: Date;
     onlyMonthSelection?: boolean;
     hideBody?: boolean;
+    width?: string;
+    height?: string;
+    border?: string;
+    backgroundColor?: string;
+    boxShadow?: string;
+    icon?: string;
+    padding?: string;
+    hoverBackgroundColor?: string;
+    borderRadius?: number;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 export default KSelectDate;

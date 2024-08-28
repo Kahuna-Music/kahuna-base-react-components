@@ -185,6 +185,15 @@ interface KSelectDateProps {
     minimumDate?: Date;
     onlyMonthSelection?: boolean;
     hideBody?: boolean;
+    width?: string;
+    height?: string;
+    border?: string;
+    backgroundColor?: string;
+    boxShadow?: string;
+    icon?: string;
+    padding?: string;
+    hoverBackgroundColor?: string;
+    borderRadius?: number;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 
@@ -259,6 +268,15 @@ declare const KInput: React.FC<KCodeInputProps>;
 interface KSelectRangeProps {
     value: DateRangeType;
     onChange: (date: DateRangeType) => void;
+    width?: string;
+    height?: string;
+    border?: string;
+    backgroundColor?: string;
+    boxShadow?: string;
+    icon?: string;
+    padding?: string;
+    hoverBackgroundColor?: string;
+    borderRadius?: number;
 }
 type DateRangeType = Date | null | [Date | null, Date | null];
 declare const KSelectRange: React.FC<KSelectRangeProps>;
