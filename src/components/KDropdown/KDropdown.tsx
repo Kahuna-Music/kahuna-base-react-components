@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
 import "../../main.css"
-import Select, { components, MultiValue } from "react-select"
+import Select, { MultiValue } from "react-select"
 // @ts-ignore
 import CheckIcon from "../../assets/check.svg"
+// @ts-ignore
+import CloseIcon from "../../assets/close.svg"
 import KSpan from "../KSpan"
 import { FilterOptionOption } from "react-select/dist/declarations/src/filters"
 
@@ -70,7 +72,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const isClearable = props.isClearable || false
   const isEllipsis = props.isEllipsis || false
   const showOnlyIconsInMulti = props.showOnlyIconsInMulti || false
-  const showedIconsSize = 20
+  const showedIconsSize = 21
   const menuWidth = props.menuWidth || "100%"
   const menuLeftMargin = props.menuLeftMargin || 0
 
@@ -111,19 +113,36 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     )
   }
 
-  const CustomMultiValue = (multiValueProps: any) => {
+  const CustomMultiIconValue = (multiValueProps: any) => {
     const { data, ...restProps } = multiValueProps
     return (
       <div
-        className={`absolute bg-white rounded-full flex items-center justify-center ${!data.icon && "!hidden"} `}
-        style={{
-          left: `${restProps.index * 15}px`,
-          zIndex: `${20 - restProps.index}`,
-          width: `${showedIconsSize + 2}px`,
-          height: `${showedIconsSize + 2}px`
-        }}
+        className={`bg-white rounded-full flex items-center justify-center ${!data.icon && "!hidden"} `}
+        style={{ width: `${showedIconsSize + 2}px`, height: `${showedIconsSize + 2}px` }}
       >
         {data.icon && <img src={data.icon} width={showedIconsSize} height={showedIconsSize} />}
+      </div>
+    )
+  }
+
+  const CustomMultiValue = (multiValueProps: any) => {
+    const { data, removeProps, ...restProps } = multiValueProps
+    return (
+      <div
+        className="flex"
+        style={{ border: "1px solid rgba(0,0,0, 0.1)", margin: 2, padding: 4, borderRadius: 5 }}
+      >
+        {data?.iconLabel ? (
+          <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
+            <img src={data.iconLabel} width={80} alt={"option-icon"} />
+          </div>
+        ) : (
+          <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
+            {data.icon && !hideIcon && <img src={data.icon} className="mr-2" width={20} alt={"data-icon"} />}
+            <KSpan text={data.label} color="#111" ellipsis={isEllipsis} />
+          </div>
+        )}
+        <img {...removeProps} src={CloseIcon} style={{ cursor: "pointer", marginLeft: "8px" }} />
       </div>
     )
   }
@@ -152,9 +171,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             padding: "0px !important",
             boxShadow: "none",
             fontSize: 14,
-            lineHeight: "20px",
+            lineHeight: "21px",
             cursor: "pointer",
-            minHeight: "20px",
+            minHeight: "21px",
             border: "none"
           }),
           menu: (base) => ({
@@ -217,7 +236,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           DropdownIndicator: () => null,
           SingleValue: ({ data, ...props }) =>
             data?.iconLabel ? (
-              <div className={`flex ${isEllipsis ? "w-full" : ""}`}> 
+              <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
                 <img src={data.iconLabel} width={80} alt={"option-icon"} />
               </div>
             ) : (
@@ -226,7 +245,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
                 <KSpan text={data.label} color="#111" ellipsis={isEllipsis} />
               </div>
             ),
-          ...(showOnlyIconsInMulti && { MultiValue: CustomMultiValue })
+          ...{ MultiValue: showOnlyIconsInMulti ? CustomMultiIconValue : CustomMultiValue }
         }}
         onChange={(event) => {
           if (!event) {
