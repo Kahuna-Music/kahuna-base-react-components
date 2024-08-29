@@ -9,13 +9,15 @@ import MetaIcon from "../../assets/platforms/Meta.svg"
 // @ts-ignore
 import TiktokIcon from "../../assets/platforms/tiktok.svg"
 // @ts-ignore
-import SpotifyIcon from "../../assets/platforms/Spotify.svg"
-// @ts-ignore
 import YoutubeIcon from "../../assets/platforms/youtube.svg"
 // @ts-ignore
 import NcmIcon from "../../assets/platforms/ncm.svg"
 // @ts-ignore
 import CaretDownIcon from "../../assets/platforms/caret-down.svg"
+// @ts-ignore
+import SpotifyLogo from "../../assets/platforms/SpotifyLogo.png"
+// @ts-ignore
+import SpotifyIcon from "../../assets/platforms/SpotifyIcon.png"
 
 import { MultiValue } from "react-select"
 
@@ -54,7 +56,8 @@ KDropdownSingle.args = {
     { label: "ELEKTRONIC ", value: 7 },
     { label: "TANIK", value: 8 },
     { label: "Very very very very very long content.", value: 9 },
-    { label: "TANIK", value: 10 }
+    { label: "TANIK", value: 10 },
+    { label: "Spotify", value: 11, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo }
   ]
 }
 
@@ -65,8 +68,8 @@ const options = [
   { label: "Label 2", value: 3, icon: NcmIcon },
   { label: "Label 2", value: 4, icon: AppleIcon },
   { label: "Label 2", value: 5, icon: MetaIcon },
-  { label: "Label 2", value: 6, icon: SpotifyIcon },
-  { label: "Label 7", value: 7 }
+  { label: "Spotify", value: 6, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo },
+  { label: "Label 7", value: 7 },
 ]
 KDropdownMulti.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},

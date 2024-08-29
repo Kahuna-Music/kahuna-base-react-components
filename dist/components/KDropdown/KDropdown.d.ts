@@ -8,6 +8,7 @@ export interface KSelectOption {
     label2?: string;
     value2?: string;
     icon?: string;
+    iconLabel?: string;
 }
 export interface KDropdownProps {
     defaultValue?: KSelectOption | MultiValue<KSelectOption>;

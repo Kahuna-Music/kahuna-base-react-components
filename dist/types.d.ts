@@ -135,6 +135,7 @@ interface KSelectOption {
     label2?: string;
     value2?: string;
     icon?: string;
+    iconLabel?: string;
 }
 interface KDropdownProps {
     defaultValue?: KSelectOption | MultiValue<KSelectOption>;
