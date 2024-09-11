@@ -41,6 +41,9 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   const [range, setRange] = useState<DateRangeType>(props.value)
   const [loading, setLoading] = useState(false)
 
+  const [leftCalendarYear, setLeftCalendarYear] = useState(new Date().getFullYear())
+  const [rightCalendarYear, setRightCalendarYear] = useState(new Date().getFullYear() + 1)
+
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
   const [shorthandIndex, setShorthandIndex] = useState<{ current: number; approved: number }>({
     current: -1,
@@ -83,77 +86,20 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     props.onChange(value)
   }, [value])
 
+  useEffect(() => {
+    console.log("range:", range)
+  }, [range])
+
   const renderPopUpCalendar = () => {
     return (
       <div className="flex flex-row">
-        <div className="flex flex-col gap-0">
-          <Calendar
-            className="kselect-range"
-            locale="en-US"
-            value={range}
-            onChange={(dates) => {
-              setRange(dates)
-              setTimeout(() => {
-                setLoading(false)
-              }, 100)
-            }}
-            onClickMonth={() => {
-              setLoading(true)
-              setShorthandIndex({ ...shorthandIndex, current: -1 })
-            }}
-            defaultValue={null}
-            next2Label={null}
-            prev2Label={null}
-            prevLabel={<img src={LeftIcon} />}
-            nextLabel={<img src={RightIcon} />}
-            formatShortWeekday={formatShortWeekday}
-            formatMonthYear={formatMonthYear}
-            selectRange
-            maxDetail="year"
-          />
-          <div
-            className="h-19 w-[350px] bg-[#FFF] flex flex-row gap-4 py-4 justify-center border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]"
-            style={{
-              borderBottomRightRadius: "0px"
-            }}
-          >
-            <KButton
-              text="Cancel"
-              height="44px"
-              width="160px"
-              background="#FFF"
-              textColor="#111"
-              onClick={() => {
-                setRange(value)
-                setOpenCalendar(false)
-                const approvedIndex = shorthandIndex.approved
-                setShorthandIndex({ ...shorthandIndex, current: approvedIndex })
-                setLoading(false)
-              }}
-            />
-            <KButton
-              text="Apply"
-              height="44px"
-              width="160px"
-              background="#F2FE67"
-              textColor="#111"
-              disabled={loading}
-              onClick={() => {
-                setValue(range)
-                setOpenCalendar(false)
-                const currentIndex = shorthandIndex.current
-                setShorthandIndex({ ...shorthandIndex, approved: currentIndex })
-              }}
-            />
-          </div>
-        </div>
         <div
           className="w-[160px] bg-[#FFF] flex flex-col items-center justify-between px-2.5 pt-5 pb-4"
           style={{
             border: "1px solid #E7E7E7",
-            borderLeft: "0px",
-            borderTopRightRadius: "16px",
-            borderBottomRightRadius: "16px"
+            borderRight: "0px",
+            borderTopLeftRadius: "16px",
+            borderBottomLeftRadius: "16px"
           }}
         >
           <KButton
@@ -226,6 +172,136 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             hoverBackground="#F0F0F0"
             height="40px"
           />
+        </div>
+        <div className="flex flex-col gap-0">
+          <div className="flex flex-row">
+            <Calendar
+              className="kselect-range left-calendar"
+              allowPartialRange
+              locale="en-US"
+              value={range}
+              activeStartDate={new Date(leftCalendarYear, 0, 1)}
+              onChange={(dates) => {
+                setTimeout(() => {
+                  setLoading(false)
+                }, 100)
+              }}
+              onClickMonth={(clickedDate) => {
+                if (!Array.isArray(range)) return
+                
+                if (range[0] === null && range[1] === null) {
+                  setRange([clickedDate, null])
+                } else if (range[0] !== null && range[1] === null) {
+                  const newRange:DateRangeType = range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
+                  setRange(newRange)
+                } else if (range[0] !== null && range[1] !== null) {
+                  setRange([clickedDate, null])
+                }
+            
+                setLoading(true)
+                setShorthandIndex({ ...shorthandIndex, current: -1 })
+              }}
+              defaultValue={null}
+              next2Label={null}
+              prev2Label={null}
+              prevLabel={
+                <img
+                  src={LeftIcon}
+                  onClick={() => {
+                    setLeftCalendarYear((current) => current - 1)
+                  }}
+                />
+              }
+              nextLabel={null}
+              formatShortWeekday={formatShortWeekday}
+              selectRange
+              maxDetail="year"
+            />
+            <Calendar
+              className="kselect-range right-calendar"
+              locale="en-US"
+              value={range}
+              activeStartDate={new Date(leftCalendarYear + 1, 0, 1)}
+              allowPartialRange
+              onChange={(dates) => {
+                setTimeout(() => {
+                  setLoading(false)
+                }, 100)
+              }}
+              onClickMonth={(clickedDate) => {
+                if (!Array.isArray(range)) return
+                
+                if (range[0] === null && range[1] === null) {
+                  setRange([clickedDate, null])
+                } else if (range[0] !== null && range[1] === null) {
+                  const newRange:DateRangeType = range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
+                  setRange(newRange)
+                } else if (range[0] !== null && range[1] !== null) {
+                  setRange([clickedDate, null])
+                }
+            
+                setLoading(true)
+                setShorthandIndex({ ...shorthandIndex, current: -1 })
+              }}
+              onClickYear={() => {
+                return
+              }}
+              defaultValue={null}
+              next2Label={null}
+              prev2Label={null}
+              prevLabel={null}
+              nextLabel={
+                <img
+                  src={RightIcon}
+                  onClick={() => {
+                    setLeftCalendarYear((current) => current + 1)
+                  }}
+                />
+              }
+              formatShortWeekday={formatShortWeekday}
+              formatMonthYear={formatMonthYear}
+              selectRange
+              maxDetail="year"
+            />
+          </div>
+          <div
+            className="h-19 w-full bg-[#FFF] flex flex-row gap-4 py-4 justify-end border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]"
+            style={{
+              borderBottomRightRadius: "16px",
+              borderBottomLeftRadius: "0px"
+            }}
+          >
+            <div className="flex flex-row gap-3 px-3">
+              <KButton
+                text="Cancel"
+                height="44px"
+                width="108px"
+                background="#FFF"
+                textColor="#111"
+                onClick={() => {
+                  setRange(value)
+                  setOpenCalendar(false)
+                  const approvedIndex = shorthandIndex.approved
+                  setShorthandIndex({ ...shorthandIndex, current: approvedIndex })
+                  setLoading(false)
+                }}
+              />
+              <KButton
+                text="Apply"
+                height="44px"
+                width="108px"
+                background="#000"
+                textColor="#FFF"
+                disabled={loading}
+                onClick={() => {
+                  setValue(range)
+                  setOpenCalendar(false)
+                  const currentIndex = shorthandIndex.current
+                  setShorthandIndex({ ...shorthandIndex, approved: currentIndex })
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     )
