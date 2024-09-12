@@ -89,6 +89,47 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     setLoading(false)
   }
 
+  const tileClassName = ({ date, view }: { date: Date; view: string }) => {
+    if (view === "year") {
+      // Apply active class for current month
+      if (!(Array.isArray(range) && range[0] && range[1])) return
+
+      if (
+        range[0]?.getFullYear() === date.getFullYear() &&
+        range[0]?.getMonth() === date.getMonth() &&
+        range[1]?.getFullYear() === date.getFullYear() &&
+        range[1]?.getMonth() === date.getMonth()
+      ) {
+        return "active-month-first-month active-month-last-month"
+      } else if (range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth()) {
+        return "active-month-first-month"
+      } else if (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth()) {
+        return "active-month-last-month"
+      } else if (range[0]?.getTime() < date.getTime() && date.getTime() < range[1]?.getTime()) {
+        if (date.getMonth() % 3 === 0) {
+          return "active-month-range-month-left "
+        } else if (date.getMonth() % 3 === 1) {
+          return "active-month-range-month-middle "
+        } else {
+          return "active-month-range-month-right "
+        }
+      }
+
+      return null
+    }
+  }
+
+  const tileContent = ({ date, view }: { date: Date; view: string }) => {
+    if (view === "year") {
+      const month = date.toLocaleString('en-US', { month: 'long' })
+      return <div className="absolute left-0 top-0 h-full w-full flex items-center justify-center tile-content-external-div">{
+       Array.isArray(range) && ((range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth()) || (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth()) ) &&
+       <abbr>{month}</abbr>
+      }</div>
+    }
+    return null
+  }
+
   useEffect(() => {
     props.onChange(value)
   }, [value])
@@ -105,10 +146,10 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     return (
       <div className="flex flex-row">
         <div
-          className="w-[160px] bg-[#FFF] flex flex-col items-center justify-between px-2.5 pt-5 pb-4"
+          className="w-[160px] bg-[#FFF] flex flex-col items-center gap-2 justify-start px-2.5 pt-5 pb-4 border-r-0"
           style={{
-            border: "1px solid #E7E7E7",
-            borderRight: "0px",
+            border: "1px solid #F3F3F3",
+            borderRightWidth: "0px",
             borderTopLeftRadius: "16px",
             borderBottomLeftRadius: "16px"
           }}
@@ -119,10 +160,10 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               setShorthandIndex({ ...shorthandIndex, current: 0 })
             }}
             width="140px"
-            background={shorthandIndex.current === 0 ? "#000" : "#FFF"}
-            textColor={shorthandIndex.current === 0 ? "#FFF" : "#000"}
+            background={shorthandIndex.current === 0 ? "#F7F7F7" : "#FFF"}
+            textColor={shorthandIndex.current === 0 ? "#000" : "#999"}
             text="Last 3 months"
-            borderRadius={1}
+            borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
             height="40px"
@@ -133,10 +174,10 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               setShorthandIndex({ ...shorthandIndex, current: 1 })
             }}
             width="140px"
-            background={shorthandIndex.current === 1 ? "#000" : "#FFF"}
-            textColor={shorthandIndex.current === 1 ? "#FFF" : "#000"}
+            background={shorthandIndex.current === 1 ? "#F7F7F7" : "#FFF"}
+            textColor={shorthandIndex.current === 1 ? "#000" : "#999"}
             text="Last 6 months"
-            borderRadius={1}
+            borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
             height="40px"
@@ -147,10 +188,10 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               setShorthandIndex({ ...shorthandIndex, current: 2 })
             }}
             width="140px"
-            background={shorthandIndex.current === 2 ? "#000" : "#FFF"}
-            textColor={shorthandIndex.current === 2 ? "#FFF" : "#000"}
+            background={shorthandIndex.current === 2 ? "#F7F7F7" : "#FFF"}
+            textColor={shorthandIndex.current === 2 ? "#000" : "#999"}
             text="Last 12 months"
-            borderRadius={1}
+            borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
             height="40px"
@@ -161,10 +202,10 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               setShorthandIndex({ ...shorthandIndex, current: 3 })
             }}
             width="140px"
-            background={shorthandIndex.current === 3 ? "#000" : "#FFF"}
-            textColor={shorthandIndex.current === 3 ? "#FFF" : "#000"}
+            background={shorthandIndex.current === 3 ? "#F7F7F7" : "#FFF"}
+            textColor={shorthandIndex.current === 3 ? "#000" : "#999"}
             text="This year"
-            borderRadius={1}
+            borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
             height="40px"
@@ -175,10 +216,10 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               setShorthandIndex({ ...shorthandIndex, current: 4 })
             }}
             width="140px"
-            background={shorthandIndex.current === 4 ? "#000" : "#FFF"}
-            textColor={shorthandIndex.current === 4 ? "#FFF" : "#000"}
+            background={shorthandIndex.current === 4 ? "#F7F7F7" : "#FFF"}
+            textColor={shorthandIndex.current === 4 ? "#000" : "#999"}
             text="Last year"
-            borderRadius={1}
+            borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
             height="40px"
@@ -189,6 +230,8 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             <Calendar
               className="kselect-range left-calendar"
               allowPartialRange
+              tileClassName={tileClassName}
+              tileContent={tileContent}
               locale="en-US"
               value={range}
               activeStartDate={new Date(leftCalendarYear, 0, 1)}
@@ -230,6 +273,8 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             />
             <Calendar
               className="kselect-range right-calendar"
+              tileClassName={tileClassName}
+              tileContent={tileContent}
               locale="en-US"
               value={range}
               activeStartDate={new Date(leftCalendarYear + 1, 0, 1)}
@@ -277,7 +322,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             />
           </div>
           <div
-            className="h-19 w-full bg-[#FFF] flex flex-row gap-4 py-4 px-5 justify-between items-center border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]"
+            className="h-19 w-full bg-[#FFF] flex flex-row gap-4 py-4 px-5 justify-between items-center border-[1px] border-[#F3F3F3] border-t-0 rounded-b-[10px]"
             style={{
               borderBottomRightRadius: "16px",
               borderBottomLeftRadius: "0px"
@@ -294,7 +339,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             <div className="flex flex-row gap-3">
               <KButton
                 text="Cancel"
-                height="44px"
+                height="48px"
                 width="108px"
                 background="#FFF"
                 textColor="#111"
@@ -308,7 +353,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               />
               <KButton
                 text="Apply"
-                height="44px"
+                height="48px"
                 width="108px"
                 background="#000"
                 textColor="#FFF"

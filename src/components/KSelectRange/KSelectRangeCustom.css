@@ -2,12 +2,14 @@
     border-top-right-radius: 0 !important;
     border-right: none !important;
 }
-.react-calendar.kselect-range{
+
+.react-calendar.kselect-range {
     width: 350px;
     max-width: 100%;
     background: white;
-    border: 1px solid #E7E7E7;
-    font-family: Inter;
+    /*border: 1px solid #E7E7E7;*/
+    border: 1px solid #F3F3F3;
+    font-family: Inter !important;
     line-height: 1.125em;
     border-top-right-radius: 16px;
     border-top-left-radius: 0px;
@@ -103,6 +105,7 @@
     font: inherit;
     font-size: 0.75em;
     font-weight: bold;
+    position: relative;
 }
 
 .kselect-range .react-calendar__month-view__days {
@@ -200,13 +203,7 @@
     height: 40px;
     width: 40px !important;
 }
-.kselect-range .react-calendar__tile--active {
-    background: #111;
-    color: white;
-    border-radius: 0px;
-    height: 40px;
-    width: 40px !important;
-}
+
 .kselect-range .react-calendar__tile--active:enabled:hover,
 .kselect-range .react-calendar__tile--active:enabled:focus {
     background: #111111;
@@ -241,6 +238,45 @@ abbr:where([title]) {
 .kselect-range .react-calendar__year-view__months {
     row-gap: 8px;
 }
+
 .kselect-range .react-calendar__year-view__months__month {
-    padding: 0 !important;
+    padding: 0px !important;
+    position: relative;
+}
+
+.kselect-range .active-month-first-month {
+    background-color: #F0F0F0 !important;
+    border-top-left-radius: 999px !important;
+    border-bottom-left-radius: 999px !important;
+}
+
+.active-month-first-month .tile-content-external-div {
+    background-color: #111;
+    border-radius: 999px !important;
+}
+
+.kselect-range .active-month-last-month {
+    background-color: #F0F0F0 !important;
+    border-top-right-radius: 999px !important;
+    border-bottom-right-radius: 999px !important;
+}
+
+.active-month-last-month .tile-content-external-div {
+    background-color: #111;
+    border-radius: 999px !important;
+}
+
+.kselect-range .active-month-range-month-left {
+    background: linear-gradient(90deg, #FFF 0%, #F0F0F0 30.28%, #F0F0F0 100%);
+    color: #1F1F1F;
+}
+
+.kselect-range .active-month-range-month-middle {
+    background-color: #F0F0F0 !important;
+    color: #1F1F1F;
+}
+
+.kselect-range .active-month-range-month-right {
+    background: linear-gradient(90deg, #F0F0F0 0%, #F0F0F0 69.72%, #FFF 100%);
+    color: #1F1F1F;
 }
