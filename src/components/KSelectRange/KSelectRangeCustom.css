@@ -65,9 +65,8 @@
     background: none;
 }
 
-
 .kselect-range .react-calendar__navigation button:disabled {
-    background-color: #f0f0f0;
+    background-color: #FFF;
 }
 
 .kselect-range .react-calendar__navigation button:enabled:hover,

@@ -9,6 +9,7 @@ import CalendarNewIcon from "../../assets/calendar-new.svg"
 import RightIcon from "../../assets/chevron-right.svg"
 import "../../main.css"
 import KButton from "../KButton"
+import KSpan from "../KSpan"
 
 export interface KSelectRangeProps {
   value: DateRangeType
@@ -50,6 +51,16 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     approved: -1
   })
 
+  const convertToMonthYear = (date: Date | null): string => {
+    if (!date) return "?"
+
+    const year = date.getFullYear()
+    const month = date.getMonth()
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    return `${monthNames[Number(month)]} ${year}`
+  }
+
   const formatShortWeekday = (locale: string | undefined, date: Date): string => {
     return date.toLocaleDateString(locale, { weekday: "short" }).charAt(0) // Return only the first letter of the weekday
   }
@@ -76,10 +87,6 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
       setRange([startDate, endDate])
     }
     setLoading(false)
-    setOpenCalendar(false)
-    setTimeout(() => {
-      setOpenCalendar(true)
-    }, 10)
   }
 
   useEffect(() => {
@@ -87,7 +94,11 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   }, [value])
 
   useEffect(() => {
-    console.log("range:", range)
+    if (Array.isArray(range)) {
+      if (range[0] !== null && range[1] !== null) {
+        setLeftCalendarYear(range[0].getFullYear())
+      }
+    }
   }, [range])
 
   const renderPopUpCalendar = () => {
@@ -181,24 +192,23 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               locale="en-US"
               value={range}
               activeStartDate={new Date(leftCalendarYear, 0, 1)}
-              onChange={(dates) => {
-                setTimeout(() => {
-                  setLoading(false)
-                }, 100)
-              }}
+              onChange={(dates) => {}}
               onClickMonth={(clickedDate) => {
                 if (!Array.isArray(range)) return
-                
+
                 if (range[0] === null && range[1] === null) {
                   setRange([clickedDate, null])
                 } else if (range[0] !== null && range[1] === null) {
-                  const newRange:DateRangeType = range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
+                  const newRange: DateRangeType =
+                    range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
                   setRange(newRange)
+                  setOpenCalendar(false)
+                  setTimeout(() => {
+                    setOpenCalendar(true)
+                  }, 100)
                 } else if (range[0] !== null && range[1] !== null) {
                   setRange([clickedDate, null])
                 }
-            
-                setLoading(true)
                 setShorthandIndex({ ...shorthandIndex, current: -1 })
               }}
               defaultValue={null}
@@ -216,6 +226,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               formatShortWeekday={formatShortWeekday}
               selectRange
               maxDetail="year"
+              minDetail="year"
             />
             <Calendar
               className="kselect-range right-calendar"
@@ -223,24 +234,24 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               value={range}
               activeStartDate={new Date(leftCalendarYear + 1, 0, 1)}
               allowPartialRange
-              onChange={(dates) => {
-                setTimeout(() => {
-                  setLoading(false)
-                }, 100)
-              }}
+              onChange={(dates) => {}}
               onClickMonth={(clickedDate) => {
                 if (!Array.isArray(range)) return
-                
+
                 if (range[0] === null && range[1] === null) {
                   setRange([clickedDate, null])
                 } else if (range[0] !== null && range[1] === null) {
-                  const newRange:DateRangeType = range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
+                  const newRange: DateRangeType =
+                    range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
                   setRange(newRange)
+                  setOpenCalendar(false)
+                  setTimeout(() => {
+                    setOpenCalendar(true)
+                  }, 100)
                 } else if (range[0] !== null && range[1] !== null) {
                   setRange([clickedDate, null])
                 }
-            
-                setLoading(true)
+
                 setShorthandIndex({ ...shorthandIndex, current: -1 })
               }}
               onClickYear={() => {
@@ -262,16 +273,25 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               formatMonthYear={formatMonthYear}
               selectRange
               maxDetail="year"
+              minDetail="year"
             />
           </div>
           <div
-            className="h-19 w-full bg-[#FFF] flex flex-row gap-4 py-4 justify-end border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]"
+            className="h-19 w-full bg-[#FFF] flex flex-row gap-4 py-4 px-5 justify-between items-center border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]"
             style={{
               borderBottomRightRadius: "16px",
               borderBottomLeftRadius: "0px"
             }}
           >
-            <div className="flex flex-row gap-3 px-3">
+            <div className="flex items-center gap-1">
+              <KSpan text="Range:" color="#999" />
+              <KSpan
+                text={Array.isArray(range) ? `${convertToMonthYear(range[0])} - ${convertToMonthYear(range[1])}` : ""}
+                color="#000"
+                fontWeight={500}
+              />
+            </div>
+            <div className="flex flex-row gap-3">
               <KButton
                 text="Cancel"
                 height="44px"
@@ -292,7 +312,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                 width="108px"
                 background="#000"
                 textColor="#FFF"
-                disabled={loading}
+                disabled={Array.isArray(range) && (range[0] === null || range[1] === null)}
                 onClick={() => {
                   setValue(range)
                   setOpenCalendar(false)
