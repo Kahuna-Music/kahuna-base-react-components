@@ -79,7 +79,7 @@ KDropdownMulti.args = {
   selected: options[0],
   rightIcon: CaretDownIcon,
   menuWidth: 200,
-  width: 150
+  width: 180
 }
 
 export const KDropdownLeftIcon = Template.bind({})

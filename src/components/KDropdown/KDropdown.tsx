@@ -214,7 +214,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             ...(!props.width &&
               isMulti &&
               showOnlyIconsInMulti &&
-              selectedOption && { width: `${(selectedOption as KSelectOption[]).length * 15 + 5}px`, minWidth: "50px" })
+              selectedOption && { width: `${(selectedOption as KSelectOption[]).length * 25 + 5}px`, minWidth: "50px" })
           }),
           input: (base) => ({
             ...base,
