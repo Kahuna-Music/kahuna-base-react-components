@@ -42,8 +42,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   const [range, setRange] = useState<DateRangeType>(props.value)
   const [loading, setLoading] = useState(false)
 
-  const [leftCalendarYear, setLeftCalendarYear] = useState(new Date().getFullYear())
-  const [rightCalendarYear, setRightCalendarYear] = useState(new Date().getFullYear() + 1)
+  const [leftCalendarYear, setLeftCalendarYear] = useState<number>(new Date().getFullYear())
 
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
   const [shorthandIndex, setShorthandIndex] = useState<{ current: number; approved: number }>({
@@ -261,7 +260,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                 <img
                   src={LeftIcon}
                   onClick={() => {
-                    setLeftCalendarYear((current) => current - 1)
+                    setLeftCalendarYear((current:number) => current - 1)
                   }}
                 />
               }
@@ -310,7 +309,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                 <img
                   src={RightIcon}
                   onClick={() => {
-                    setLeftCalendarYear((current) => current + 1)
+                    setLeftCalendarYear((current:number) => current + 1)
                   }}
                 />
               }
@@ -349,6 +348,9 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                   const approvedIndex = shorthandIndex.approved
                   setShorthandIndex({ ...shorthandIndex, current: approvedIndex })
                   setLoading(false)
+                  if(Array.isArray(value) && value[0] !== null) {
+                    setLeftCalendarYear(value[0].getFullYear())
+                  }
                 }}
               />
               <KButton
@@ -363,6 +365,9 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                   setOpenCalendar(false)
                   const currentIndex = shorthandIndex.current
                   setShorthandIndex({ ...shorthandIndex, approved: currentIndex })
+                  if(Array.isArray(range) && range[0] !== null) {
+                    setLeftCalendarYear(range[0].getFullYear())
+                  }
                 }}
               />
             </div>
