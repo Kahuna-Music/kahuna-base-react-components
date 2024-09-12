@@ -45,6 +45,7 @@ export interface KDropdownProps {
   showOnlyIconsInMulti?: boolean
   menuWidth?: string | number
   menuLeftMargin?: number
+  placeholderColor?: string
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -75,6 +76,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const showedIconsSize = 21
   const menuWidth = props.menuWidth || "100%"
   const menuLeftMargin = props.menuLeftMargin || 0
+  const placeholderColor = props.placeholderColor || "#848484"
 
   let defaultValue = props.defaultValue
   if (!defaultValue && props.defaultValuePrimitive) {
@@ -224,7 +226,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           }),
           placeholder: (base) => ({
             ...base,
-            margin: 0
+            margin: 0,
+            color: placeholderColor
           }),
           clearIndicator: (base) => ({
             ...base,

@@ -79,7 +79,7 @@ KDropdownMulti.args = {
   selected: options[0],
   rightIcon: CaretDownIcon,
   menuWidth: 200,
-  width: 180
+  placeholderColor: "#000"
 }
 
 export const KDropdownLeftIcon = Template.bind({})
@@ -95,6 +95,7 @@ KDropdownRightIcon.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
   placeholder: "Placeholder...",
   rightIcon: TracksIcon,
+  placeholderColor: "#F00",
   width: 250,
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
