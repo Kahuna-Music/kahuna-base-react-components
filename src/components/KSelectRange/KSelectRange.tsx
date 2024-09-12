@@ -123,7 +123,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     if (view === "year") {
       const month = date.toLocaleString('en-US', { month: 'long' })
       return <div className="absolute left-0 top-0 h-full w-full flex items-center justify-center tile-content-external-div">{
-       Array.isArray(range) && ((range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth()) || (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth()) ) &&
+       Array.isArray(range) && range[1] !== null && ((range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth()) || (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth()) ) &&
        <abbr>{month}</abbr>
       }</div>
     }
