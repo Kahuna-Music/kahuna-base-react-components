@@ -60,6 +60,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     setBackground(background)
   }, [props.selected])
 
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+
   const width = props.width || "100%"
   const height = props.height || "auto"
   const borderRadius = props.borderRadius || 10
@@ -166,6 +168,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         filterOption={customFilterOption}
         isClearable={isClearable}
         hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}
+        menuIsOpen={isMenuOpen}
+        
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
@@ -265,7 +269,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {props.rightIcon && <img src={props.rightIcon} width={20} alt={"r-icon"} />}
+      {props.rightIcon && <img src={props.rightIcon} width={20} alt={"r-icon"} onClick={() => {
+        setIsMenuOpen(!isMenuOpen)
+      }} />}
     </div>
   )
 }
