@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
 import "../../main.css"
-import Select, { MultiValue } from "react-select"
+import Select, { components, MultiValue } from "react-select"
 // @ts-ignore
 import CheckIcon from "../../assets/check.svg"
 // @ts-ignore
 import CloseIcon from "../../assets/close.svg"
+// @ts-ignore
+import CaretDownIcon from "../../assets/caret-down.svg"
 import KSpan from "../KSpan"
 import { FilterOptionOption } from "react-select/dist/declarations/src/filters"
 
@@ -46,6 +48,7 @@ export interface KDropdownProps {
   menuWidth?: string | number
   menuLeftMargin?: number
   placeholderColor?: string
+  addDropdownIndicator?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -77,6 +80,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const menuWidth = props.menuWidth || "100%"
   const menuLeftMargin = props.menuLeftMargin || 0
   const placeholderColor = props.placeholderColor || "#848484"
+  const addDropdownIndicator = props.addDropdownIndicator || false
 
   let defaultValue = props.defaultValue
   if (!defaultValue && props.defaultValuePrimitive) {
@@ -149,6 +153,16 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     )
   }
 
+  const CustomDropdownIndicator = (props: any) => {
+    return (
+      <div style={{
+        paddingLeft: gap
+      }}>
+        <img src={CaretDownIcon} alt="dropdown-arrow" width={20} />
+      </div>
+    )
+  }
+
   return (
     <div
       className={"k-dropdown-container"}
@@ -162,11 +176,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         name={props.label || ""}
         placeholder={props.placeholder || ""}
         options={props.options}
-        className={"k-dropdown pr-8"}
+        className={"k-dropdown"}
         filterOption={customFilterOption}
         isClearable={isClearable}
-        hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}
-        
+        hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}        
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
@@ -233,11 +246,14 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           clearIndicator: (base) => ({
             ...base,
             padding: 0
+          }),
+          indicatorsContainer: (base) => ({
+            ...base,
           })
         }}
         components={{
           IndicatorSeparator: () => null,
-          DropdownIndicator: () => null,
+          DropdownIndicator: addDropdownIndicator ? CustomDropdownIndicator : () => null,
           SingleValue: ({ data, ...props }) =>
             data?.iconLabel ? (
               <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
@@ -266,7 +282,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {props.rightIcon && <img className="absolute right-2" src={props.rightIcon} width={20} alt={"r-icon"} />}
+      {props.rightIcon && <img src={props.rightIcon} width={20} alt={"r-icon"}/>}
     </div>
   )
 }
