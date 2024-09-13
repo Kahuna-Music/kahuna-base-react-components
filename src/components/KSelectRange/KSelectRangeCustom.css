@@ -281,3 +281,71 @@ abbr:where([title]) {
     background: linear-gradient(90deg, #F0F0F0 0%, #F0F0F0 69.72%, #FFF 100%);
     color: #1F1F1F;
 }
+.bottom-center {
+    top: 100%;
+    margin-top: 10px;
+    left:50%;
+    transform: translateX(-50%);
+}
+.bottom-left {
+    top: 100%;
+    margin-top: 10px;
+    left:0%;
+    transform: translateX(-100%);
+}
+.bottom-right {
+    top: 100%;
+    margin-top: 10px;
+    left:100%;
+}
+.top-center {
+    bottom: 100%;
+    margin-bottom: 10px;
+    left:50%;
+    transform: translateX(-50%);
+}
+.top-left {
+    bottom: 100%;
+    margin-bottom: 10px;
+    left:0%;
+    transform: translateX(-100%);
+}
+.top-right {
+    bottom: 100%;
+    margin-bottom: 10px;
+    left:100%;
+}
+.left-center {
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    margin-right: 10px;
+}
+.left-top {
+    top: 0%;
+    right: 100%;
+    transform: translateY(-100%);
+    margin-right: 10px;
+}
+.left-bottom {
+    top: 100%;
+    right: 100%;
+    margin-right: 10px;
+}
+.right-center {
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+}
+.right-top {
+    top: 0%;
+    left: 100%;
+    transform: translateY(-100%);
+    margin-left: 10px;
+}
+.right-bottom {
+    top: 100%;
+    left: 100%;
+    margin-left: 10px;
+}

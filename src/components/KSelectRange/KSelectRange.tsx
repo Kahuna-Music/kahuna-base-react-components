@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useState } from "react"
+import React, { CSSProperties, useEffect, useRef, useState } from "react"
 import Calendar from "react-calendar"
 import "./KSelectRangeCustom.css"
 //@ts-ignore
@@ -23,6 +23,9 @@ export interface KSelectRangeProps {
   padding?: string
   hoverBackgroundColor?: string
   borderRadius?: number
+  anchorToButton?: boolean
+  position?: "top" | "bottom" | "left" | "right"
+  align?: "top" | "bottom" | "left" | "right" | "center" 
 }
 
 export type DateRangeType = Date | null | [Date | null, Date | null]
@@ -37,10 +40,13 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   const hoverBackgroundColor = props.hoverBackgroundColor || backgroundColor
   const borderRadius = props.borderRadius || 10
   const border = props.border || "none"
+  const anchorToButton = props.anchorToButton || false
+  const position = props.position || "bottom"
+  const align = props.align || "center"
+
 
   const [value, setValue] = useState<DateRangeType>(props.value)
   const [range, setRange] = useState<DateRangeType>(props.value)
-  const [loading, setLoading] = useState(false)
 
   const [leftCalendarYear, setLeftCalendarYear] = useState<number>(new Date().getFullYear())
 
@@ -85,7 +91,25 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
       const startDate = new Date(year + range, 0)
       setRange([startDate, endDate])
     }
-    setLoading(false)
+  }
+
+  const onClickMonthEvent = (clickedDate: Date) => {
+    if (!Array.isArray(range)) return
+
+    if (range[0] === null && range[1] === null) {
+      setRange([clickedDate, null])
+    } else if (range[0] !== null && range[1] === null) {
+      const newRange: DateRangeType =
+        range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
+      setRange(newRange)
+      setOpenCalendar(false)
+      setTimeout(() => {
+        setOpenCalendar(true)
+      }, 100)
+    } else if (range[0] !== null && range[1] !== null) {
+      setRange([clickedDate, null])
+    }
+    setShorthandIndex({ ...shorthandIndex, current: -1 })
   }
 
   const tileClassName = ({ date, view }: { date: Date; view: string }) => {
@@ -120,11 +144,17 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
 
   const tileContent = ({ date, view }: { date: Date; view: string }) => {
     if (view === "year") {
-      const month = date.toLocaleString('en-US', { month: 'long' })
-      return <div className="absolute left-0 top-0 h-full w-full flex items-center justify-center tile-content-external-div">{
-       Array.isArray(range) && range[1] !== null && ((range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth()) || (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth()) ) &&
-       <abbr>{month}</abbr>
-      }</div>
+      const month = date.toLocaleString("en-US", { month: "long" })
+      return (
+        <div className="absolute left-0 top-0 h-full w-full flex items-center justify-center tile-content-external-div">
+          {Array.isArray(range) &&
+            range[1] !== null &&
+            ((range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth()) ||
+              (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth())) && (
+              <abbr>{month}</abbr>
+            )}
+        </div>
+      )
     }
     return null
   }
@@ -236,22 +266,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               activeStartDate={new Date(leftCalendarYear, 0, 1)}
               onChange={(dates) => {}}
               onClickMonth={(clickedDate) => {
-                if (!Array.isArray(range)) return
-
-                if (range[0] === null && range[1] === null) {
-                  setRange([clickedDate, null])
-                } else if (range[0] !== null && range[1] === null) {
-                  const newRange: DateRangeType =
-                    range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
-                  setRange(newRange)
-                  setOpenCalendar(false)
-                  setTimeout(() => {
-                    setOpenCalendar(true)
-                  }, 100)
-                } else if (range[0] !== null && range[1] !== null) {
-                  setRange([clickedDate, null])
-                }
-                setShorthandIndex({ ...shorthandIndex, current: -1 })
+                onClickMonthEvent(clickedDate)
               }}
               defaultValue={null}
               next2Label={null}
@@ -260,7 +275,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                 <img
                   src={LeftIcon}
                   onClick={() => {
-                    setLeftCalendarYear((current:number) => current - 1)
+                    setLeftCalendarYear((current: number) => current - 1)
                   }}
                 />
               }
@@ -280,23 +295,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               allowPartialRange
               onChange={(dates) => {}}
               onClickMonth={(clickedDate) => {
-                if (!Array.isArray(range)) return
-
-                if (range[0] === null && range[1] === null) {
-                  setRange([clickedDate, null])
-                } else if (range[0] !== null && range[1] === null) {
-                  const newRange: DateRangeType =
-                    range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
-                  setRange(newRange)
-                  setOpenCalendar(false)
-                  setTimeout(() => {
-                    setOpenCalendar(true)
-                  }, 100)
-                } else if (range[0] !== null && range[1] !== null) {
-                  setRange([clickedDate, null])
-                }
-
-                setShorthandIndex({ ...shorthandIndex, current: -1 })
+                onClickMonthEvent(clickedDate)
               }}
               onClickYear={() => {
                 return
@@ -309,7 +308,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                 <img
                   src={RightIcon}
                   onClick={() => {
-                    setLeftCalendarYear((current:number) => current + 1)
+                    setLeftCalendarYear((current: number) => current + 1)
                   }}
                 />
               }
@@ -347,8 +346,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                   setOpenCalendar(false)
                   const approvedIndex = shorthandIndex.approved
                   setShorthandIndex({ ...shorthandIndex, current: approvedIndex })
-                  setLoading(false)
-                  if(Array.isArray(value) && value[0] !== null) {
+                  if (Array.isArray(value) && value[0] !== null) {
                     setLeftCalendarYear(value[0].getFullYear())
                   }
                 }}
@@ -365,7 +363,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                   setOpenCalendar(false)
                   const currentIndex = shorthandIndex.current
                   setShorthandIndex({ ...shorthandIndex, approved: currentIndex })
-                  if(Array.isArray(range) && range[0] !== null) {
+                  if (Array.isArray(range) && range[0] !== null) {
                     setLeftCalendarYear(range[0].getFullYear())
                   }
                 }}
@@ -379,12 +377,17 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
 
   return (
     <React.Fragment>
-      {openCalendar && (
+      {(openCalendar && !anchorToButton) && (
         <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50">
           <div>{renderPopUpCalendar()}</div>
         </div>
       )}
-      <div>
+      <div className="flex relative">
+        {(openCalendar && anchorToButton) && (
+          <div className={`absolute ${position}-${align}`}>
+            <div>{renderPopUpCalendar()}</div>
+          </div>
+        )}
         <div className="flex flex-row justify-between gap-2 items-center">
           <div
             style={{
