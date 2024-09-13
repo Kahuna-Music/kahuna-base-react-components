@@ -106,11 +106,11 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
         return "active-month-last-month"
       } else if (range[0]?.getTime() < date.getTime() && date.getTime() < range[1]?.getTime()) {
         if (date.getMonth() % 3 === 0) {
-          return "active-month-range-month-left "
+          return "active-month-range-month-left"
         } else if (date.getMonth() % 3 === 1) {
-          return "active-month-range-month-middle "
+          return "active-month-range-month-middle"
         } else {
-          return "active-month-range-month-right "
+          return "active-month-range-month-right"
         }
       }
 

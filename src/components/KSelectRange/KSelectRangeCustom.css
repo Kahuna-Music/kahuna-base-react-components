@@ -197,15 +197,14 @@
 }
 
 .kselect-range .react-calendar__tile--active {
-    background: #111;
+    background-color: #111;
     color: white;
     border-radius: 0px;
     height: 40px;
     width: 40px !important;
 }
-
-.kselect-range .react-calendar__tile--active:enabled:hover {
-    
+.react-calendar__tile--hover.react-calendar__tile--active {
+    background-color: #111 !important;
 }
 .kselect-range .react-calendar__tile--active:enabled:focus {
     background: #111111;

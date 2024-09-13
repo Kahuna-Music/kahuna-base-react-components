@@ -161,8 +161,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             text="Apply"
             height="44px"
             width="160px"
-            background="#F2FE67"
-            textColor="#111"
+            background="#000"
+            textColor="#FFF"
             onClick={() => {
               setValue(calendarDate)
               setOpenCalendar(false)
