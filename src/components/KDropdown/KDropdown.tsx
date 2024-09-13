@@ -48,7 +48,7 @@ export interface KDropdownProps {
   menuWidth?: string | number
   menuLeftMargin?: number
   placeholderColor?: string
-  addDropdownIndicator?: boolean
+  enableRightIcon?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -80,7 +80,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const menuWidth = props.menuWidth || "100%"
   const menuLeftMargin = props.menuLeftMargin || 0
   const placeholderColor = props.placeholderColor || "#848484"
-  const addDropdownIndicator = props.addDropdownIndicator || false
+  const enableRightIcon = props.enableRightIcon || false
 
   let defaultValue = props.defaultValue
   if (!defaultValue && props.defaultValuePrimitive) {
@@ -153,12 +153,12 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     )
   }
 
-  const CustomDropdownIndicator = (props: any) => {
+  const CustomDropdownIndicator = (indicatorProps: any) => {
     return (
       <div style={{
         paddingLeft: gap
       }}>
-        <img src={CaretDownIcon} alt="dropdown-arrow" width={20} />
+       {<img src={props.rightIcon} alt="dropdown-arrow" width={20} />}
       </div>
     )
   }
@@ -246,14 +246,11 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           clearIndicator: (base) => ({
             ...base,
             padding: 0
-          }),
-          indicatorsContainer: (base) => ({
-            ...base,
           })
         }}
         components={{
           IndicatorSeparator: () => null,
-          DropdownIndicator: addDropdownIndicator ? CustomDropdownIndicator : () => null,
+          DropdownIndicator: (props.rightIcon && enableRightIcon) ? CustomDropdownIndicator : () => null,
           SingleValue: ({ data, ...props }) =>
             data?.iconLabel ? (
               <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
@@ -282,7 +279,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {props.rightIcon && <img src={props.rightIcon} width={20} alt={"r-icon"}/>}
+      {(props.rightIcon && !enableRightIcon ) && <img src={props.rightIcon} width={20} alt={"r-icon"}/>}
     </div>
   )
 }
