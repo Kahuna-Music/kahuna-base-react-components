@@ -179,7 +179,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         className={"k-dropdown"}
         filterOption={customFilterOption}
         isClearable={isClearable}
-        hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}        
+        hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
@@ -230,7 +230,11 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             ...(!props.width &&
               isMulti &&
               showOnlyIconsInMulti &&
-              selectedOption && { width: `${(selectedOption as KSelectOption[]).length * 25 + 5}px`, minWidth: "50px" })
+              selectedOption &&
+              (selectedOption as KSelectOption[]).length > 0 && {
+                width: `${(selectedOption as KSelectOption[]).length * 25 + 5}px`,
+                minWidth: "50px"
+              })
           }),
           input: (base) => ({
             ...base,
@@ -250,7 +254,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         }}
         components={{
           IndicatorSeparator: () => null,
-          DropdownIndicator: (props.rightIcon && enableRightIcon) ? CustomDropdownIndicator : () => null,
+          DropdownIndicator: props.rightIcon && enableRightIcon ? CustomDropdownIndicator : () => null,
           SingleValue: ({ data, ...props }) =>
             data?.iconLabel ? (
               <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
@@ -265,6 +269,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           ...{ MultiValue: showOnlyIconsInMulti ? CustomMultiIconValue : CustomMultiValue }
         }}
         onChange={(event) => {
+          const newf = event as KSelectOption[]
+          console.log("event: ", newf)
           if (!event) {
             if (props.isClearable) {
               setSelectedOption(undefined)
@@ -279,7 +285,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {(props.rightIcon && !enableRightIcon ) && <img src={props.rightIcon} width={20} alt={"r-icon"}/>}
+      {props.rightIcon && !enableRightIcon && <img src={props.rightIcon} width={20} alt={"r-icon"} />}
     </div>
   )
 }

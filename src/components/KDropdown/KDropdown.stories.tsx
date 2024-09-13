@@ -40,7 +40,6 @@ KDropdownSingle.args = {
       console.log("update process can be performed")
     }
   },
-  width: 250,
   placeholder: "Select single...",
   isClearable: true,
   isEllipsis: true,
@@ -73,7 +72,7 @@ const options = [
 ]
 KDropdownMulti.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
-  placeholder: "Multi...",
+  placeholder: "All Platforms",
   options: options,
   isMulti: true,
   selected: options[0],
