@@ -64,8 +64,8 @@ KSelectRangePrimary.args = {
   hoverBackgroundColor: "#F3F3F3",
   borderRadius: 24,
   anchorToButton:true,
-  position: "left",
-  align: "top",
+  position: "top",
+  align: "left",
 
   onChange: (value) => {
     if (value) {

@@ -25,7 +25,7 @@ export interface KSelectRangeProps {
   borderRadius?: number
   anchorToButton?: boolean
   position?: "top" | "bottom" | "left" | "right"
-  align?: "top" | "bottom" | "left" | "right" | "center" 
+  align?: "top" | "bottom" | "left" | "right" | "center"
 }
 
 export type DateRangeType = Date | null | [Date | null, Date | null]
@@ -43,7 +43,6 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   const anchorToButton = props.anchorToButton || false
   const position = props.position || "bottom"
   const align = props.align || "center"
-
 
   const [value, setValue] = useState<DateRangeType>(props.value)
   const [range, setRange] = useState<DateRangeType>(props.value)
@@ -375,16 +374,27 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     )
   }
 
+  const absolutePositionClassName = (position: string, align: string) => {
+    const finalPosition = position
+    let finalAlign = align
+    if (finalPosition === "top" || finalPosition === "bottom") {
+      finalAlign = align === "top" || align === "bottom" ? "center" : align
+    } else if (finalPosition === "left" || finalPosition === "right") {
+      finalAlign = align === "left" || align === "right" ? "center" : align
+    }
+    return `${finalPosition}-${finalAlign}`
+  }
+
   return (
     <React.Fragment>
-      {(openCalendar && !anchorToButton) && (
+      {openCalendar && !anchorToButton && (
         <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50">
           <div>{renderPopUpCalendar()}</div>
         </div>
       )}
       <div className="flex relative">
-        {(openCalendar && anchorToButton) && (
-          <div className={`absolute ${position}-${align}`}>
+        {openCalendar && anchorToButton && (
+          <div className={`absolute ${absolutePositionClassName(position, align)}`}>
             <div>{renderPopUpCalendar()}</div>
           </div>
         )}
