@@ -409,7 +409,17 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             <KButton
               icon={icon}
               onClick={() => {
-                setOpenCalendar(true)
+                if (!openCalendar) {
+                  setOpenCalendar(true)
+                } else {
+                  setRange(value)
+                  setOpenCalendar(false)
+                  const approvedIndex = shorthandIndex.approved
+                  setShorthandIndex({ ...shorthandIndex, current: approvedIndex })
+                  if (Array.isArray(value) && value[0] !== null) {
+                    setLeftCalendarYear(value[0].getFullYear())
+                  }
+                }
               }}
               padding={padding}
               width={width}
