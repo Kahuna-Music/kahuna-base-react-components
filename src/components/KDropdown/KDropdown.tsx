@@ -53,6 +53,7 @@ export interface KDropdownProps {
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
   const [selectedOption, setSelectedOption] = useState<KSelectOption | MultiValue<KSelectOption>>()
+  const [iconCount, setIconCount] = useState<number>(0)
   const [background, setBackground] = useState("#F5F5F5")
 
   useEffect(() => {
@@ -62,6 +63,13 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     const background = props.selected ? activeBackground : emptyBackground
     setBackground(background)
   }, [props.selected])
+
+  useEffect(() => {
+    if (!isMulti || !Array.isArray(selectedOption)) return
+    const optionsWithIcon = selectedOption.filter((o) => o.icon)
+    const iconNumber = optionsWithIcon.length
+    setIconCount(iconNumber)
+  }, [selectedOption])
 
   const width = props.width || "100%"
   const height = props.height || "auto"
@@ -232,7 +240,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
               showOnlyIconsInMulti &&
               selectedOption &&
               (selectedOption as KSelectOption[]).length > 0 && {
-                width: `${(selectedOption as KSelectOption[]).length * 25 + 5}px`,
+                width: `${iconCount * (showedIconsSize + 2) + 5}px`,
                 minWidth: "50px"
               })
           }),
@@ -269,8 +277,6 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           ...{ MultiValue: showOnlyIconsInMulti ? CustomMultiIconValue : CustomMultiValue }
         }}
         onChange={(event) => {
-          const newf = event as KSelectOption[]
-          console.log("event: ", newf)
           if (!event) {
             if (props.isClearable) {
               setSelectedOption(undefined)

@@ -40,6 +40,8 @@ KDropdownSingle.args = {
       console.log("update process can be performed")
     }
   },
+  width: 120,
+  menuWidth: 200,
   placeholder: "Select single...",
   isClearable: true,
   isEllipsis: true,
