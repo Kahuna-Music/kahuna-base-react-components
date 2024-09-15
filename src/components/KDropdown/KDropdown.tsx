@@ -229,7 +229,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             marginBottom: 4,
             marginTop: 4,
             borderRadius: 10,
-            color: "#111"
+            color: "#111",
+            "&:hover": {
+              background: "#F7F7F7"
+            }
           }),
           valueContainer: (base) => ({
             ...base,
