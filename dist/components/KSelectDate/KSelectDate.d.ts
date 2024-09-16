@@ -16,6 +16,9 @@ export interface KSelectDateProps {
     padding?: string;
     hoverBackgroundColor?: string;
     borderRadius?: number;
+    anchorToButton?: boolean;
+    position?: "top" | "bottom" | "left" | "right";
+    align?: "top" | "bottom" | "left" | "right" | "center";
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 export default KSelectDate;

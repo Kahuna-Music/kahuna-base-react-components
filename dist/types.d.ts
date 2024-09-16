@@ -164,6 +164,9 @@ interface KDropdownProps {
     showOnlyIconsInMulti?: boolean;
     menuWidth?: string | number;
     menuLeftMargin?: number;
+    placeholderColor?: string;
+    enableIndicator?: boolean;
+    allowContainerShrink?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 
@@ -195,6 +198,9 @@ interface KSelectDateProps {
     padding?: string;
     hoverBackgroundColor?: string;
     borderRadius?: number;
+    anchorToButton?: boolean;
+    position?: "top" | "bottom" | "left" | "right";
+    align?: "top" | "bottom" | "left" | "right" | "center";
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 
@@ -278,6 +284,9 @@ interface KSelectRangeProps {
     padding?: string;
     hoverBackgroundColor?: string;
     borderRadius?: number;
+    anchorToButton?: boolean;
+    position?: "top" | "bottom" | "left" | "right";
+    align?: "top" | "bottom" | "left" | "right" | "center";
 }
 type DateRangeType = Date | null | [Date | null, Date | null];
 declare const KSelectRange: React.FC<KSelectRangeProps>;
