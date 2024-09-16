@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react"
 import "../../main.css"
-import Select, { components, MultiValue } from "react-select"
+import Select, { MultiValue } from "react-select"
 // @ts-ignore
 import CheckIcon from "../../assets/check.svg"
 // @ts-ignore
 import CloseIcon from "../../assets/close.svg"
-// @ts-ignore
-import CaretDownIcon from "../../assets/caret-down.svg"
 import KSpan from "../KSpan"
 import { FilterOptionOption } from "react-select/dist/declarations/src/filters"
 
@@ -64,13 +62,6 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     const background = props.selected ? activeBackground : emptyBackground
     setBackground(background)
   }, [props.selected])
-
-  useEffect(() => {
-    if (!isMulti || !Array.isArray(selectedOption)) return
-    const optionsWithIcon = selectedOption.filter((o) => o.icon)
-    const iconNumber = optionsWithIcon.length
-    setIconCount(iconNumber)
-  }, [selectedOption])
 
   const width = props.width || "100%"
   const height = props.height || "auto"
@@ -195,6 +186,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     if (!isMulti) {
       const calculatedWidth: string = calculateContainerWidth()
       setCalculatedContainerWidth(calculatedWidth)
+    } else if (isMulti && Array.isArray(selectedOption)) {
+      const optionsWithIcon = selectedOption.filter((o) => o.icon)
+      const iconNumber = optionsWithIcon.length
+      setIconCount(iconNumber)
     }
   }, [selectedOption])
 
@@ -282,9 +277,14 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
                 width: `${iconCount * (showedIconsSize + 2) + 5}px`,
                 minWidth: "50px"
               }),
-            ...((allowContainerShrink && !isMulti) && {
-              width: calculatedContainerWidth
-            })
+            ...(allowContainerShrink &&
+              !isMulti && {
+                width: calculatedContainerWidth
+              }),
+            ...(!isMulti &&
+              (selectedOption as KSelectOption)?.iconLabel && {
+                height: "24px"
+              })
           }),
           input: (base) => ({
             ...base,
@@ -307,7 +307,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           DropdownIndicator: props.rightIcon && enableIndicator ? CustomDropdownIndicator : () => null,
           SingleValue: ({ data, ...props }) =>
             data?.iconLabel ? (
-              <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
+              <div className={`flex ${isEllipsis ? "w-full" : ""}`} style={{ position: "absolute" }}>
                 <img src={data.iconLabel} width={80} alt={"option-icon"} />
               </div>
             ) : (
