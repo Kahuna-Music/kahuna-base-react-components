@@ -48,7 +48,7 @@ export interface KDropdownProps {
   menuWidth?: string | number
   menuLeftMargin?: number
   placeholderColor?: string
-  enableRightIcon?: boolean
+  enableIndicator?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -88,7 +88,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const menuWidth = props.menuWidth || "100%"
   const menuLeftMargin = props.menuLeftMargin || 0
   const placeholderColor = props.placeholderColor || "#848484"
-  const enableRightIcon = props.enableRightIcon || false
+  const enableIndicator = props.enableIndicator || false
 
   let defaultValue = props.defaultValue
   if (!defaultValue && props.defaultValuePrimitive) {
@@ -265,7 +265,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         }}
         components={{
           IndicatorSeparator: () => null,
-          DropdownIndicator: props.rightIcon && enableRightIcon ? CustomDropdownIndicator : () => null,
+          DropdownIndicator: props.rightIcon && enableIndicator ? CustomDropdownIndicator : () => null,
           SingleValue: ({ data, ...props }) =>
             data?.iconLabel ? (
               <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
@@ -294,7 +294,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {props.rightIcon && !enableRightIcon && <img src={props.rightIcon} width={20} alt={"r-icon"} />}
+      {props.rightIcon && !enableIndicator && <img src={props.rightIcon} width={20} alt={"r-icon"} />}
     </div>
   )
 }

@@ -80,7 +80,7 @@ KDropdownMulti.args = {
   selected: options[0],
   menuWidth: 200,
   placeholderColor: "#000",
-  enableRightIcon: true,
+  enableIndicator: true,
   showOnlyIconsInMulti: true,
   rightIcon: CaretDownIcon
 }
@@ -118,6 +118,6 @@ KDropdownLeftRightIcon.args = {
   placeholder: "Placeholder...",
   leftIcon: TracksIcon,
   rightIcon: TracksIcon,
-  enableRightIcon:true,
+  enableIndicator:true,
   gap: "15px"
 }
