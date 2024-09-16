@@ -40,13 +40,14 @@ KDropdownSingle.args = {
       console.log("update process can be performed")
     }
   },
-  width: 120,
+  width: 200,
   menuWidth: 200,
   placeholder: "Select single...",
   isClearable: true,
   isEllipsis: true,
   allowContainerShrink: true,
   defaultValuePrimitive: 7,
+  hideChosenOptionIcon: true,
   // defaultValue: { label: "Label 1", value: 1, icon: TracksIcon },
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
@@ -60,7 +61,8 @@ KDropdownSingle.args = {
     { label: "Very very very very very long content.", value: 9 },
     { label: "EVREN TANIK EVREN TANIK", value: 10 },
     { label: "TANIK", value: 11 },
-    { label: "Spotify", value: 12, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo }
+    { label: "Spotify", value: 12, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo },
+    { label: "All", value: 12, value2: "spo-spotify", icon: SpotifyIcon}
   ]
 }
 

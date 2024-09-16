@@ -183,7 +183,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   }
 
   useEffect(() => {
-    if (!isMulti) {
+    if (!isMulti && allowContainerShrink) {
       const calculatedWidth: string = calculateContainerWidth()
       setCalculatedContainerWidth(calculatedWidth)
     } else if (isMulti && Array.isArray(selectedOption)) {
