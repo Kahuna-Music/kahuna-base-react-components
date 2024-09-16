@@ -101,7 +101,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         selectedOption?.value === option.value
     return (
       <div className="flex justify-between" style={{ width: "100%" }}>
-        <div className="flex">
+        <div className="flex items-center">
           {option?.iconLabel ? (
             <>
               <img src={option.iconLabel} className="mr-2" width={80} alt={"option-icon"} />
@@ -114,7 +114,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           )}
         </div>
         {isSelected && ((isMulti && showOnlyIconsInMulti) || !isMulti) && (
-          <img src={CheckIcon} width={24} alt={"check-icon"} />
+          <img src={CheckIcon} className="shrink-0" width={24} alt={"check-icon"} />
         )}
       </div>
     )
@@ -218,6 +218,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         className={"k-dropdown"}
         filterOption={customFilterOption}
         isClearable={isClearable}
+        menuIsOpen
         hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}
         styles={{
           control: (baseStyles, state) => ({
