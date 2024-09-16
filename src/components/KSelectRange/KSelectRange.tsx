@@ -382,7 +382,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     } else if (finalPosition === "left" || finalPosition === "right") {
       finalAlign = align === "left" || align === "right" ? "center" : align
     }
-    return `${finalPosition}-${finalAlign}`
+    return `range-${finalPosition}-${finalAlign}`
   }
 
   return (
@@ -394,7 +394,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
       )}
       <div className="flex relative">
         {openCalendar && anchorToButton && (
-          <div className={`absolute ${absolutePositionClassName(position, align)}`}>
+          <div className={`absolute  ${absolutePositionClassName(position, align)}`}>
             <div>{renderPopUpCalendar()}</div>
           </div>
         )}
