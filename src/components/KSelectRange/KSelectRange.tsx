@@ -23,9 +23,9 @@ export interface KSelectRangeProps {
   padding?: string
   hoverBackgroundColor?: string
   borderRadius?: number
-  anchorToButton?: boolean
-  position?: "top" | "bottom" | "left" | "right"
-  align?: "top" | "bottom" | "left" | "right" | "center"
+  anchorToButton?: boolean // opens the calendar relative to the button's position
+  position?: "top" | "bottom" | "left" | "right" // position of the calendar relative to the button's position, has effect as long as anchorButton is true 
+  align?: "top" | "bottom" | "left" | "right" | "center" // lets to align the calendar, has effect as long as anchorButton is true
 }
 
 export type DateRangeType = Date | null | [Date | null, Date | null]

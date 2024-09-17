@@ -39,15 +39,15 @@ export interface KDropdownProps {
   menuBackground?: string
   padding?: string
   gap?: string
-  hideChosenOptionIcon?: boolean
-  isClearable?: boolean
-  isEllipsis?: boolean
-  showOnlyIconsInMulti?: boolean
-  menuWidth?: string | number
-  menuLeftMargin?: number
+  hideChosenOptionIcon?: boolean // hides the selected option's icon in the container, not menu
+  isClearable?: boolean // makes possible to clear the selected option
+  isEllipsis?: boolean // adds ellipsis to the container if label overflows, width should be fixed value
+  showOnlyIconsInMulti?: boolean // adds only icons of selected options to the container, not labels
+  menuWidth?: string | number 
+  menuLeftMargin?: number // lets to change menu's position horizontally
   placeholderColor?: string
-  enableIndicator?: boolean
-  allowContainerShrink?: boolean
+  enableIndicator?: boolean // if rightIcon is provided, lets it to open-close menu
+  allowContainerShrink?: boolean // allows container to shrink if label is smaller than width, width should be fixed value
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -104,11 +104,11 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         <div className="flex items-center">
           {option?.iconLabel ? (
             <>
-              <img src={option.iconLabel} className="mr-2" width={80} alt={"option-icon"} />
+              <img src={option.iconLabel} className="mr-2 shrink-0" width={80} alt={"option-icon"} />
             </>
           ) : (
             <>
-              {option.icon && <img src={option.icon} className="mr-2" width={20} alt={"option-icon"} />}
+              {option.icon && <img src={option.icon} className="mr-2 shrink-0" width={20} alt={"option-icon"} />}
               <KSpan text={option.label} color="#111" />
             </>
           )}

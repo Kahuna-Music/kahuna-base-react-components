@@ -19,8 +19,8 @@ export interface KSelectDateProps {
   value: Date | undefined
   onChange: (date: Date | undefined) => void
   minimumDate?: Date
-  onlyMonthSelection?: boolean
-  hideBody?: boolean
+  onlyMonthSelection?: boolean // if true, only month selection is possible
+  hideBody?: boolean // hides the body and just shows the button with the icon
   width?: string
   height?: string
   border?: string
@@ -30,9 +30,9 @@ export interface KSelectDateProps {
   padding?: string
   hoverBackgroundColor?: string
   borderRadius?: number
-  anchorToButton?: boolean
-  position?: "top" | "bottom" | "left" | "right"
-  align?: "top" | "bottom" | "left" | "right" | "center"
+  anchorToButton?: boolean // opens the calendar relative to the button's position, does not have any effect if body is not hidden.
+  position?: "top" | "bottom" | "left" | "right" // position of the calendar relative to the button's position, has effect as long as anchorButton is true
+  align?: "top" | "bottom" | "left" | "right" | "center" // lets to align the calendar, has effect as long as anchorButton is true
 }
 interface MonthSelectorType {
   monthName: string
