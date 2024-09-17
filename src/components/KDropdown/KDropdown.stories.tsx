@@ -68,8 +68,8 @@ KDropdownSingle.args = {
 
 export const KDropdownMulti = Template.bind({})
 const options = [
-  { label: "Label 1", value: 1, icon: YoutubeIcon },
-  { label: "Label 2", value: 2, icon: TiktokIcon },
+  { label: "Youtube audio Tier", value: 1, icon: YoutubeIcon },
+  { label: "Tiktok Tiktok Tiktok", value: 2, icon: TiktokIcon },
   { label: "Label 2", value: 3, icon: NcmIcon },
   { label: "Label 2", value: 4, icon: AppleIcon },
   { label: "Label 2", value: 5, icon: MetaIcon },

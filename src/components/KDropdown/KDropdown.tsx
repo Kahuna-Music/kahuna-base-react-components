@@ -104,11 +104,11 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         <div className="flex items-center">
           {option?.iconLabel ? (
             <>
-              <img src={option.iconLabel} className="mr-2" width={80} alt={"option-icon"} />
+              <img src={option.iconLabel} className="mr-2 shrink-0" width={80} alt={"option-icon"} />
             </>
           ) : (
             <>
-              {option.icon && <img src={option.icon} className="mr-2" width={20} alt={"option-icon"} />}
+              {option.icon && <img src={option.icon} className="mr-2 shrink-0" width={20} alt={"option-icon"} />}
               <KSpan text={option.label} color="#111" />
             </>
           )}
@@ -219,6 +219,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         filterOption={customFilterOption}
         isClearable={isClearable}
         hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}
+        menuIsOpen
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
