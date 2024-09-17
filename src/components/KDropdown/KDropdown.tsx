@@ -219,7 +219,6 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         filterOption={customFilterOption}
         isClearable={isClearable}
         hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}
-        menuIsOpen
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,
