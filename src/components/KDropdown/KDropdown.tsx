@@ -45,10 +45,14 @@ export interface KDropdownProps {
   showOnlyIconsInMulti?: boolean
   menuWidth?: string | number
   menuLeftMargin?: number
+  placeholderColor?: string
+  enableIndicator?: boolean
+  allowContainerShrink?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
   const [selectedOption, setSelectedOption] = useState<KSelectOption | MultiValue<KSelectOption>>()
+  const [iconCount, setIconCount] = useState<number>(0)
   const [background, setBackground] = useState("#F5F5F5")
 
   useEffect(() => {
@@ -75,6 +79,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const showedIconsSize = 21
   const menuWidth = props.menuWidth || "100%"
   const menuLeftMargin = props.menuLeftMargin || 0
+  const placeholderColor = props.placeholderColor || "#848484"
+  const enableIndicator = props.enableIndicator || false
+  const allowContainerShrink = props.allowContainerShrink || false
 
   let defaultValue = props.defaultValue
   if (!defaultValue && props.defaultValuePrimitive) {
@@ -94,7 +101,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         selectedOption?.value === option.value
     return (
       <div className="flex justify-between" style={{ width: "100%" }}>
-        <div className="flex">
+        <div className="flex items-center">
           {option?.iconLabel ? (
             <>
               <img src={option.iconLabel} className="mr-2" width={80} alt={"option-icon"} />
@@ -107,7 +114,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           )}
         </div>
         {isSelected && ((isMulti && showOnlyIconsInMulti) || !isMulti) && (
-          <img src={CheckIcon} width={24} alt={"check-icon"} />
+          <img src={CheckIcon} className="shrink-0" width={24} alt={"check-icon"} />
         )}
       </div>
     )
@@ -128,10 +135,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const CustomMultiValue = (multiValueProps: any) => {
     const { data, removeProps, ...restProps } = multiValueProps
     return (
-      <div
-        className="flex"
-        style={{ border: "1px solid rgba(0,0,0, 0.1)", margin: 2, padding: 4, borderRadius: 5 }}
-      >
+      <div className="flex" style={{ border: "1px solid rgba(0,0,0, 0.1)", margin: 2, padding: 4, borderRadius: 5 }}>
         {data?.iconLabel ? (
           <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
             <img src={data.iconLabel} width={80} alt={"option-icon"} />
@@ -147,10 +151,61 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     )
   }
 
+  const CustomDropdownIndicator = (indicatorProps: any) => {
+    return (
+      <div
+        style={{
+          paddingLeft: gap
+        }}
+      >
+        {<img src={props.rightIcon} alt="dropdown-arrow" width={20} />}
+      </div>
+    )
+  }
+
+  const [calculatedContainerWidth, setCalculatedContainerWidth] = useState(width)
+
+  const calculateContainerWidth = () => {
+    let text = ""
+    if (selectedOption) {
+      text = (selectedOption as KSelectOption).label
+    } else if (defaultValue && !selectedOption) {
+      text = (defaultValue as KSelectOption).label
+    } else if (!defaultValue && !selectedOption && props.placeholder) {
+      text = props.placeholder
+    } else {
+      return width.toString()
+    }
+
+    const textWidth = text === text.toUpperCase() ? `${text.length * 9.2}px` : `${text.length * 8}px`
+    const selectedLabelLeftIconWidth = (selectedOption as KSelectOption)?.icon && !hideIcon ? "28px" : "0px"
+    return (selectedOption as KSelectOption)?.iconLabel ? "84px" : `calc(${textWidth} + ${selectedLabelLeftIconWidth})`
+  }
+
+  useEffect(() => {
+    if (!isMulti && allowContainerShrink) {
+      const calculatedWidth: string = calculateContainerWidth()
+      setCalculatedContainerWidth(calculatedWidth)
+    } else if (isMulti && Array.isArray(selectedOption)) {
+      const optionsWithIcon = selectedOption.filter((o) => o.icon)
+      const iconNumber = optionsWithIcon.length
+      setIconCount(iconNumber)
+    }
+  }, [selectedOption])
+
   return (
     <div
       className={"k-dropdown-container"}
-      style={{ background, borderRadius, width, height, boxShadow, padding, gap }}
+      style={{
+        background,
+        borderRadius,
+        width: allowContainerShrink ? "auto" : width,
+        ...(allowContainerShrink && { maxWidth: width }),
+        height,
+        boxShadow,
+        padding,
+        gap
+      }}
     >
       {props.leftIcon && <img src={props.leftIcon} width={20} alt={"l-icon"} />}
 
@@ -205,7 +260,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             marginBottom: 4,
             marginTop: 4,
             borderRadius: 10,
-            color: "#111"
+            color: "#111",
+            "&:hover": {
+              background: "#F7F7F7"
+            }
           }),
           valueContainer: (base) => ({
             ...base,
@@ -214,7 +272,19 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             ...(!props.width &&
               isMulti &&
               showOnlyIconsInMulti &&
-              selectedOption && { width: `${(selectedOption as KSelectOption[]).length * 15 + 5}px`, minWidth: "50px" })
+              selectedOption &&
+              (selectedOption as KSelectOption[]).length > 0 && {
+                width: `${iconCount * (showedIconsSize + 2) + 5}px`,
+                minWidth: "50px"
+              }),
+            ...(allowContainerShrink &&
+              !isMulti && {
+                width: calculatedContainerWidth
+              }),
+            ...(!isMulti &&
+              (selectedOption as KSelectOption)?.iconLabel && {
+                height: "24px"
+              })
           }),
           input: (base) => ({
             ...base,
@@ -224,7 +294,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
           }),
           placeholder: (base) => ({
             ...base,
-            margin: 0
+            margin: 0,
+            color: placeholderColor
           }),
           clearIndicator: (base) => ({
             ...base,
@@ -233,10 +304,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         }}
         components={{
           IndicatorSeparator: () => null,
-          DropdownIndicator: () => null,
+          DropdownIndicator: props.rightIcon && enableIndicator ? CustomDropdownIndicator : () => null,
           SingleValue: ({ data, ...props }) =>
             data?.iconLabel ? (
-              <div className={`flex ${isEllipsis ? "w-full" : ""}`}>
+              <div className={`flex ${isEllipsis ? "w-full" : ""}`} style={{ position: "absolute" }}>
                 <img src={data.iconLabel} width={80} alt={"option-icon"} />
               </div>
             ) : (
@@ -262,7 +333,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         getOptionLabel={(option: KSelectOption) => getOptionLabels(option)}
       />
 
-      {props.rightIcon && <img src={props.rightIcon} width={20} alt={"r-icon"} />}
+      {props.rightIcon && !enableIndicator && <img src={props.rightIcon} width={20} alt={"r-icon"} />}
     </div>
   )
 }

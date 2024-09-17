@@ -40,12 +40,15 @@ KDropdownSingle.args = {
       console.log("update process can be performed")
     }
   },
-  width: 250,
+  width: 200,
+  menuWidth: 200,
   placeholder: "Select single...",
   isClearable: true,
   isEllipsis: true,
-  // defaultValue: { label: "Label 1", value: 1, icon: TracksIcon },
+  allowContainerShrink: true,
   defaultValuePrimitive: 7,
+  hideChosenOptionIcon: true,
+  // defaultValue: { label: "Label 1", value: 1, icon: TracksIcon },
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
     { label: "Label 4", value: 2, icon: TracksIcon },
@@ -56,8 +59,10 @@ KDropdownSingle.args = {
     { label: "ELEKTRONIC ", value: 7 },
     { label: "TANIK", value: 8 },
     { label: "Very very very very very long content.", value: 9 },
-    { label: "TANIK", value: 10 },
-    { label: "Spotify", value: 11, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo }
+    { label: "EVREN TANIK EVREN TANIK", value: 10 },
+    { label: "TANIK", value: 11 },
+    { label: "Spotify", value: 12, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo },
+    { label: "All", value: 12, value2: "spo-spotify", icon: SpotifyIcon}
   ]
 }
 
@@ -73,13 +78,15 @@ const options = [
 ]
 KDropdownMulti.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
-  placeholder: "Multi...",
+  placeholder: "All Platforms",
   options: options,
   isMulti: true,
   selected: options[0],
-  rightIcon: CaretDownIcon,
   menuWidth: 200,
-  width: 150
+  placeholderColor: "#000",
+  enableIndicator: true,
+  showOnlyIconsInMulti: true,
+  rightIcon: CaretDownIcon
 }
 
 export const KDropdownLeftIcon = Template.bind({})
@@ -95,7 +102,10 @@ KDropdownRightIcon.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
   placeholder: "Placeholder...",
   rightIcon: TracksIcon,
+  placeholderColor: "#F00",
+  allowContainerShrink: true, 
   width: 250,
+  menuWidth: 200,
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
     { label: "Label 4", value: 2, icon: TracksIcon },
@@ -113,5 +123,7 @@ KDropdownLeftRightIcon.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
   placeholder: "Placeholder...",
   leftIcon: TracksIcon,
-  rightIcon: TracksIcon
+  rightIcon: TracksIcon,
+  enableIndicator:true,
+  gap: "15px"
 }

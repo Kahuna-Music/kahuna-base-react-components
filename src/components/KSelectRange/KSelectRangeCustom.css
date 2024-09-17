@@ -1,12 +1,18 @@
-.react-calendar.kselect-range{
+.left-calendar {
+    border-top-right-radius: 0 !important;
+    border-right: none !important;
+}
+
+.react-calendar.kselect-range {
     width: 350px;
     max-width: 100%;
     background: white;
-    border: 1px solid #E7E7E7;
-    font-family: Inter;
+    /*border: 1px solid #E7E7E7;*/
+    border: 1px solid #F3F3F3;
+    font-family: Inter !important;
     line-height: 1.125em;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 0px;
+    border-top-right-radius: 16px;
+    border-top-left-radius: 0px;
     padding: 20px;
     font-size: 14px;
     color: #1F1F1F;
@@ -61,9 +67,8 @@
     background: none;
 }
 
-
 .kselect-range .react-calendar__navigation button:disabled {
-    background-color: #f0f0f0;
+    background-color: #FFF;
 }
 
 .kselect-range .react-calendar__navigation button:enabled:hover,
@@ -100,6 +105,7 @@
     font: inherit;
     font-size: 0.75em;
     font-weight: bold;
+    position: relative;
 }
 
 .kselect-range .react-calendar__month-view__days {
@@ -175,7 +181,7 @@
 
 .kselect-range .react-calendar__tile--now:enabled:hover,
 .kselect-range.react-calendar__tile--now:enabled:focus {
-    background: #ffffa9;
+    background: #FFFFA9;
 }
 
 .kselect-range .react-calendar__tile--hasActive {
@@ -191,20 +197,15 @@
 }
 
 .kselect-range .react-calendar__tile--active {
-    background: #111;
+    background-color: #111;
     color: white;
     border-radius: 0px;
     height: 40px;
     width: 40px !important;
 }
-.kselect-range .react-calendar__tile--active {
-    background: #111;
-    color: white;
-    border-radius: 0px;
-    height: 40px;
-    width: 40px !important;
+.react-calendar__tile--hover.react-calendar__tile--active {
+    background-color: #111 !important;
 }
-.kselect-range .react-calendar__tile--active:enabled:hover,
 .kselect-range .react-calendar__tile--active:enabled:focus {
     background: #111111;
     /*old value: 1087ff*/
@@ -236,8 +237,115 @@ abbr:where([title]) {
 }
 
 .kselect-range .react-calendar__year-view__months {
-    row-gap: 2px;
+    row-gap: 8px;
 }
+
 .kselect-range .react-calendar__year-view__months__month {
-    padding: 0 !important;
+    padding: 0px !important;
+    position: relative;
+}
+
+.kselect-range .active-month-first-month {
+    background-color: #F0F0F0 !important;
+    border-top-left-radius: 999px !important;
+    border-bottom-left-radius: 999px !important;
+}
+
+.active-month-first-month .tile-content-external-div {
+    background-color: #111;
+    border-radius: 999px !important;
+}
+
+.kselect-range .active-month-last-month {
+    background-color: #F0F0F0 !important;
+    border-top-right-radius: 999px !important;
+    border-bottom-right-radius: 999px !important;
+}
+
+.active-month-last-month .tile-content-external-div {
+    background-color: #111;
+    border-radius: 999px !important;
+}
+
+.kselect-range .active-month-range-month-left {
+    background: linear-gradient(90deg, #FFF 0%, #F0F0F0 30.28%, #F0F0F0 100%);
+    color: #1F1F1F;
+}
+
+.kselect-range .active-month-range-month-middle {
+    background-color: #F0F0F0 !important;
+    color: #1F1F1F;
+}
+
+.kselect-range .active-month-range-month-right {
+    background: linear-gradient(90deg, #F0F0F0 0%, #F0F0F0 69.72%, #FFF 100%);
+    color: #1F1F1F;
+}
+.range-bottom-center {
+    top: 100%;
+    margin-top: 10px;
+    left:50%;
+    transform: translateX(-50%);
+}
+.range-bottom-left {
+    top: 100%;
+    margin-top: 10px;
+    left:0%;
+    transform: translateX(-100%);
+}
+.range-bottom-right {
+    top: 100%;
+    margin-top: 10px;
+    left:100%;
+}
+.range-top-center {
+    bottom: 100%;
+    margin-bottom: 10px;
+    left:50%;
+    transform: translateX(-50%);
+}
+.range-top-left {
+    bottom: 100%;
+    margin-bottom: 10px;
+    left:0%;
+    transform: translateX(-100%);
+}
+.range-top-right {
+    bottom: 100%;
+    margin-bottom: 10px;
+    left:100%;
+}
+.range-left-center {
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    margin-right: 10px;
+}
+.range-left-top {
+    top: 0%;
+    right: 100%;
+    transform: translateY(-100%);
+    margin-right: 10px;
+}
+.range-left-bottom {
+    top: 100%;
+    right: 100%;
+    margin-right: 10px;
+}
+.range-right-center {
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+}
+.range-right-top {
+    top: 0%;
+    left: 100%;
+    transform: translateY(-100%);
+    margin-left: 10px;
+}
+.range-right-bottom {
+    top: 100%;
+    left: 100%;
+    margin-left: 10px;
 }

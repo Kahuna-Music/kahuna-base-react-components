@@ -13,6 +13,9 @@ export interface KSelectRangeProps {
     padding?: string;
     hoverBackgroundColor?: string;
     borderRadius?: number;
+    anchorToButton?: boolean;
+    position?: "top" | "bottom" | "left" | "right";
+    align?: "top" | "bottom" | "left" | "right" | "center";
 }
 export type DateRangeType = Date | null | [Date | null, Date | null];
 declare const KSelectRange: React.FC<KSelectRangeProps>;

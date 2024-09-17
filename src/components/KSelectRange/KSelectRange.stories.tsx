@@ -28,14 +28,15 @@ export default {
 const KSelectRangeWrapper: React.FC<KSelectRangeProps> = (args) => {
   const [selectedDate, setSelectedDate] = useState<DateRangeType>([
     new Date(new Date().setMonth(new Date().getMonth() - 10)), // Start date: 3 months ago
-    new Date() // End date: today
+    new Date(new Date().setMonth(new Date().getMonth() + 10)) // End date: today
   ])
   useEffect(() => {
     // console.log("selectedDate: ", selectedDate)
   }, [selectedDate])
 
   return (
-    <div><KSelectRange
+    <div>
+      <KSelectRange
       {...args}
       value={selectedDate}
       onChange={(date: DateRangeType) => {
@@ -61,9 +62,11 @@ KSelectRangePrimary.args = {
   height: "48px",
   backgroundColor: "#F7F7F7",
   hoverBackgroundColor: "#F3F3F3",
-  boxShadow: "1px 1px 2px red",
   borderRadius: 24,
-  border: "3px dashed blue",
+  anchorToButton:true,
+  position: "top",
+  align: "center",
+
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)

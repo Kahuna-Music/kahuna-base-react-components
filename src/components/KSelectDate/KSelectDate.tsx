@@ -30,6 +30,9 @@ export interface KSelectDateProps {
   padding?: string
   hoverBackgroundColor?: string
   borderRadius?: number
+  anchorToButton?: boolean
+  position?: "top" | "bottom" | "left" | "right"
+  align?: "top" | "bottom" | "left" | "right" | "center"
 }
 interface MonthSelectorType {
   monthName: string
@@ -46,12 +49,11 @@ interface MonthTextType {
 }
 
 const KSelectDate: React.FC<KSelectDateProps> = (props) => {
-
-  const width = props.width ||  "36px"
+  const width = props.width || "36px"
   const height = props.height || "36px"
   const padding = props.padding || "8px"
   const icon = props.icon || CalendarIcon
-  const boxShadow = props.boxShadow || "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)" 
+  const boxShadow = props.boxShadow || "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const backgroundColor = props.backgroundColor || "#FFF"
   const hoverBackgroundColor = props.hoverBackgroundColor || backgroundColor
   const borderRadius = props.borderRadius || 10
@@ -66,6 +68,10 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
 
   const onlyMonthSelection = props.onlyMonthSelection || false
   const hideBody = props.hideBody || false
+
+  const anchorToButton = props.anchorToButton || false
+  const position = props.position || "bottom"
+  const align = props.align || "center"
 
   const formatShortWeekday = (locale: string | undefined, date: Date): string => {
     return date.toLocaleDateString(locale, { weekday: "short" }).charAt(0) // Return only the first letter of the weekday
@@ -161,8 +167,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             text="Apply"
             height="44px"
             width="160px"
-            background="#F2FE67"
-            textColor="#111"
+            background="#000"
+            textColor="#FFF"
             onClick={() => {
               setValue(calendarDate)
               setOpenCalendar(false)
@@ -273,6 +279,17 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
     }
   }
 
+  const absolutePositionClassName = (position: string, align: string) => {
+    const finalPosition = position
+    let finalAlign = align
+    if (finalPosition === "top" || finalPosition === "bottom") {
+      finalAlign = align === "top" || align === "bottom" ? "center" : align
+    } else if (finalPosition === "left" || finalPosition === "right") {
+      finalAlign = align === "left" || align === "right" ? "center" : align
+    }
+    return `date-${finalPosition}-${finalAlign}`
+  }
+
   useEffect(() => {
     if (value) {
       setDummyDate(value)
@@ -302,7 +319,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
 
   return (
     <React.Fragment>
-      {openCalendar && (
+      {openCalendar && (!hideBody || !anchorToButton) && (
         <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50">
           <div>{renderPopUpCalendar()}</div>
         </div>
@@ -364,16 +381,28 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           </div>
         </div>
       ) : (
-          <div style={{
-            borderRadius: borderRadius,
-            boxShadow: boxShadow,
-            border: border
-          }}>
+        <div className="flex relative">
+          {openCalendar && anchorToButton && (
+            <div className={`absolute ${absolutePositionClassName(position, align)}`}>
+              <div>{renderPopUpCalendar()}</div>
+            </div>
+          )}
+          <div
+            style={{
+              borderRadius: borderRadius,
+              boxShadow: boxShadow,
+              border: border
+            }}
+          >
             <KButton
               icon={icon}
               onClick={() => {
-                setOpenCalendar(true)
-                setCalendarDate(value)
+                if (openCalendar) {
+                  setOpenCalendar(false)
+                } else {
+                  setOpenCalendar(true)
+                  setCalendarDate(value)
+                }
               }}
               padding={padding}
               width={width}
@@ -382,10 +411,9 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
               hoverBackground={hoverBackgroundColor}
               borderRadius={borderRadius}
               shadowDisabled
-              
-              
             />
           </div>
+        </div>
       )}
     </React.Fragment>
   )
