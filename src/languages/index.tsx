@@ -1,7 +1,7 @@
 import enLang from "./en.json"
 import trLang from "./tr.json"
 
-export const DEFAULT_LANGUAGE = "en"
+export const DEFAULT_LANGUAGE = "tr"
 
 export const getSelectedLanguage = () => {
   return localStorage.getItem("language") || DEFAULT_LANGUAGE

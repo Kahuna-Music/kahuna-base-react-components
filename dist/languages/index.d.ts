@@ -1,4 +1,4 @@
-export declare const DEFAULT_LANGUAGE = "en";
+export declare const DEFAULT_LANGUAGE = "tr";
 export declare const getSelectedLanguage: () => string;
 export declare const getLanguageJson: () => {
     locale: string;
