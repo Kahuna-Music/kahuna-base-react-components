@@ -1,5 +1,5 @@
 {
-    "locale_name": "en-US",
+    "locale": "en-US",
     "common": {
         "months_short": {
             "0": "Jan",

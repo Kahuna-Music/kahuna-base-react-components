@@ -144,7 +144,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
 
   const tileContent = ({ date, view }: { date: Date; view: string }) => {
     if (view === "year") {
-      const month = date.toLocaleString(lang.locale_name, { month: "long" })
+      const month = date.toLocaleString(lang.locale, { month: "long" })
       return (
         <div className="absolute left-0 top-0 h-full w-full flex items-center justify-center tile-content-external-div">
           {Array.isArray(range) &&
@@ -261,7 +261,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               allowPartialRange
               tileClassName={tileClassName}
               tileContent={tileContent}
-              locale={lang.locale_name}
+              locale={lang.locale}
               value={range}
               activeStartDate={new Date(leftCalendarYear, 0, 1)}
               onChange={(dates) => {}}
@@ -289,7 +289,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               className="kselect-range right-calendar"
               tileClassName={tileClassName}
               tileContent={tileContent}
-              locale={lang.locale_name}
+              locale={lang.locale}
               value={range}
               activeStartDate={new Date(leftCalendarYear + 1, 0, 1)}
               allowPartialRange

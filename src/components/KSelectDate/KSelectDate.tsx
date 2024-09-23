@@ -80,7 +80,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   }
 
   const formatMonthYear = (locale: string | undefined, date: Date): string => {
-    const formattedDate = date.toLocaleDateString("en-UK", { month: "short", year: "numeric" })
+    const formattedDate = date.toLocaleDateString(lang.locale, { month: "short", year: "numeric" })
     const [month, year] = formattedDate.split(" ")
     const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1).toLowerCase()
     return `${capitalizedMonth}, ${year}`
@@ -106,7 +106,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
       const updatedMonths = Array.from({ length: 4 }, (_, i) => {
         const newDate = new Date(date.getFullYear(), date.getMonth() + (i - 1), 1)
         return {
-          monthName: newDate.toLocaleString("en-UK", { month: "long" }),
+          monthName: newDate.toLocaleString("en-US", { month: "long" }),
           year: newDate.getFullYear().toString(),
           date: newDate,
           monthIndex: newDate.getMonth().toString()
@@ -127,7 +127,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
         const day = new Date(startOfWeek)
         day.setDate(startOfWeek.getDate() + i)
         return {
-          dayName: day.toLocaleDateString(lang.locale_name, { weekday: "short" }),
+          dayName: day.toLocaleDateString(lang.locale, { weekday: "short" }),
           dayOrderInMonth: day.getDate(),
           date: day
         }
@@ -144,7 +144,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           onClickDay={onClickDay}
           {...(onlyMonthSelection && { onClickMonth: onClickMonth })}
           {...(onlyMonthSelection && { maxDetail: "year" })}
-          locale={lang.locale_name}
+          locale={lang.locale}
           value={calendarDate || null}
           defaultValue={null}
           next2Label={null}
