@@ -14,6 +14,7 @@ import RightIcon from "../../assets/chevron-right.svg"
 import "../../main.css"
 import KButton from "../KButton"
 import KSpan from "../KSpan"
+import { lang } from "../../languages"
 
 export interface KSelectDateProps {
   value: Date | undefined
@@ -37,7 +38,8 @@ export interface KSelectDateProps {
 interface MonthSelectorType {
   monthName: string
   year: string
-  date: Date
+  date: Date,
+  monthIndex: string | number
 }
 interface DaySelectorType {
   dayName: string
@@ -78,7 +80,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   }
 
   const formatMonthYear = (locale: string | undefined, date: Date): string => {
-    const formattedDate = date.toLocaleDateString(locale, { month: "short", year: "numeric" })
+    const formattedDate = date.toLocaleDateString(lang.locale, { month: "short", year: "numeric" })
     const [month, year] = formattedDate.split(" ")
     const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1).toLowerCase()
     return `${capitalizedMonth}, ${year}`
@@ -106,7 +108,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
         return {
           monthName: newDate.toLocaleString("en-US", { month: "long" }),
           year: newDate.getFullYear().toString(),
-          date: newDate
+          date: newDate,
+          monthIndex: newDate.getMonth().toString()
         }
       })
       setNextMonths(updatedMonths)
@@ -124,7 +127,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
         const day = new Date(startOfWeek)
         day.setDate(startOfWeek.getDate() + i)
         return {
-          dayName: day.toLocaleDateString("en-US", { weekday: "short" }),
+          dayName: day.toLocaleDateString(lang.locale, { weekday: "short" }),
           dayOrderInMonth: day.getDate(),
           date: day
         }
@@ -141,7 +144,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           onClickDay={onClickDay}
           {...(onlyMonthSelection && { onClickMonth: onClickMonth })}
           {...(onlyMonthSelection && { maxDetail: "year" })}
-          locale="en-US"
+          locale={lang.locale}
           value={calendarDate || null}
           defaultValue={null}
           next2Label={null}
@@ -154,7 +157,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
         />
         <div className="h-19 w-[350px] bg-[#FFF] flex flex-row gap-4 py-4 justify-center border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]">
           <KButton
-            text="Cancel"
+            text={lang.button_text.cancel}
             height="44px"
             width="160px"
             background="#FFF"
@@ -164,7 +167,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             }}
           />
           <KButton
-            text="Apply"
+            text={lang.button_text.apply}
             height="44px"
             width="160px"
             background="#000"
@@ -179,23 +182,10 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
     )
   }
 
-  const monthSelector = (month: string, year: string, date: Date) => {
-    const monthText: MonthTextType = {
-      January: "Jan",
-      February: "Feb",
-      March: "March",
-      April: "April",
-      May: "May",
-      June: "June",
-      July: "July",
-      August: "August",
-      September: "Sept",
-      October: "Oct",
-      November: "Nov",
-      December: "Dec"
-    }
+  const monthSelector = (month: string, year: string, date: Date, monthIndex:string | number) => {
+    const monthText: MonthTextType = lang.common.months_short
 
-    const text = `${monthText[month]}, ${year}`
+    const text = `${monthText[monthIndex]}, ${year}`
 
     const inMonth = dummyDate ? dummyDate?.getMonth() === date.getMonth() : new Date().getMonth() === date.getMonth()
 
@@ -330,7 +320,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             <div className="flex flex-row justify-between gap-2 items-center">
               <div className="flex flex-row gap-2">
                 {nextMonths.map((month, i) => {
-                  return monthSelector(month.monthName, month.year, month.date)
+                  return monthSelector(month.monthName, month.year, month.date, month.monthIndex)
                 })}
               </div>
               <div>
@@ -356,7 +346,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             </div>
             <div className="flex flex-row justify-between items-center">
               <KButton
-                text="Previous Week"
+                text={lang.button_text.previous_week}
                 padding="6px"
                 leftIcon={LeftIcon}
                 onClick={() => {
@@ -367,7 +357,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
                 background="#FFF"
               />
               <KButton
-                text="Next Week"
+                text={lang.button_text.next_week}
                 padding="6px"
                 rightIcon={RightIcon}
                 onClick={() => {

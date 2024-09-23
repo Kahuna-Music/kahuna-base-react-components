@@ -1,6 +1,6 @@
 {
   "name": "kahuna-base-react-components",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "Kahuna Base React Components",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -65,6 +65,7 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
+    "@rollup/plugin-json": "^6.1.0",
     "react-date-picker": "^11.0.0",
     "react-select": "^5.8.0"
   }

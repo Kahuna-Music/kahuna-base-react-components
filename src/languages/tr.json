@@ -1,0 +1,31 @@
+{
+    "locale": "tr-TR",
+    "common": {
+        "months_short": {
+            "0": "Oca",
+            "1": "Şub",
+            "2": "Mar",
+            "3": "Nis",
+            "4": "May",
+            "5": "Haz",
+            "6": "Tem",
+            "7": "Ağu",
+            "8": "Eyl",
+            "9": "Eki",
+            "10": "Kas",
+            "11": "Ara"
+        },
+        "range": "Tarih Aralığı"
+    },
+    "button_text": {
+        "last_three_months": "Son 3 ay",
+        "last_six_months": "Son 6 ay",
+        "last_twelve_months": "Son 12 ay",
+        "this_year": "Bu yıl",
+        "last_year": "Geçen yıl",
+        "cancel": "Vazgeç",
+        "apply": "Uygula",
+        "next_week": "Sonraki Hafta",
+        "previous_week": "Önceki Hafta"
+    }
+}
