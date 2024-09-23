@@ -10,6 +10,7 @@ import RightIcon from "../../assets/chevron-right.svg"
 import "../../main.css"
 import KButton from "../KButton"
 import KSpan from "../KSpan"
+import { lang } from "../../languages"
 
 export interface KSelectRangeProps {
   value: DateRangeType
@@ -61,8 +62,8 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     const year = date.getFullYear()
     const month = date.getMonth()
 
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    return `${monthNames[Number(month)]} ${year}`
+    const monthNames:{[key:string]: string} = lang.common.months_short
+    return `${monthNames[month.toString()]} ${year}`
   }
 
   const formatShortWeekday = (locale: string | undefined, date: Date): string => {
@@ -143,7 +144,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
 
   const tileContent = ({ date, view }: { date: Date; view: string }) => {
     if (view === "year") {
-      const month = date.toLocaleString("en-US", { month: "long" })
+      const month = date.toLocaleString(lang.locale_name, { month: "long" })
       return (
         <div className="absolute left-0 top-0 h-full w-full flex items-center justify-center tile-content-external-div">
           {Array.isArray(range) &&
@@ -190,7 +191,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             width="140px"
             background={shorthandIndex.current === 0 ? "#F7F7F7" : "#FFF"}
             textColor={shorthandIndex.current === 0 ? "#000" : "#999"}
-            text="Last 3 months"
+            text={lang.button_text.last_three_months}
             borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
@@ -204,7 +205,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             width="140px"
             background={shorthandIndex.current === 1 ? "#F7F7F7" : "#FFF"}
             textColor={shorthandIndex.current === 1 ? "#000" : "#999"}
-            text="Last 6 months"
+            text={lang.button_text.last_six_months}
             borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
@@ -218,7 +219,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             width="140px"
             background={shorthandIndex.current === 2 ? "#F7F7F7" : "#FFF"}
             textColor={shorthandIndex.current === 2 ? "#000" : "#999"}
-            text="Last 12 months"
+            text={lang.button_text.last_twelve_months}
             borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
@@ -232,7 +233,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             width="140px"
             background={shorthandIndex.current === 3 ? "#F7F7F7" : "#FFF"}
             textColor={shorthandIndex.current === 3 ? "#000" : "#999"}
-            text="This year"
+            text={lang.button_text.this_year}
             borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
@@ -246,7 +247,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             width="140px"
             background={shorthandIndex.current === 4 ? "#F7F7F7" : "#FFF"}
             textColor={shorthandIndex.current === 4 ? "#000" : "#999"}
-            text="Last year"
+            text={lang.button_text.last_year}
             borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
@@ -260,7 +261,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               allowPartialRange
               tileClassName={tileClassName}
               tileContent={tileContent}
-              locale="en-US"
+              locale={lang.locale_name}
               value={range}
               activeStartDate={new Date(leftCalendarYear, 0, 1)}
               onChange={(dates) => {}}
@@ -288,7 +289,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               className="kselect-range right-calendar"
               tileClassName={tileClassName}
               tileContent={tileContent}
-              locale="en-US"
+              locale={lang.locale_name}
               value={range}
               activeStartDate={new Date(leftCalendarYear + 1, 0, 1)}
               allowPartialRange
@@ -326,7 +327,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             }}
           >
             <div className="flex items-center gap-1">
-              <KSpan text="Range:" color="#999" />
+              <KSpan text={`${lang.common.range}:`} color="#999" />
               <KSpan
                 text={Array.isArray(range) ? `${convertToMonthYear(range[0])} - ${convertToMonthYear(range[1])}` : ""}
                 color="#000"
@@ -335,7 +336,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
             </div>
             <div className="flex flex-row gap-3">
               <KButton
-                text="Cancel"
+                text={lang.button_text.cancel}
                 height="48px"
                 width="108px"
                 background="#FFF"
@@ -351,7 +352,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                 }}
               />
               <KButton
-                text="Apply"
+                text={lang.button_text.apply}
                 height="48px"
                 width="108px"
                 background="#000"
