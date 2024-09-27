@@ -25,8 +25,11 @@ export interface KSelectRangeProps {
   hoverBackgroundColor?: string
   borderRadius?: number
   anchorToButton?: boolean // opens the calendar relative to the button's position
-  position?: "top" | "bottom" | "left" | "right" // position of the calendar relative to the button's position, has effect as long as anchorButton is true 
+  position?: "top" | "bottom" | "left" | "right" // position of the calendar relative to the button's position, has effect as long as anchorButton is true
   align?: "top" | "bottom" | "left" | "right" | "center" // lets to align the calendar, has effect as long as anchorButton is true
+  minimumDate?: Date
+  maximumDate?: Date
+  popupCalendarBackground?: string
 }
 
 export type DateRangeType = Date | null | [Date | null, Date | null]
@@ -62,7 +65,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     const year = date.getFullYear()
     const month = date.getMonth()
 
-    const monthNames:{[key:string]: string} = lang.common.months_short
+    const monthNames: { [key: string]: string } = lang.common.months_short
     return `${monthNames[month.toString()]} ${year}`
   }
 
@@ -284,6 +287,8 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               selectRange
               maxDetail="year"
               minDetail="year"
+              minDate={props.minimumDate || undefined}
+              maxDate={props.maximumDate || undefined}
             />
             <Calendar
               className="kselect-range right-calendar"
@@ -317,6 +322,8 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               selectRange
               maxDetail="year"
               minDetail="year"
+              minDate={props.minimumDate || undefined}
+              maxDate={props.maximumDate || undefined}
             />
           </div>
           <div
@@ -389,7 +396,10 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   return (
     <React.Fragment>
       {openCalendar && !anchorToButton && (
-        <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50">
+        <div
+          className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50"
+          style={props.popupCalendarBackground ? { background: props.popupCalendarBackground } : {}}
+        >
           <div>{renderPopUpCalendar()}</div>
         </div>
       )}

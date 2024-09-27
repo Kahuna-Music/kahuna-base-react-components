@@ -16,6 +16,9 @@ export interface KSelectRangeProps {
     anchorToButton?: boolean;
     position?: "top" | "bottom" | "left" | "right";
     align?: "top" | "bottom" | "left" | "right" | "center";
+    minimumDate?: Date;
+    maximumDate?: Date;
+    popupCalendarBackground?: string;
 }
 export type DateRangeType = Date | null | [Date | null, Date | null];
 declare const KSelectRange: React.FC<KSelectRangeProps>;

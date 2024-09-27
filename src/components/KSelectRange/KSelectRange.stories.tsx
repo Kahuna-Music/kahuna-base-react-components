@@ -76,5 +76,26 @@ KSelectRangePrimary.args = {
   }
 }
 
+export const KSelectRangeMinimumDate = Template.bind({})
+KSelectRangeMinimumDate.args = {
+  width: "48px",
+  height: "48px",
+  backgroundColor: "#F7F7F7",
+  hoverBackgroundColor: "#F3F3F3",
+  borderRadius: 24,
+  anchorToButton:true,
+  position: "top",
+  align: "center",
+  minimumDate: new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000),
+
+  onChange: (value) => {
+    if (value) {
+      console.log("value is updated using this value:", value)
+    } else {
+      console.log("value is deleted, because it is: ", value)
+    }
+  }
+}
+
 export const KSelectRangeHoverText = Template.bind({})
 KSelectRangeHoverText.args = {}
