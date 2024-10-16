@@ -31,6 +31,7 @@ export interface KDropdownProps {
     menuBackground?: string;
     padding?: string;
     gap?: string;
+    onBlur?: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => void;
     hideChosenOptionIcon?: boolean;
     isClearable?: boolean;
     isEllipsis?: boolean;

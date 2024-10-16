@@ -39,11 +39,12 @@ export interface KDropdownProps {
   menuBackground?: string
   padding?: string
   gap?: string
+  onBlur?: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => void
   hideChosenOptionIcon?: boolean // hides the selected option's icon in the container, not menu
   isClearable?: boolean // makes possible to clear the selected option
   isEllipsis?: boolean // adds ellipsis to the container if label overflows, width should be fixed value
   showOnlyIconsInMulti?: boolean // adds only icons of selected options to the container, not labels
-  menuWidth?: string | number 
+  menuWidth?: string | number
   menuLeftMargin?: number // lets to change menu's position horizontally
   placeholderColor?: string
   enableIndicator?: boolean // if rightIcon is provided, lets it to open-close menu
@@ -216,6 +217,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         placeholder={props.placeholder || ""}
         options={props.options}
         className={"k-dropdown"}
+        onBlur={() => {
+          if (props.onBlur) props.onBlur(selectedOption)
+        }}
         filterOption={customFilterOption}
         isClearable={isClearable}
         hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}

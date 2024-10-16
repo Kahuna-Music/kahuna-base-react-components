@@ -48,6 +48,9 @@ KDropdownSingle.args = {
   allowContainerShrink: true,
   defaultValuePrimitive: 7,
   hideChosenOptionIcon: true,
+  onBlur: (value: any) => {
+    console.log(value)
+  },
   // defaultValue: { label: "Label 1", value: 1, icon: TracksIcon },
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
@@ -62,7 +65,7 @@ KDropdownSingle.args = {
     { label: "EVREN TANIK EVREN TANIK", value: 10 },
     { label: "TANIK", value: 11 },
     { label: "Spotify", value: 12, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo },
-    { label: "All", value: 12, value2: "spo-spotify", icon: SpotifyIcon}
+    { label: "All", value: 12, value2: "spo-spotify", icon: SpotifyIcon }
   ]
 }
 
@@ -74,7 +77,7 @@ const options = [
   { label: "Label 2", value: 4, icon: AppleIcon },
   { label: "Label 2", value: 5, icon: MetaIcon },
   { label: "Spotify", value: 6, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo },
-  { label: "Label 7", value: 7 },
+  { label: "Label 7", value: 7 }
 ]
 KDropdownMulti.args = {
   onSelect: (value: KSelectOption | MultiValue<KSelectOption> | undefined) => {},
@@ -86,7 +89,10 @@ KDropdownMulti.args = {
   placeholderColor: "#000",
   enableIndicator: true,
   showOnlyIconsInMulti: true,
-  rightIcon: CaretDownIcon
+  rightIcon: CaretDownIcon,
+  onBlur: (value: any) => {
+    console.log(value)
+  }
 }
 
 export const KDropdownLeftIcon = Template.bind({})
@@ -103,7 +109,7 @@ KDropdownRightIcon.args = {
   placeholder: "Placeholder...",
   rightIcon: TracksIcon,
   placeholderColor: "#F00",
-  allowContainerShrink: true, 
+  allowContainerShrink: true,
   width: 250,
   menuWidth: 200,
   options: [
@@ -124,6 +130,6 @@ KDropdownLeftRightIcon.args = {
   placeholder: "Placeholder...",
   leftIcon: TracksIcon,
   rightIcon: TracksIcon,
-  enableIndicator:true,
+  enableIndicator: true,
   gap: "15px"
 }
