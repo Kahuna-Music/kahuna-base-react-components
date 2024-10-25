@@ -17,7 +17,7 @@ const Template: StoryFn<typeof KButton> = (args) => <KButton {...args} />;
 export const KButtonText = Template.bind({});
 KButtonText.args = {
   onClick: () => {
-    alert("clicked")
+    //alert("clicked")
   },
   text: "Hello World",
   background: "#F2FE67",
@@ -25,7 +25,8 @@ KButtonText.args = {
   width: "160px",
   height: "44px",
   hoverBackground: "#A2FE67",
-  textDecoration: "underline"
+  textDecoration: "underline",
+  activeBackground: "#F00",
 };
 
 export const KButtonIcon = Template.bind({});

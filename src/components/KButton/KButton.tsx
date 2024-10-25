@@ -20,7 +20,8 @@ export interface KButtonProps {
   fontWeight?: number
   textDecoration?: string
   gap?: string
-}
+  activeBackground?: string
+ }
 
 const KButton: React.FC<KButtonProps> = (props) => {
   const [hover, setHover] = useState(false)
@@ -37,11 +38,13 @@ const KButton: React.FC<KButtonProps> = (props) => {
   const fontWeight = props.fontWeight || 500
   const textDecoration = props.textDecoration || "none"
   const gap = props.gap || "0px"
+  const activeBackground = props.activeBackground || background
+
   return (
     <button
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className={"k-button"}
+      className={`k-button active:!bg-[${activeBackground}]`}
       disabled={disabled}
       onClick={props.onClick}
       style={{ background: hover ? hoverBackground : background, borderRadius, width, height, padding, boxShadow }}
