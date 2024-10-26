@@ -46,7 +46,10 @@ KInputPrimary.args = {
     }
   },
   placeholder: "Placeholder...",
-  hoverBackground: "white"
+  hoverBackground: "white",
+  activeBackground: "black",
+  value: "b"
+
 }
 
 export const KInputLeftIcon = Template.bind({})
