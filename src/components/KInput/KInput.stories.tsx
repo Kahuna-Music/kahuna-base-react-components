@@ -77,10 +77,11 @@ KInputLeftIcon.args = {
   leftIconClick: () => {
     alert("left icon clicked")
   },
+  activeBackground: "red",
+  hoverBackground: "white",
   border: "1px solid black",
-  hoverBorder: "1px solid blue",
-  activeBorder: "1px solid red",
-  hoverBackground: "pink"
+  activeBorder: "1px solid blue",
+  hoverBorder: "1px solid yellow"
 
 }
 
