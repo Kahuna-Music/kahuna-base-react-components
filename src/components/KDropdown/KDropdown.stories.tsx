@@ -66,7 +66,9 @@ KDropdownSingle.args = {
     { label: "TANIK", value: 11 },
     { label: "Spotify", value: 12, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo },
     { label: "All", value: 12, value2: "spo-spotify", icon: SpotifyIcon }
-  ]
+  ],
+  selected: { label: "Label 1", value: 1, icon: TracksIcon }
+
 }
 
 export const KDropdownMulti = Template.bind({})

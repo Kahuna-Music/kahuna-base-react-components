@@ -267,6 +267,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             color: "#111",
             "&:hover": {
               background: "#F7F7F7"
+            },
+            "&:active": {
+              background: "white"
             }
           }),
           valueContainer: (base) => ({
