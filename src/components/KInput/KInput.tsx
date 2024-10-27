@@ -63,7 +63,6 @@ const KInput: React.FC<KInputProps> = (props) => {
   const hoverBackground = props.hoverBackground || background
   const padding = props.padding || "8px"
   const gap = props.gap || "12px"
-  //const border = props.border || "none"
   const fontSize = props.fontSize || "14px"
   const iconSize = props.iconSize || "20px"
   const hoverBorder = props.hoverBorder || border
