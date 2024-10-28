@@ -265,6 +265,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             marginTop: 4,
             borderRadius: 10,
             color: "#111",
+            transition: "all 0.3s",
             "&:hover": {
               background: "#F7F7F7"
             },
