@@ -12,10 +12,10 @@ export default {
 const KTitleSpanWrapper: React.FC<KTitleSpanProps> = (args) => {
 
   return (
-    <div className="w-[150px]">
-    <KTitleSpan
-      {...args}
-    />
+    <div className="min-[1000px]:w-[300px] min-[800px]:w-[200px] min-[700px]:w-[150px]">
+      <div className="w-[100%]">
+        <KTitleSpan {...args} />
+      </div>
     </div>
   )
 }
@@ -32,4 +32,15 @@ KTitleSpanPrimary.args = {
   letterSpacing: "-0.48px",
   bold: false,
   ellipsis: true
+};
+
+export const KTitleSpanSecondary = Template.bind({});
+KTitleSpanSecondary.args = {
+  text: "Hello World",
+  fontSize: 48,
+  color: "#111",
+  lineHeight: "56px",
+  fontStyle: "normal",
+  letterSpacing: "-0.48px",
+  bold: false
 };
