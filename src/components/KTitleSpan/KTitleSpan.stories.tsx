@@ -12,7 +12,7 @@ export default {
 const KTitleSpanWrapper: React.FC<KTitleSpanProps> = (args) => {
 
   return (
-    <div className="min-[1000px]:w-[300px] min-[800px]:w-[200px] min-[700px]:w-[150px]">
+    <div className="min-[1000px]:w-[300px] min-[800px]:w-[200px] min-[700px]:w-[150px] w-[100px]">
       <div className="w-[100%]">
         <KTitleSpan {...args} />
       </div>
@@ -24,7 +24,7 @@ const Template: StoryFn<typeof KTitleSpanWrapper> = (args) => <KTitleSpanWrapper
 
 export const KTitleSpanPrimary = Template.bind({});
 KTitleSpanPrimary.args = {
-  text: "Hello World",
+  text: "Hello  yo?",
   fontSize: 48,
   color: "#111",
   lineHeight: "56px",

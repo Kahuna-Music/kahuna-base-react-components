@@ -3,7 +3,7 @@ import "../../main.css"
 import KTooltip from "../KTooltip"
 import KSpan from "../KSpan"
 
-export interface KTitleSpanProps {
+export interface KEllipsisSpanProps {
   text: string
   fontSize?: number
   color?: string
@@ -11,30 +11,30 @@ export interface KTitleSpanProps {
   lineHeight?: string
   fontStyle?: string
   letterSpacing?: string
-  bold?: boolean
+  textDecoration?: string
   ellipsis?: boolean
 }
 
-const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
-  const fontSize = props.fontSize || 48
-  const color = props.color || "#111111"
-  const lineHeight = props.lineHeight || "56px"
+const KEllipsisSpan: React.FC<KEllipsisSpanProps> = (props) => {
+  const fontSize = props.fontSize || 14
+  const color = props.color || "#737373"
+  const fontWeight = props.fontWeight || 400
+  const lineHeight = props.lineHeight || "20px"
   const fontStyle = props.fontStyle || "normal"
-  const letterSpacing = props.letterSpacing || "-0.48px"
-  const bold = props.bold || false
-  const titleClassName = bold ? "k-title-span-bold" : "k-title-span"
-  const fontWeight = props.fontWeight ? props.fontWeight : bold ? 700 : 500
+  const letterSpacing = props.letterSpacing || "-0.084px"
+  const textDecoration = props.textDecoration || "none"
   const ellipsis = props.ellipsis || false
+
   const ellipsisStyle = { overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }
 
   const [isEllipsis, setIsEllipsis] = useState(false)
-  const textRef = useRef<HTMLSpanElement>(null)
+  const myTextRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     const checkEllipsis = () => {
-      if (textRef.current && ellipsis) {
-        setIsEllipsis(textRef.current.scrollWidth > textRef.current.clientWidth)
-        console.log("myRef:", textRef)
+      if (myTextRef.current && ellipsis) {
+        setIsEllipsis(myTextRef.current.scrollWidth > myTextRef.current.clientWidth)
+        console.log("myTextRef:", myTextRef)
       }
     }
 
@@ -45,6 +45,10 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
       window.removeEventListener("resize", checkEllipsis)
     }
   }, [props.text, ellipsis])
+
+  useEffect(() => {
+    console.log("isEllipsis:", isEllipsis)
+  }, [isEllipsis])
 
   return (
     <React.Fragment>
@@ -58,8 +62,8 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
           }
         >
           <span
-            ref={textRef}
-            className={`ff ${titleClassName} ${ellipsis ? "block" : "flex items-center"}`}
+            ref={myTextRef}
+            className={`ellipsis-in ${ellipsis ? "block" : "flex items-center"}`}
             style={{
               fontSize,
               color,
@@ -67,6 +71,7 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
               lineHeight,
               fontStyle,
               letterSpacing,
+              textDecoration,
               ...(ellipsis && ellipsisStyle)
             }}
           >
@@ -75,9 +80,18 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
         </KTooltip>
       ) : (
         <span
-          ref={textRef}
-          className={`${titleClassName} ${ellipsis ? "block" : "flex items-center"}`}
-          style={{ fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing, ...(ellipsis && ellipsisStyle) }}
+          ref={myTextRef}
+          className={`out`}
+          style={{
+            fontSize,
+            color,
+            fontWeight,
+            lineHeight,
+            fontStyle,
+            letterSpacing,
+            textDecoration,
+            ...(ellipsis && ellipsisStyle)
+          }}
         >
           {props.text}
         </span>
@@ -86,4 +100,4 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
   )
 }
 
-export default KTitleSpan
+export default KEllipsisSpan

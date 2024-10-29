@@ -39,6 +39,11 @@
     display: inline;
 }
 
+.k-ellipsis-span {
+    font-feature-settings: 'ss11' on, 'cv09' on, 'liga' off, 'calt' off;
+    font-family: "Inter";
+}
+
 .k-input-container {
     display: flex;
     align-items: center;
