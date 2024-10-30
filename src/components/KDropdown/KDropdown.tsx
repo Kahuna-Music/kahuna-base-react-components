@@ -49,19 +49,29 @@ export interface KDropdownProps {
   placeholderColor?: string
   enableIndicator?: boolean // if rightIcon is provided, lets it to open-close menu
   allowContainerShrink?: boolean // allows container to shrink if label is smaller than width, width should be fixed value
+  border?: string
+  activeBorder?: string
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
   const [selectedOption, setSelectedOption] = useState<KSelectOption | MultiValue<KSelectOption>>()
   const [iconCount, setIconCount] = useState<number>(0)
   const [background, setBackground] = useState("#F5F5F5")
+  const [border, setBorder] = useState("none")
 
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
     const activeBackground = props.activeBackground || "#FFF"
 
+    const emptyBorder = props.border || "none"
+    const activeBorder = props.activeBorder || emptyBorder
+
     const background = props.selected ? activeBackground : emptyBackground
+    const border = props.selected ? activeBorder : emptyBorder
+
     setBackground(background)
+    setBorder(border)
+  
   }, [props.selected])
 
   const width = props.width || "100%"
@@ -205,7 +215,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         height,
         boxShadow,
         padding,
-        gap
+        gap,
+        border
       }}
     >
       {props.leftIcon && <img src={props.leftIcon} width={20} alt={"l-icon"} />}

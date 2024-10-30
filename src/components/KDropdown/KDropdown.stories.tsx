@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react"
-import KDropdown, { KSelectOption } from "./KDropdown"
+import KDropdown, { KDropdownProps, KSelectOption } from "./KDropdown"
 // @ts-ignore
 import TracksIcon from "../../assets/tracks.svg"
 // @ts-ignore
@@ -20,6 +20,7 @@ import SpotifyLogo from "../../assets/platforms/SpotifyLogo.png"
 import SpotifyIcon from "../../assets/platforms/SpotifyIcon.png"
 
 import { MultiValue } from "react-select"
+import { useState } from "react"
 
 export default {
   title: "ReactComponentLibrary/KDropdown",
@@ -29,7 +30,40 @@ export default {
   }
 } as Meta<typeof KDropdown>
 
-const Template: StoryFn<typeof KDropdown> = (args) => <KDropdown {...args} />
+const KDropdownWrapper: React.FC<KDropdownProps> = (args) => {
+  const [selectedOption, setSelectedOption] = useState<KSelectOption | undefined>(undefined)
+
+  const options = [
+    { label: "Label 1", value: 1, icon: TracksIcon },
+    { label: "Label 4", value: 2, icon: TracksIcon },
+    { label: "Label 3", value: 3 },
+    { label: "Label 2", value: 4 },
+    { label: "R&B", value: 5 },
+    { label: "Çınar", value: 6 },
+    { label: "ELEKTRONIC ", value: 7 },
+    { label: "TANIK", value: 8 },
+    { label: "Very very very very very long content.", value: 9 },
+    { label: "EVREN TANIK EVREN TANIK", value: 10 },
+    { label: "TANIK", value: 11 },
+    { label: "Spotify", value: 12, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo },
+    { label: "All", value: 12, value2: "spo-spotify", icon: SpotifyIcon }
+  ]
+
+  return (
+    <div className="w-24">
+      <KDropdown
+        {...args}
+        options={options}
+        onSelect={(selected: KSelectOption | MultiValue<KSelectOption> | undefined) => {
+          setSelectedOption(selected as KSelectOption)
+        }}
+        selected={selectedOption}
+      />
+    </div>
+  )
+}
+
+const Template: StoryFn<typeof KDropdownWrapper> = (args) => <KDropdownWrapper {...args} />
 
 export const KDropdownSingle = Template.bind({})
 KDropdownSingle.args = {
@@ -46,12 +80,10 @@ KDropdownSingle.args = {
   isClearable: true,
   isEllipsis: true,
   allowContainerShrink: true,
-  defaultValuePrimitive: 7,
   hideChosenOptionIcon: true,
   onBlur: (value: any) => {
     console.log(value)
   },
-  // defaultValue: { label: "Label 1", value: 1, icon: TracksIcon },
   options: [
     { label: "Label 1", value: 1, icon: TracksIcon },
     { label: "Label 4", value: 2, icon: TracksIcon },
@@ -66,9 +98,8 @@ KDropdownSingle.args = {
     { label: "TANIK", value: 11 },
     { label: "Spotify", value: 12, value2: "spo-spotify", icon: SpotifyIcon, iconLabel: SpotifyLogo },
     { label: "All", value: 12, value2: "spo-spotify", icon: SpotifyIcon }
-  ],
-  selected: { label: "Label 1", value: 1, icon: TracksIcon }
-
+  ]
+  //selected: { label: "Label 1", value: 1, icon: TracksIcon }
 }
 
 export const KDropdownMulti = Template.bind({})
