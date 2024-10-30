@@ -34,16 +34,3 @@ KSpanPrimary.args = {
   textDecoration: "underline",
   ellipsis: true
 }
-
-
-export const KSpanHoverText = Template.bind({})
-KSpanHoverText.args = {
-  text: "Hello World",
-  fontSize: 14,
-  fontWeight: 400,
-  lineHeight: "20px",
-  color: "#111",
-  fontStyle: "normal",
-  letterSpacing: "-0.084px",
-  hoverText: "Hover"
-}

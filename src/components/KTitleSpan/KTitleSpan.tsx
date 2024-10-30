@@ -34,7 +34,6 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
     const checkEllipsis = () => {
       if (textRef.current && ellipsis) {
         setIsEllipsis(textRef.current.scrollWidth > textRef.current.clientWidth)
-        console.log("myRef:", textRef)
       }
     }
 
@@ -59,7 +58,7 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
         >
           <span
             ref={textRef}
-            className={`ff ${titleClassName} ${ellipsis ? "block" : "flex items-center"}`}
+            className={`${titleClassName} ${ellipsis ? "block" : "flex items-center"}`}
             style={{
               fontSize,
               color,

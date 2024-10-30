@@ -1,4 +1,4 @@
-import React, { CSSProperties, KeyboardEvent } from 'react';
+import React, { KeyboardEvent } from 'react';
 import { MultiValue } from 'react-select';
 
 interface KButtonProps {
@@ -19,6 +19,10 @@ interface KButtonProps {
     fontWeight?: number;
     textDecoration?: string;
     gap?: string;
+    activeBackground?: string;
+    border?: string;
+    hoverBorder?: string;
+    activeBorder?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 
@@ -30,9 +34,6 @@ interface KSpanProps {
     lineHeight?: string;
     fontStyle?: string;
     letterSpacing?: string;
-    hoverText?: string;
-    hoverTextColor?: string;
-    hoverStyle?: CSSProperties;
     textDecoration?: string;
     ellipsis?: boolean;
 }
@@ -47,6 +48,7 @@ interface KTitleSpanProps {
     fontStyle?: string;
     letterSpacing?: string;
     bold?: boolean;
+    ellipsis?: boolean;
 }
 declare const KTitleSpan: React.FC<KTitleSpanProps>;
 
@@ -93,6 +95,8 @@ interface KInputProps {
     fontSize?: string;
     iconSize?: string;
     checked?: boolean;
+    hoverBorder?: string;
+    activeBorder?: string;
 }
 declare const KInput$1: React.FC<KInputProps>;
 

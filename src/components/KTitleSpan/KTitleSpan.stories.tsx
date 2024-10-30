@@ -24,7 +24,7 @@ const Template: StoryFn<typeof KTitleSpanWrapper> = (args) => <KTitleSpanWrapper
 
 export const KTitleSpanPrimary = Template.bind({});
 KTitleSpanPrimary.args = {
-  text: "Hello  yo?",
+  text: "Hello how?",
   fontSize: 48,
   color: "#111",
   lineHeight: "56px",
