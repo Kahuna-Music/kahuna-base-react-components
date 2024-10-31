@@ -24,11 +24,10 @@ KButtonText.args = {
   borderRadius: 10,
   width: "160px",
   height: "44px",
-  hoverBackground: "#A2FE67",
+  hoverBackground: "yellow",
   textDecoration: "underline",
-  activeBackground: "#F00",
-  border: "1px solid black",
-  hoverBorder: "1px solid red",
+  activeBackground: "yellow",
+  hoverBorder: "1px solid yellow",
   activeBorder: "1px solid transparent",
 };
 
