@@ -35,7 +35,7 @@ KTextAreaPrimary.args = {
   leftIcon: TracksIcon,
   activeBackground: "#FFF",
   maxHeight: 200,
-  clearTextOnPressedEnter: true
+  clearTextOnPressedEnter: true,
 }
 
 export const KTextAreaLeftIcon = Template.bind({})
