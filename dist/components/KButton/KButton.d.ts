@@ -18,6 +18,10 @@ export interface KButtonProps {
     fontWeight?: number;
     textDecoration?: string;
     gap?: string;
+    activeBackground?: string;
+    border?: string;
+    hoverBorder?: string;
+    activeBorder?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 export default KButton;

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react"
 import "../../main.css"
+import KTooltip from "../KTooltip"
+import KSpan from "../KSpan"
 
 export interface KTitleSpanProps {
   text: string
@@ -8,8 +10,9 @@ export interface KTitleSpanProps {
   fontWeight?: number
   lineHeight?: string
   fontStyle?: string
-  letterSpacing?: string,
+  letterSpacing?: string
   bold?: boolean
+  ellipsis?: boolean
 }
 
 const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
@@ -20,14 +23,66 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
   const letterSpacing = props.letterSpacing || "-0.48px"
   const bold = props.bold || false
   const titleClassName = bold ? "k-title-span-bold" : "k-title-span"
-  const fontWeight = props.fontWeight ? props.fontWeight : (bold ? 700 : 500)
+  const fontWeight = props.fontWeight ? props.fontWeight : bold ? 700 : 500
+  const ellipsis = props.ellipsis || false
+  const ellipsisStyle = { overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }
 
-  
+  const [isEllipsis, setIsEllipsis] = useState(false)
+  const textRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    const checkEllipsis = () => {
+      if (textRef.current && ellipsis) {
+        setIsEllipsis(textRef.current.scrollWidth > textRef.current.clientWidth)
+      }
+    }
+
+    checkEllipsis()
+    window.addEventListener("resize", checkEllipsis)
+
+    return () => {
+      window.removeEventListener("resize", checkEllipsis)
+    }
+  }, [props.text, ellipsis])
+
   return (
-    <span className={`${titleClassName} flex items-center`} style={{fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing}}>
-      {props.text}
-    </span>
-  );
-};
+    <React.Fragment>
+      {isEllipsis ? (
+        <KTooltip
+          padding="2px 4px"
+          content={
+            <div className="w-max">
+              <KSpan text={props.text} color="#111" />
+            </div>
+          }
+        >
+          <span
+            ref={textRef}
+            className={`${titleClassName} ${ellipsis ? "block" : "flex items-center"}`}
+            style={{
+              fontSize,
+              color,
+              fontWeight,
+              lineHeight,
+              fontStyle,
+              letterSpacing,
+              ...(ellipsis && ellipsisStyle)
+            }}
+          >
+            {props.text}
+          </span>
+        </KTooltip>
+      ) : (
+        <span
+          ref={textRef}
+          className={`${titleClassName} ${ellipsis ? "block" : "flex items-center"}`}
+          style={{ fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing, ...(ellipsis && ellipsisStyle) }}
+        >
+          {props.text}
+        </span>
+      )}
+    </React.Fragment>
+  )
+}
 
-export default KTitleSpan;
+export default KTitleSpan

@@ -41,6 +41,8 @@ export interface KDropdownProps {
     placeholderColor?: string;
     enableIndicator?: boolean;
     allowContainerShrink?: boolean;
+    border?: string;
+    activeBorder?: string;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 export default KDropdown;

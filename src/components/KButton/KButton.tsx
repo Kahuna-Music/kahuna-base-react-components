@@ -20,10 +20,15 @@ export interface KButtonProps {
   fontWeight?: number
   textDecoration?: string
   gap?: string
+  activeBackground?: string
+  border?: string
+  hoverBorder?: string 
+  activeBorder?: string 
 }
 
 const KButton: React.FC<KButtonProps> = (props) => {
   const [hover, setHover] = useState(false)
+  const [active, setActive] = useState(false)
 
   const disabled = props.disabled || false
   const background = disabled ? "#F0F0F0" : props.background || "#F2FE67"
@@ -37,16 +42,31 @@ const KButton: React.FC<KButtonProps> = (props) => {
   const fontWeight = props.fontWeight || 500
   const textDecoration = props.textDecoration || "none"
   const gap = props.gap || "0px"
+  const activeBackground = props.activeBackground || background
+  const border = props.border || "none"
+  const hoverBorder = props.hoverBorder || border
+  const activeBorder = props.activeBorder || border
+
   return (
     <button
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className={"k-button"}
+      onMouseDown={() => setActive(true)}
+      onMouseUp={() => setActive(false)}
+      className={`k-button`}
       disabled={disabled}
       onClick={props.onClick}
-      style={{ background: hover ? hoverBackground : background, borderRadius, width, height, padding, boxShadow }}
+      style={{
+        background: active ? activeBackground : hover ? hoverBackground : background,
+        border: active ? activeBorder : hover ? hoverBorder : border,
+        borderRadius,
+        width,
+        height,
+        padding,
+        boxShadow
+      }}
     >
-      <div className={"flex items-center"} style={{gap}}>
+      <div className={"flex items-center"} style={{ gap }}>
         {props.leftIcon && <img src={props.leftIcon} alt={"button-left-icon"} />}
         {props.text && (
           <KSpan text={props.text} color={textColor} fontWeight={fontWeight} textDecoration={textDecoration} />

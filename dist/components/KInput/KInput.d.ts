@@ -27,6 +27,8 @@ export interface KInputProps {
     fontSize?: string;
     iconSize?: string;
     checked?: boolean;
+    hoverBorder?: string;
+    activeBorder?: string;
 }
 declare const KInput: React.FC<KInputProps>;
 export default KInput;

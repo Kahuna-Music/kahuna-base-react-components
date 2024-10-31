@@ -1,8 +1,8 @@
 import { Meta, StoryFn } from "@storybook/react"
-import KInput from "./KInput"
+import KInput, { KInputProps } from "./KInput"
 // @ts-ignore
 import TracksIcon from "../../assets/tracks.svg"
-import { KeyboardEvent } from "react"
+import { KeyboardEvent, useState } from "react"
 
 export default {
   title: "ReactComponentLibrary/KInput",
@@ -12,7 +12,41 @@ export default {
   }
 } as Meta<typeof KInput>
 
-const Template: StoryFn<typeof KInput> = (args) => <KInput {...args} />
+
+const KInputWrapper: React.FC<KInputProps> = (args) => {
+
+ const [textValue, setTextValue] = useState<string>("")
+
+  return (
+    <KInput
+      {...args}
+      value={textValue}
+      onChange={(text) => {
+        setTextValue(text)
+
+      }}
+    />
+  )
+}
+
+const Template: StoryFn<typeof KInputWrapper> = (args) => <KInputWrapper {...args} />
+
+export const KInputPrimary = Template.bind({})
+KInputPrimary.args = {
+
+  onKeyDown: (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      console.log("Enter is clicked and our value is:", event.currentTarget)
+    }
+  },
+  placeholder: "Placeholder...",
+  hoverBackground: "white",
+  activeBackground: "red",
+  border: "1px solid black",
+  hoverBorder: "1px solid red",
+  activeBorder: "1px solid transparent",
+}
+
 
 export const KInputRange = Template.bind({})
 KInputRange.args = {
@@ -35,20 +69,6 @@ KInputCheckbox.args = {
   checked: false
 }
 
-export const KInputPrimary = Template.bind({})
-KInputPrimary.args = {
-  onChange: (value: string) => {
-    console.log("value:", value)
-  },
-  onKeyDown: (event: KeyboardEvent) => {
-    if (event.key === "Enter") {
-      console.log("Enter is clicked and our value is:", event.currentTarget)
-    }
-  },
-  placeholder: "Placeholder...",
-  hoverBackground: "white"
-}
-
 export const KInputLeftIcon = Template.bind({})
 KInputLeftIcon.args = {
   onChange: (value: string) => {},
@@ -56,7 +76,13 @@ KInputLeftIcon.args = {
   leftIcon: TracksIcon,
   leftIconClick: () => {
     alert("left icon clicked")
-  }
+  },
+  activeBackground: "red",
+  hoverBackground: "white",
+  border: "1px solid black",
+  activeBorder: "1px solid blue",
+  hoverBorder: "1px solid yellow"
+
 }
 
 export const KInputRightIcon = Template.bind({})

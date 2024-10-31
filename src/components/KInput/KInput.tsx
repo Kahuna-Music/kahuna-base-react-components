@@ -28,18 +28,25 @@ export interface KInputProps {
   fontSize?: string
   iconSize?: string
   checked?: boolean
+  hoverBorder?: string
+  activeBorder?: string
 }
 
 const KInput: React.FC<KInputProps> = (props) => {
   const [background, setBackground] = useState("#F5F5F5")
+  const [border, setBorder] = useState("none")
   const [hover, setHover] = useState(false)
 
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
     const activeBackground = props.activeBackground || "#FFF"
+    const emptyBorder = props.border || "none"
+    const activeBorder = props.activeBorder || emptyBorder
 
     const background = props.value ? activeBackground : emptyBackground
+    const border = props.value ? activeBorder : emptyBorder
     setBackground(background)
+    setBorder(border)
   }, [props.value])
 
   const width = props.width || "100%"
@@ -56,16 +63,23 @@ const KInput: React.FC<KInputProps> = (props) => {
   const hoverBackground = props.hoverBackground || background
   const padding = props.padding || "8px"
   const gap = props.gap || "12px"
-  const border = props.border || "none"
   const fontSize = props.fontSize || "14px"
   const iconSize = props.iconSize || "20px"
+  const hoverBorder = props.hoverBorder || border
 
   return (
     <div
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className={"k-input-container"}
-      style={{ background: hover ? hoverBackground : background, borderRadius, boxShadow, padding, gap, border }}
+      style={{
+        background: hover ? hoverBackground : background,
+        borderRadius,
+        boxShadow,
+        padding,
+        gap,
+        border: hover ? hoverBorder : border
+      }}
     >
       {props.leftIcon && (
         <img
