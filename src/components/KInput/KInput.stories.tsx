@@ -40,10 +40,8 @@ KInputPrimary.args = {
     }
   },
   placeholder: "Placeholder...",
-  hoverBackground: "white",
-  activeBackground: "red",
-  border: "1px solid black",
-  hoverBorder: "1px solid red",
+  activeBackground: "yellow",
+  hoverBorder: "1px solid yellow",
   activeBorder: "1px solid transparent",
 }
 
