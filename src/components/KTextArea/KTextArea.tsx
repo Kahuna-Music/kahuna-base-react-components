@@ -68,19 +68,13 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
   const maxHeight = props.maxHeight || 200
   const clearTextOnPressedEnter = props.clearTextOnPressedEnter || false
 
-  const handleInput = () => {
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (textAreaRef.current) {
       const textarea = textAreaRef.current
       textarea.style.height = "auto"
       textarea.style.height = `${textarea.scrollHeight}px` // Set the height to scrollHeight
     }
   }
-
-  useEffect(() => {
-    if (autoResize) {
-      handleInput()
-    }
-  }, [])
 
   return (
     <div
@@ -127,7 +121,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
         }}
         onChange={(event) => {
           if (autoResize) {
-            handleInput()
+            handleInput(event)
           }
 
           props.onChange(event.target.value)
