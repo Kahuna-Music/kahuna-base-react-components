@@ -42,7 +42,7 @@ KInputPrimary.args = {
   placeholder: "Placeholder...",
   activeBackground: "yellow",
   hoverBorder: "1px solid yellow",
-  activeBorder: "1px solid transparent",
+  activeBorder: "1px solid red",
 }
 
 
