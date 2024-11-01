@@ -26,9 +26,9 @@ KButtonText.args = {
   height: "44px",
   hoverBackground: "yellow",
   textDecoration: "underline",
-  activeBackground: "yellow",
-  hoverBorder: "1px solid yellow",
-  activeBorder: "1px solid transparent",
+  activeBackground: "black",
+  hoverBorder: "1px solid blue",
+  activeBorder: "1px solid red",
 };
 
 export const KButtonIcon = Template.bind({});
