@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import "../../main.css";
 export interface KSpanProps {
     text: string;
@@ -8,6 +8,7 @@ export interface KSpanProps {
     lineHeight?: string;
     fontStyle?: string;
     letterSpacing?: string;
+    hoverStyle?: CSSProperties;
     textDecoration?: string;
     ellipsis?: boolean;
 }
