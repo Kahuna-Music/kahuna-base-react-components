@@ -24,13 +24,20 @@ const Template: StoryFn<typeof KSpanWrapper> = (args) => <KSpanWrapper {...args}
 
 export const KSpanPrimary = Template.bind({})
 KSpanPrimary.args = {
-  text: "Hello World, how are you? Is everything alright?",
+  text: "Login",
   fontSize: 14,
-  color: "#737373",
+  color: "#1F1F1F",
   fontWeight: 400,
   lineHeight: "20px",
   fontStyle: "normal",
   letterSpacing: "-0.084px",
-  textDecoration: "underline",
-  ellipsis: true
+  textDecoration: "none",
+  ellipsis: true,
+  hoverStyle: {
+    textDecoration: "underline",
+    cursor: "pointer",
+    fontWeight: "500",
+    transitionDuration: "0.5s",
+    transitionTimingFunction: "linear"
+  }
 }
