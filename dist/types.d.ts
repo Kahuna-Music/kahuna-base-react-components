@@ -1,4 +1,4 @@
-import React, { KeyboardEvent } from 'react';
+import React, { CSSProperties, KeyboardEvent } from 'react';
 import { MultiValue } from 'react-select';
 
 interface KButtonProps {
@@ -34,6 +34,7 @@ interface KSpanProps {
     lineHeight?: string;
     fontStyle?: string;
     letterSpacing?: string;
+    hoverStyle?: CSSProperties;
     textDecoration?: string;
     ellipsis?: boolean;
 }
