@@ -3,6 +3,7 @@ import KSelectDate, { KSelectDateProps } from "./KSelectDate"
 import { useEffect, useState } from "react"
 //@ts-ignore
 import CalendarNewIcon from "../../assets/calendar-new.svg"
+import KSpan from "../KSpan"
 
 export default {
   title: "ReactComponentLibrary/KSelectDate",
@@ -13,28 +14,37 @@ export default {
 } as Meta<typeof KSelectDate>
 
 const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
-
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
   useEffect(() => {
     // console.log("selectedDate: ", selectedDate)
   }, [selectedDate])
 
   return (
-    <KSelectDate
-      {...args}
-      value={selectedDate}
-      onChange={(date) => {
-        // console.log("date: ", date)
-        if (date) {
-          setSelectedDate(date)
-           console.log("updating is completed: ", date)
-          // console.log("updating is completed date.toISOString(): ", date?.toISOString())
-        } else {
-          setSelectedDate(undefined)
-          // console.log("Deleting is completed")
-        }
-      }}
-    />
+    <div className=" flex flex-row gap-4 items-center">
+      <div className="flex flex-row items-center justify-center w-auto h-40 z-10">
+        <KSpan text="Burada metin va dkkpork okoekrpo koprkefokporekfpr fe ref rfre fref er " />
+      </div>
+      <div className="flex flex-col">
+        <div className="relative">
+          <KSelectDate
+            {...args}
+            value={selectedDate}
+            onChange={(date) => {
+              // console.log("date: ", date)
+              if (date) {
+                setSelectedDate(date)
+                console.log("updating is completed: ", date)
+                // console.log("updating is completed date.toISOString(): ", date?.toISOString())
+              } else {
+                setSelectedDate(undefined)
+                // console.log("Deleting is completed")
+              }
+            }}
+            anchorToButton
+          />
+        </div>
+      </div>
+    </div>
   )
 }
 

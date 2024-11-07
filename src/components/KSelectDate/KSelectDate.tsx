@@ -38,7 +38,7 @@ export interface KSelectDateProps {
 interface MonthSelectorType {
   monthName: string
   year: string
-  date: Date,
+  date: Date
   monthIndex: string | number
 }
 interface DaySelectorType {
@@ -182,7 +182,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
     )
   }
 
-  const monthSelector = (month: string, year: string, date: Date, monthIndex:string | number) => {
+  const monthSelector = (month: string, year: string, date: Date, monthIndex: string | number) => {
     const monthText: MonthTextType = lang.common.months_short
 
     const text = `${monthText[monthIndex]}, ${year}`
@@ -309,6 +309,9 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
 
   return (
     <React.Fragment>
+      {openCalendar && (
+        <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center bg-[#0000004d]"></div>
+      )}
       {openCalendar && (!hideBody || !anchorToButton) && (
         <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50">
           <div>{renderPopUpCalendar()}</div>
