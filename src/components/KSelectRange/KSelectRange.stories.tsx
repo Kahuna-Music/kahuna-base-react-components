@@ -50,7 +50,25 @@ const KSelectRangeWrapper: React.FC<KSelectRangeProps> = (args) => {
           // console.log("Deleting is completed")
         }
       }}
-    /></div>
+    />
+        <div className="relative z-10">
+        <KSelectRange
+      {...args}
+      value={selectedDate}
+      onChange={(date: DateRangeType) => {
+        // console.log("date: ", date)
+        if (date) {
+          setSelectedDate(date)
+          console.log("updating is completed: ", date)
+          // console.log("updating is completed date.toISOString(): ", date?.toISOString())
+        } else {
+          setSelectedDate(null)
+          // console.log("Deleting is completed")
+        }
+      }}
+    />
+        </div>
+    </div>
   )
 }
 
@@ -63,10 +81,9 @@ KSelectRangePrimary.args = {
   backgroundColor: "#F7F7F7",
   hoverBackgroundColor: "#F3F3F3",
   borderRadius: 24,
-  anchorToButton:true,
   position: "top",
   align: "center",
-
+  anchorToButton: true,
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)

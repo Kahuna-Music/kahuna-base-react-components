@@ -30,6 +30,7 @@ export interface KSelectRangeProps {
   minimumDate?: Date
   maximumDate?: Date
   popupCalendarBackground?: string
+  hideBackdrop?: boolean
 }
 
 export type DateRangeType = Date | null | [Date | null, Date | null]
@@ -47,6 +48,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
   const anchorToButton = props.anchorToButton || false
   const position = props.position || "bottom"
   const align = props.align || "center"
+  const hideBackdrop = props.hideBackdrop || false
 
   const [value, setValue] = useState<DateRangeType>(props.value)
   const [range, setRange] = useState<DateRangeType>(props.value)
@@ -395,6 +397,9 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
 
   return (
     <React.Fragment>
+      {openCalendar && !hideBackdrop && (
+        <div className="w-[100vw] h-[100vh] fixed left-0 top-0 z-[49] bg-[#0000004d]"/>
+      )}
       {openCalendar && !anchorToButton && (
         <div
           className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50"
@@ -405,7 +410,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
       )}
       <div className="flex relative">
         {openCalendar && anchorToButton && (
-          <div className={`absolute  ${absolutePositionClassName(position, align)}`}>
+          <div className={`absolute ${absolutePositionClassName(position, align)} z-[51]`}>
             <div>{renderPopUpCalendar()}</div>
           </div>
         )}

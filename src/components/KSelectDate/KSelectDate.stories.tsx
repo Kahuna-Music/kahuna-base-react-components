@@ -24,8 +24,7 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
       <div className="flex flex-row items-center justify-center w-auto h-40 z-10">
         <KSpan text="Burada metin va dkkpork okoekrpo koprkefokporekfpr fe ref rfre fref er " />
       </div>
-      <div className="flex flex-col">
-        <div className="relative">
+      <div className="flex flex-col relative">
           <KSelectDate
             {...args}
             value={selectedDate}
@@ -42,8 +41,24 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
             }}
             anchorToButton
           />
-        </div>
+          <KSelectDate
+            {...args}
+            value={selectedDate}
+            onChange={(date) => {
+              // console.log("date: ", date)
+              if (date) {
+                setSelectedDate(date)
+                console.log("updating is completed: ", date)
+                // console.log("updating is completed date.toISOString(): ", date?.toISOString())
+              } else {
+                setSelectedDate(undefined)
+                // console.log("Deleting is completed")
+              }
+            }}
+            anchorToButton
+          />
       </div>
+      <div></div>
     </div>
   )
 }
