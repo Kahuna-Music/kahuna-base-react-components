@@ -22,7 +22,7 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
   return (
     <div className=" flex flex-row gap-4 items-center">
       <div className="flex flex-row items-center justify-center w-auto h-40 z-10">
-        <KSpan text="Burada metin va dkkpork okoekrpo koprkefokporekfpr fe ref rfre fref er " />
+        <KSpan text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
       </div>
       <div className="flex flex-col relative">
           <KSelectDate
