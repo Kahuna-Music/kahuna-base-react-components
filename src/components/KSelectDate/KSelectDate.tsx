@@ -34,11 +34,12 @@ export interface KSelectDateProps {
   anchorToButton?: boolean // opens the calendar relative to the button's position, does not have any effect if body is not hidden.
   position?: "top" | "bottom" | "left" | "right" // position of the calendar relative to the button's position, has effect as long as anchorButton is true
   align?: "top" | "bottom" | "left" | "right" | "center" // lets to align the calendar, has effect as long as anchorButton is true
+  hideBackdrop?: boolean
 }
 interface MonthSelectorType {
   monthName: string
   year: string
-  date: Date,
+  date: Date
   monthIndex: string | number
 }
 interface DaySelectorType {
@@ -74,6 +75,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const anchorToButton = props.anchorToButton || false
   const position = props.position || "bottom"
   const align = props.align || "center"
+
+  const hideBackdrop = props.hideBackdrop || false
 
   const formatShortWeekday = (locale: string | undefined, date: Date): string => {
     return date.toLocaleDateString(locale, { weekday: "short" }).charAt(0) // Return only the first letter of the weekday
@@ -182,7 +185,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
     )
   }
 
-  const monthSelector = (month: string, year: string, date: Date, monthIndex:string | number) => {
+  const monthSelector = (month: string, year: string, date: Date, monthIndex: string | number) => {
     const monthText: MonthTextType = lang.common.months_short
 
     const text = `${monthText[monthIndex]}, ${year}`
@@ -309,6 +312,9 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
 
   return (
     <React.Fragment>
+      {openCalendar && !hideBackdrop && (
+        <div className="w-[100vw] h-[100vh] fixed left-0 top-0 z-[49] bg-[#0000004d]"/>
+      )}
       {openCalendar && (!hideBody || !anchorToButton) && (
         <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50">
           <div>{renderPopUpCalendar()}</div>
@@ -373,7 +379,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
       ) : (
         <div className="flex relative">
           {openCalendar && anchorToButton && (
-            <div className={`absolute ${absolutePositionClassName(position, align)}`}>
+            <div className={`absolute ${absolutePositionClassName(position, align)} z-[51]`}>
               <div>{renderPopUpCalendar()}</div>
             </div>
           )}

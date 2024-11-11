@@ -19,6 +19,7 @@ export interface KSelectDateProps {
     anchorToButton?: boolean;
     position?: "top" | "bottom" | "left" | "right";
     align?: "top" | "bottom" | "left" | "right" | "center";
+    hideBackdrop?: boolean;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 export default KSelectDate;
