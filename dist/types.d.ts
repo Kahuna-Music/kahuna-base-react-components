@@ -209,6 +209,7 @@ interface KSelectDateProps {
     anchorToButton?: boolean;
     position?: "top" | "bottom" | "left" | "right";
     align?: "top" | "bottom" | "left" | "right" | "center";
+    hideBackdrop?: boolean;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 
@@ -298,6 +299,7 @@ interface KSelectRangeProps {
     minimumDate?: Date;
     maximumDate?: Date;
     popupCalendarBackground?: string;
+    hideBackdrop?: boolean;
 }
 type DateRangeType = Date | null | [Date | null, Date | null];
 declare const KSelectRange: React.FC<KSelectRangeProps>;
