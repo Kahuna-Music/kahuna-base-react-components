@@ -61,6 +61,8 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
     approved: -1
   })
 
+  const [openBackdrop, setOpenBackdrop] = useState<boolean>(false)
+
   const convertToMonthYear = (date: Date | null): string => {
     if (!date) return "?"
 
@@ -353,6 +355,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                 onClick={() => {
                   setRange(value)
                   setOpenCalendar(false)
+                  setOpenBackdrop(false)
                   const approvedIndex = shorthandIndex.approved
                   setShorthandIndex({ ...shorthandIndex, current: approvedIndex })
                   if (Array.isArray(value) && value[0] !== null) {
@@ -370,6 +373,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
                 onClick={() => {
                   setValue(range)
                   setOpenCalendar(false)
+                  setOpenBackdrop(false)
                   const currentIndex = shorthandIndex.current
                   setShorthandIndex({ ...shorthandIndex, approved: currentIndex })
                   if (Array.isArray(range) && range[0] !== null) {
@@ -397,7 +401,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
 
   return (
     <React.Fragment>
-      {openCalendar && !hideBackdrop && (
+      {openBackdrop && !hideBackdrop && (
         <div className="w-[100vw] h-[100vh] fixed left-0 top-0 z-[49] bg-[#0000004d]"/>
       )}
       {openCalendar && !anchorToButton && (
@@ -427,9 +431,11 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               onClick={() => {
                 if (!openCalendar) {
                   setOpenCalendar(true)
+                  setOpenBackdrop(true)
                 } else {
                   setRange(value)
                   setOpenCalendar(false)
+                  setOpenBackdrop(false)
                   const approvedIndex = shorthandIndex.approved
                   setShorthandIndex({ ...shorthandIndex, current: approvedIndex })
                   if (Array.isArray(value) && value[0] !== null) {

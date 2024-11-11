@@ -83,6 +83,7 @@ KSelectRangePrimary.args = {
   borderRadius: 24,
   position: "top",
   align: "center",
+  hideBackdrop: true,
   anchorToButton: true,
   onChange: (value) => {
     if (value) {
