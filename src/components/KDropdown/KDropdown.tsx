@@ -36,6 +36,7 @@ export interface KDropdownProps {
   label?: string
   textColor?: string
   shadowDisabled?: boolean
+  closeMenuOnSelect?: boolean
   menuBackground?: string
   padding?: string
   gap?: string
@@ -93,6 +94,10 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const placeholderColor = props.placeholderColor || "#848484"
   const enableIndicator = props.enableIndicator || false
   const allowContainerShrink = props.allowContainerShrink || false
+  let closeMenuOnSelect = true
+  if (props.closeMenuOnSelect === false) {
+    closeMenuOnSelect = false
+  }
 
   let defaultValue = props.defaultValue
   if (!defaultValue && props.defaultValuePrimitive) {
@@ -225,6 +230,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         defaultValue={defaultValue}
         isMulti={isMulti}
         name={props.label || ""}
+        closeMenuOnSelect={closeMenuOnSelect}
         placeholder={props.placeholder || ""}
         options={props.options}
         className={"k-dropdown"}

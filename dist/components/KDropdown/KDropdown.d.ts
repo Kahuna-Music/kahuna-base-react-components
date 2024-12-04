@@ -28,6 +28,7 @@ export interface KDropdownProps {
     label?: string;
     textColor?: string;
     shadowDisabled?: boolean;
+    closeMenuOnSelect?: boolean;
     menuBackground?: string;
     padding?: string;
     gap?: string;
