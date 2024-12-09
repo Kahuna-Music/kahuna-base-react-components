@@ -3,7 +3,7 @@ import "../../main.css"
 
 export interface KSpanProps {
   text: string
-  fontSize?: number
+  fontSize?: number | string
   color?: string
   fontWeight?: number
   lineHeight?: string
