@@ -1,0 +1,38 @@
+import React, { KeyboardEvent } from "react";
+import "../../main.css";
+import { KSelectOption } from "../KDropdown/KDropdown";
+export interface KSearchSelectProps {
+    value: string;
+    onChange: (value: string) => void;
+    onBlur?: (value: string) => void;
+    onKeyDown?: (event: KeyboardEvent) => void;
+    width?: number;
+    height?: number;
+    leftIcon?: string;
+    rightIcon?: string;
+    background?: string;
+    activeBackground?: string;
+    borderRadius?: number;
+    disabled?: boolean;
+    placeholder?: string;
+    shadowDisabled?: boolean;
+    leftIconClick?: () => void;
+    rightIconClick?: () => void;
+    hoverBackground?: string;
+    padding?: string;
+    gap?: string;
+    border?: string;
+    boxShadow?: string;
+    fontSize?: string;
+    iconSize?: string;
+    hoverBorder?: string;
+    activeBorder?: string;
+    onTextChange: (value: string) => void;
+    onSelect: (value: KSelectOption) => void;
+    options: KSelectOption[];
+    optionIconSize?: string;
+    optionFontSize?: string;
+    optionColor?: string;
+}
+declare const KSearchSelect: React.FC<KSearchSelectProps>;
+export default KSearchSelect;
