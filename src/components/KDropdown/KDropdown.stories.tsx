@@ -79,6 +79,7 @@ KDropdownSingle.args = {
   placeholder: "Select single...",
   isClearable: true,
   isEllipsis: true,
+  selected: {label: "1", value: 1},
   allowContainerShrink: true,
   hideChosenOptionIcon: true,
   onBlur: (value: any) => {

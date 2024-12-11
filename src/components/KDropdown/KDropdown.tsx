@@ -73,6 +73,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
 
     setBackground(background)
     setBorder(border)
+    setSelectedOption(props.selected)
   }, [props.selected])
 
   const width = props.width || "100%"
@@ -242,6 +243,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         }}
         filterOption={customFilterOption}
         isClearable={isClearable}
+        value={selectedOption}
         hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}
         styles={{
           control: (baseStyles, state) => ({
