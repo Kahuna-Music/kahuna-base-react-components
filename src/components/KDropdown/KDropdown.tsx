@@ -52,6 +52,7 @@ export interface KDropdownProps {
   allowContainerShrink?: boolean // allows container to shrink if label is smaller than width, width should be fixed value
   border?: string
   activeBorder?: string
+  onInputChange?: (text:string) => void
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -234,9 +235,11 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         placeholder={props.placeholder || ""}
         options={props.options}
         className={"k-dropdown"}
+        onInputChange={props.onInputChange}
         onBlur={() => {
           if (props.onBlur) props.onBlur(selectedOption)
         }}
+
         filterOption={customFilterOption}
         isClearable={isClearable}
         hideSelectedOptions={!isMulti ? false : showOnlyIconsInMulti ? false : true}
