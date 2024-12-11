@@ -11,5 +11,4 @@ import KTooltip from "./components/KTooltip";
 import KSliderLabel from "./components/KSliderLabel";
 import KCodeInput from "./components/KCodeInput";
 import KSelectRange from "./components/KSelectRange";
-import KSearchSelect from "./components/KSearchSelect";
-export { KButton, KSpan, KLogo, KTitleSpan, KInput, KTextArea, KDropdown, KSlider, KSelectDate, KTooltip, KSliderLabel, KCodeInput, KSelectRange, KSearchSelect };
+export { KButton, KSpan, KLogo, KTitleSpan, KInput, KTextArea, KDropdown, KSlider, KSelectDate, KTooltip, KSliderLabel, KCodeInput, KSelectRange };

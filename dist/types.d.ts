@@ -28,7 +28,7 @@ declare const KButton: React.FC<KButtonProps>;
 
 interface KSpanProps {
     text: string;
-    fontSize?: number | string;
+    fontSize?: number;
     color?: string;
     fontWeight?: number;
     lineHeight?: string;
@@ -176,6 +176,7 @@ interface KDropdownProps {
     allowContainerShrink?: boolean;
     border?: string;
     activeBorder?: string;
+    onInputChange?: (text: string) => void;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 
@@ -305,39 +306,4 @@ interface KSelectRangeProps {
 type DateRangeType = Date | null | [Date | null, Date | null];
 declare const KSelectRange: React.FC<KSelectRangeProps>;
 
-interface KSearchSelectProps {
-    value: string;
-    onChange: (value: string) => void;
-    onBlur?: (value: string) => void;
-    onKeyDown?: (event: KeyboardEvent) => void;
-    width?: number;
-    height?: number;
-    leftIcon?: string;
-    rightIcon?: string;
-    background?: string;
-    activeBackground?: string;
-    borderRadius?: number;
-    disabled?: boolean;
-    placeholder?: string;
-    shadowDisabled?: boolean;
-    leftIconClick?: () => void;
-    rightIconClick?: () => void;
-    hoverBackground?: string;
-    padding?: string;
-    gap?: string;
-    border?: string;
-    boxShadow?: string;
-    fontSize?: string;
-    iconSize?: string;
-    hoverBorder?: string;
-    activeBorder?: string;
-    onTextChange: (value: string) => void;
-    onSelect: (value: KSelectOption) => void;
-    options: KSelectOption[];
-    optionIconSize?: string;
-    optionFontSize?: string;
-    optionColor?: string;
-}
-declare const KSearchSelect: React.FC<KSearchSelectProps>;
-
-export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSearchSelect, KSelectDate, KSelectRange, KSlider, KSliderLabel, KSpan, KTextArea, KTitleSpan, KTooltip };
+export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSelectDate, KSelectRange, KSlider, KSliderLabel, KSpan, KTextArea, KTitleSpan, KTooltip };

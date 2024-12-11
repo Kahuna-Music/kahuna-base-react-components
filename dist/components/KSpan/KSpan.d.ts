@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react";
 import "../../main.css";
 export interface KSpanProps {
     text: string;
-    fontSize?: number | string;
+    fontSize?: number;
     color?: string;
     fontWeight?: number;
     lineHeight?: string;

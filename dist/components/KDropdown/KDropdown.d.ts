@@ -44,6 +44,7 @@ export interface KDropdownProps {
     allowContainerShrink?: boolean;
     border?: string;
     activeBorder?: string;
+    onInputChange?: (text: string) => void;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 export default KDropdown;
