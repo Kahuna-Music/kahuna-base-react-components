@@ -1,5 +1,5 @@
-import React, { CSSProperties, useEffect, useState } from "react"
-import Calendar from "react-calendar"
+import React, { useEffect, useState } from "react"
+import Calendar, { TileDisabledFunc } from "react-calendar"
 import "./CalendarCustom.css"
 //@ts-ignore
 import LeftIcon from "../../assets/chevron-left.svg"
@@ -7,8 +7,6 @@ import LeftIcon from "../../assets/chevron-left.svg"
 import SeparatorIcon from "../../assets/separator.svg"
 //@ts-ignore
 import CalendarIcon from "../../assets/calendar.svg"
-//@ts-ignore
-import CalendarNewIcon from "../../assets/calendar-new.svg"
 //@ts-ignore
 import RightIcon from "../../assets/chevron-right.svg"
 import "../../main.css"
@@ -35,6 +33,9 @@ export interface KSelectDateProps {
   position?: "top" | "bottom" | "left" | "right" // position of the calendar relative to the button's position, has effect as long as anchorButton is true
   align?: "top" | "bottom" | "left" | "right" | "center" // lets to align the calendar, has effect as long as anchorButton is true
   hideBackdrop?: boolean
+  isTileDisabled?: TileDisabledFunc
+  applyUndefinedValue?: boolean // if this prop's value is false, makes the Apply button disabled when chosen date is undefined
+  buttonText?: string
 }
 interface MonthSelectorType {
   monthName: string
@@ -77,6 +78,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const align = props.align || "center"
 
   const hideBackdrop = props.hideBackdrop || false
+  const applyUndefinedValue = props.applyUndefinedValue !== undefined ? props.applyUndefinedValue : true
 
   const formatShortWeekday = (locale: string | undefined, date: Date): string => {
     return date.toLocaleDateString(locale, { weekday: "short" }).charAt(0) // Return only the first letter of the weekday
@@ -157,6 +159,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
           formatShortWeekday={formatShortWeekday}
           formatMonthYear={formatMonthYear}
           minDate={props.minimumDate || undefined}
+          {...(props.isTileDisabled && { tileDisabled: props.isTileDisabled })}
         />
         <div className="h-19 w-[350px] bg-[#FFF] flex flex-row gap-4 py-4 justify-center border-[1px] border-[#E7E7E7] border-t-0 rounded-b-[10px]">
           <KButton
@@ -174,6 +177,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             height="44px"
             width="160px"
             background="#000"
+            disabled={!applyUndefinedValue && !calendarDate}
             textColor="#FFF"
             onClick={() => {
               setValue(calendarDate)
@@ -313,7 +317,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   return (
     <React.Fragment>
       {openCalendar && !hideBackdrop && (
-        <div className="w-[100vw] h-[100vh] fixed left-0 top-0 z-[49] bg-[#0000004d]"/>
+        <div className="w-[100vw] h-[100vh] fixed left-0 top-0 z-[49] bg-[#0000004d]" />
       )}
       {openCalendar && (!hideBody || !anchorToButton) && (
         <div className="w-[100vw] h-[100vh] fixed left-0 top-0 flex items-center justify-center z-50">
@@ -391,7 +395,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             }}
           >
             <KButton
-              icon={icon}
+              {...(props.buttonText ? { leftIcon: icon } : { icon })}
+              {...(props.buttonText && { text: props.buttonText })}
               onClick={() => {
                 if (openCalendar) {
                   setOpenCalendar(false)
