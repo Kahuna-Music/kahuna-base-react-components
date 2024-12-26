@@ -27,6 +27,7 @@ KTooltipPrimary.args = {
     </div>
   ),
   position: "top",
+  align: "right",
   zIndex: 1000,
   arrowColor: "green",
   showArrow: true,
