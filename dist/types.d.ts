@@ -1,5 +1,6 @@
 import React, { CSSProperties, KeyboardEvent } from 'react';
 import { MultiValue } from 'react-select';
+import { TileDisabledFunc } from 'react-calendar';
 
 interface KButtonProps {
     onClick: () => void;
@@ -212,13 +213,17 @@ interface KSelectDateProps {
     position?: "top" | "bottom" | "left" | "right";
     align?: "top" | "bottom" | "left" | "right" | "center";
     hideBackdrop?: boolean;
+    isTileDisabled?: TileDisabledFunc;
+    applyUndefinedValue?: boolean;
+    buttonText?: string;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 
 interface KTooltipProps {
     children: React.ReactNode;
     content: React.ReactNode;
-    position?: string;
+    position?: "top" | "bottom" | "left" | "right";
+    align?: "top" | "bottom" | "left" | "right" | "center";
     backgroundColor?: string;
     width?: string;
     height?: string;
@@ -229,6 +234,8 @@ interface KTooltipProps {
     showArrow?: boolean;
     arrowColor?: string;
     padding?: string;
+    marginTop?: string;
+    marginLeft?: string;
 }
 declare const KTooltip: React.FC<KTooltipProps>;
 

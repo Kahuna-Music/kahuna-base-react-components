@@ -1,4 +1,5 @@
 import React from "react";
+import { TileDisabledFunc } from "react-calendar";
 import "./CalendarCustom.css";
 import "../../main.css";
 export interface KSelectDateProps {
@@ -20,6 +21,9 @@ export interface KSelectDateProps {
     position?: "top" | "bottom" | "left" | "right";
     align?: "top" | "bottom" | "left" | "right" | "center";
     hideBackdrop?: boolean;
+    isTileDisabled?: TileDisabledFunc;
+    applyUndefinedValue?: boolean;
+    buttonText?: string;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 export default KSelectDate;
