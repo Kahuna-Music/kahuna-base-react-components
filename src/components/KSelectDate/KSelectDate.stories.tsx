@@ -18,6 +18,20 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
   useEffect(() => {
     // console.log("selectedDate: ", selectedDate)
   }, [selectedDate])
+  const periods = [
+    { value: "202401", label: "202401" },
+    { value: "202402", label: "202402" },
+    { value: "202403", label: "202403" },
+    { value: "202404", label: "202404" },
+    { value: "202405", label: "202405"}]
+  const isTileDisabled = ({ date }: { date: Date }) => {
+    const year = date.getFullYear()
+    const month = (date.getMonth() + 1).toString().padStart(2, "0")
+    const formattedDate = `${year}${month}` // Format as YYYYMM
+    const includedPeriods = periods.map((period) => String(period.value))
+
+    return !includedPeriods.includes(formattedDate) // Disable if not in the array
+  }
 
   return (
     <div className=" flex flex-row gap-4 items-center">
@@ -28,6 +42,7 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
           <KSelectDate
             {...args}
             value={selectedDate}
+            isTileDisabled={isTileDisabled}
             onChange={(date) => {
               // console.log("date: ", date)
               if (date) {
@@ -40,6 +55,7 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
               }
             }}
             anchorToButton
+            
           />
           <KSelectDate
             {...args}
@@ -87,5 +103,6 @@ KSelectDateHoverText.args = {
   boxShadow: "none",
   borderRadius: 22,
   icon: CalendarNewIcon,
-  hideBody: true
+  hideBody: true,
+  onlyMonthSelection: true
 }
