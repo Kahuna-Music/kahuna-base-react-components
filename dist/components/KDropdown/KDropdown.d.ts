@@ -19,6 +19,7 @@ export interface KDropdownProps {
     width?: number;
     height?: number;
     leftIcon?: string;
+    position?: string;
     rightIcon?: string;
     background?: string;
     activeBackground?: string;
