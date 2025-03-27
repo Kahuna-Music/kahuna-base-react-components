@@ -27,7 +27,7 @@ export interface KDropdownProps {
   width?: number
   height?: number
   leftIcon?: string
-  position?: string
+  menuPosition?: string
   rightIcon?: string
   background?: string
   activeBackground?: string
@@ -85,7 +85,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const boxShadow = props.shadowDisabled ? "" : "0 0 0 1px rgba(17, 17, 17, 0.04), 0 1px 1px 0 rgba(17, 17, 17, 0.04)"
   const menuBackground = props.menuBackground || "rgb(249, 249, 249)"
   const padding = props.padding || "8px"
-  const position = props.position || "absolute"
+  const menuPosition = props.menuPosition || "absolute"
   const gap = props.gap || "4px"
   const hideIcon = props.hideChosenOptionIcon || false
   const isClearable = props.isClearable || false
@@ -224,9 +224,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         boxShadow,
         padding,
         gap,
-        border,
-        //@ts-ignore
-        position
+        border
       }}
     >
       {props.leftIcon && <img src={props.leftIcon} width={20} alt={"l-icon"} />}
@@ -261,6 +259,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             minHeight: "21px",
             border: "none"
           }),
+          //@ts-ignore
           menu: (base) => ({
             ...base,
             borderRadius: 10,
@@ -271,7 +270,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
             paddingRight: 3,
             paddingLeft: 3,
             width: menuWidth,
-            left: menuLeftMargin
+            left: menuLeftMargin,
+            position: menuPosition
           }),
           menuList: (base) => ({
             ...base,
