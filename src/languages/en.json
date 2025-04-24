@@ -18,6 +18,11 @@
         "range": "Range"
     },
     "button_text": {
+        "yesterday": "Yesterday",
+        "last_three_days": "Last 3 days",
+        "last_week": "Last week",
+        "last_two_week": "Last 2 week",
+        "last_month": "Last Month",
         "last_three_months": "Last 3 months",
         "last_six_months": "Last 6 months",
         "last_twelve_months": "Last 12 months",
