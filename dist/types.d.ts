@@ -292,6 +292,29 @@ interface KCodeInputProps {
 declare const KInput: React.FC<KCodeInputProps>;
 
 interface KSelectRangeProps {
+    value: DateRangeType$1;
+    onChange: (date: DateRangeType$1) => void;
+    width?: string;
+    height?: string;
+    border?: string;
+    backgroundColor?: string;
+    boxShadow?: string;
+    icon?: string;
+    padding?: string;
+    hoverBackgroundColor?: string;
+    borderRadius?: number;
+    anchorToButton?: boolean;
+    position?: "top" | "bottom" | "left" | "right";
+    align?: "top" | "bottom" | "left" | "right" | "center";
+    minimumDate?: Date;
+    maximumDate?: Date;
+    popupCalendarBackground?: string;
+    hideBackdrop?: boolean;
+}
+type DateRangeType$1 = Date | null | [Date | null, Date | null];
+declare const KSelectRange: React.FC<KSelectRangeProps>;
+
+interface KSelectRangeDateProps {
     value: DateRangeType;
     onChange: (date: DateRangeType) => void;
     width?: string;
@@ -312,6 +335,6 @@ interface KSelectRangeProps {
     hideBackdrop?: boolean;
 }
 type DateRangeType = Date | null | [Date | null, Date | null];
-declare const KSelectRange: React.FC<KSelectRangeProps>;
+declare const KSelectRangeDate: React.FC<KSelectRangeDateProps>;
 
-export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSelectDate, KSelectRange, KSlider, KSliderLabel, KSpan, KTextArea, KTitleSpan, KTooltip };
+export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSelectDate, KSelectRange, KSelectRangeDate, KSlider, KSliderLabel, KSpan, KTextArea, KTitleSpan, KTooltip };

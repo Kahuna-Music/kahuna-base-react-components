@@ -11,6 +11,7 @@ import KTooltip from "./components/KTooltip"
 import KSliderLabel from "./components/KSliderLabel"
 import KCodeInput from "./components/KCodeInput"
 import KSelectRange from "./components/KSelectRange"
+import KSelectRangeDate from "./components/KSelectRangeDate"
 
 export {
   KButton,
@@ -25,5 +26,6 @@ export {
   KTooltip,
   KSliderLabel,
   KCodeInput,
-  KSelectRange
+  KSelectRange,
+  KSelectRangeDate
 }
