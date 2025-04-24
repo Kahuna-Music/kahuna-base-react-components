@@ -20,6 +20,11 @@ export declare const getLanguageJson: () => {
         range: string;
     };
     button_text: {
+        yesterday: string;
+        last_three_days: string;
+        last_week: string;
+        last_two_week: string;
+        last_month: string;
         last_three_months: string;
         last_six_months: string;
         last_twelve_months: string;
@@ -51,6 +56,11 @@ export declare const lang: {
         range: string;
     };
     button_text: {
+        yesterday: string;
+        last_three_days: string;
+        last_week: string;
+        last_two_week: string;
+        last_month: string;
         last_three_months: string;
         last_six_months: string;
         last_twelve_months: string;
