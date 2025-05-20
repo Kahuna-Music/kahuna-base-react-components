@@ -125,10 +125,10 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
       if (
         range[0]?.getFullYear() === date.getFullYear() &&
         range[0]?.getMonth() === date.getMonth() &&
-        range[0]?.getDay() === date.getDay() &&
+        range[0]?.getDate() === date.getDay() &&
         range[1]?.getFullYear() === date.getFullYear() &&
         range[1]?.getMonth() === date.getMonth() &&
-        range[1]?.getDay() === date.getDay()
+        range[1]?.getDate() === date.getDay()
       ) {
         return "active-day-first-day active-day-last-day"
       } else if (range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth() && range[0]?.getDate() === date.getDate()) {
@@ -189,7 +189,7 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
           style={{
             border: "1px solid #F3F3F3",
             borderRightWidth: "0px",
-            borderTopLeftRadius: "0px",
+            borderTopLeftRadius: "16px",
             borderBottomLeftRadius: "16px"
           }}
         >

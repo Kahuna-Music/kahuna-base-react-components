@@ -114,6 +114,7 @@
 
 .kselect-range-date .react-calendar__month-view__days {
     justify-content: center;
+    row-gap: 2px;
 
 }
 
