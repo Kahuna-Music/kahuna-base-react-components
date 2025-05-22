@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import Calendar from "react-calendar"
 import "./KSelectRangeDateCustom.css"
 //@ts-ignore
@@ -118,28 +118,46 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
   }
 
   const tileClassName = ({ date, view }: { date: Date; view: string }) => {
-    if (view === "year") {
+    if (view === "month") {
+
+      if (Array.isArray(range) && range[0] && !range[1] && hoveredDate &&
+       ((date.getTime() > hoveredDate.getTime() && date.getTime() < range[0].getTime()) ||
+       date.getTime() < hoveredDate.getTime() && date.getTime() > range[0].getTime()) ) {
+        
+        return "hovered-range-day"
+      }
+
       // Apply active class for current month
       if (!(Array.isArray(range) && range[0] && range[1])) return
 
       if (
         range[0]?.getFullYear() === date.getFullYear() &&
         range[0]?.getMonth() === date.getMonth() &&
+        range[0]?.getDate() === date.getDate() &&
         range[1]?.getFullYear() === date.getFullYear() &&
-        range[1]?.getMonth() === date.getMonth()
+        range[1]?.getMonth() === date.getMonth() &&
+        range[1]?.getDate() === date.getDate()
       ) {
-        return "active-month-first-month active-month-last-month"
-      } else if (range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth()) {
-        return "active-month-first-month"
-      } else if (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth()) {
-        return "active-month-last-month"
+        return "active-day-first-day active-day-last-day"
+      } else if (range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth() && range[0]?.getDate() === date.getDate()) {
+        return "active-day-first-day"
+      } else if (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth() && range[1]?.getDate() === date.getDate()) {
+        return "active-day-last-day"
       } else if (range[0]?.getTime() < date.getTime() && date.getTime() < range[1]?.getTime()) {
-        if (date.getMonth() % 3 === 0) {
-          return "active-month-range-month-left"
-        } else if (date.getMonth() % 3 === 1) {
-          return "active-month-range-month-middle"
+        const weekStartsOn = 1
+        const col = (date.getDay() - weekStartsOn + 7) % 7
+        const dayOfMonth = date.getDate()
+        const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate()
+        if (col === 6) {
+          return "active-day-range-day-left"
+        } else if (col === 5) {
+          return "active-day-range-day-right"
+        } else if (dayOfMonth === 1) {
+          return "active-day-range-day-middle first-day-of-month"
+        } else if (dayOfMonth === lastDayOfMonth) {
+          return "active-day-range-day-middle last-day-of-month"
         } else {
-          return "active-month-range-month-right"
+          return "active-day-range-day-middle"
         }
       }
 
@@ -148,15 +166,15 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
   }
 
   const tileContent = ({ date, view }: { date: Date; view: string }) => {
-    if (view === "year") {
-      const month = date.toLocaleString(lang.locale, { month: "long" })
+    if (view === "month") {
+      const day = date.getDate()
       return (
         <div className="absolute left-0 top-0 h-full w-full flex items-center justify-center tile-content-external-div">
           {Array.isArray(range) &&
             range[1] !== null &&
-            ((range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth()) ||
-              (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth())) && (
-              <abbr>{month}</abbr>
+            ((range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth() && range[0]?.getDate() === date.getDate()) ||
+              (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth() && range[1]?.getDate() === date.getDate())) && (
+              <abbr>{day}</abbr>
             )}
         </div>
       )
@@ -177,6 +195,8 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
     }
   }, [range])
 
+  const [hoveredDate, setHoveredDate] = useState<Date | null>(null)
+
   const renderPopUpCalendar = () => {
     return (
       <div className="flex flex-row">
@@ -185,7 +205,7 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
           style={{
             border: "1px solid #F3F3F3",
             borderRightWidth: "0px",
-            borderTopLeftRadius: "0px",
+            borderTopLeftRadius: "16px",
             borderBottomLeftRadius: "16px"
           }}
         >
@@ -261,9 +281,27 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
           />
         </div>
         <div className="flex flex-col gap-0">
-          <div className="flex flex-row">
+          <div className="flex flex-row"            
+          onMouseOver={e => {
+            const tile = (e.target as HTMLElement).closest(".react-calendar__tile")
+            if (!tile) return
+              const abbr = tile.querySelector("abbr[aria-label]") as HTMLElement | null;
+            if (!abbr) return
+            const label = abbr.getAttribute("aria-label")!
+            const date = new Date(label)
+            setHoveredDate(date)
+            }
+          }
+          onMouseOut={e => {
+
+            const leftTile = (e.target as HTMLElement).closest(".react-calendar__tile")
+            if (leftTile) {
+              setHoveredDate(null)
+            }
+            }
+          }>
             <Calendar
-              className="kselect-range left-calendar"
+              className="kselect-range-date left-calendar"
               allowPartialRange
               tileClassName={tileClassName}
               tileContent={tileContent}
@@ -294,7 +332,7 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
               maxDate={props.maximumDate || undefined}
             />
             <Calendar
-              className="kselect-range right-calendar"
+              className="kselect-range-date right-calendar"
               tileClassName={tileClassName}
               tileContent={tileContent}
               locale={lang.locale}
