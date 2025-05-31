@@ -54,6 +54,8 @@ export interface KDropdownProps {
   border?: string
   activeBorder?: string
   onInputChange?: (text: string) => void
+  sortSelectedFirst?: boolean
+
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -61,7 +63,8 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const [iconCount, setIconCount] = useState<number>(0)
   const [background, setBackground] = useState("#F5F5F5")
   const [border, setBorder] = useState("none")
-
+  const [options, setOptions] = useState<KSelectOption[]>(props.options)
+  
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
     const activeBackground = props.activeBackground || "#FFF"
@@ -76,6 +79,27 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     setBorder(border)
     setSelectedOption(props.selected)
   }, [props.selected])
+
+    useEffect(() => {
+      if (!selectedOption || !isMulti) {
+        // if it is not isMulti or there is no selected option no need to sort it
+        setOptions(props.options)
+        return
+      }
+
+      if (isMulti) {
+        const selections = (selectedOption as KSelectOption[]).map((o) => o.value)
+        console.log("selections", selections)
+        const selectedOptions = props.options.filter((opt) => selections.includes(opt.value))
+        const others = props.options.filter((opt) => !selections.includes(opt.value))
+        console.log("[...selectedOptions, ...others]:", [...selectedOptions, ...others])
+        setOptions([...selectedOptions, ...others])
+        return 
+      }
+
+      setOptions(props.options)
+    }, [props.options, selectedOption])
+
 
   const width = props.width || "100%"
   const height = props.height || "auto"
@@ -235,7 +259,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         name={props.label || ""}
         closeMenuOnSelect={closeMenuOnSelect}
         placeholder={props.placeholder || ""}
-        options={props.options}
+        options={options}
         className={"k-dropdown"}
         onInputChange={(text) => {
           if (props.onInputChange) props.onInputChange(text)
