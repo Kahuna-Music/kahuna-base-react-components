@@ -102,19 +102,19 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const allowContainerShrink = props.allowContainerShrink || false
 
   const sortedOptions = useMemo<KSelectOption[]>(() => {
-  if (!props.sortSelectedFirst) {
-    return props.options
-  }
+    if (!props.sortSelectedFirst) {
+      return props.options
+    }
 
-  if (!selectedOption || !isMulti) {
-    return props.options
-  }
+    if (!selectedOption || !isMulti) {
+      return props.options
+    }
 
-  const selections = (selectedOption as KSelectOption[]).map((o) => o.value);
-  const selectedOnes = props.options.filter((opt) => selections.includes(opt.value));
-  const others      = props.options.filter((opt) => !selections.includes(opt.value));
-  return [...selectedOnes, ...others];
-}, [props.options, selectedOption, isMulti, props.sortSelectedFirst])
+    const selections = (selectedOption as KSelectOption[]).map((o) => o.value)
+    const selectedOnes = props.options.filter((opt) => selections.includes(opt.value))
+    const others = props.options.filter((opt) => !selections.includes(opt.value))
+    return [...selectedOnes, ...others]
+  }, [props.options, selectedOption, isMulti, props.sortSelectedFirst])
 
   let closeMenuOnSelect = true
   if (props.closeMenuOnSelect === false) {
