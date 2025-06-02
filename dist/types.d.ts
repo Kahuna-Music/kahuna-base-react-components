@@ -179,6 +179,7 @@ interface KDropdownProps {
     border?: string;
     activeBorder?: string;
     onInputChange?: (text: string) => void;
+    sortSelectedFirst?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 
