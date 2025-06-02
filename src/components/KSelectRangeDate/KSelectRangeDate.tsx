@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Calendar from "react-calendar"
 import "./KSelectRangeDateCustom.css"
 //@ts-ignore
@@ -52,11 +52,30 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
 
   const [value, setValue] = useState<DateRangeType>(props.value)
   const [range, setRange] = useState<DateRangeType>(props.value)
+  const [openCalendar, setOpenCalendar] = useState<boolean>(false)
+
+  const skipNextOpenRef = useRef(false)
+
+  useEffect(() => {
+    setValue(props.value)
+    setRange(props.value)
+  }, [props.value])
+
+  useEffect(() => {
+    if (openCalendar) {
+      if(skipNextOpenRef?.current) {
+        skipNextOpenRef.current = false
+        return
+      }
+
+      setRange(props.value)
+    }    
+  }, [props.value, openCalendar])
 
   const [leftCalendarYear, setLeftCalendarYear] = useState<number>(new Date().getFullYear())
   const [leftCalendarMonth, setLeftCalendarMonth] = useState<number>(new Date().getMonth())
 
-  const [openCalendar, setOpenCalendar] = useState<boolean>(false)
+  
   const [shorthandIndex, setShorthandIndex] = useState<{ current: number; approved: number }>({
     current: -1,
     approved: -1
@@ -107,6 +126,7 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
       const newRange: DateRangeType =
         range[0].getTime() > clickedDate.getTime() ? [clickedDate, range[0]] : [range[0], clickedDate]
       setRange(newRange)
+      skipNextOpenRef.current = true
       setOpenCalendar(false)
       setTimeout(() => {
         setOpenCalendar(true)
