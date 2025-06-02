@@ -30,43 +30,30 @@ const KSelectRangeDateWrapper: React.FC<KSelectRangeDateProps> = (args) => {
     new Date() // End date: today
   ])
   useEffect(() => {
-    // console.log("selectedDate: ", selectedDate)
+    console.log("selectedDate: ", selectedDate)
   }, [selectedDate])
+  const MILISECONDS_MONTH = 2678400000
+
 
   return (
     <div>
       <KSelectRangeDate
         {...args}
         value={selectedDate}
-        onChange={(date: DateRangeType) => {
-          // console.log("date: ", date)
-          if (date) {
-            setSelectedDate(date)
-            console.log("updating is completed: ", date)
-            // console.log("updating is completed date.toISOString(): ", date?.toISOString())
-          } else {
-            setSelectedDate(null)
-            // console.log("Deleting is completed")
+        onChange={(event: any) => {
+          console.log("works")
+          if (!event) {
+            return
           }
+          if (event[1] - event[0] > MILISECONDS_MONTH) {
+            console.log("not allowed")
+            return
+          }
+
+          setSelectedDate(event)
         }}
       />
-      <div className="relative z-10">
-        <KSelectRangeDate
-          {...args}
-          value={selectedDate}
-          onChange={(date: DateRangeType) => {
-            // console.log("date: ", date)
-            if (date) {
-              setSelectedDate(date)
-              console.log("updating is completed: ", date)
-              // console.log("updating is completed date.toISOString(): ", date?.toISOString())
-            } else {
-              setSelectedDate(null)
-              // console.log("Deleting is completed")
-            }
-          }}
-        />
-      </div>
+      <div className="relative z-10"></div>
     </div>
   )
 }
@@ -80,10 +67,11 @@ KSelectRangePrimary.args = {
   backgroundColor: "#F7F7F7",
   hoverBackgroundColor: "#F3F3F3",
   borderRadius: 24,
-  position: "top",
+  position: "bottom",
   align: "center",
   hideBackdrop: true,
   anchorToButton: true,
+
   onChange: (value) => {
     if (value) {
       console.log("value is updated using this value:", value)

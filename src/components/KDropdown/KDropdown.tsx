@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import "../../main.css"
 import Select, { MultiValue } from "react-select"
 // @ts-ignore
@@ -54,6 +54,8 @@ export interface KDropdownProps {
   border?: string
   activeBorder?: string
   onInputChange?: (text: string) => void
+  sortSelectedFirst?: boolean
+
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -61,7 +63,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const [iconCount, setIconCount] = useState<number>(0)
   const [background, setBackground] = useState("#F5F5F5")
   const [border, setBorder] = useState("none")
-
+  
   useEffect(() => {
     const emptyBackground = props.background || "#F5F5F5"
     const activeBackground = props.activeBackground || "#FFF"
@@ -76,6 +78,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
     setBorder(border)
     setSelectedOption(props.selected)
   }, [props.selected])
+
 
   const width = props.width || "100%"
   const height = props.height || "auto"
@@ -97,6 +100,22 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const placeholderColor = props.placeholderColor || "#848484"
   const enableIndicator = props.enableIndicator || false
   const allowContainerShrink = props.allowContainerShrink || false
+
+  const sortedOptions = useMemo<KSelectOption[]>(() => {
+    if (!props.sortSelectedFirst) {
+      return props.options
+    }
+
+    if (!selectedOption || !isMulti) {
+      return props.options
+    }
+
+    const selections = (selectedOption as KSelectOption[]).map((o) => o.value)
+    const selectedOnes = props.options.filter((opt) => selections.includes(opt.value))
+    const others = props.options.filter((opt) => !selections.includes(opt.value))
+    return [...selectedOnes, ...others]
+  }, [props.options, selectedOption, isMulti, props.sortSelectedFirst])
+
   let closeMenuOnSelect = true
   if (props.closeMenuOnSelect === false) {
     closeMenuOnSelect = false
@@ -235,7 +254,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
         name={props.label || ""}
         closeMenuOnSelect={closeMenuOnSelect}
         placeholder={props.placeholder || ""}
-        options={props.options}
+        options={sortedOptions}
         className={"k-dropdown"}
         onInputChange={(text) => {
           if (props.onInputChange) props.onInputChange(text)
