@@ -22,7 +22,7 @@ const KTitleSpanWrapper: React.FC<KTitleSpanProps> = (args) => {
 }
 
 const Template: StoryFn<typeof KTitleSpanWrapper> = (args) => <KTitleSpanWrapper {...args} />;
-const myText = "Hello how are you ne var you nasıl gidiyor?"
+const myText = "Hello how are you, how is it going? "
 export const KTitleSpanPrimary = Template.bind({});
 KTitleSpanPrimary.args = {
   text: myText,
