@@ -21,11 +21,7 @@ const Template: StoryFn<KTooltipProps> = (args) => (
 
 export const KTooltipPrimary = Template.bind({})
 KTooltipPrimary.args = {
-  content: (
-    <div className="bg-red-100 flex justify-center items-center">
-      <div className="bg-green-300 font-extrabold ">BURADA</div>
-    </div>
-  ),
+  content: "null",
   position: "top",
   align: "right",
   zIndex: 1000,
@@ -38,7 +34,7 @@ KTooltipPrimary.args = {
 }
 
 export const KTooltipSecondary = Template.bind({})
-KTooltipPrimary.args = {
+KTooltipSecondary.args = {
   content: (
     <div className="flex flex-col gap-2 justify-center items-start px-4 py-2">
       <div

@@ -3,7 +3,7 @@ import "../../main.css"
 
 export interface KTooltipProps {
   children: React.ReactNode
-  content: React.ReactNode
+  content: React.ReactNode // if content === null the tooltip will not be visible
   position?: "top" | "bottom" | "left" | "right"
   align?: "top" | "bottom" | "left" | "right" | "center"
   backgroundColor?: string
@@ -61,7 +61,7 @@ const KTooltip: React.FC<KTooltipProps> = (props) => {
     <div className="relative box-border" onMouseEnter={showTooltip} onMouseLeave={hideTooltip}>
       {props.children}
 
-      <div
+      {props.content !== null && <div
         className={`${absolutePositionClassName(position, align)} absolute ${
           isVisible ? "k-tooltip-enter" : "k-tooltip-exit"
         }`}
@@ -81,7 +81,7 @@ const KTooltip: React.FC<KTooltipProps> = (props) => {
           {props.content}
         </div>
         {showArrow && <div className={`arrow-${position}`} style={{ backgroundColor: arrowColor, zIndex: -200 }}></div>}
-      </div>
+      </div>}
     </div>
   )
 }
