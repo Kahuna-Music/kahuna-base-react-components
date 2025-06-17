@@ -41,6 +41,26 @@ interface KSpanProps {
 }
 declare const KSpan: React.FC<KSpanProps>;
 
+interface KTooltipProps {
+    children: React.ReactNode;
+    content: React.ReactNode;
+    position?: "top" | "bottom" | "left" | "right";
+    align?: "top" | "bottom" | "left" | "right" | "center";
+    backgroundColor?: string;
+    width?: string;
+    height?: string;
+    zIndex?: number;
+    border?: string;
+    borderRadius?: string;
+    boxShadow?: string;
+    showArrow?: boolean;
+    arrowColor?: string;
+    padding?: string;
+    marginTop?: string;
+    marginLeft?: string;
+}
+declare const KTooltip: React.FC<KTooltipProps>;
+
 interface KTitleSpanProps {
     text: string;
     fontSize?: number;
@@ -51,6 +71,7 @@ interface KTitleSpanProps {
     letterSpacing?: string;
     bold?: boolean;
     ellipsis?: boolean;
+    tooltipProps?: Partial<KTooltipProps>;
 }
 declare const KTitleSpan: React.FC<KTitleSpanProps>;
 
@@ -220,26 +241,6 @@ interface KSelectDateProps {
     buttonText?: string;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
-
-interface KTooltipProps {
-    children: React.ReactNode;
-    content: React.ReactNode;
-    position?: "top" | "bottom" | "left" | "right";
-    align?: "top" | "bottom" | "left" | "right" | "center";
-    backgroundColor?: string;
-    width?: string;
-    height?: string;
-    zIndex?: number;
-    border?: string;
-    borderRadius?: string;
-    boxShadow?: string;
-    showArrow?: boolean;
-    arrowColor?: string;
-    padding?: string;
-    marginTop?: string;
-    marginLeft?: string;
-}
-declare const KTooltip: React.FC<KTooltipProps>;
 
 interface SliderLabelOption {
     label: string;
