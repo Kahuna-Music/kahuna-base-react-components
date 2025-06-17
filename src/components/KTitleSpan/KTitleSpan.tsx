@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import "../../main.css"
 import KTooltip from "../KTooltip"
 import KSpan from "../KSpan"
+import { KTooltipProps } from "../KTooltip/KTooltip"
 
 export interface KTitleSpanProps {
   text: string
@@ -13,6 +14,7 @@ export interface KTitleSpanProps {
   letterSpacing?: string
   bold?: boolean
   ellipsis?: boolean
+  tooltipProps?: Partial<KTooltipProps>
 }
 
 const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
@@ -55,6 +57,7 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
               <KSpan text={props.text} color="#111" />
             </div>
           }
+          {...props.tooltipProps}
         >
           <span
             ref={textRef}

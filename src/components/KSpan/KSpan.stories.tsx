@@ -24,7 +24,7 @@ const Template: StoryFn<typeof KSpanWrapper> = (args) => <KSpanWrapper {...args}
 
 export const KSpanPrimary = Template.bind({})
 KSpanPrimary.args = {
-  text: "Login",
+  text: "Burada uzun metin var, overflow olabilir.",
   fontSize: 14,
   color: "#1F1F1F",
   fontWeight: 400,
