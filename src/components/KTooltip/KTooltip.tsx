@@ -32,7 +32,7 @@ const KTooltip: React.FC<KTooltipProps> = (props) => {
     }
     setIsVisible(true)
   }
-  
+
   const hideTooltip = () => {
     if (props.hideDelay && props.hideDelay > 0) {
       timeoutRef.current = setTimeout(() => {

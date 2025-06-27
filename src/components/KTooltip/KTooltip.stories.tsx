@@ -29,7 +29,7 @@ KTooltipPrimary.args = {
   showArrow: true,
   padding: "10px",
   border: "1px solid red",
-  hideDelay: 500
+  marginLeft: "200px", 
   //boxShadow: "3px 3px 10px #000",
   //borderRadius: "100px",
 }
