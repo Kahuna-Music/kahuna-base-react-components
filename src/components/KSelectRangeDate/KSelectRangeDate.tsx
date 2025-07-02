@@ -279,7 +279,7 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
             width="140px"
             background={shorthandIndex.current === 3 ? "#F7F7F7" : "#FFF"}
             textColor={shorthandIndex.current === 3 ? "#000" : "#999"}
-            text={lang.button_text.last_two_week}
+            text={lang.button_text.last_two_weeks}
             borderRadius={8}
             shadowDisabled
             hoverBackground="#F0F0F0"
