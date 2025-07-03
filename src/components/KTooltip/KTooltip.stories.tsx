@@ -28,7 +28,8 @@ KTooltipPrimary.args = {
   arrowColor: "green",
   showArrow: true,
   padding: "10px",
-  border: "1px solid red"
+  border: "1px solid red",
+  marginLeft: "200px", 
   //boxShadow: "3px 3px 10px #000",
   //borderRadius: "100px",
 }
@@ -85,7 +86,8 @@ KTooltipSecondary.args = {
     </div>
   ),
   arrowColor: "red",
-  padding: "0px"
+  padding: "0px",
+  hideDelay: 200
   //boxShadow: "3px 3px 10px #000",
   //borderRadius: "100px",
 }

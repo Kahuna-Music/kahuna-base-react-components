@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import "../../main.css"
 
 export interface KTooltipProps {
@@ -18,13 +18,30 @@ export interface KTooltipProps {
   padding?: string
   marginTop?: string // position and align is used to position the tooltip. for additional changes in vertical positioning use this prop
   marginLeft?: string // position and align is used to position the tooltip. for minor changes in horizontal positioning use this prop
+  hideDelay?: number
 }
 
 const KTooltip: React.FC<KTooltipProps> = (props) => {
   const [isVisible, setIsVisible] = useState(false)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  const showTooltip = () => setIsVisible(true)
-  const hideTooltip = () => setIsVisible(false)
+  const showTooltip = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+    setIsVisible(true)
+  }
+
+  const hideTooltip = () => {
+    if (props.hideDelay && props.hideDelay > 0) {
+      timeoutRef.current = setTimeout(() => {
+        setIsVisible(false)
+      }, props.hideDelay)
+    } else {
+      setIsVisible(false)
+    }
+  }
 
   const position = props.position || "top"
   const align = props.align || "center"
