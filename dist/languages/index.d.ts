@@ -23,7 +23,7 @@ export declare const getLanguageJson: () => {
         yesterday: string;
         last_three_days: string;
         last_week: string;
-        last_two_week: string;
+        last_two_weeks: string;
         last_month: string;
         last_three_months: string;
         last_six_months: string;
@@ -59,7 +59,7 @@ export declare const lang: {
         yesterday: string;
         last_three_days: string;
         last_week: string;
-        last_two_week: string;
+        last_two_weeks: string;
         last_month: string;
         last_three_months: string;
         last_six_months: string;

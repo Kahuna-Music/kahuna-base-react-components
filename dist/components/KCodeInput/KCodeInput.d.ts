@@ -32,5 +32,5 @@ export interface KCodeInputProps {
     isCodeCorrect?: boolean;
     autoBlur?: boolean;
 }
-declare const KInput: React.FC<KCodeInputProps>;
-export default KInput;
+declare const KCodeInput: React.FC<KCodeInputProps>;
+export default KCodeInput;

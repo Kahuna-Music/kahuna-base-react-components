@@ -34,7 +34,7 @@ export interface KCodeInputProps {
   autoBlur?: boolean
 }
 
-const KInput: React.FC<KCodeInputProps> = (props) => {
+const KCodeInput: React.FC<KCodeInputProps> = (props) => {
   const autoFocus = props.autoFocus || false
   const autoBlur = props.autoBlur || false
   const borderRadius = props.borderRadius || 10
@@ -257,4 +257,4 @@ const KInput: React.FC<KCodeInputProps> = (props) => {
   )
 }
 
-export default KInput
+export default KCodeInput

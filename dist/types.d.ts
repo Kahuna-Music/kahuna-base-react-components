@@ -58,6 +58,7 @@ interface KTooltipProps {
     padding?: string;
     marginTop?: string;
     marginLeft?: string;
+    hideDelay?: number;
 }
 declare const KTooltip: React.FC<KTooltipProps>;
 
@@ -121,7 +122,7 @@ interface KInputProps {
     hoverBorder?: string;
     activeBorder?: string;
 }
-declare const KInput$1: React.FC<KInputProps>;
+declare const KInput: React.FC<KInputProps>;
 
 interface KTextAreaProps {
     value: string;
@@ -291,7 +292,7 @@ interface KCodeInputProps {
     isCodeCorrect?: boolean;
     autoBlur?: boolean;
 }
-declare const KInput: React.FC<KCodeInputProps>;
+declare const KCodeInput: React.FC<KCodeInputProps>;
 
 interface KSelectRangeProps {
     value: DateRangeType$1;
@@ -339,4 +340,4 @@ interface KSelectRangeDateProps {
 type DateRangeType = Date | null | [Date | null, Date | null];
 declare const KSelectRangeDate: React.FC<KSelectRangeDateProps>;
 
-export { KButton, KInput as KCodeInput, KDropdown, KInput$1 as KInput, KLogo, KSelectDate, KSelectRange, KSelectRangeDate, KSlider, KSliderLabel, KSpan, KTextArea, KTitleSpan, KTooltip };
+export { KButton, KCodeInput, KDropdown, KInput, KLogo, KSelectDate, KSelectRange, KSelectRangeDate, KSlider, KSliderLabel, KSpan, KTextArea, KTitleSpan, KTooltip };

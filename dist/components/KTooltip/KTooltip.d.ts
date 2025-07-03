@@ -17,6 +17,7 @@ export interface KTooltipProps {
     padding?: string;
     marginTop?: string;
     marginLeft?: string;
+    hideDelay?: number;
 }
 declare const KTooltip: React.FC<KTooltipProps>;
 export default KTooltip;
