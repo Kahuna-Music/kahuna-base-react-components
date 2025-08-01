@@ -1,6 +1,6 @@
 {
   "name": "kahuna-base-react-components",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "description": "Kahuna Base React Components",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

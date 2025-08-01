@@ -22,6 +22,7 @@ export interface KButtonProps {
     border?: string;
     hoverBorder?: string;
     activeBorder?: string;
+    dataTestId?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 export default KButton;

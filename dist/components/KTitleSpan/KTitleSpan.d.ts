@@ -12,6 +12,7 @@ export interface KTitleSpanProps {
     bold?: boolean;
     ellipsis?: boolean;
     tooltipProps?: Partial<KTooltipProps>;
+    dataTestId?: string;
 }
 declare const KTitleSpan: React.FC<KTitleSpanProps>;
 export default KTitleSpan;

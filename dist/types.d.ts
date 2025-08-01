@@ -24,6 +24,7 @@ interface KButtonProps {
     border?: string;
     hoverBorder?: string;
     activeBorder?: string;
+    dataTestId?: string;
 }
 declare const KButton: React.FC<KButtonProps>;
 
@@ -38,6 +39,7 @@ interface KSpanProps {
     hoverStyle?: CSSProperties;
     textDecoration?: string;
     ellipsis?: boolean;
+    dataTestId?: string;
 }
 declare const KSpan: React.FC<KSpanProps>;
 
@@ -59,6 +61,7 @@ interface KTooltipProps {
     marginTop?: string;
     marginLeft?: string;
     hideDelay?: number;
+    dataTestId?: string;
 }
 declare const KTooltip: React.FC<KTooltipProps>;
 
@@ -73,6 +76,7 @@ interface KTitleSpanProps {
     bold?: boolean;
     ellipsis?: boolean;
     tooltipProps?: Partial<KTooltipProps>;
+    dataTestId?: string;
 }
 declare const KTitleSpan: React.FC<KTitleSpanProps>;
 
@@ -121,6 +125,7 @@ interface KInputProps {
     checked?: boolean;
     hoverBorder?: string;
     activeBorder?: string;
+    dataTestId?: string;
 }
 declare const KInput: React.FC<KInputProps>;
 
@@ -153,6 +158,7 @@ interface KTextAreaProps {
     checked?: boolean;
     maxHeight?: number;
     clearTextOnPressedEnter?: boolean;
+    dataTestId?: string;
 }
 declare const KTextArea: React.FC<KTextAreaProps>;
 
@@ -202,6 +208,7 @@ interface KDropdownProps {
     activeBorder?: string;
     onInputChange?: (text: string) => void;
     sortSelectedFirst?: boolean;
+    dataTestId?: string;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 

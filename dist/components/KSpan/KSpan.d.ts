@@ -11,6 +11,7 @@ export interface KSpanProps {
     hoverStyle?: CSSProperties;
     textDecoration?: string;
     ellipsis?: boolean;
+    dataTestId?: string;
 }
 declare const KSpan: React.FC<KSpanProps>;
 export default KSpan;

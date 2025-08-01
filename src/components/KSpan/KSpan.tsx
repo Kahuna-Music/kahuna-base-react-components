@@ -12,6 +12,7 @@ export interface KSpanProps {
   hoverStyle?: CSSProperties
   textDecoration?: string
   ellipsis?: boolean
+  dataTestId?: string
 }
 
 const KSpan: React.FC<KSpanProps> = (props) => {
@@ -42,6 +43,7 @@ const KSpan: React.FC<KSpanProps> = (props) => {
 
   return (
     <span
+      data-testid={props.dataTestId}
       className={"k-span"}
       onMouseEnter={() => setOnHover(true)}
       onMouseLeave={() => setOnHover(false)}

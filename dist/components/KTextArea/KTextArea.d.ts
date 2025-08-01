@@ -29,6 +29,7 @@ export interface KTextAreaProps {
     checked?: boolean;
     maxHeight?: number;
     clearTextOnPressedEnter?: boolean;
+    dataTestId?: string;
 }
 declare const KTextArea: React.FC<KTextAreaProps>;
 export default KTextArea;

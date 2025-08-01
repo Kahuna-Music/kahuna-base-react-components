@@ -29,6 +29,7 @@ export interface KInputProps {
     checked?: boolean;
     hoverBorder?: string;
     activeBorder?: string;
+    dataTestId?: string;
 }
 declare const KInput: React.FC<KInputProps>;
 export default KInput;

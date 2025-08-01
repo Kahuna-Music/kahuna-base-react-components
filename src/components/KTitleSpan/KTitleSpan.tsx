@@ -15,6 +15,7 @@ export interface KTitleSpanProps {
   bold?: boolean
   ellipsis?: boolean
   tooltipProps?: Partial<KTooltipProps>
+  dataTestId?: string
 }
 
 const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
@@ -60,6 +61,7 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
           {...props.tooltipProps}
         >
           <span
+            data-testid={props.dataTestId}
             ref={textRef}
             className={`${titleClassName} ${ellipsis ? "block" : "flex items-center"}`}
             style={{
@@ -77,6 +79,7 @@ const KTitleSpan: React.FC<KTitleSpanProps> = (props) => {
         </KTooltip>
       ) : (
         <span
+          data-testid={props.dataTestId}
           ref={textRef}
           className={`${titleClassName} ${ellipsis ? "block" : "flex items-center"}`}
           style={{ fontSize, color, fontWeight, lineHeight, fontStyle, letterSpacing, ...(ellipsis && ellipsisStyle) }}

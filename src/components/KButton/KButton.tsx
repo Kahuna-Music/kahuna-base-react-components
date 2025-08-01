@@ -22,8 +22,9 @@ export interface KButtonProps {
   gap?: string
   activeBackground?: string
   border?: string
-  hoverBorder?: string 
-  activeBorder?: string 
+  hoverBorder?: string
+  activeBorder?: string
+  dataTestId?: string
 }
 
 const KButton: React.FC<KButtonProps> = (props) => {
@@ -49,6 +50,7 @@ const KButton: React.FC<KButtonProps> = (props) => {
 
   return (
     <button
+      data-testid={props.dataTestId}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onMouseDown={() => setActive(true)}

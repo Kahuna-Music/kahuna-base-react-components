@@ -18,6 +18,7 @@ export interface KTooltipProps {
     marginTop?: string;
     marginLeft?: string;
     hideDelay?: number;
+    dataTestId?: string;
 }
 declare const KTooltip: React.FC<KTooltipProps>;
 export default KTooltip;

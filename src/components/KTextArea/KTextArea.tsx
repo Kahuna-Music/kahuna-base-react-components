@@ -30,6 +30,7 @@ export interface KTextAreaProps {
   checked?: boolean
   maxHeight?: number
   clearTextOnPressedEnter?: boolean
+  dataTestId?: string
 }
 
 const KTextArea: React.FC<KTextAreaProps> = (props) => {
@@ -78,6 +79,7 @@ const KTextArea: React.FC<KTextAreaProps> = (props) => {
 
   return (
     <div
+      data-testid={props.dataTestId}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className={"k-input-container"}

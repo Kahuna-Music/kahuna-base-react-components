@@ -47,6 +47,7 @@ export interface KDropdownProps {
     activeBorder?: string;
     onInputChange?: (text: string) => void;
     sortSelectedFirst?: boolean;
+    dataTestId?: string;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 export default KDropdown;

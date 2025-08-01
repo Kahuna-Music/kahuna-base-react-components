@@ -30,6 +30,7 @@ export interface KInputProps {
   checked?: boolean
   hoverBorder?: string
   activeBorder?: string
+  dataTestId?: string
 }
 
 const KInput: React.FC<KInputProps> = (props) => {
@@ -69,6 +70,7 @@ const KInput: React.FC<KInputProps> = (props) => {
 
   return (
     <div
+      data-testid={props.dataTestId}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className={"k-input-container"}

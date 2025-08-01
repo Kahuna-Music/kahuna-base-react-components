@@ -55,7 +55,7 @@ export interface KDropdownProps {
   activeBorder?: string
   onInputChange?: (text: string) => void
   sortSelectedFirst?: boolean
-
+  dataTestId?: string
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -233,6 +233,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
 
   return (
     <div
+      data-testid={props.dataTestId}
       className={"k-dropdown-container"}
       style={{
         background,

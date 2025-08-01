@@ -19,6 +19,7 @@ export interface KTooltipProps {
   marginTop?: string // position and align is used to position the tooltip. for additional changes in vertical positioning use this prop
   marginLeft?: string // position and align is used to position the tooltip. for minor changes in horizontal positioning use this prop
   hideDelay?: number
+  dataTestId?: string
 }
 
 const KTooltip: React.FC<KTooltipProps> = (props) => {
@@ -75,30 +76,39 @@ const KTooltip: React.FC<KTooltipProps> = (props) => {
   }
 
   return (
-    <div className="relative box-border" onMouseEnter={showTooltip} onMouseLeave={hideTooltip}>
+    <div
+      className="relative box-border"
+      onMouseEnter={showTooltip}
+      onMouseLeave={hideTooltip}
+      data-testid={props.dataTestId}
+    >
       {props.children}
 
-      {props.content !== null && <div
-        className={`${absolutePositionClassName(position, align)} absolute ${
-          isVisible ? "k-tooltip-enter" : "k-tooltip-exit"
-        }`}
-        style={{
-          ...baseStyles,
-          ...(props.marginTop && { marginTop: `${props.marginTop}` }),
-          ...(props.marginLeft && { marginLeft: `${props.marginLeft}` })
-        }}
-      >
+      {props.content !== null && (
         <div
+          className={`${absolutePositionClassName(position, align)} absolute ${
+            isVisible ? "k-tooltip-enter" : "k-tooltip-exit"
+          }`}
           style={{
-            padding,
-            borderRadius,
-            background
+            ...baseStyles,
+            ...(props.marginTop && { marginTop: `${props.marginTop}` }),
+            ...(props.marginLeft && { marginLeft: `${props.marginLeft}` })
           }}
         >
-          {props.content}
+          <div
+            style={{
+              padding,
+              borderRadius,
+              background
+            }}
+          >
+            {props.content}
+          </div>
+          {showArrow && (
+            <div className={`arrow-${position}`} style={{ backgroundColor: arrowColor, zIndex: -200 }}></div>
+          )}
         </div>
-        {showArrow && <div className={`arrow-${position}`} style={{ backgroundColor: arrowColor, zIndex: -200 }}></div>}
-      </div>}
+      )}
     </div>
   )
 }
