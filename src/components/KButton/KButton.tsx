@@ -24,6 +24,7 @@ export interface KButtonProps {
   border?: string
   hoverBorder?: string
   activeBorder?: string
+  fontSize?: number
   dataTestId?: string
 }
 
@@ -47,6 +48,7 @@ const KButton: React.FC<KButtonProps> = (props) => {
   const border = props.border || "none"
   const hoverBorder = props.hoverBorder || border
   const activeBorder = props.activeBorder || border
+  const fontSize = props.fontSize || 14
 
   return (
     <button
@@ -71,7 +73,7 @@ const KButton: React.FC<KButtonProps> = (props) => {
       <div className={"flex items-center"} style={{ gap }}>
         {props.leftIcon && <img src={props.leftIcon} alt={"button-left-icon"} />}
         {props.text && (
-          <KSpan text={props.text} color={textColor} fontWeight={fontWeight} textDecoration={textDecoration} />
+          <KSpan text={props.text} color={textColor} fontWeight={fontWeight} textDecoration={textDecoration} fontSize={fontSize} lineHeight={`${fontSize + 6}px`}/>
         )}
         {props.icon && <img src={props.icon} alt={"button-icon"} />}
         {props.rightIcon && <img src={props.rightIcon} alt={"button-right-icon"} />}
