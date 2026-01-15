@@ -28,6 +28,7 @@ export interface KInputProps {
   fontSize?: string
   iconSize?: string
   checked?: boolean
+  autoComplete?: string
   hoverBorder?: string
   activeBorder?: string
   dataTestId?: string
@@ -109,6 +110,7 @@ const KInput: React.FC<KInputProps> = (props) => {
           fontSize
         }}
         {...(props.checked && (type === "checkbox" || type === "radio") && { checked: props.checked })}
+        {...(props.autoComplete && { autoComplete: props.autoComplete })}
         value={props.value}
         placeholder={props.placeholder || ""}
         disabled={disabled}

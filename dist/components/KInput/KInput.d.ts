@@ -27,6 +27,7 @@ export interface KInputProps {
     fontSize?: string;
     iconSize?: string;
     checked?: boolean;
+    autoComplete?: string;
     hoverBorder?: string;
     activeBorder?: string;
     dataTestId?: string;
