@@ -288,6 +288,7 @@ const KSelectRange: React.FC<KSelectRangeProps> = (props) => {
               }
               nextLabel={null}
               formatShortWeekday={formatShortWeekday}
+              formatMonthYear={formatMonthYear}
               selectRange
               maxDetail="year"
               minDetail="year"
