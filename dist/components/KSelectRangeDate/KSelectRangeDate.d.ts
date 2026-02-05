@@ -20,6 +20,7 @@ export interface KSelectRangeDateProps {
     maximumDate?: Date;
     popupCalendarBackground?: string;
     hideBackdrop?: boolean;
+    weeklyMode?: boolean;
 }
 export type DateRangeType = Date | null | [Date | null, Date | null];
 declare const KSelectRangeDate: React.FC<KSelectRangeDateProps>;
