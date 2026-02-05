@@ -2,7 +2,10 @@
     border-top-right-radius: 0 !important;
     border-right: none !important;
 }
-
+.left-calendar.weekly-mode {
+    border-top-left-radius: 16px !important;
+    border-right: none !important;
+}
 .react-calendar.kselect-range-date {
     width: 350px;
     max-width: 100%;

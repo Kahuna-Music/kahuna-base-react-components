@@ -81,6 +81,28 @@ KSelectRangePrimary.args = {
   }
 }
 
+export const KSelectRangeWeekly = Template.bind({})
+KSelectRangeWeekly.args = {
+  width: "48px",
+  height: "48px",
+  backgroundColor: "#F7F7F7",
+  hoverBackgroundColor: "#F3F3F3",
+  borderRadius: 24,
+  position: "bottom",
+  align: "center",
+  hideBackdrop: true,
+  anchorToButton: true,
+  weeklyMode: true,
+
+  onChange: (value) => {
+    if (value) {
+      console.log("value is updated using this value:", value)
+    } else {
+      console.log("value is deleted, because it is: ", value)
+    }
+  }
+}
+
 export const KSelectRangeDateMinimumDate = Template.bind({})
 KSelectRangeDateMinimumDate.args = {
   width: "48px",

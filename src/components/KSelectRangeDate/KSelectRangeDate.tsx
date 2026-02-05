@@ -31,6 +31,7 @@ export interface KSelectRangeDateProps {
   maximumDate?: Date
   popupCalendarBackground?: string
   hideBackdrop?: boolean
+  weeklyMode?: boolean
 }
 
 export type DateRangeType = Date | null | [Date | null, Date | null]
@@ -63,19 +64,18 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
 
   useEffect(() => {
     if (openCalendar) {
-      if(skipNextOpenRef?.current) {
+      if (skipNextOpenRef?.current) {
         skipNextOpenRef.current = false
         return
       }
 
       setRange(props.value)
-    }    
+    }
   }, [props.value, openCalendar])
 
   const [leftCalendarYear, setLeftCalendarYear] = useState<number>(new Date().getFullYear())
   const [leftCalendarMonth, setLeftCalendarMonth] = useState<number>(new Date().getMonth())
 
-  
   const [shorthandIndex, setShorthandIndex] = useState<{ current: number; approved: number }>({
     current: -1,
     approved: -1
@@ -107,18 +107,34 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
 
   const shorthandDateSelection = (range: number) => {
     const theDate = new Date()
-    // if isMonth is false, then it is year
     const year = theDate.getFullYear()
     const month = theDate.getMonth()
     const day = theDate.getDate()
 
     const endDate = new Date(year, month, day)
-    const startDate = new Date(year, month, day - range)
+    const startDate = new Date(year, month, day - (range - 1))
     setRange([startDate, endDate])
   }
 
   const onClickDayEvent = (clickedDate: Date) => {
     if (!Array.isArray(range)) return
+
+    if (props.weeklyMode) {
+      const DAY = 24 * 60 * 60 * 1000
+
+      const endDate = clickedDate
+      const startDate = new Date(clickedDate.getTime() - 6 * DAY)
+
+      setRange([startDate, endDate])
+      skipNextOpenRef.current = true
+      setOpenCalendar(false)
+      setTimeout(() => {
+        setOpenCalendar(true)
+      }, 100)
+
+      setShorthandIndex((prev) => ({ ...prev, current: -1 }))
+      return
+    }
 
     if (range[0] === null && range[1] === null) {
       setRange([clickedDate, null])
@@ -139,11 +155,14 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
 
   const tileClassName = ({ date, view }: { date: Date; view: string }) => {
     if (view === "month") {
-
-      if (Array.isArray(range) && range[0] && !range[1] && hoveredDate &&
-       ((date.getTime() > hoveredDate.getTime() && date.getTime() < range[0].getTime()) ||
-       date.getTime() < hoveredDate.getTime() && date.getTime() > range[0].getTime()) ) {
-        
+      if (
+        Array.isArray(range) &&
+        range[0] &&
+        !range[1] &&
+        hoveredDate &&
+        ((date.getTime() > hoveredDate.getTime() && date.getTime() < range[0].getTime()) ||
+          (date.getTime() < hoveredDate.getTime() && date.getTime() > range[0].getTime()))
+      ) {
         return "hovered-range-day"
       }
 
@@ -159,15 +178,23 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
         range[1]?.getDate() === date.getDate()
       ) {
         return "active-day-first-day active-day-last-day"
-      } else if (range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth() && range[0]?.getDate() === date.getDate()) {
+      } else if (
+        range[0]?.getFullYear() === date.getFullYear() &&
+        range[0]?.getMonth() === date.getMonth() &&
+        range[0]?.getDate() === date.getDate()
+      ) {
         return "active-day-first-day"
-      } else if (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth() && range[1]?.getDate() === date.getDate()) {
+      } else if (
+        range[1]?.getFullYear() === date.getFullYear() &&
+        range[1]?.getMonth() === date.getMonth() &&
+        range[1]?.getDate() === date.getDate()
+      ) {
         return "active-day-last-day"
       } else if (range[0]?.getTime() < date.getTime() && date.getTime() < range[1]?.getTime()) {
         const weekStartsOn = 1
         const col = (date.getDay() - weekStartsOn + 7) % 7
         const dayOfMonth = date.getDate()
-        const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate()
+        const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
         if (col === 6) {
           return "active-day-range-day-left"
         } else if (col === 5) {
@@ -178,6 +205,16 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
           return "active-day-range-day-middle last-day-of-month"
         } else {
           return "active-day-range-day-middle"
+        }
+      }
+
+      if (hoveredDate && props.weeklyMode) {
+        const DAY = 24 * 60 * 60 * 1000
+        const end = hoveredDate.getTime()
+        const start = end - 6 * DAY
+        const t = date.getTime()
+        if (t >= start && t <= end) {
+          return "hovered-range-day"
         }
       }
 
@@ -192,10 +229,12 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
         <div className="absolute left-0 top-0 h-full w-full flex items-center justify-center tile-content-external-div">
           {Array.isArray(range) &&
             range[1] !== null &&
-            ((range[0]?.getFullYear() === date.getFullYear() && range[0]?.getMonth() === date.getMonth() && range[0]?.getDate() === date.getDate()) ||
-              (range[1]?.getFullYear() === date.getFullYear() && range[1]?.getMonth() === date.getMonth() && range[1]?.getDate() === date.getDate())) && (
-              <abbr>{day}</abbr>
-            )}
+            ((range[0]?.getFullYear() === date.getFullYear() &&
+              range[0]?.getMonth() === date.getMonth() &&
+              range[0]?.getDate() === date.getDate()) ||
+              (range[1]?.getFullYear() === date.getFullYear() &&
+                range[1]?.getMonth() === date.getMonth() &&
+                range[1]?.getDate() === date.getDate())) && <abbr>{day}</abbr>}
         </div>
       )
     }
@@ -220,108 +259,114 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
   const renderPopUpCalendar = () => {
     return (
       <div className="flex flex-row">
+        {!props.weeklyMode && (
+          <div
+            className="w-[160px] bg-[#FFF] flex flex-col items-center gap-2 justify-start px-2.5 pt-5 pb-4 border-r-0"
+            style={{
+              border: "1px solid #F3F3F3",
+              borderRightWidth: "0px",
+              borderTopLeftRadius: "16px",
+              borderBottomLeftRadius: "16px"
+            }}
+          >
+            <KButton
+              onClick={() => {
+                shorthandDateSelection(2)
+                setShorthandIndex({ ...shorthandIndex, current: 0 })
+              }}
+              width="140px"
+              background={shorthandIndex.current === 0 ? "#F7F7F7" : "#FFF"}
+              textColor={shorthandIndex.current === 0 ? "#000" : "#999"}
+              text={lang.button_text.yesterday}
+              borderRadius={8}
+              shadowDisabled
+              hoverBackground="#F0F0F0"
+              height="40px"
+            />
+            <KButton
+              onClick={() => {
+                shorthandDateSelection(3)
+                setShorthandIndex({ ...shorthandIndex, current: 1 })
+              }}
+              width="140px"
+              background={shorthandIndex.current === 1 ? "#F7F7F7" : "#FFF"}
+              textColor={shorthandIndex.current === 1 ? "#000" : "#999"}
+              text={lang.button_text.last_three_days}
+              borderRadius={8}
+              shadowDisabled
+              hoverBackground="#F0F0F0"
+              height="40px"
+            />
+            <KButton
+              onClick={() => {
+                shorthandDateSelection(7)
+                setShorthandIndex({ ...shorthandIndex, current: 2 })
+              }}
+              width="140px"
+              background={shorthandIndex.current === 2 ? "#F7F7F7" : "#FFF"}
+              textColor={shorthandIndex.current === 2 ? "#000" : "#999"}
+              text={lang.button_text.last_week}
+              borderRadius={8}
+              shadowDisabled
+              hoverBackground="#F0F0F0"
+              height="40px"
+            />
+            <KButton
+              onClick={() => {
+                shorthandDateSelection(14)
+                setShorthandIndex({ ...shorthandIndex, current: 3 })
+              }}
+              width="140px"
+              background={shorthandIndex.current === 3 ? "#F7F7F7" : "#FFF"}
+              textColor={shorthandIndex.current === 3 ? "#000" : "#999"}
+              text={lang.button_text.last_two_weeks}
+              borderRadius={8}
+              shadowDisabled
+              hoverBackground="#F0F0F0"
+              height="40px"
+            />
+            <KButton
+              onClick={() => {
+                shorthandDateSelection(31)
+                setShorthandIndex({ ...shorthandIndex, current: 4 })
+              }}
+              width="140px"
+              background={shorthandIndex.current === 4 ? "#F7F7F7" : "#FFF"}
+              textColor={shorthandIndex.current === 4 ? "#000" : "#999"}
+              text={lang.button_text.last_month}
+              borderRadius={8}
+              shadowDisabled
+              hoverBackground="#F0F0F0"
+              height="40px"
+            />
+          </div>
+        )}
         <div
-          className="w-[160px] bg-[#FFF] flex flex-col items-center gap-2 justify-start px-2.5 pt-5 pb-4 border-r-0"
+          className="flex flex-col gap-0"
           style={{
-            border: "1px solid #F3F3F3",
-            borderRightWidth: "0px",
-            borderTopLeftRadius: "16px",
-            borderBottomLeftRadius: "16px"
+            borderTopLeftRadius: 20
           }}
         >
-          <KButton
-            onClick={() => {
-              shorthandDateSelection(2)
-              setShorthandIndex({ ...shorthandIndex, current: 0 })
+          <div
+            className="flex flex-row"
+            onMouseOver={(e) => {
+              const tile = (e.target as HTMLElement).closest(".react-calendar__tile")
+              if (!tile) return
+              const abbr = tile.querySelector("abbr[aria-label]") as HTMLElement | null
+              if (!abbr) return
+              const label = abbr.getAttribute("aria-label")!
+              const date = new Date(label)
+              setHoveredDate(date)
             }}
-            width="140px"
-            background={shorthandIndex.current === 0 ? "#F7F7F7" : "#FFF"}
-            textColor={shorthandIndex.current === 0 ? "#000" : "#999"}
-            text={lang.button_text.yesterday}
-            borderRadius={8}
-            shadowDisabled
-            hoverBackground="#F0F0F0"
-            height="40px"
-          />
-          <KButton
-            onClick={() => {
-              shorthandDateSelection(3)
-              setShorthandIndex({ ...shorthandIndex, current: 1 })
+            onMouseOut={(e) => {
+              const leftTile = (e.target as HTMLElement).closest(".react-calendar__tile")
+              if (leftTile) {
+                setHoveredDate(null)
+              }
             }}
-            width="140px"
-            background={shorthandIndex.current === 1 ? "#F7F7F7" : "#FFF"}
-            textColor={shorthandIndex.current === 1 ? "#000" : "#999"}
-            text={lang.button_text.last_three_days}
-            borderRadius={8}
-            shadowDisabled
-            hoverBackground="#F0F0F0"
-            height="40px"
-          />
-          <KButton
-            onClick={() => {
-              shorthandDateSelection(7)
-              setShorthandIndex({ ...shorthandIndex, current: 2 })
-            }}
-            width="140px"
-            background={shorthandIndex.current === 2 ? "#F7F7F7" : "#FFF"}
-            textColor={shorthandIndex.current === 2 ? "#000" : "#999"}
-            text={lang.button_text.last_week}
-            borderRadius={8}
-            shadowDisabled
-            hoverBackground="#F0F0F0"
-            height="40px"
-          />
-          <KButton
-            onClick={() => {
-              shorthandDateSelection(14)
-              setShorthandIndex({ ...shorthandIndex, current: 3 })
-            }}
-            width="140px"
-            background={shorthandIndex.current === 3 ? "#F7F7F7" : "#FFF"}
-            textColor={shorthandIndex.current === 3 ? "#000" : "#999"}
-            text={lang.button_text.last_two_weeks}
-            borderRadius={8}
-            shadowDisabled
-            hoverBackground="#F0F0F0"
-            height="40px"
-          />
-          <KButton
-            onClick={() => {
-              shorthandDateSelection(31)
-              setShorthandIndex({ ...shorthandIndex, current: 4 })
-            }}
-            width="140px"
-            background={shorthandIndex.current === 4 ? "#F7F7F7" : "#FFF"}
-            textColor={shorthandIndex.current === 4 ? "#000" : "#999"}
-            text={lang.button_text.last_month}
-            borderRadius={8}
-            shadowDisabled
-            hoverBackground="#F0F0F0"
-            height="40px"
-          />
-        </div>
-        <div className="flex flex-col gap-0">
-          <div className="flex flex-row"            
-          onMouseOver={e => {
-            const tile = (e.target as HTMLElement).closest(".react-calendar__tile")
-            if (!tile) return
-              const abbr = tile.querySelector("abbr[aria-label]") as HTMLElement | null;
-            if (!abbr) return
-            const label = abbr.getAttribute("aria-label")!
-            const date = new Date(label)
-            setHoveredDate(date)
-            }
-          }
-          onMouseOut={e => {
-
-            const leftTile = (e.target as HTMLElement).closest(".react-calendar__tile")
-            if (leftTile) {
-              setHoveredDate(null)
-            }
-            }
-          }>
+          >
             <Calendar
-              className="kselect-range-date left-calendar"
+              className={`kselect-range-date left-calendar ${props.weeklyMode ? "weekly-mode" : ""}`}
               allowPartialRange
               tileClassName={tileClassName}
               tileContent={tileContent}
@@ -345,6 +390,7 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
               }
               nextLabel={null}
               formatShortWeekday={formatShortWeekday}
+              formatMonthYear={formatMonthYear}
               selectRange
               maxDetail="month"
               minDetail="month"
@@ -360,8 +406,6 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
               activeStartDate={new Date(leftCalendarYear, leftCalendarMonth + 1, 1)}
               allowPartialRange
               onChange={(dates) => {}}
-              maxDetail="month"
-              minDetail="month"
               onClickDay={(clickedDate) => {
                 onClickDayEvent(clickedDate)
               }}
@@ -380,6 +424,8 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
               formatShortWeekday={formatShortWeekday}
               formatMonthYear={formatMonthYear}
               selectRange
+              maxDetail="month"
+              minDetail="month"
               minDate={props.minimumDate || undefined}
               maxDate={props.maximumDate || undefined}
             />
@@ -388,7 +434,7 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
             className="h-19 w-full bg-[#FFF] flex flex-row gap-4 py-4 px-5 justify-between items-center border-[1px] border-[#F3F3F3] border-t-0 rounded-b-[10px]"
             style={{
               borderBottomRightRadius: "16px",
-              borderBottomLeftRadius: "0px"
+              borderBottomLeftRadius: props.weeklyMode ? "16px" : "0px"
             }}
           >
             <div className="flex items-center gap-1">
