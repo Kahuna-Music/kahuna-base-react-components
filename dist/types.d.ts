@@ -211,6 +211,7 @@ interface KDropdownProps {
     onInputChange?: (text: string) => void;
     sortSelectedFirst?: boolean;
     dataTestId?: string;
+    disableFilterOption?: boolean;
 }
 declare const KDropdown: React.FC<KDropdownProps>;
 

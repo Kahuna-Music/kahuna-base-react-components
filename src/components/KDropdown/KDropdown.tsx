@@ -56,6 +56,7 @@ export interface KDropdownProps {
   onInputChange?: (text: string) => void
   sortSelectedFirst?: boolean
   dataTestId?: string
+  disableFilterOption?: boolean
 }
 
 const KDropdown: React.FC<KDropdownProps> = (props) => {
@@ -100,6 +101,7 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   const placeholderColor = props.placeholderColor || "#848484"
   const enableIndicator = props.enableIndicator || false
   const allowContainerShrink = props.allowContainerShrink || false
+  const disableFilterOption = props.disableFilterOption
 
   const sortedOptions = useMemo<KSelectOption[]>(() => {
     if (!props.sortSelectedFirst) {
@@ -129,6 +131,9 @@ const KDropdown: React.FC<KDropdownProps> = (props) => {
   }
 
   const customFilterOption = (option: FilterOptionOption<KSelectOption>, inputValue: string) => {
+    if (disableFilterOption) {
+      return true
+    }
     return option.data.label.toLocaleLowerCase("en").includes(inputValue.toLocaleLowerCase("en"))
   }
 
