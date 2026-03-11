@@ -305,7 +305,7 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
               width="140px"
               background={shorthandIndex.current === 2 ? "#F7F7F7" : "#FFF"}
               textColor={shorthandIndex.current === 2 ? "#000" : "#999"}
-              text={lang.button_text.last_week}
+              text={lang.button_text.last_seven_days}
               borderRadius={8}
               shadowDisabled
               hoverBackground="#F0F0F0"
@@ -319,7 +319,7 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
               width="140px"
               background={shorthandIndex.current === 3 ? "#F7F7F7" : "#FFF"}
               textColor={shorthandIndex.current === 3 ? "#000" : "#999"}
-              text={lang.button_text.last_two_weeks}
+              text={lang.button_text.last_fourteen_days}
               borderRadius={8}
               shadowDisabled
               hoverBackground="#F0F0F0"
@@ -327,13 +327,13 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
             />
             <KButton
               onClick={() => {
-                shorthandDateSelection(31)
+                shorthandDateSelection(28)
                 setShorthandIndex({ ...shorthandIndex, current: 4 })
               }}
               width="140px"
               background={shorthandIndex.current === 4 ? "#F7F7F7" : "#FFF"}
               textColor={shorthandIndex.current === 4 ? "#000" : "#999"}
-              text={lang.button_text.last_month}
+              text={lang.button_text.last_twenty_eight_days}
               borderRadius={8}
               shadowDisabled
               hoverBackground="#F0F0F0"
