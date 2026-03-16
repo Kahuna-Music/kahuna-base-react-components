@@ -71,6 +71,7 @@ KSelectRangePrimary.args = {
   align: "center",
   hideBackdrop: true,
   anchorToButton: true,
+  shorthandEndDateOffsetDays: 5,
 
   onChange: (value) => {
     if (value) {
@@ -113,7 +114,8 @@ KSelectRangeDateMinimumDate.args = {
   anchorToButton: true,
   position: "top",
   align: "center",
-  minimumDate: new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000),
+  minimumDate: new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000),
+  maximumDate: new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000),
 
   onChange: (value) => {
     if (value) {
