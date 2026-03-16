@@ -32,6 +32,7 @@ export interface KSelectRangeDateProps {
   popupCalendarBackground?: string
   hideBackdrop?: boolean
   weeklyMode?: boolean
+  shorthandEndDateOffsetDays?: number
 }
 
 export type DateRangeType = Date | null | [Date | null, Date | null]
@@ -111,8 +112,11 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
     const month = theDate.getMonth()
     const day = theDate.getDate()
 
-    const endDate = new Date(year, month, day)
-    const startDate = new Date(year, month, day - (range - 1))
+    const delta = props.shorthandEndDateOffsetDays ?? 0
+
+
+    const endDate = new Date(year, month, day - delta)
+    const startDate = new Date(year, month, day - delta - (range - 1))
     setRange([startDate, endDate])
   }
 
