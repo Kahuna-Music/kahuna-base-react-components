@@ -94,6 +94,7 @@ KSelectRangeWeekly.args = {
   hideBackdrop: true,
   anchorToButton: true,
   weeklyMode: true,
+  weeklyModeStartDay: 5,
 
   onChange: (value) => {
     if (value) {

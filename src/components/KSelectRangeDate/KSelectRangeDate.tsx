@@ -33,6 +33,7 @@ export interface KSelectRangeDateProps {
   hideBackdrop?: boolean
   weeklyMode?: boolean
   shorthandEndDateOffsetDays?: number
+  weeklyModeStartDay?: number // Day the weekly range should start from (0=Sun...6=Sat); defaults to a rolling 7-day range if unset.
 }
 
 export type DateRangeType = Date | null | [Date | null, Date | null]
@@ -125,9 +126,25 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
 
     if (props.weeklyMode) {
       const DAY = 24 * 60 * 60 * 1000
+      let startDate: Date
+      let endDate: Date
 
-      const endDate = clickedDate
-      const startDate = new Date(clickedDate.getTime() - 6 * DAY)
+      if (props.weeklyModeStartDay !== undefined) {
+        const startDay = props.weeklyModeStartDay
+        const dayOfWeek = clickedDate.getDay()
+        const daysSinceStart = (dayOfWeek - startDay + 7) % 7
+
+        startDate = new Date(clickedDate)
+        startDate.setDate(clickedDate.getDate() - daysSinceStart)
+        startDate.setHours(0, 0, 0, 0)
+
+        endDate = new Date(startDate)
+        endDate.setDate(startDate.getDate() + 6)
+        endDate.setHours(0, 0, 0, 0)
+      } else {
+        endDate = clickedDate
+        startDate = new Date(clickedDate.getTime() - 6 * DAY)
+      }
 
       setRange([startDate, endDate])
       skipNextOpenRef.current = true
@@ -214,8 +231,29 @@ const KSelectRangeDate: React.FC<KSelectRangeDateProps> = (props) => {
 
       if (hoveredDate && props.weeklyMode) {
         const DAY = 24 * 60 * 60 * 1000
-        const end = hoveredDate.getTime()
-        const start = end - 6 * DAY
+        let start: number
+        let end: number
+
+        if (props.weeklyModeStartDay !== undefined) {
+          const startDay = props.weeklyModeStartDay
+          const dayOfWeek = hoveredDate.getDay()
+          const daysSinceStart = (dayOfWeek - startDay + 7) % 7
+
+          const startDate = new Date(hoveredDate)
+          startDate.setDate(hoveredDate.getDate() - daysSinceStart)
+          startDate.setHours(0, 0, 0, 0)
+
+          const endDate = new Date(startDate)
+          endDate.setDate(startDate.getDate() + 6)
+          endDate.setHours(0, 0, 0, 0)
+
+          start = startDate.getTime()
+          end = endDate.getTime()
+        } else {
+          end = hoveredDate.getTime()
+          start = end - 6 * DAY
+        }
+
         const t = date.getTime()
         if (t >= start && t <= end) {
           return "hovered-range-day"
