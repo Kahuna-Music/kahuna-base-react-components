@@ -348,6 +348,7 @@ interface KSelectRangeDateProps {
     hideBackdrop?: boolean;
     weeklyMode?: boolean;
     shorthandEndDateOffsetDays?: number;
+    weeklyModeStartDay?: number;
 }
 type DateRangeType = Date | null | [Date | null, Date | null];
 declare const KSelectRangeDate: React.FC<KSelectRangeDateProps>;
