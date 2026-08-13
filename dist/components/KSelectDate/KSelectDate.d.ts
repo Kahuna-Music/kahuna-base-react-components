@@ -24,6 +24,9 @@ export interface KSelectDateProps {
     isTileDisabled?: TileDisabledFunc;
     applyUndefinedValue?: boolean;
     buttonText?: string;
+    open?: boolean;
+    setOpen?: (open: boolean) => void;
+    onCancel?: () => void;
 }
 declare const KSelectDate: React.FC<KSelectDateProps>;
 export default KSelectDate;
