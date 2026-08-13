@@ -36,6 +36,9 @@ export interface KSelectDateProps {
   isTileDisabled?: TileDisabledFunc
   applyUndefinedValue?: boolean // if this prop's value is false, makes the Apply button disabled when chosen date is undefined
   buttonText?: string
+  open?: boolean // Use open and setOpen props together. Opens the calendar without requiring a click on the calendar icon.
+  setOpen?: (open: boolean) => void // Use open and setOpen props together. 
+  onCancel?: () => void
 }
 interface MonthSelectorType {
   monthName: string
@@ -69,6 +72,13 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
   const [nextMonths, setNextMonths] = useState<MonthSelectorType[]>([])
   const [weekDays, setWeekDays] = useState<DaySelectorType[]>([])
   const [openCalendar, setOpenCalendar] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (props.open) {
+      setOpenCalendar(true)  // Used only to open the calendar. The Cancel and Apply buttons handle closing it.
+      setCalendarDate(value)
+    }
+  }, [props.open])
 
   const onlyMonthSelection = props.onlyMonthSelection || false
   const hideBody = props.hideBody || false
@@ -170,6 +180,8 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             textColor="#111"
             onClick={() => {
               setOpenCalendar(false)
+              if (props.setOpen) props.setOpen(false)
+              if (props.onCancel) props.onCancel()
             }}
           />
           <KButton
@@ -182,6 +194,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
             onClick={() => {
               setValue(calendarDate)
               setOpenCalendar(false)
+              if (props.setOpen) props.setOpen(false)
             }}
           />
         </div>
@@ -400,6 +413,7 @@ const KSelectDate: React.FC<KSelectDateProps> = (props) => {
               onClick={() => {
                 if (openCalendar) {
                   setOpenCalendar(false)
+                  if (props.setOpen) props.setOpen(false)
                 } else {
                   setOpenCalendar(true)
                   setCalendarDate(value)

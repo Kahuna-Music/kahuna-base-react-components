@@ -15,9 +15,15 @@ export default {
 
 const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
+  const [open, setOpen] = useState<boolean>(false)
   useEffect(() => {
     // console.log("selectedDate: ", selectedDate)
   }, [selectedDate])
+
+  useEffect(() => {
+    console.log("open: ", open)
+  }, [open])
+
   const periods = [
     { value: "202401", label: "202401" },
     { value: "202402", label: "202402" },
@@ -59,7 +65,12 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
           />
           <KSelectDate
             {...args}
+            key={selectedDate?.toString()}
             value={selectedDate}
+            open={open}
+            setOpen={setOpen}
+            hideBody
+            hideBackdrop
             onChange={(date) => {
               // console.log("date: ", date)
               if (date) {
@@ -71,10 +82,15 @@ const KSelectDateWrapper: React.FC<KSelectDateProps> = (args) => {
                 // console.log("Deleting is completed")
               }
             }}
+            onCancel={() => {
+              console.log("close:::")
+            }}
             anchorToButton
           />
       </div>
-      <div></div>
+      <div className="cursor-pointer" onClick={() => {
+        setOpen(true)
+      }}>Deneme Butonu</div>
     </div>
   )
 }
